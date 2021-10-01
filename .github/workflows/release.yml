@@ -1,0 +1,29 @@
+name: release
+
+on:
+  workflow_run:
+    workflows: ['test']
+    branches: [master]
+    types: [completed]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - name: Install Deps
+        run: npm ci
+      - name: Build & Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm run build
+          npx semantic-release

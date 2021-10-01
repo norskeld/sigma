@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-n-test:
+  test:
     strategy:
       matrix:
         node: [14]
