@@ -2,11 +2,9 @@ name: CI @ Test
 
 on:
   push:
-    branches:
-      - ${{ github.event.repository.default_branch }}
+    branches: ['master']
   pull_request:
-    branches:
-      - '*'
+    branches: ['*']
   workflow_dispatch:
 
 jobs:
