@@ -1,7 +1,7 @@
 {
-  "name": "@norskeld/serpent",
+  "name": "@nrsk/arc",
   "version": "1.0.0",
-  "description": "Yet another TypeScript library starter with conventional goodies and automatic semantic releases.",
+  "description": "TypeScript parser combinators.",
   "main": "./dist/index.js",
   "files": [
     "dist"
@@ -10,9 +10,9 @@
     "node": ">=14.17.0"
   },
   "scripts": {
-    "cz": "git-cz",
     "build": "tsc",
     "build:watch": "tsc -w",
+    "cz": "git-cz",
     "prebuild": "rimraf dist",
     "prepare": "husky install",
     "release": "npx semantic-release",
@@ -29,22 +29,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/norskeld/serpent.git"
+    "url": "git+https://github.com/norskeld/arc.git"
   },
   "keywords": [
-    "starter",
-    "library",
     "typescript",
-    "jest",
-    "eslint",
-    "prettier",
-    "husky",
-    "lint-staged",
-    "commitizen",
-    "commitlint",
-    "semantic-release",
-    "editorconfig",
-    "circleci"
+    "parser-combinators",
+    "parser",
+    "combinators",
+    "parsec"
   ],
   "author": {
     "name": "Vladislav Mamon",
@@ -52,9 +44,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/norskeld/serpent/issues"
+    "url": "https://github.com/norskeld/arc/issues"
   },
-  "homepage": "https://github.com/norskeld/serpent#readme",
+  "homepage": "https://github.com/norskeld/arc#readme",
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
