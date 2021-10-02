@@ -24,7 +24,6 @@
     "style:lint:check": "eslint --ext .js,.ts .",
     "style:lint:fix": "eslint --fix --ext .js,.ts .",
     "test": "jest",
-    "test:coverage": "jest --coverage=true",
     "test:watch": "jest --watch"
   },
   "repository": {
