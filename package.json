@@ -1,7 +1,7 @@
 {
-  "name": "@nrsk/arc",
+  "name": "@nrsk/gram",
   "version": "1.0.0",
-  "description": "TypeScript parser combinators.",
+  "description": "TypeScript library for creating fast and convenient parsers somewhat similar to Parsec and best suited for parsing *BNF-like grammars.",
   "main": "./dist/index.js",
   "files": [
     "dist"
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/norskeld/arc.git"
+    "url": "git+https://github.com/norskeld/gram.git"
   },
   "keywords": [
     "typescript",
@@ -43,9 +43,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/norskeld/arc/issues"
+    "url": "https://github.com/norskeld/gram/issues"
   },
-  "homepage": "https://github.com/norskeld/arc#readme",
+  "homepage": "https://github.com/norskeld/gram#readme",
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
