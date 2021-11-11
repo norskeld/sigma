@@ -3,15 +3,20 @@
     "strict": true,
     "target": "es2020",
     "module": "commonjs",
-    "declaration": true,
-    "sourceMap": true,
     "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "outDir": "dist",
     "esModuleInterop": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@lib/*": ["src/*"],
+      "@tests/*": ["tests/*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["dist", "node_modules", "**/*.spec.ts", "**/*.test.ts", "**/__tests__/**/*.ts"]
+  "include": ["src", "tests"]
 }

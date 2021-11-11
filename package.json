@@ -2,7 +2,8 @@
   "name": "@nrsk/sigma",
   "version": "1.0.0",
   "description": "TypeScript parser combinator library for building fast and convenient parsers.",
-  "main": "./dist/index.js",
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "files": [
     "dist"
   ],
@@ -10,8 +11,8 @@
     "node": ">=14.17.0"
   },
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc -w",
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "tsc -w -p tsconfig.build.json",
     "cz": "git-cz",
     "prebuild": "rimraf dist",
     "prepare": "husky install",
@@ -24,6 +25,7 @@
     "style:lint:check": "eslint --ext .js,.ts .",
     "style:lint:fix": "eslint --fix --ext .js,.ts .",
     "test": "jest",
+    "test:with-coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "repository": {
