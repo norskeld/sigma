@@ -1,7 +1,7 @@
 {
-  "name": "@nrsk/gram",
+  "name": "@nrsk/sigma",
   "version": "1.0.0",
-  "description": "TypeScript library for creating fast and convenient parsers somewhat similar to Parsec and best suited for parsing *BNF-like grammars.",
+  "description": "TypeScript parser combinator library for building fast and convenient parsers.",
   "main": "./dist/index.js",
   "files": [
     "dist"
@@ -28,14 +28,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/norskeld/gram.git"
+    "url": "git+https://github.com/norskeld/sigma.git"
   },
   "keywords": [
     "typescript",
     "parser-combinators",
     "parser",
     "combinators",
-    "parsec"
+    "parsec",
+    "bnf",
+    "ebnf",
+    "abnf"
   ],
   "author": {
     "name": "Vladislav Mamon",
@@ -43,9 +46,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/norskeld/gram/issues"
+    "url": "https://github.com/norskeld/sigma/issues"
   },
-  "homepage": "https://github.com/norskeld/gram#readme",
+  "homepage": "https://github.com/norskeld/sigma#readme",
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
