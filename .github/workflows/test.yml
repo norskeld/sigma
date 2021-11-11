@@ -25,10 +25,10 @@ jobs:
           cache: 'npm'
       - name: Install Deps
         run: npm ci
-      - name: Build & Test
-        run: |
-          npm run build
-          npm run test
+      - name: Build
+        run: npm run build
+      - name: Test w/ Coverage
+        run: npm run test:with-coverage
       - name: Start Coveralls
         uses: coverallsapp/github-action@master
         with:
