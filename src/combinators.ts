@@ -1,4 +1,5 @@
 export * from './internal/combinators/choice'
+export * from './internal/combinators/defer'
 export * from './internal/combinators/error'
 export * from './internal/combinators/lazy'
 export * from './internal/combinators/list'
