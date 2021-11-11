@@ -1,3 +1,4 @@
+export * from './internal/combinators/chain'
 export * from './internal/combinators/choice'
 export * from './internal/combinators/defer'
 export * from './internal/combinators/error'
