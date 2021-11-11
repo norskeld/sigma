@@ -10,38 +10,22 @@ on:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        # TODO: Add 16.x later on.
-        node: [14]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Use Node ${{ matrix.node }}
+      - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '14'
           cache: 'npm'
       - name: Install Deps
         run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Test w/ Coverage
-        run: npm run test:with-coverage
-      - name: Start Coveralls
+      - name: Build, Test & Coverage
+        run: |
+          npm run build
+          npm run test:with-coverage
+      - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          flag-name: run-on-${{ matrix.node }}
-          parallel: true
-
-  finish-coverage:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Finish Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel-finished: true
