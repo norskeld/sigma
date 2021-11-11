@@ -1,5 +1,6 @@
 export * from './internal/combinators/choice'
 export * from './internal/combinators/error'
+export * from './internal/combinators/list'
 export * from './internal/combinators/many'
 export * from './internal/combinators/map'
 export * from './internal/combinators/nothing'
