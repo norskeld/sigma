@@ -1,11 +1,15 @@
 {
   "preset": "ts-jest",
-  "testMatch": ["**/__tests__/**/*.ts", "**/*.(spec|test).ts"],
+  "testMatch": ["<rootDir>/tests/**/*.(spec|test).ts"],
   "testPathIgnorePatterns": ["<rootDir>/node_modules/"],
-  "collectCoverage": true,
+  "setupFilesAfterEnv": ["<rootDir>/tests/@setup/jest.setup.ts"],
   "coverageDirectory": "coverage",
   "coverageReporters": ["lcov", "text"],
   "collectCoverageFrom": ["<rootDir>/src/**/*.ts"],
+  "moduleNameMapper": {
+    "^@lib/(.*)$": "<rootDir>/src/$1",
+    "^@tests/(.*)$": "<rootDir>/tests/$1"
+  },
   "watchPathIgnorePatterns": [
     "<rootDir>/node_modules/",
     "<rootDir>/dist/",
