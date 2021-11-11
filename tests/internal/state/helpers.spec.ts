@@ -1,7 +1,7 @@
-import { State, Success, Failure } from '@lib/internal/state/state'
-import { success, failure } from '@lib/internal/state/helpers'
+import * as exposed from '@lib/index'
+import { success, failure, State, Success, Failure } from '@lib/index'
 
-import * as exposed from '@lib/internal/state/helpers'
+import { should } from '@tests/@setup/jest.helpers'
 
 describe('internal/state/helpers', () => {
   const value = 'value'
@@ -12,13 +12,12 @@ describe('internal/state/helpers', () => {
     index: 0
   }
 
-  it('exposes specific functions', () => {
-    expect(exposed).toHaveProperty('success')
-    expect(exposed).toHaveProperty('failure')
+  it(`should expose 'success' and 'failure'`, () => {
+    should.expose(exposed, 'success', 'failure')
   })
 
   describe(success, () => {
-    it('constructs correct success object', () => {
+    it('should construct a success object', () => {
       const actual = success({ ...state }, value)
       const result: Success<typeof value> = { kind: 'success', state, value }
 
@@ -27,7 +26,7 @@ describe('internal/state/helpers', () => {
   })
 
   describe(failure, () => {
-    it('constructs correct failure object', () => {
+    it('should construct a failure object', () => {
       const actual = failure({ ...state }, value)
       const result: Failure = { kind: 'failure', state, expected }
 
