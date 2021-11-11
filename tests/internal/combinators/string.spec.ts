@@ -1,46 +1,47 @@
-import * as exposed from '@lib/internal/combinators/string'
-import { run, result } from '@tests/@setup/jest.helpers'
+import * as exposed from '@lib/combinators'
+import { string } from '@lib/combinators'
+
+import { run, result, should } from '@tests/@setup/jest.helpers'
 
 describe('internal/combinators/string', () => {
-  it(`exposes 'string' w/ 'str' alias`, () => {
-    expect(exposed).toHaveProperty('string')
-    expect(exposed).toHaveProperty('str')
+  it(`should expose 'string' ('str')`, () => {
+    should.expose(exposed, 'string', 'str')
   })
 
-  describe(exposed.string, () => {
+  describe(string, () => {
     const ok = 'test'
     const err = 'text'
     const repetitive = 'testtest'
     const zero = ''
 
-    const parser = exposed.string(ok)
+    const parser = string(ok)
 
-    it(`should result in success if matches the input`, () => {
+    it(`should succeed if matches the input`, () => {
       const actual = run(parser, ok)
       const expected = result('success', ok)
 
-      expect(actual).toHaveState(expected)
+      should.matchState(actual, expected)
     })
 
-    it(`should result in success if given repetitive input`, () => {
+    it(`should succeed if given repetitive input`, () => {
       const actual = run(parser, repetitive)
       const expected = result('success', ok)
 
-      expect(actual).toHaveState(expected)
+      should.matchState(actual, expected)
     })
 
-    it(`should result in failure if doesn't match the input`, () => {
+    it(`should fail if doesn't match the input`, () => {
       const actual = run(parser, err)
       const expected = result('failure', ok)
 
-      expect(actual).toHaveState(expected)
+      should.matchState(actual, expected)
     })
 
-    it(`should result in failure if given zero input`, () => {
+    it(`should fail if given zero input`, () => {
       const actual = run(parser, zero)
       const expected = result('failure', ok)
 
-      expect(actual).toHaveState(expected)
+      should.matchState(actual, expected)
     })
   })
 })

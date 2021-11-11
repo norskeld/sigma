@@ -1,15 +1,16 @@
-import { shouldExpose } from '@tests/@setup/jest.helpers'
 import * as exposed from '@lib/index'
 
+import { should } from '@tests/@setup/jest.helpers'
+
 describe('index.ts', () => {
-  it('exposes state helpers', () => {
-    shouldExpose(exposed, 'success', 'failure')
+  it(`should expose state helpers`, () => {
+    should.expose(exposed, 'success', 'failure')
   })
 
-  it('exposes combinators', () => {
-    shouldExpose(exposed, 'string', 'str')
-    shouldExpose(exposed, 'regexp', 're')
+  it(`should expose combinators`, () => {
+    should.expose(exposed, 'string', 'str')
+    should.expose(exposed, 'regexp', 're')
   })
 
-  it.todo('exposes parsers')
+  it.todo(`should expose parsers`)
 })
