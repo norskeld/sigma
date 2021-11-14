@@ -1,5 +1,7 @@
 import * as exposed from '@lib/index'
-import { run, defer, string } from '@lib/index'
+
+import { defer, string } from '@lib/combinators'
+import { run } from '@lib/index'
 
 import { result, should } from '@tests/@setup/jest.helpers'
 
