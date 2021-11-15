@@ -1,6 +1,6 @@
 {
   "name": "@nrsk/sigma",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "TypeScript parser combinator library for building fast and convenient parsers.",
   "type": "module",
   "main": "./index.cjs.cjs",
@@ -37,7 +37,7 @@
     "postversion": "npx tsm ../scripts/release.ts restore",
     "prebuild": "rimraf dist",
     "prerelease": "npx tsm scripts/release.ts prepare",
-    "prepare": "husky install",
+    "prepare": "echo husky install",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
     "test": "jest",
