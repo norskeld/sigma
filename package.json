@@ -1,6 +1,6 @@
 {
   "name": "@nrsk/sigma",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "TypeScript parser combinator library for building fast and convenient parsers.",
   "type": "module",
   "main": "./index.cjs.cjs",
