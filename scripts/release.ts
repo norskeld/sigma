@@ -1,5 +1,6 @@
 import { access, copyFile } from 'fs/promises'
 import { constants } from 'fs'
+import { resolve } from 'path'
 
 interface Success {
   kind: 'success'
@@ -71,15 +72,15 @@ async function main() {
         }
       },
 
-      /** This should be called in `postversion`. */
+      /** This should be called in `postversion`. Here we actually are inside the `dist`. */
       async restore() {
         try {
           // Copy back.
-          await copyFile(`${cwd}/dist/package.json`, `${cwd}/package.json`)
+          await copyFile(`${cwd}/package.json`, resolve(cwd, '..', 'package.json'))
 
           return {
             kind: 'success',
-            message: 'Successfully prepared files for a release.'
+            message: 'Successfully restored `package.json`.'
           }
         } catch (error) {
           return {
