@@ -2,36 +2,46 @@
   "name": "@nrsk/sigma",
   "version": "1.0.0",
   "description": "TypeScript parser combinator library for building fast and convenient parsers.",
-  "main": "./index.js",
+  "type": "module",
+  "main": "./index.cjs.cjs",
+  "module": "./index.esm.js",
   "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.esm.js",
+      "require": "./index.cjs.cjs",
+      "types": "./index.d.ts"
+    },
+    "./combinators": {
+      "import": "./combinators.esm.js",
+      "require": "./combinators.cjs.cjs",
+      "types": "./combinators.d.ts"
+    }
+  },
   "files": [
-    "internal",
     "CHANGELOG.md",
-    "README.md",
     "*.d.ts",
-    "*.d.ts.map",
-    "*.js",
-    "*.js.map"
+    "*.cjs.*",
+    "*.esm.*"
   ],
   "engines": {
     "node": ">=14.17.0"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "build:release": "npm run build && npx shx cp -r dist/* .",
-    "build:watch": "tsc -w -p tsconfig.build.json",
+    "build": "npm run build:types && npm run build:rollup",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build:rollup": "tsm scripts/compile.ts",
+    "fmt:prettier": "prettier --write \"**/*.{js,ts,json}\"",
+    "fmt:style": "eslint --fix --ext .js,.ts .",
+    "postbuild": "rimraf dist/types",
+    "postversion": "tsm scripts/release.ts restore",
     "prebuild": "rimraf dist",
+    "prepack": "tsm scripts/release.ts prepare",
     "prepare": "husky install",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
-    "style:check": "npm run style:format:check && npm run style:lint:check",
-    "style:fix": "npm run style:format:fix && npm run style:lint:fix",
-    "style:format:check": "prettier --check \"**/*.{js,ts,json}\"",
-    "style:format:fix": "prettier --write \"**/*.{js,ts,json}\"",
-    "style:lint:check": "eslint --ext .js,.ts .",
-    "style:lint:fix": "eslint --fix --ext .js,.ts .",
     "test": "jest",
-    "test:with-coverage": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "repository": {
@@ -60,6 +70,7 @@
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
     "@nrsk/config-conventional": "^1.0.0",
+    "@rollup/plugin-typescript": "^8.3.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@types/jest": "^27.0.2",
@@ -72,9 +83,11 @@
     "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
+    "rollup": "^2.60.0",
+    "rollup-plugin-dts": "^4.0.1",
     "semantic-release": "^18.0.0",
     "ts-jest": "^27.0.7",
-    "ts-node": "^10.4.0",
+    "tsm": "^2.1.4",
     "typescript": "^4.4.0"
   },
   "commitlint": {

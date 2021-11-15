@@ -7,9 +7,8 @@ describe('index.ts', () => {
     should.expose(exposed, 'success', 'failure')
   })
 
-  it(`should expose combinators`, () => {
-    should.expose(exposed, 'string', 'str')
-    should.expose(exposed, 'regexp', 're')
+  it(`should expose runner`, () => {
+    should.expose(exposed, 'run')
   })
 
   it.todo(`should expose parsers`)

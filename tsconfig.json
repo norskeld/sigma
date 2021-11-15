@@ -1,22 +1,19 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
     "strict": true,
     "target": "es2020",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "declarationMap": true,
     "sourceMap": true,
-    "outDir": "dist",
     "esModuleInterop": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "paths": {
       "@lib/*": ["src/*"],
       "@tests/*": ["tests/*"]
     }
   },
-  "include": ["src", "tests"]
+  "include": ["scripts", "src", "tests"]
 }
