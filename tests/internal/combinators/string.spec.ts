@@ -27,6 +27,27 @@ describe('internal/combinators/string', () => {
       should.matchState(actualUniUmlauts, expectedUniUmlauts)
       should.matchState(actualUniEmojis, expectedUniEmojis)
     })
+
+    it(`should succeed if given repetitive input`, () => {
+      const actual = run(uniString('test'), 'testtest')
+      const expected = result('success', 'test')
+
+      should.matchState(actual, expected)
+    })
+
+    it(`should fail if doesn't match the input`, () => {
+      const actual = run(uniString('test'), 'wrong')
+      const expected = result('failure', 'test')
+
+      should.matchState(actual, expected)
+    })
+
+    it(`should fail if given zero input`, () => {
+      const actual = run(uniString('test'), '')
+      const expected = result('failure', 'test')
+
+      should.matchState(actual, expected)
+    })
   })
 
   describe(string, () => {
