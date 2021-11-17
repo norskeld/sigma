@@ -4,7 +4,7 @@ import { regexp } from '@lib/combinators'
 import { run, result, should } from '@tests/@setup/jest.helpers'
 
 describe('internal/combinators/regexp', () => {
-  it(`should expose 'regexp' w/ 're' alias`, () => {
+  it(`should expose 'regexp' ('re')`, () => {
     should.expose(exposed, 'regexp', 're')
   })
 
@@ -22,6 +22,24 @@ describe('internal/combinators/regexp', () => {
       should.matchState(actualDigit, expectedDigit)
       should.matchState(actualDigits, expectedDigits)
       should.matchState(actualMatchGroups, expectedMatchGroups)
+    })
+
+    it(`should properly work with unicode flag`, () => {
+      const actualReEmoji = run(regexp(/\w+\s+👌/gu, 'words, spaces, ok emoji'), 'Yes 👌')
+      const expectedReEmoji = result('success', 'Yes 👌')
+
+      should.matchState(actualReEmoji, expectedReEmoji)
+    })
+
+    it(`should properly work with unicode property escapes`, () => {
+      const actualReEmoji = run(regexp(/\p{Emoji_Presentation}+/gu, 'emoji'), '👌👌👌')
+      const expectedReEmoji = result('success', '👌👌👌')
+
+      const actualReNonLatin = run(regexp(/\P{Script_Extensions=Latin}+/gu, 'non-latin'), '大阪')
+      const expectedReNonLation = result('success', '大阪')
+
+      should.matchState(actualReEmoji, expectedReEmoji)
+      should.matchState(actualReNonLatin, expectedReNonLation)
     })
 
     it(`should succeeed if matches the beginning of the input`, () => {
@@ -49,7 +67,7 @@ describe('internal/combinators/regexp', () => {
       should.matchState(actualZeroFailure, expectedZeroFailure)
     })
 
-    // TODO: Though this is kinda contrintuitive, so maybe should throw/fail?
+    // TODO: Though this is kinda counterintuitive, so maybe should throw/fail?
     it(`should succeed if given zero input and regexp with 'zero or more' quantifier`, () => {
       const actualZeroSuccess = run(regexp(/\d*/g, 'digits*'), '')
       const expectedZeroSuccess = result('success', '')
