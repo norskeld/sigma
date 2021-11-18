@@ -2,27 +2,26 @@
   "name": "@nrsk/sigma",
   "version": "1.2.0",
   "description": "TypeScript parser combinator library for building fast and convenient parsers.",
-  "type": "module",
-  "main": "./index.cjs.cjs",
-  "module": "./index.esm.js",
+  "main": "./index.cjs",
+  "module": "./index.mjs",
   "types": "./index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.esm.js",
-      "require": "./index.cjs.cjs",
+      "import": "./index.mjs",
+      "require": "./index.cjs",
       "types": "./index.d.ts"
     },
     "./combinators": {
-      "import": "./combinators.esm.js",
-      "require": "./combinators.cjs.cjs",
+      "import": "./combinators.mjs",
+      "require": "./combinators.cjs",
       "types": "./combinators.d.ts"
     }
   },
   "files": [
     "CHANGELOG.md",
     "*.d.ts",
-    "*.cjs.*",
-    "*.esm.*"
+    "*.cjs*",
+    "*.mjs*"
   ],
   "engines": {
     "node": ">=14.17.0"
@@ -30,14 +29,14 @@
   "scripts": {
     "build": "npm run build:types && npm run build:rollup",
     "build:types": "tsc -p tsconfig.types.json",
-    "build:rollup": "npx tsm scripts/compile.ts",
+    "build:rollup": "node --require tsm scripts/compile.ts",
     "fmt:prettier": "prettier --write \"**/*.{js,ts,json}\"",
-    "fmt:style": "eslint --fix --ext .js,.ts .",
+    "fmt:lint": "eslint --fix --ext .js,.ts .",
     "postbuild": "rimraf dist/types",
-    "postversion": "npx tsm ../scripts/release.ts restore",
+    "postversion": "node --require tsm ../scripts/release.ts restore",
     "prebuild": "rimraf dist",
-    "prerelease": "npx tsm scripts/release.ts prepare",
     "prepare": "echo husky install",
+    "prerelease": "node --require tsm scripts/release.ts prepare",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
     "test": "jest",

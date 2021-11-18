@@ -48,7 +48,7 @@ async function main() {
 
   await run(
     await actions({
-      /** This should be called in `prepack`. */
+      /** This should be called in `prerelease`. */
       async prepare() {
         try {
           // Just double-check for `dist` directory.
@@ -59,6 +59,10 @@ async function main() {
           await copyFile(`${cwd}/CHANGELOG.md`, `${cwd}/dist/CHANGELOG.md`)
           await copyFile(`${cwd}/README.md`, `${cwd}/dist/README.md`)
           await copyFile(`${cwd}/LICENSE`, `${cwd}/dist/LICENSE`)
+
+          // This is kinda needed for local publishes to `verdaccio`, so I do not accidentally
+          // publish my experiments to the actual `npm` registry.
+          await copyFile(`${cwd}/.npmrc`, `${cwd}/dist/.npmrc`)
 
           return {
             kind: 'success',

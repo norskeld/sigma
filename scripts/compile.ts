@@ -20,12 +20,12 @@ function createBundleOptions(entry: string, destination: string): BundleOptions 
     },
     output: [
       {
-        file: `${destination}.cjs.cjs`,
+        file: `${destination}.cjs`,
         format: 'cjs',
         sourcemap: true
       },
       {
-        file: `${destination}.esm.js`,
+        file: `${destination}.mjs`,
         format: 'esm',
         sourcemap: true
       }
