@@ -14,7 +14,11 @@ describe('internal/parsers/integer', () => {
       const actual = run(integer(), '42')
       const expected = result('success', 42)
 
+      const actualSingle = run(integer(), '0')
+      const expectedSingle = result('success', 0)
+
       should.matchState(actual, expected)
+      should.matchState(actualSingle, expectedSingle)
     })
 
     it(`should succeed if configured to accept optionally unsigned integers (sign = some)`, () => {
