@@ -12,7 +12,7 @@ interface IntegerOptions {
 
 const INT_SOME_RE = /^[+-]?\d+$/g
 const INT_ANY_RE = /^[+-]\d+$/g
-const INT_NONE_RE = /^[^+-]\d+$/g
+const INT_NONE_RE = /^\d+$/g
 const INT_POSITIVE_RE = /^[+]\d+$/g
 const INT_NEGATIVE_RE = /^[-]\d+$/g
 
