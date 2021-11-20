@@ -1,16 +1,16 @@
 import { size } from '@lib/internal/unicode'
 import { pangrams } from './unicode.data'
 
+function check(locale: string) {
+  const pangram = pangrams[locale]
+
+  return Array.isArray(pangram)
+    ? pangram.forEach((data) => expect(size(data.text)).toBe(data.size))
+    : expect(size(pangram.text)).toBe(pangram.size)
+}
+
 describe(size, () => {
-  function check(locale: string) {
-    const pangram = pangrams[locale]
-
-    return Array.isArray(pangram)
-      ? pangram.forEach((data) => expect(size(data.text)).toBe(data.size))
-      : expect(size(pangram.text)).toBe(pangram.size)
-  }
-
-  it('should correctly get length of unicode pangrams in bytes', () => {
+  it('should correctly get length in bytes if given a unicode pangram', () => {
     check('da')
     check('en')
     check('fr')
@@ -25,14 +25,14 @@ describe(size, () => {
     check('es')
   })
 
-  it('should correctly get length of emojis in bytes', () => {
+  it('should correctly get length in bytes if given an emoji', () => {
     expect(size(`⚡`)).toBe(3)
     expect(size(`🦶🏿`)).toBe(8)
     expect(size(`👨‍👨‍👧‍👧`)).toBe(25)
     expect(size(`🏴󠁧󠁢󠁥󠁮󠁧󠁿`)).toBe(28)
   })
 
-  it('should correctly calculate length of any char in bytes in range [E000, FFFF]', () => {
+  it('should correctly calculate length in bytes if given a char in range [E000, FFFF]', () => {
     ;[
       '\uE000', // Private Use Area
       '\uF900', // CJK Compatibility Ideographs
@@ -51,7 +51,7 @@ describe(size, () => {
     })
   })
 
-  it('should throw if provided with invalid single surrogates', () => {
+  it('should throw if given an invalid single surrogate', () => {
     ;[
       '\uD800', // Missing low surrogate
       '\uDB7F', // Missing low surrogate
