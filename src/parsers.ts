@@ -1,2 +1,7 @@
+export * from './internal/parsers/defer'
 export * from './internal/parsers/float'
 export * from './internal/parsers/integer'
+export * from './internal/parsers/lazy'
+export * from './internal/parsers/nothing'
+export * from './internal/parsers/regexp'
+export * from './internal/parsers/string'

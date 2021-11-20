@@ -40,8 +40,8 @@
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
     "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:coverage": "jest --coverage --run-in-band",
+    "test:watch": "jest --watch --max-workers=50%"
   },
   "repository": {
     "type": "git",

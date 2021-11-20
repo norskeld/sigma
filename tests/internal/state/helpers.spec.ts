@@ -1,36 +1,33 @@
-import * as exposed from '@lib/index'
-import { success, failure, State, Success, Failure } from '@lib/index'
+import { State, Success, Failure } from '@lib/internal/state/state'
+import { success, failure } from '@lib/internal/state/helpers'
 
-import { should } from '@tests/@setup/jest.helpers'
+describe(success, () => {
+  it('should construct a success object if given a state object and value', () => {
+    const value = 'value'
+    const state: State = {
+      text: 'test',
+      index: 0
+    }
 
-describe('internal/state/helpers', () => {
-  const value = 'value'
-  const expected = 'value'
+    const actual = success({ ...state }, value)
+    const result: Success<typeof value> = { kind: 'success', state, value }
 
-  const state: State = {
-    text: 'test',
-    index: 0
-  }
-
-  it(`should expose 'success' and 'failure'`, () => {
-    should.expose(exposed, 'success', 'failure')
+    expect(actual).toStrictEqual(result)
   })
+})
 
-  describe(success, () => {
-    it('should construct a success object', () => {
-      const actual = success({ ...state }, value)
-      const result: Success<typeof value> = { kind: 'success', state, value }
+describe(failure, () => {
+  it('should construct a failure object if given a state object and expectation message', () => {
+    const value = 'value'
+    const expected = 'value'
+    const state: State = {
+      text: 'test',
+      index: 0
+    }
 
-      expect(actual).toStrictEqual(result)
-    })
-  })
+    const actual = failure({ ...state }, value)
+    const result: Failure = { kind: 'failure', state, expected }
 
-  describe(failure, () => {
-    it('should construct a failure object', () => {
-      const actual = failure({ ...state }, value)
-      const result: Failure = { kind: 'failure', state, expected }
-
-      expect(actual).toStrictEqual(result)
-    })
+    expect(actual).toStrictEqual(result)
   })
 })

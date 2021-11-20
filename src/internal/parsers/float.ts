@@ -1,6 +1,6 @@
 import { success, Parser, State } from '../state'
 
-import { regexp } from '../combinators/regexp'
+import { regexp } from './regexp'
 
 type SignKind = 'any' | 'some' | 'positive' | 'negative' | 'none'
 type SignMeta = [rexpression: RegExp, expectation: string]

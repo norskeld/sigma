@@ -1,44 +1,38 @@
-import * as exposed from '@lib/index'
+import { run } from '@lib/internal/run'
 
-import { defer, string } from '@lib/combinators'
-import { run } from '@lib/index'
+import { string } from '@lib/internal/parsers/string'
+import { defer } from '@lib/internal/parsers/defer'
 
-import { result, should } from '@tests/@setup/jest.helpers'
+import { result, should } from '@tests/@helpers'
 
-describe('internal/run', () => {
-  it(`should expose 'run'`, () => {
-    should.expose(exposed, 'run')
+describe(run, () => {
+  it('should succeed if given a succeeding parser', () => {
+    const parser = string('runnable')
+    const actual = run(parser).with('runnable')
+    const expected = result('success', 'runnable')
+
+    should.matchState(actual, expected)
   })
 
-  describe(run, () => {
-    it(`should succeed`, () => {
-      const parser = string('runnable')
-      const actual = run(parser).with('runnable')
-      const expected = result('success', 'runnable')
+  it('should fail if given a failing parser', () => {
+    const deferred = defer<string>()
 
-      should.matchState(actual, expected)
-    })
+    deferred.with(string('deferred'))
 
-    it(`should throw`, () => {
-      const deferred = defer<string>()
+    const actual = run(deferred).with('lazy')
+    const expected = result('failure', 'deferred')
 
-      expect(() => {
-        const actual = run(deferred).with('deferred')
-        const expected = result('failure', 'deferred')
+    should.matchState(actual, expected)
+  })
 
-        should.matchState(actual, expected)
-      }).toThrow()
-    })
+  it('should throw if given a non-initialized deferred parser', () => {
+    const deferred = defer<string>()
 
-    it(`should fail`, () => {
-      const deferred = defer<string>()
-
-      deferred.with(string('deferred'))
-
-      const actual = run(deferred).with('lazy')
+    expect(() => {
+      const actual = run(deferred).with('deferred')
       const expected = result('failure', 'deferred')
 
       should.matchState(actual, expected)
-    })
+    }).toThrow()
   })
 })

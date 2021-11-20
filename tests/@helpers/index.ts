@@ -1,4 +1,5 @@
 import { Parser, Result } from '@lib/internal/state'
+import { run as internal$run } from '@lib/internal/run'
 
 type ResultKind = 'success' | 'failure'
 
@@ -8,7 +9,7 @@ interface ReducedResult<T> {
 }
 
 export function run<T>(parser: Parser<T>, text: string): Result<T> {
-  return parser.parse({ text, index: 0 })
+  return internal$run(parser).with(text)
 }
 
 export function result<T>(kind: ResultKind, value: T): ReducedResult<T> {
