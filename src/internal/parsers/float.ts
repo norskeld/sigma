@@ -2,32 +2,28 @@ import { success, Parser, State } from '../state'
 
 import { regexp } from './regexp'
 
-type SignKind = 'any' | 'some' | 'positive' | 'negative' | 'none'
+type SignKind = 'always' | 'never' | 'maybe'
 type SignMeta = [rexpression: RegExp, expectation: string]
 
 interface FloatOptions {
   sign?: SignKind
 }
 
-const FLOAT_SOME_RE = /^[+-]?\d+[.]\d+$/g
-const FLOAT_ANY_RE = /^[+-]\d+[.]\d+$/g
-const FLOAT_NONE_RE = /^\d+[.]\d+$/g
-const FLOAT_POSITIVE_RE = /^[+]\d+[.]\d+$/g
-const FLOAT_NEGATIVE_RE = /^[-]\d+[.]\d+$/g
+const FLOAT_ALWAYS_RE = /-\d+\.\d+/g
+const FLOAT_NEVER_RE = /\d+\.\d+/g
+const FLOAT_MAYBE_RE = /-?\d+\.\d+/g
 
 function meta(sign: SignKind): SignMeta {
   // prettier-ignore
   switch (sign) {
-    case 'some': return [FLOAT_SOME_RE, `optionally signed float`]
-    case 'any': return [FLOAT_ANY_RE, `signed float`]
-    case 'none': return [FLOAT_NONE_RE, `unsigned float`]
-    case 'positive': return [FLOAT_POSITIVE_RE, `positively signed float`]
-    case 'negative': return [FLOAT_NEGATIVE_RE, `negatively signed float`]
+    case 'always': return [FLOAT_ALWAYS_RE, 'signed float']
+    case 'never': return [FLOAT_NEVER_RE, 'unsigned float']
+    case 'maybe': return [FLOAT_MAYBE_RE, 'optionally signed float']
   }
 }
 
 export function float(options: FloatOptions = {}): Parser<number> {
-  const sign = options.sign ?? 'none'
+  const sign = options.sign ?? 'maybe'
 
   return {
     parse(state: State) {
