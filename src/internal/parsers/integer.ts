@@ -2,7 +2,7 @@ import { success, Parser, State } from '../state'
 
 import { regexp } from './regexp'
 
-type SignKind = 'any' | 'some' | 'positive' | 'negative' | 'none'
+type SignKind = 'always' | 'never' | 'maybe'
 type SignMeta = [rexpression: RegExp, expectation: string]
 
 interface IntegerOptions {
@@ -10,25 +10,21 @@ interface IntegerOptions {
   radix?: number
 }
 
-const INT_SOME_RE = /^[+-]?\d+$/g
-const INT_ANY_RE = /^[+-]\d+$/g
-const INT_NONE_RE = /^\d+$/g
-const INT_POSITIVE_RE = /^[+]\d+$/g
-const INT_NEGATIVE_RE = /^[-]\d+$/g
+const INT_ALWAYS_RE = /-\d+/g
+const INT_NEVER_RE = /\d+/g
+const INT_MAYBE_RE = /-?\d+/g
 
 function meta(sign: SignKind): SignMeta {
   // prettier-ignore
   switch (sign) {
-    case 'some': return [INT_SOME_RE, `optionally signed integer`]
-    case 'any': return [INT_ANY_RE, `signed integer`]
-    case 'none': return [INT_NONE_RE, `unsigned integer`]
-    case 'positive': return [INT_POSITIVE_RE, `positively signed integer`]
-    case 'negative': return [INT_NEGATIVE_RE, `negatively signed integer`]
+    case 'always': return [INT_ALWAYS_RE, 'signed integer']
+    case 'never': return [INT_NEVER_RE, 'unsigned integer']
+    case 'maybe': return [INT_MAYBE_RE, 'optionally signed integer']
   }
 }
 
 export function integer(options: IntegerOptions = {}): Parser<number> {
-  const sign = options.sign ?? 'none'
+  const sign = options.sign ?? 'maybe'
   const radix = options.radix ?? 10
 
   return {
