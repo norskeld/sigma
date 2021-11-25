@@ -17,6 +17,10 @@ it('should expose parsers', () => {
     'string',
     'str',
     'uniString',
-    'ustr'
+    'ustr',
+    'whitespace',
+    'ws',
+    'whitespaceOptional',
+    'wsOpt'
   )
 })
