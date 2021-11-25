@@ -14,6 +14,7 @@ it('should expose parsers', () => {
     'nil',
     'regexp',
     're',
+    'rest',
     'string',
     'str',
     'uniString',
