@@ -6,6 +6,7 @@ it('should expose parsers', () => {
   should.expose(
     exposed,
     'defer',
+    'eof',
     'float',
     'integer',
     'int',

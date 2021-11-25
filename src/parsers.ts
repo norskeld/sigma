@@ -1,4 +1,5 @@
 export * from './internal/parsers/defer'
+export * from './internal/parsers/eof'
 export * from './internal/parsers/float'
 export * from './internal/parsers/integer'
 export * from './internal/parsers/lazy'
