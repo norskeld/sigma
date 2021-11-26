@@ -15,6 +15,8 @@ it('should expose parsers', () => {
     'letters',
     'nothing',
     'nil',
+    'newline',
+    'eol',
     'regexp',
     're',
     'rest',
