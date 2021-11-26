@@ -11,6 +11,8 @@ it('should expose parsers', () => {
     'integer',
     'int',
     'lazy',
+    'letter',
+    'letters',
     'nothing',
     'nil',
     'regexp',
