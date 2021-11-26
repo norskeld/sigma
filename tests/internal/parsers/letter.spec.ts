@@ -17,6 +17,13 @@ describe(letter, () => {
     should.matchState(actual, expected)
   })
 
+  it('should succeed with a single letter if given multiple letters', () => {
+    const actual = run(letter(), 'ab')
+    const expected = result('success', 'a')
+
+    should.matchState(actual, expected)
+  })
+
   it('should fail if given something other than a letter', () => {
     ;['1', '+', '~', '`', ':', `'`].forEach((tcase) => {
       const actual = run(letter(), tcase)
