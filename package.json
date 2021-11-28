@@ -15,6 +15,11 @@
       "import": "./combinators.mjs",
       "require": "./combinators.cjs",
       "types": "./combinators.d.ts"
+    },
+    "./parsers": {
+      "import": "./parsers.mjs",
+      "require": "./parsers.cjs",
+      "types": "./parsers.d.ts"
     }
   },
   "files": [
