@@ -52,10 +52,12 @@ async function compile() {
   const options = [
     // Roll-up sources.
     createBundleOptions('src/index', 'dist/index'),
+    createBundleOptions('src/parsers', 'dist/parsers'),
     createBundleOptions('src/combinators', 'dist/combinators'),
 
     // Roll-up already existing d.ts created by `tsc`.
     createTypesBundleOptions('dist/types/index', 'dist/index'),
+    createTypesBundleOptions('dist/types/parsers', 'dist/parsers'),
     createTypesBundleOptions('dist/types/combinators', 'dist/combinators')
   ]
 
