@@ -1,96 +1,67 @@
-import { error } from '@lib/internal/combinators/error'
-import { integer } from '@lib/internal/parsers/integer'
+import { integer, integerUnsigned } from '@lib/internal/parsers/integer'
 
-import { result, run, should } from '@tests/@helpers'
+import { testSuccess, testFailure } from '@tests/@helpers'
 
 describe(integer, () => {
-  describe('sign = ... (success)', () => {
-    it('should succeed if given an unsigned integer number', () => {
-      const actual = run(integer(), '42')
-      const expected = result('success', 42)
+  it('should succeed if given a signed integer', () => {
+    const tcases = [
+      ['0', 0],
+      ['2', 2],
+      ['20', 20],
+      ['-2', -2],
+      ['-20', -20]
+    ] as const
 
-      const actualSingle = run(integer(), '0')
-      const expectedSingle = result('success', 0)
-
-      should.matchState(actual, expected)
-      should.matchState(actualSingle, expectedSingle)
-    })
-
-    it('should succeed if configured to accept optionally unsigned integers (sign = maybe)', () => {
-      const cases = [
-        [integer({ sign: 'maybe' }), '-42', result('success', -42)],
-        [integer({ sign: 'maybe' }), '42', result('success', 42)]
-      ] as const
-
-      cases.forEach(([parser, input, expected]) => {
-        should.matchState(run(parser, input), expected)
-      })
-    })
-
-    it('should succeed if configured to accept signed integers (sign = always)', () => {
-      const cases = [
-        [integer({ sign: 'always' }), '-8', result('success', -8)],
-        [integer({ sign: 'always' }), '-42', result('success', -42)],
-        [integer({ sign: 'always' }), '-9000', result('success', -9000)]
-      ] as const
-
-      cases.forEach(([parser, input, expected]) => {
-        should.matchState(run(parser, input), expected)
-      })
-    })
-
-    it('should succeed if configured to not accept signed integers (sign = never)', () => {
-      const cases = [
-        [integer({ sign: 'never' }), '42', result('success', 42)],
-        [integer({ sign: 'never' }), '8912493', result('success', 8912493)]
-      ] as const
-
-      cases.forEach(([parser, input, expected]) => {
-        should.matchState(run(parser, input), expected)
-      })
+    tcases.forEach(([input, value]) => {
+      testSuccess(input, value, integer)
     })
   })
 
-  describe('radix = ... (success)', () => {
-    it('should succeed with hexadecimal value if configured to use radix = 16', () => {
-      const actual = run(integer({ radix: 16 }), '100')
-      const expected = result('success', 256)
+  it('should succeed with hexadecimal value if radix = 16', () => {
+    testSuccess('100', 256, () => integer(16))
+  })
 
-      should.matchState(actual, expected)
+  it('should succeed with octal value if radix = 8', () => {
+    testSuccess('100', 64, () => integer(8))
+  })
+
+  it('should fail if given something else', () => {
+    ;['string', '-+', ' '].forEach((tcase) => {
+      testFailure(tcase, integer)
     })
+  })
+})
 
-    it('should succeed with hexadecimal value if configured to use radix = 8', () => {
-      const actual = run(integer({ radix: 8 }), '100')
-      const expected = result('success', 64)
+describe(integerUnsigned, () => {
+  it('should succeed if given an unsigned integer', () => {
+    const tcases = [
+      ['0', 0],
+      ['2', 2],
+      ['20', 20]
+    ] as const
 
-      should.matchState(actual, expected)
-    })
-
-    it('should succeed with hexadecimal value if configured to use radix = 2', () => {
-      const actual = run(integer({ radix: 2 }), '100')
-      const expected = result('success', 4)
-
-      should.matchState(actual, expected)
+    tcases.forEach(([input, value]) => {
+      testSuccess(input, value, integerUnsigned)
     })
   })
 
-  describe('failed cases', () => {
-    it('should fail if configured to accept only signed integers and given an unsigned integer', () => {
-      const message = 'signed integer'
+  it('should succeed with hexadecimal value if radix = 16', () => {
+    testSuccess('100', 256, () => integerUnsigned(16))
+  })
 
-      const actual = run(error(integer({ sign: 'always' }), message), '420')
-      const expected = result('failure', message)
+  it('should succeed with octal value if radix = 8', () => {
+    testSuccess('100', 64, () => integerUnsigned(8))
+  })
 
-      should.matchState(actual, expected)
+  it('should fail if given a signed integer', () => {
+    ;['-20', '-2'].forEach((tcase) => {
+      testFailure(tcase, integerUnsigned)
     })
+  })
 
-    it('should fail if configured to accept only unsigned integers and given a signed integer', () => {
-      const message = 'unsigned integer'
-
-      const actual = run(error(integer({ sign: 'never' }), message), '-420')
-      const expected = result('failure', message)
-
-      should.matchState(actual, expected)
+  it('should fail if given something else', () => {
+    ;['string', '-+', ' '].forEach((tcase) => {
+      testFailure(tcase, integerUnsigned)
     })
   })
 })

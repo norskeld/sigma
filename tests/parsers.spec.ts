@@ -10,6 +10,8 @@ it('should expose parsers', () => {
     'float',
     'integer',
     'int',
+    'integerUnsigned',
+    'uint',
     'lazy',
     'letter',
     'letters',

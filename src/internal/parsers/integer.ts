@@ -2,35 +2,13 @@ import { success, Parser, State } from '../state'
 
 import { regexp } from './regexp'
 
-type SignKind = 'always' | 'never' | 'maybe'
-type SignMeta = [rexpression: RegExp, expectation: string]
+const INT_SIGNED_RE = /-?\d+/g
+const INT_UNSIGNED_RE = /\d+/g
 
-interface IntegerOptions {
-  sign?: SignKind
-  radix?: number
-}
-
-const INT_ALWAYS_RE = /-\d+/g
-const INT_NEVER_RE = /\d+/g
-const INT_MAYBE_RE = /-?\d+/g
-
-function meta(sign: SignKind): SignMeta {
-  // prettier-ignore
-  switch (sign) {
-    case 'always': return [INT_ALWAYS_RE, 'signed integer']
-    case 'never': return [INT_NEVER_RE, 'unsigned integer']
-    case 'maybe': return [INT_MAYBE_RE, 'optionally signed integer']
-  }
-}
-
-export function integer(options: IntegerOptions = {}): Parser<number> {
-  const sign = options.sign ?? 'maybe'
-  const radix = options.radix ?? 10
-
+function createIntegerParser(re: RegExp, expectation: string, radix: number) {
   return {
     parse(state: State) {
-      const [rexpression, expectation] = meta(sign)
-      const result = regexp(rexpression, expectation).parse(state)
+      const result = regexp(re, expectation).parse(state)
 
       switch (result.kind) {
         case 'success': {
@@ -45,4 +23,12 @@ export function integer(options: IntegerOptions = {}): Parser<number> {
   }
 }
 
-export { integer as int }
+export function integer(radix = 10): Parser<number> {
+  return createIntegerParser(INT_SIGNED_RE, 'signed integer', radix)
+}
+
+export function integerUnsigned(radix = 10): Parser<number> {
+  return createIntegerParser(INT_UNSIGNED_RE, 'unsigned integer', radix)
+}
+
+export { integer as int, integerUnsigned as uint }
