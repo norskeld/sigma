@@ -26,7 +26,8 @@ npm i @nrsk/sigma
 Below is an example of parsing nested tuples like `(1, 2, (3, 4))` into an AST.
 
 ```ts
-import { choice, defer, list, map, opt, regexp, string, tmid } from '@nrsk/sigma/combinators'
+import { map, sequence, choice, sepBy, takeMid } from '@nrsk/sigma/combinators'
+import { defer, integer, string, wsOpt } from '@nrsk/sigma/parsers'
 import { run } from '@nrsk/sigma'
 
 /* AST. */
@@ -43,10 +44,10 @@ interface ListNode {
 
 /* Mapping functions to turn parsed string values into AST nodes. */
 
-function toNumber(value: string): NumberNode {
+function toNumber(value: number): NumberNode {
   return {
     type: 'number',
-    value: +value
+    value
   }
 }
 
@@ -60,25 +61,18 @@ function toList(value: Array<NumberNode | ListNode>): ListNode {
 /* Parsers. */
 
 // Non-Terminals.
-const Space = regexp(/\s+/g, 'whitespace')
-const Integer = regexp(/\d+/g, 'integer')
+const Space = wsOpt()
+const Integer = integer()
 
 // Terminals.
 const OperParen = string('(')
 const CloseParen = string(')')
-const Comma = tmid(opt(Space), string(','), opt(Space))
+const Comma = sequence(Space, string(','), Space)
 
 // Composites. Deferred initialization allows us to use recursion and mutual calls between parsers.
-const TupleNumber = defer<NumberNode>()
 const TupleElement = defer<NumberNode | ListNode>()
+const TupleNumber = defer<NumberNode>()
 const TupleList = defer<ListNode>()
-
-TupleNumber.with(
-  map(
-    Integer,
-    toNumber
-  )
-)
 
 TupleElement.with(
   choice(
@@ -87,11 +81,18 @@ TupleElement.with(
   )
 )
 
+TupleNumber.with(
+  map(
+    Integer,
+    toNumber
+  )
+)
+
 TupleList.with(
   map(
-    tmid(
+    takeMid(
       OperParen,
-      list(TupleElement, Comma),
+      sepBy(TupleElement, Comma),
       CloseParen
     ),
     toList
