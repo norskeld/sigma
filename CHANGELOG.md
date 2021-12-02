@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/norskeld/sigma/compare/v1.3.0...v1.4.0) (2021-12-02)
+
+
+### Features
+
+* **combinators/take:** add `takeSides` combinator ([7bd2eb1](https://github.com/norskeld/sigma/commit/7bd2eb130337a419308aaf777b75627a370c065b))
+
 # [1.3.0](https://github.com/norskeld/sigma/compare/v1.2.0...v1.3.0) (2021-11-28)
 
 
