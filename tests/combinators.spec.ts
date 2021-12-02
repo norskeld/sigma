@@ -23,6 +23,8 @@ it(`should expose combinators`, () => {
     'takeMid',
     'tmid',
     'takeRight',
-    'tright'
+    'tright',
+    'takeSides',
+    'tsides'
   )
 })

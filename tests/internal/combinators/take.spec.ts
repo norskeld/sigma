@@ -1,4 +1,4 @@
-import { takeLeft, takeMid, takeRight } from '@lib/internal/combinators/take'
+import { takeLeft, takeMid, takeRight, takeSides } from '@lib/internal/combinators/take'
 import { string } from '@lib/internal/parsers/string'
 
 import { run, result, should } from '@tests/@helpers'
@@ -31,6 +31,17 @@ describe(takeRight, () => {
     const parser = takeRight(string('mid'), string('right'))
     const actual = run(parser, 'midright')
     const expected = result('success', 'right')
+
+    should.matchState(actual, expected)
+  })
+})
+
+// TODO: Add failing cases.
+describe(takeSides, () => {
+  it('should succeed with the tuple of the first and the last values', () => {
+    const parser = takeSides(string('left'), string('mid'), string('right'))
+    const actual = run(parser, 'leftmidright')
+    const expected = result('success', ['left', 'right'])
 
     should.matchState(actual, expected)
   })
