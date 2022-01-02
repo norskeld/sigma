@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/norskeld/sigma/compare/v1.4.0...v1.4.1) (2022-01-02)
+
+
+### Bug Fixes
+
+* mark package as side-effect-free ([e2f7327](https://github.com/norskeld/sigma/commit/e2f7327cddfb90e0599f833e119ad2252964e55c))
+
 # [1.4.0](https://github.com/norskeld/sigma/compare/v1.3.0...v1.4.0) (2021-12-02)
 
 
