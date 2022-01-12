@@ -1,3 +1,11 @@
+## [1.4.2](https://github.com/norskeld/sigma/compare/v1.4.1...v1.4.2) (2022-01-12)
+
+
+### Bug Fixes
+
+* **combinators/choice:** get rid of manual overloads ([ace89ea](https://github.com/norskeld/sigma/commit/ace89ea4b151b42ed10c459c06a341dadff68f95))
+* **combinators/sequence:** get rid of manual overloads ([d81a7b6](https://github.com/norskeld/sigma/commit/d81a7b6cd44a66bf232b23c334c9aab23a3091ad))
+
 ## [1.4.1](https://github.com/norskeld/sigma/compare/v1.4.0...v1.4.1) (2022-01-02)
 
 
