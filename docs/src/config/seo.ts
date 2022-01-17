@@ -15,7 +15,7 @@ export const Common = {
 /** Default SEO options/properties that are passed to `next-seo` and universal across all pages. */
 export const Seo: DefaultSeoProps = {
   defaultTitle: Common.title,
-  titleTemplate: `%s | ${Common.title}`,
+  titleTemplate: `${Common.title} :: %s `,
   description: Common.description,
   openGraph: {
     type: 'website',

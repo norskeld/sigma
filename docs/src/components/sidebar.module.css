@@ -21,6 +21,12 @@
   font-size: 1rem;
 }
 
+@media screen and (min-width: 560px) {
+  .sidebarWithOverlay {
+    padding: 8rem 2rem 2rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .sidebar {
     display: block;
