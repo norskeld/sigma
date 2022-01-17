@@ -1,0 +1,229 @@
+/* Footer. */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0.5;
+  padding: 1rem 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.footer:hover {
+  opacity: 1;
+}
+
+.footerLastChange {
+  color: var(--contrast-500);
+  cursor: help;
+}
+
+@media screen and (min-width: 560px) {
+  .footer {
+    flex-direction: row;
+  }
+}
+
+/* Article. */
+
+.article {
+  padding: 0;
+  width: 100%;
+}
+
+/** Paragraphs. */
+
+.article p {
+  margin: 1.25em 0;
+}
+
+/** Horizontal divider. */
+
+.article hr:first-of-type {
+  display: none;
+}
+
+/** General <pre> and <code> styling. */
+
+.article pre,
+.article code {
+  font-family: var(--font-mono);
+}
+
+/** Code highlighting. */
+
+/** -- General. */
+
+.article :global(.shiki) {
+  border-radius: 0;
+  margin: 1.5rem -1.5rem;
+  font-size: 0.9rem;
+}
+
+.article :global(.shiki code) {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+}
+
+/** -- Line numbers. */
+
+.article :global(.shiki .line-numbers) {
+  padding: 0.75rem 0;
+  color: var(--contrast-600);
+  text-align: right;
+  user-select: none;
+}
+
+.article :global(.shiki .line-numbers .line-number) {
+  min-width: 1.5rem;
+  padding: 0 1rem;
+}
+
+/** -- Lines. */
+
+.article :global(.shiki .lines) {
+  display: grid;
+  width: 100%;
+  padding: 0.75rem 0;
+  overflow-x: auto;
+}
+
+.article :global(.shiki .lines .line) {
+  padding-right: 2rem;
+  white-space: pre;
+}
+
+/** -- Highlight. */
+
+.article :global(.shiki :where(.lines, .line-numbers) :where(.highlight-invert)) {
+  opacity: 0.35;
+}
+
+.article
+  :global(.shiki
+    :where(.lines, .line-numbers)
+    :where(.highlight, .highlight-start, .highlight-inner, .highlight-end)) {
+  background: #434c5e58;
+  opacity: 1;
+}
+
+/** -- Language label. */
+
+.article :global(.shiki .language-id) {
+  background: var(--contrast-100);
+  color: var(--contrast-500);
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  border-bottom: 1px solid var(--contrast-200);
+  user-select: none;
+}
+
+@media screen and (min-width: 560px) {
+  .article :global(.shiki) {
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .article :global(.shiki .language-id) {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+}
+
+/** Inline code. */
+
+.article :global(:not(pre) code) {
+  background: var(--contrast-950);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+}
+
+/** Blockquotes. */
+
+.article q,
+.article blockquote {
+  color: var(--contrast-400);
+  padding: 0 1rem;
+  margin: 0 0 1rem;
+  border-left: 0.4rem solid var(--contrast-900);
+}
+
+/** Links. */
+
+.article a {
+  color: var(--accent);
+  padding-bottom: 0.05rem;
+  border-bottom: 2px solid rgba(var(--accent-base), 0.125);
+  transition: color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.article a:focus,
+.article a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/** Headers. */
+
+.article h1,
+.article h2 {
+  border-bottom: 2px solid var(--contrast-950);
+}
+
+.article h1:first-of-type {
+  border: 0;
+}
+
+.article :global(a.header-anchor) {
+  color: var(--contrast-800);
+  opacity: 1;
+  border: 0;
+  transition: color 150ms ease-in-out, opacity 150ms ease-in-out;
+}
+
+.article :global(a.header-anchor:hover) {
+  color: var(--text);
+}
+
+@media screen and (min-width: 768px) {
+  .article :global(a.header-anchor) {
+    opacity: 0;
+  }
+
+  .article :is(h1, h2, h3, h4, h5, h5):hover :global(a.header-anchor) {
+    opacity: 1;
+  }
+}
+
+/** Tables. */
+
+.article table {
+  width: 100%;
+  max-width: 100%;
+  font-size: 1.15rem;
+}
+
+.article table tr,
+.article table td,
+.article table th {
+  padding: 0.5rem 0.75rem;
+}
+
+.article table tr {
+  border-bottom: 1px solid var(--contrast-900);
+}
+
+.article th {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: left;
+  background-color: var(--contrast-900);
+}
+
+/** Images. */
+
+.article img {
+  width: 100%;
+  border-radius: 0.5rem;
+}

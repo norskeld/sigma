@@ -1,0 +1,34 @@
+:root {
+  --black: #0a0b0b;
+  --white: #fcfcfc;
+
+  --text: var(--black);
+  --background: var(--white);
+
+  /** Accents. */
+
+  --accent-base: 0, 112, 243;
+
+  --accent: rgba(var(--accent-base), 1);
+
+  /** Contrasts. */
+
+  --contrast-base: 212, 10%;
+
+  --contrast-100: hsl(var(--contrast-base), 14%);
+  --contrast-200: hsl(var(--contrast-base), 23%);
+  --contrast-300: hsl(var(--contrast-base), 33%);
+  --contrast-400: hsl(var(--contrast-base), 43%);
+  --contrast-500: hsl(var(--contrast-base), 52%);
+  --contrast-600: hsl(var(--contrast-base), 62%);
+  --contrast-700: hsl(var(--contrast-base), 71%);
+  --contrast-800: hsl(var(--contrast-base), 81%);
+  --contrast-850: hsl(var(--contrast-base), 84%);
+  --contrast-900: hsl(var(--contrast-base), 91%);
+  --contrast-950: hsl(var(--contrast-base), 94%);
+
+  /** Selection.  */
+
+  --selection-color: var(--white);
+  --selection-background: rgba(var(--accent-base), 0.825);
+}

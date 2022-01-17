@@ -1,0 +1,104 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.headline {
+  max-width: 100%;
+}
+
+.headline h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 3rem;
+}
+
+@media screen and (min-width: 560px) {
+  .headline {
+    max-width: 48rem;
+  }
+
+  .headline h1 {
+    text-align: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.buttons > * {
+  width: 100%;
+}
+
+.buttons > * + * {
+  margin: 1rem 0 0 0;
+}
+
+.buttonsRead {
+  display: block;
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  transition: background 150ms ease-in-out;
+}
+
+.buttonsRead:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.buttonsCopy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  background: var(--contrast-950);
+  color: var(--contrast-200);
+  transition: color 150ms ease-in-out;
+}
+
+.buttonsCopy:hover {
+  cursor: pointer;
+  color: var(--contrast-400);
+}
+
+.buttonsCopyText {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.buttonsCopyIcon {
+  display: block;
+  margin-left: 1rem;
+}
+
+@media screen and (min-width: 560px) {
+  .buttons {
+    flex-direction: row;
+    width: auto;
+  }
+
+  .buttons > * + * {
+    margin: 0 0 0 1rem;
+  }
+}

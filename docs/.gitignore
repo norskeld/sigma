@@ -1,0 +1,9 @@
+# Next.js.
+.next
+out
+
+# Production.
+build
+
+# Vercel.
+.vercel

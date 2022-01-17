@@ -1,0 +1,7 @@
+---
+title: 'takeMid'
+---
+
+# takeMid
+
+TBD.

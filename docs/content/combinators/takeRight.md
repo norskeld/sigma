@@ -1,0 +1,7 @@
+---
+title: 'takeRight'
+---
+
+# takeRight
+
+TBD.
