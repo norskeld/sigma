@@ -1,0 +1,61 @@
+/** Remove all the styles of the "User-Agent-Stylesheet", except for the `display` property. */
+
+*:where(:not(li, ul, ol, pre, code, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/** `Prefer `box-sizing` value. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/** Some root defaults. */
+
+html,
+body {
+  font-family: var(--font-normal);
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/** For images to not be able to exceed their container. */
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/** Remove spacing between cells in tables. */
+
+table {
+  border-collapse: collapse;
+}
+
+/** Unify `q`s and `blockquote`s behaviour. */
+
+q,
+blockquote {
+  quotes: none;
+}
+
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  content: '';
+  content: none;
+}
+
+/** Revert some stuff for Chromium browsers. */
+
+:where([contenteditable]) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+}

@@ -1,0 +1,126 @@
+.sidebar {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  padding: 6rem 1.5rem 2rem;
+  background: var(--background);
+}
+
+.sidebarWithOverlay {
+  display: block;
+}
+
+.container {
+  position: static;
+  width: 100%;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    display: block;
+    position: relative;
+    overflow: visible;
+    padding: 2rem 1.5rem 0 0;
+  }
+
+  .container {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.container > *:first-child {
+  padding-top: 0;
+  margin-top: 0.5rem;
+}
+
+.section {
+  margin: 1rem 0;
+}
+
+.sectionBody {
+  display: none;
+}
+
+.sectionBodyOpen {
+  display: block;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+  color: var(--black);
+  transition: color 150ms ease-in-out;
+}
+
+.sectionTitle:hover {
+  color: var(--contrast-400);
+  cursor: pointer;
+}
+
+.sectionTitle > * + * {
+  margin-left: 0.25rem;
+}
+
+.sectionTitleLabel {
+  font-size: 1.25rem;
+  font-weight: 800;
+  user-select: none;
+}
+
+.sectionTitleCaret,
+.sectionTitleCaret svg {
+  display: block;
+  transition: transform 100ms ease-in-out;
+}
+
+.sectionTitleCaretRotate {
+  transform: rotate(90deg);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  transition: all 150ms ease-in-out;
+}
+
+.itemLink {
+  display: block;
+  width: 100%;
+  color: var(--black);
+  transition: color 150ms ease-in-out;
+}
+
+.itemLinkDisabled {
+  width: auto;
+  color: var(--contrast-500);
+  cursor: default;
+  user-select: none;
+}
+
+.itemActive * {
+  color: var(--accent);
+}
+
+.itemTBD {
+  font-size: 0.5rem;
+  font-weight: 800;
+  line-height: 0.75rem;
+  padding: 0.2rem 0.35rem;
+  margin-left: 0.5rem;
+  border-radius: 0.25rem;
+  background: var(--contrast-950);
+}
+
+.itemTBD:hover {
+  cursor: help;
+  user-select: none;
+}

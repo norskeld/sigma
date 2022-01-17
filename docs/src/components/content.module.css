@@ -1,0 +1,9 @@
+.content {
+  padding: 0;
+  min-width: 0;
+}
+
+.content > *:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}

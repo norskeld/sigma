@@ -1,0 +1,20 @@
+# Ignore everything in the project root.
+/*
+
+# Except: content and source directories.
+!content
+!public
+!src
+
+# Except: Next.js config and types.
+!next.config.*
+!next-env.d.ts
+
+# Except: tsconfig.json.
+!tsconfig.*
+
+# Except: package.json and lock-files.
+!package.json
+!package-lock.json
+!pnpm-lock.yaml
+!yarn.lock
