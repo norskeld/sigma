@@ -6,12 +6,6 @@
   padding: 2rem 0;
 }
 
-@media screen and (min-width: 560px) {
-  .container {
-    padding: 4rem 0;
-  }
-}
-
 @media screen and (min-width: 768px) {
   .container {
     grid-template-columns: 12rem 1fr;

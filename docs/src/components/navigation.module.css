@@ -113,3 +113,9 @@
   padding: 1.5rem;
   background: var(--background);
 }
+
+@media screen and (min-width: 560px) {
+  .navigationWithOverlay {
+    padding: 2rem;
+  }
+}
