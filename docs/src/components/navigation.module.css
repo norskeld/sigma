@@ -6,6 +6,21 @@
   max-width: var(--container-w);
 }
 
+.navigationWithOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  padding: 1.5rem;
+  background: var(--background);
+}
+
+@media screen and (min-width: 560px) {
+  .navigationWithOverlay {
+    padding: 2rem;
+  }
+}
+
 .logo,
 .brand {
   display: flex;
@@ -53,8 +68,20 @@
   padding: 0 1rem;
 }
 
-.item:hover .link {
-  color: var(--accent);
+.itemTBD {
+  font-size: 0.5rem;
+  font-weight: 800;
+  line-height: 0.75rem;
+  padding: 0.2rem 0.35rem;
+  margin-left: 0.5rem;
+  border-radius: 0.25rem;
+  background: var(--contrast-950);
+  user-select: none;
+  cursor: help;
+}
+
+.itemWithIcon {
+  padding: 0 0.5rem;
 }
 
 .links {
@@ -71,9 +98,21 @@
 .link {
   font-size: 1rem;
   font-weight: 800;
-
   color: var(--black);
+  cursor: pointer;
   transition: color 150ms ease-in-out;
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.linkDisabled,
+.linkDisabled:hover {
+  display: flex;
+  align-items: center;
+  color: var(--contrast-400);
+  user-select: none;
 }
 
 .icons {
@@ -83,10 +122,6 @@
 
 .icon {
   display: block;
-}
-
-.itemWithIcon {
-  padding: 0 0.5rem;
 }
 
 .mobile {
@@ -102,20 +137,5 @@
 @media screen and (min-width: 768px) {
   .mobile {
     display: none;
-  }
-}
-
-.navigationWithOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  padding: 1.5rem;
-  background: var(--background);
-}
-
-@media screen and (min-width: 560px) {
-  .navigationWithOverlay {
-    padding: 2rem;
   }
 }

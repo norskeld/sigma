@@ -9,7 +9,7 @@ import AppLink from './link'
 import styles from './navigation.module.css'
 
 interface DocLinkProps {
-  href: string
+  href?: string
   className?: string
   children: React.ReactNode
 }
@@ -40,7 +40,7 @@ export default function Navigation() {
 
       <div className={styles.items}>
         <div className={styles.links}>
-          <DocLink href="/guides/parser-combinators-101">Guides</DocLink>
+          <DocLink>Guides</DocLink>
           <DocLink href="/combinators/chainl">Combinators</DocLink>
           <DocLink href="/parsers/defer">Parsers</DocLink>
         </div>
@@ -75,9 +75,15 @@ function MobileLink() {
 function DocLink({ href, children }: DocLinkProps) {
   return (
     <div className={styles.item}>
-      <AppLink href={href}>
-        <a className={styles.link}>{children}</a>
-      </AppLink>
+      {href ? (
+        <AppLink href={href}>
+          <a className={styles.link}>{children}</a>
+        </AppLink>
+      ) : (
+        <div className={cx(styles.link, styles.linkDisabled)}>
+          {children} <ToBeDocumented />
+        </div>
+      )}
     </div>
   )
 }
@@ -89,5 +95,13 @@ function IconLink({ href, icon: Icon }: IconLinkProps) {
         <Icon className={styles.icon} />
       </AppLink>
     </div>
+  )
+}
+
+function ToBeDocumented() {
+  return (
+    <span title="To be documented" className={styles.itemTBD}>
+      TBD
+    </span>
   )
 }

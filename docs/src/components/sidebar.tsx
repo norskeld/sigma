@@ -42,7 +42,7 @@ export default function Sidebar({ sections, path }: SidebarProps) {
         [styles.sidebarWithOverlay]: isShowing
       })}
     >
-      <div className={styles.container}>
+      <div className={styles.sidebarContainer}>
         {sections.map((section, nodeId) => (
           <SidebarSection key={nodeId} section={section} path={path} />
         ))}
@@ -59,7 +59,14 @@ function SidebarSection({ section, path }: SidebarSectionProps) {
   return (
     <div className={styles.section}>
       <div className={styles.sectionTitle} onClick={() => setIsOpen(hasDocumentedItems && !isOpen)}>
-        <div className={styles.sectionTitleLabel}>{section.label}</div>
+        <div
+          className={cx({
+            [styles.sectionTitleLabel]: true,
+            [styles.sectionTitleLabelDisabled]: !hasDocumentedItems
+          })}
+        >
+          {section.label}
+        </div>
 
         {hasDocumentedItems ? (
           <CaretRightIcon
