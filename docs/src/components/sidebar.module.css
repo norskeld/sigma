@@ -15,10 +15,15 @@
   display: block;
 }
 
-.container {
+.sidebarContainer {
   position: static;
   width: 100%;
   font-size: 1rem;
+}
+
+.sidebarContainer > *:first-child {
+  padding-top: 0;
+  margin-top: 0.5rem;
 }
 
 @media screen and (min-width: 560px) {
@@ -35,15 +40,10 @@
     padding: 2rem 1.5rem 0 0;
   }
 
-  .container {
+  .sidebarContainer {
     position: sticky;
     top: 2rem;
   }
-}
-
-.container > *:first-child {
-  padding-top: 0;
-  margin-top: 0.5rem;
 }
 
 .section {
@@ -79,6 +79,10 @@
   font-size: 1.25rem;
   font-weight: 800;
   user-select: none;
+}
+
+.sectionTitleLabelDisabled {
+  color: var(--contrast-400);
 }
 
 .sectionTitleCaret,
@@ -124,9 +128,6 @@
   margin-left: 0.5rem;
   border-radius: 0.25rem;
   background: var(--contrast-950);
-}
-
-.itemTBD:hover {
-  cursor: help;
   user-select: none;
+  cursor: help;
 }
