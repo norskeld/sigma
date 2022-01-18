@@ -9,7 +9,7 @@ export const DOCS_DIR = 'content'
 /**
  * Theme to use for syntax highlighting in Shiki.
  *
- * Custom themes (any Visual Studio Code theme will do) reside in `src/syntax` directory.
+ * Custom themes (any Visual Studio Code theme will do) reside in `src/syntax/themes` directory.
  */
 export const DOCS_SYNTAX_THEME = 'norskeld'
 
