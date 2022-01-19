@@ -41,7 +41,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('Writing a JSON parser', '/guides/writing-a-json-parser', true)
     ]),
     createSection('Combinators', null, [
-      createItem('chainl', '/combinators/chainl', true),
+      createItem('chainl', '/combinators/chainl'),
       createItem('choice', '/combinators/choice', true),
       createItem('error', '/combinators/error', true),
       createItem('list', '/combinators/list', true),

@@ -1,4 +1,6 @@
 {
+  "cSpell.enabledLanguageIds": ["markdown"],
+  "cSpell.useGitignore": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.rulers": [100],
   "editor.formatOnSave": true,
