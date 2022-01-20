@@ -69,6 +69,10 @@
   font-size: 0.9rem;
 }
 
+.article blockquote :global(.shiki) {
+  margin: 1.5rem 0;
+}
+
 .article :global(.shiki code) {
   display: flex;
   flex-direction: row;
@@ -130,6 +134,15 @@
   border-radius: 0;
   border-bottom: 1px solid var(--contrast-200);
   user-select: none;
+}
+
+.article blockquote :global(.shiki) {
+  border-radius: 0.5rem;
+}
+
+.article blockquote :global(.shiki .language-id) {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
 @media screen and (min-width: 560px) {
