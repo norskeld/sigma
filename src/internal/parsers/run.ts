@@ -1,4 +1,4 @@
-import { Parser, Result } from './state'
+import { Parser, Result } from '../state'
 
 interface Runnable<T> {
   with(input: string): Result<T>

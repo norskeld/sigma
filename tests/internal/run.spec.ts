@@ -1,4 +1,4 @@
-import { run } from '@lib/internal/run'
+import { run } from '@lib/internal/parsers/run'
 
 import { string } from '@lib/internal/parsers/string'
 import { defer } from '@lib/internal/parsers/defer'

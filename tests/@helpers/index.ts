@@ -1,5 +1,5 @@
 import { Parser, Result } from '@lib/internal/state'
-import { run as internal$run } from '@lib/internal/run'
+import { run as internal$run } from '@lib/internal/parsers/run'
 
 type ResultKind = 'success' | 'failure'
 
