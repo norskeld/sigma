@@ -31,9 +31,8 @@ Below is an example of parsing nested tuples like `(1, 2, (3, 4))` into an AST.
 <summary>Click to show the tuples example.</summary>
 
 ```ts
-import { map, sequence, choice, sepBy, takeMid } from '@nrsk/sigma/combinators'
-import { defer, integer, string, wsOpt } from '@nrsk/sigma/parsers'
-import { run } from '@nrsk/sigma'
+import { choice, map, optional, sepBy, sequence, takeMid } from '@nrsk/sigma/combinators'
+import { defer, int, run, string, whitespace } from '@nrsk/sigma/parsers'
 
 /* AST. */
 
@@ -65,30 +64,17 @@ function toList(value: Array<NumberNode | ListNode>): ListNode {
 
 /* Parsers. */
 
-// Non-Terminals.
-const Space = wsOpt()
-const Integer = integer()
-
-// Terminals.
-const OperParen = string('(')
+const OpenParen = string('(')
 const CloseParen = string(')')
+const Space = optional(whitespace())
 const Comma = sequence(Space, string(','), Space)
 
-// Composites. Deferred initialization allows us to use recursion and mutual calls between parsers.
-const TupleElement = defer<NumberNode | ListNode>()
 const TupleNumber = defer<NumberNode>()
 const TupleList = defer<ListNode>()
 
-TupleElement.with(
-  choice(
-    TupleList,
-    TupleNumber
-  )
-)
-
 TupleNumber.with(
   map(
-    Integer,
+    int(),
     toNumber
   )
 )
@@ -96,8 +82,8 @@ TupleNumber.with(
 TupleList.with(
   map(
     takeMid(
-      OperParen,
-      sepBy(TupleElement, Comma),
+      OpenParen,
+      sepBy(choice(TupleList, TupleNumber), Comma),
       CloseParen
     ),
     toList
@@ -105,7 +91,7 @@ TupleList.with(
 )
 ```
 
-Then we simply `.run` the root parser, feeding it `.with` text:
+Then we simply `run` the root parser, feeding it `.with` text:
 
 ```ts
 run(TupleList).with('(1, 2, (3, 4))')
