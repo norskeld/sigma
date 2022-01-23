@@ -1,4 +1,4 @@
-import { failure, State, Parser, Result } from '../state'
+import { failure, type Parser } from '../state'
 
 interface Deferred<T> extends Parser<T> {
   with(parser: Parser<T>): void
@@ -8,11 +8,11 @@ export function defer<T>(): Deferred<T> {
   let deferred: Parser<T> | null = null
 
   return {
-    with(parser: Parser<T>): void {
+    with(parser): void {
       deferred = parser
     },
 
-    parse(state: State): Result<T> {
+    parse(state) {
       if (deferred) {
         return deferred.parse(state)
       }

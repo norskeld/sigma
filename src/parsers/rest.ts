@@ -1,8 +1,8 @@
-import { success, State, Parser } from '../state'
+import { success, type Parser } from '../state'
 
 export function rest(): Parser<string> {
   return {
-    parse(state: State) {
+    parse(state) {
       return success(
         {
           text: state.text,

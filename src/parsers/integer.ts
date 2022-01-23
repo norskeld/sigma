@@ -1,13 +1,13 @@
-import { success, Parser, State } from '../state'
+import { success, type Parser } from '../state'
 
 import { regexp } from './regexp'
 
 const INT_SIGNED_RE = /-?\d+/g
 const INT_UNSIGNED_RE = /\d+/g
 
-function createIntegerParser(re: RegExp, expectation: string, radix: number) {
+function createIntegerParser(re: RegExp, expectation: string, radix: number): Parser<number> {
   return {
-    parse(state: State) {
+    parse(state) {
       const result = regexp(re, expectation).parse(state)
 
       switch (result.kind) {

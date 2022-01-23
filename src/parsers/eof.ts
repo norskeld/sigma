@@ -1,8 +1,8 @@
-import { success, failure, State, Parser } from '../state'
+import { success, failure, type Parser } from '../state'
 
 export function eof(): Parser<null> {
   return {
-    parse(state: State) {
+    parse(state) {
       const isEof = state.index === state.text.length
 
       switch (isEof) {

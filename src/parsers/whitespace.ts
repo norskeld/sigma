@@ -1,4 +1,4 @@
-import { Parser } from '../state'
+import { type Parser } from '../state'
 
 import { regexp } from './regexp'
 

@@ -1,4 +1,4 @@
-import { Parser, Result } from '../state'
+import type { Parser, Result } from '../state'
 
 interface Runnable<T> {
   with(input: string): Result<T>
@@ -6,7 +6,7 @@ interface Runnable<T> {
 
 export function run<T>(parser: Parser<T>): Runnable<T> {
   return {
-    with(text: string) {
+    with(text) {
       return parser.parse({ text, index: 0 })
     }
   }

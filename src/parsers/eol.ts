@@ -1,4 +1,4 @@
-import { Parser } from '../state'
+import { type Parser } from '../state'
 
 import { choice } from '../combinators/choice'
 import { error } from '../combinators/error'

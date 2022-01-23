@@ -1,9 +1,9 @@
-import { State, Parser, Result, ToUnion } from '../state'
+import type { Parser, Result, ToUnion } from '../state'
 
 export function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>
 export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
   return {
-    parse(state: State) {
+    parse(state) {
       let nextResult: Result<T> | null = null
 
       for (const parser of ps) {
