@@ -1,3 +1,26 @@
+# [2.0.0](https://github.com/norskeld/sigma/compare/v1.4.2...v2.0.0) (2022-01-23)
+
+
+### Code Refactoring
+
+* remove `lazy` parser ([4340d7d](https://github.com/norskeld/sigma/commit/4340d7df47e504e3d354047d529056b465fd79e8))
+* restructure & rename combinators/parsers ([f6a6956](https://github.com/norskeld/sigma/commit/f6a69567eb87579d74cfb76a776a799e34b35107))
+
+
+### BREAKING CHANGES
+
+* - Lifted contents of the `internal` directory since the library itself gets bundled anyway.
+- Removed all aliases for parsers and combinators.
+- Removed `whitespaceOptional` parser. Its functionality can be replicated with `optional(whitespace())`.
+- Renamed the following parsers:
+  - `newline` -> `eol`
+  - `integer` -> `int`
+  - `integerUnsigned` -> `uint`
+  - `uniString` -> `ustring`
+- Renamed the following combinators:
+  - `list` -> `sepBy`
+* This parser can no longer be used.
+
 ## [1.4.2](https://github.com/norskeld/sigma/compare/v1.4.1...v1.4.2) (2022-01-12)
 
 
