@@ -1,8 +1,8 @@
-import { success, failure, State, Parser } from '../state'
+import { success, failure, type Parser } from '../state'
 
 export function regexp(re: RegExp, expected: string): Parser<string> {
   return {
-    parse(state: State) {
+    parse(state) {
       // Reset RegExp index, because we abuse the 'g' flag.
       re.lastIndex = state.index
 

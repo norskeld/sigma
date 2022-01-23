@@ -1,4 +1,4 @@
-import { Parser } from '../state'
+import type { Parser } from '../state'
 
 import { nothing } from '../parsers/nothing'
 import { choice } from './choice'

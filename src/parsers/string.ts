@@ -1,9 +1,9 @@
-import { success, failure, State, Parser } from '../state'
+import { success, failure, type Parser } from '../state'
 import { size } from '../utils/unicode'
 
 export function string(match: string): Parser<string> {
   return {
-    parse(state: State) {
+    parse(state) {
       const index = state.index + match.length
       const slice = state.text.substring(state.index, index)
 
@@ -22,7 +22,7 @@ export function string(match: string): Parser<string> {
 
 export function ustring(match: string): Parser<string> {
   return {
-    parse(state: State) {
+    parse(state) {
       const index = state.index + size(match)
       const slice = state.text.substring(state.index, index)
 

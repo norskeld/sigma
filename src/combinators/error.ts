@@ -1,8 +1,8 @@
-import { failure, Parser, State } from '../state'
+import { failure, type Parser } from '../state'
 
 export function error<T>(parser: Parser<T>, expected: string): Parser<T> {
   return {
-    parse(state: State) {
+    parse(state) {
       const result = parser.parse(state)
 
       switch (result.kind) {

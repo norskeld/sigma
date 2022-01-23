@@ -1,11 +1,9 @@
-import { success, State, Parser } from '../state'
+import { success, type Parser } from '../state'
 
 export function nothing(): Parser<null> {
   return {
-    parse(state: State) {
+    parse(state) {
       return success(state, null)
     }
   }
 }
-
-export { nothing as nil }

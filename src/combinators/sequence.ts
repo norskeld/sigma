@@ -1,11 +1,11 @@
-import { success, State, Parser, ToTuple } from '../state'
+import { success, type Parser, type ToTuple } from '../state'
 
 export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTuple<T>>
 export function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>> {
   return {
-    parse(state: State) {
+    parse(state) {
       let values: Array<T> = []
-      let nextState: State = state
+      let nextState = state
 
       for (const parser of ps) {
         const result = parser.parse(nextState)

@@ -1,8 +1,8 @@
-import { success, State, Parser } from '../state'
+import { success, type Parser } from '../state'
 
 export function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R> {
   return {
-    parse(state: State) {
+    parse(state) {
       const result = parser.parse(state)
 
       switch (result.kind) {

@@ -1,4 +1,4 @@
-import { State, Failure, Success } from './state'
+import type { State, Failure, Success } from './state'
 
 export function success<T>(state: State, value: T): Success<T> {
   return {
