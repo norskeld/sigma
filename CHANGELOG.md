@@ -9,9 +9,10 @@
 
 ### BREAKING CHANGES
 
-* - Lifted contents of the `internal` directory since the library itself gets bundled anyway.
+- Lifted contents of the `internal` directory since the library itself gets bundled anyway.
 - Removed all aliases for parsers and combinators.
 - Removed `whitespaceOptional` parser. Its functionality can be replicated with `optional(whitespace())`.
+- Removed `lazy` parser. `defer` is superior to it at almost every aspect.
 - Renamed the following parsers:
   - `newline` -> `eol`
   - `integer` -> `int`
@@ -19,7 +20,6 @@
   - `uniString` -> `ustring`
 - Renamed the following combinators:
   - `list` -> `sepBy`
-* This parser can no longer be used.
 
 ## [1.4.2](https://github.com/norskeld/sigma/compare/v1.4.1...v1.4.2) (2022-01-12)
 
