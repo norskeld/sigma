@@ -15,5 +15,5 @@
       "@tests/*": ["tests/*"]
     }
   },
-  "include": ["scripts", "src", "tests"]
+  "include": ["benchmarks", "scripts", "src", "tests"]
 }

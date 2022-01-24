@@ -2,29 +2,22 @@ import * as exposed from '@lib/combinators'
 
 import { should } from '@tests/@helpers'
 
-it(`should expose combinators`, () => {
-  should.expose(
-    exposed,
-    'chainl',
-    'choice',
-    'alt',
-    'error',
-    'list',
-    'sepBy',
-    'many',
-    'map',
-    'mapTo',
-    'optional',
-    'opt',
-    'sequence',
-    'seq',
-    'takeLeft',
-    'tleft',
-    'takeMid',
-    'tmid',
-    'takeRight',
-    'tright',
-    'takeSides',
-    'tsides'
-  )
+export const expectedCombinators = [
+  'chainl',
+  'choice',
+  'error',
+  'sepBy',
+  'many',
+  'map',
+  'mapTo',
+  'optional',
+  'sequence',
+  'takeLeft',
+  'takeMid',
+  'takeRight',
+  'takeSides'
+] as const
+
+it('should expose combinators', () => {
+  should.expose(exposed, ...expectedCombinators)
 })

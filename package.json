@@ -1,6 +1,6 @@
 {
   "name": "@nrsk/sigma",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "description": "TypeScript parser combinator library for building fast and convenient parsers.",
   "sideEffects": false,
   "main": "./index.cjs",
@@ -79,21 +79,21 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@types/jest": "^27.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.8.1",
-    "@typescript-eslint/parser": "^5.8.1",
-    "eslint": "^8.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.4",
-    "jest": "^27.4.5",
-    "lint-staged": "^12.1.4",
+    "jest": "^27.4.7",
+    "lint-staged": "^12.2.2",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.62.0",
+    "rollup": "^2.66.0",
     "rollup-plugin-dts": "^4.1.0",
-    "semantic-release": "^18.0.1",
-    "ts-jest": "^27.1.2",
+    "semantic-release": "^19.0.2",
+    "ts-jest": "^27.1.3",
     "tsm": "^2.2.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.5"
   },
   "commitlint": {
     "extends": [
