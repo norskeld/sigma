@@ -1,7 +1,0 @@
----
-title: 'newline'
----
-
-# newline
-
-TBD.

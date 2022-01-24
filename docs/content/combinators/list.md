@@ -1,7 +1,0 @@
----
-title: 'list'
----
-
-# list
-
-TBD.

@@ -1,7 +1,0 @@
----
-title: 'lazy'
----
-
-# lazy
-
-TBD.

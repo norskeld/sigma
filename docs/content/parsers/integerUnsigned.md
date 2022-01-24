@@ -1,7 +1,0 @@
----
-title: 'integerUnsigned'
----
-
-# integerUnsigned
-
-TBD.
