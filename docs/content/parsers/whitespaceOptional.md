@@ -1,7 +1,0 @@
----
-title: 'whitespaceOptional'
----
-
-# whitespaceOptional
-
-TBD.

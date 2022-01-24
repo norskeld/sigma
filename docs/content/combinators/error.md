@@ -52,4 +52,3 @@ const Parser = error(
   }
   ```
 </details>
-
