@@ -30,6 +30,7 @@ function createItem(label: string, url: string, tbd = false): ItemNode {
   }
 }
 
+// TODO: This probably should be somewhere else.
 export function getSidebarItems(): Array<SectionNode> {
   return [
     createSection('Introduction', null, [
@@ -42,7 +43,7 @@ export function getSidebarItems(): Array<SectionNode> {
     ]),
     createSection('Combinators', null, [
       createItem('chainl', '/combinators/chainl'),
-      createItem('choice', '/combinators/choice', true),
+      createItem('choice', '/combinators/choice'),
       createItem('error', '/combinators/error', true),
       createItem('list', '/combinators/list', true),
       createItem('many', '/combinators/many', true),
