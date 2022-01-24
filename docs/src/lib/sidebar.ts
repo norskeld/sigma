@@ -44,7 +44,7 @@ export function getSidebarItems(): Array<SectionNode> {
     createSection('Combinators', null, [
       createItem('chainl', '/combinators/chainl'),
       createItem('choice', '/combinators/choice'),
-      createItem('error', '/combinators/error', true),
+      createItem('error', '/combinators/error'),
       createItem('list', '/combinators/list', true),
       createItem('many', '/combinators/many', true),
       createItem('map', '/combinators/map', true),
