@@ -5,16 +5,9 @@
       {
         "preset": "angular",
         "releaseRules": [
-          {
-            "type": "docs",
-            "scope": "readme",
-            "release": "patch"
-          },
-          {
-            "type": "docs",
-            "scope": "tsdoc",
-            "release": "patch"
-          }
+          { "type": "docs", "scope": "readme", "release": "patch" },
+          { "type": "docs", "scope": "tsdoc", "release": "patch" },
+          { "scope": "no-release", "release": false }
         ]
       }
     ],
