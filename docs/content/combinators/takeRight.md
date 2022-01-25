@@ -1,6 +1,6 @@
 ---
 title: 'Сombinators › takeRight'
-description: 'takeRight combinator takes exactly two parsers and applies them. Returns the result of the rightmost parser.'
+description: 'takeRight combinator takes exactly two parsers and applies them in order. Returns the result of the rightmost parser.'
 ---
 
 # takeRight
@@ -13,7 +13,7 @@ function takeRight<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T2>
 
 > Note: This combinator is not primitive, i.e. it is defined using other combinators.
 
-`takeRight` combinator takes exactly **two** parsers and applies them. Returns the result of the rightmost `parser`.
+`takeRight` combinator takes exactly **two** parsers and applies them in order. Returns the result of the rightmost `p2` parser.
 
 ## Usage
 
