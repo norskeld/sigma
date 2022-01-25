@@ -1,5 +1,5 @@
 ---
-title: 'mapTo'
+title: 'Сombinators › mapTo'
 description: "mapTo combinator maps the parser's result to a constant value."
 ---
 
@@ -38,8 +38,6 @@ const Parser = mapTo(
   ```
 
   ### Failure
-
-  `mapTo` doesn't fail by itself.
 
   ```typescript
   run(Parser).with('2-2')
