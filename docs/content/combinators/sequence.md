@@ -1,6 +1,6 @@
 ---
 title: 'Сombinators › sequence'
-description: 'sequence combinator applies parsers in order, until all of them succeed. Returns a tuple of the values returned by parsers.'
+description: 'sequence combinator applies parsers in order, until all of them succeed. Returns a tuple of values returned by parsers.'
 ---
 
 # sequence
@@ -12,7 +12,7 @@ function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>>
 
 ## Description
 
-`sequence` combinator applies `ps` parsers in order, until *all* of them succeed. Returns [a tuple][typescript-tuple] of the values returned by `ps` parsers.
+`sequence` combinator applies `ps` parsers in order, until *all* of them succeed. Returns [a tuple][typescript-tuple] of values returned by `ps` parsers.
 
 ## Usage
 

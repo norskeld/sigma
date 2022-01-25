@@ -35,7 +35,7 @@ const Parser = sequence(
   {
     kind: 'success',
     state: { text: '-2', index: 2 },
-    value: ['-', 2]
+    value: [ '-', 2 ]
   }
   ```
 
