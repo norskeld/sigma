@@ -54,7 +54,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('takeLeft', '/combinators/takeLeft'),
       createItem('takeMid', '/combinators/takeMid'),
       createItem('takeRight', '/combinators/takeRight'),
-      createItem('takeSides', '/combinators/takeSides', true)
+      createItem('takeSides', '/combinators/takeSides')
     ]),
     createSection('Parsers', null, [
       createItem('defer', '/parsers/defer'),
