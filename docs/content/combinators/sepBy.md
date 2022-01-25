@@ -11,6 +11,8 @@ function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
 ## Description
 
+> Note: This combinator is not primitive, i.e. it is defined using other combinators.
+
 `sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`.
 
 ## Usage
