@@ -1,5 +1,5 @@
 ---
-title: 'map'
+title: 'Сombinators › map'
 description: "map combinator applies a function to the parser's result and returns the result of that function."
 ---
 
@@ -11,7 +11,7 @@ function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R>
 
 ## Description
 
-`map` combinator applies a `fn` to the `parser`'s result and returns the result of that `fn`.
+`map` combinator applies `fn` to the `parser`'s result and returns the result of that `fn`.
 
 ## Usage
 
