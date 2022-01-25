@@ -1,6 +1,6 @@
 ---
 title: 'Сombinators › choice'
-description: 'choice combinator tries to apply given parsers in order, until one of them succeeds. Returns the value of the succeeding parser, otherwise fails with expectation message of the first parser without consuming input.'
+description: 'choice combinator tries to apply parsers in order, until one of them succeeds. Returns a value of the succeeding parser.'
 ---
 
 # choice
@@ -12,7 +12,7 @@ function choice<T>(...ps: Array<Parser<T>>): Parser<T>
 
 ## Description
 
-`choice` combinator tries to apply the `ps` parsers in order, until one of them succeeds. Returns the value of the succeeding parser, otherwise fails with expectation message of the first parser without consuming input.
+`choice` combinator tries to apply `ps` parsers in order, until one of them succeeds. Returns a value of the succeeding parser.
 
 ## Usage
 
