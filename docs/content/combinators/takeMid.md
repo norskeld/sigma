@@ -1,6 +1,6 @@
 ---
 title: 'Сombinators › takeMid'
-description: 'takeMid combinator takes exactly three parsers and applies them. Returns the result of the parser in the middle.'
+description: 'takeMid combinator takes exactly three parsers and applies them in order. Returns the result of the parser in the middle.'
 ---
 
 # takeMid
@@ -17,7 +17,7 @@ function takeMid<T1, T2, T3>(
 
 > Note: This combinator is not primitive, i.e. it is defined using other combinators.
 
-`takeMid` combinator takes exactly **three** parsers and applies them. Returns the result of `parser` in the middle.
+`takeMid` combinator takes exactly **three** parsers and applies them in order. Returns the result of the `p2` parser in the middle.
 
 ## Usage
 

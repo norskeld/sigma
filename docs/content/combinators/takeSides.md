@@ -1,6 +1,6 @@
 ---
 title: 'Сombinators › takeSides'
-description: 'takeSides combinator takes exactly three parsers and applies them. Returns a tuple of the results of the first and the last parsers.'
+description: 'takeSides combinator takes exactly three parsers and applies them in order. Returns a tuple of the results of the first and the last parsers.'
 ---
 
 # takeSides
