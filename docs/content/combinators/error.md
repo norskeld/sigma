@@ -1,6 +1,6 @@
 ---
-title: 'error'
-description: 'error combinator allows to replace error message for a given parser.'
+title: 'Сombinators › error'
+description: 'error combinator allows to replace error message for parser.'
 ---
 
 # error
@@ -11,7 +11,7 @@ function error<T>(parser: Parser<T>, expected: string): Parser<T>
 
 ## Description
 
-`error` combinator allows to replace error message with `expected` for a given `parser`.
+`error` combinator allows to replace `parser`'s error message with `expected`.
 
 ## Usage
 
