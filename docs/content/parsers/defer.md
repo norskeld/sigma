@@ -6,6 +6,10 @@ description: 'defer is a special parser that is tailored for creating mutually r
 # defer
 
 ```typescript {{ withLineNumbers: false }}
+interface Deferred<T> extends Parser<T> {
+  with(parser: Parser<T>): void
+}
+
 function defer<T>(): Deferred<T>
 ```
 
