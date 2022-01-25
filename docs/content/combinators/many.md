@@ -1,5 +1,6 @@
 ---
-title: 'many'
+title: 'Сombinators › many'
+description: 'many combinator applies parser zero or more times. Returns an array of the returned values of parser.'
 ---
 
 # many
@@ -10,7 +11,7 @@ function many<T>(parser: Parser<T>): Parser<Array<T>>
 
 ## Description
 
-`many` combinator applies the `parser` *zero* or more times. Returns an array of the returned values of `parser`.
+`many` combinator applies `parser` *zero* or more times. Returns an array of the returned values of `parser`.
 
 ## Usage
 
@@ -35,7 +36,7 @@ const Parser = many(string('+'))
 
   ### Failure
 
-  `many` actually never fails, but returns an empty array if the given `parser` fails.
+  `many` never fails and returns an empty array by default.
 
   ```typescript
   run(Parser).with('---')
