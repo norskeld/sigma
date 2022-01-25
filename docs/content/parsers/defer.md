@@ -11,17 +11,15 @@ function defer<T>(): Deferred<T>
 
 ## Description
 
-`defer` is a special parser that has an additional `with` method, which should be used to define the parser. If parser was not defined via `with` method an error will be thrown.
-
-This parser is tailored for creating mutually recursive parsers.
+`defer` is a special parser that has an additional `with` method, which should be used to define the parser. This parser is tailored for creating mutually recursive parsers.
 
 ## Example
 
 <details>
   <summary>Combinators and parsers used in this section</summary>
 
-  - Combinators: [choice], [list], [map], [takeMid]
-  - Parsers: [defer], [integer], [string]
+  - Combinators: [choice], [sepBy], [map], [takeMid]
+  - Parsers: [defer], [int], [string]
 </details>
 
 In the example below we are parsing simple nested tuples like `(1,2,(3,(4,5)))` into an AST, which then can be somehow manipulated.
@@ -42,7 +40,7 @@ const TupleNumber = defer<NumberNode>()
 
 TupleNumber.with(
   map(
-    integer(),
+    int(),
     (value) => ({ type: 'number', value })
   )
 )
@@ -51,7 +49,7 @@ TupleList.with(
   map(
     takeMid(
       string('('),
-      list(choice(TupleList, TupleNumber), string(',')),
+      sepBy(choice(TupleList, TupleNumber), string(',')),
       string(')')
     ),
     (value) => ({ type: 'list', value })
@@ -98,11 +96,11 @@ We will get the following result:
 
 [choice]: ../combinators/choice
 [map]: ../combinators/map
-[list]: ../combinators/list
+[sepBy]: ../combinators/sepBy
 [takeMid]: ../combinators/takeMid
 
 <!-- Parsers. -->
 
 [defer]: ./defer
-[integer]: ./integer
+[int]: ./int
 [string]: ./string
