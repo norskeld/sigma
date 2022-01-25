@@ -16,7 +16,7 @@ export default function Landing() {
       </div>
 
       <div className={styles.buttons}>
-        <AppLink href="/introduction/getting-started">
+        <AppLink href="/introduction/installation">
           <a className={styles.buttonsRead}>Documentation</a>
         </AppLink>
 

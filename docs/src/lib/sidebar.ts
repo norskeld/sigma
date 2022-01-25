@@ -34,7 +34,7 @@ function createItem(label: string, url: string, tbd = false): ItemNode {
 export function getSidebarItems(): Array<SectionNode> {
   return [
     createSection('Introduction', null, [
-      createItem('Getting started', '/introduction/getting-started'),
+      createItem('Getting started', '/introduction/getting-started', true),
       createItem('Installation', '/introduction/installation')
     ]),
     createSection('Guides', null, [
