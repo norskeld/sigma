@@ -58,7 +58,7 @@ export function getSidebarItems(): Array<SectionNode> {
     ]),
     createSection('Parsers', null, [
       createItem('defer', '/parsers/defer'),
-      createItem('eof', '/parsers/eof', true),
+      createItem('eof', '/parsers/eof'),
       createItem('eol', '/parsers/eol', true),
       createItem('float', '/parsers/float', true),
       createItem('int', '/parsers/int', true),
