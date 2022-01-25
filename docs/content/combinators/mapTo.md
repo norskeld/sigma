@@ -11,6 +11,8 @@ function mapTo<T, R>(parser: Parser<T>, value: R): Parser<R>
 
 ## Description
 
+> Note: This combinator is not primitive, i.e. it is defined using other combinators.
+
 `mapTo` combinator maps the `parser`'s result to a constant `value`.
 
 ## Usage
