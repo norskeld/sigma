@@ -9,6 +9,8 @@ description: 'eof only succeeds at the end of the input.'
 function eof(): Parser<null>
 ```
 
+## Description
+
 `eof` only succeeds (with `null`) at the end of the input.
 
 ## Usage
