@@ -62,14 +62,14 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('eol', '/parsers/eol'),
       createItem('float', '/parsers/float'),
       createItem('int', '/parsers/int', true),
+      createItem('uint', '/parsers/uint', true),
       createItem('letter', '/parsers/letter', true),
       createItem('letters', '/parsers/letters', true),
       createItem('nothing', '/parsers/nothing', true),
       createItem('regexp', '/parsers/regexp', true),
       createItem('rest', '/parsers/rest', true),
       createItem('run', '/parsers/run'),
-      createItem('string', '/parsers/string', true),
-      createItem('uint', '/parsers/uint', true),
+      createItem('string', '/parsers/string'),
       createItem('ustring', '/parsers/ustring', true),
       createItem('whitespace', '/parsers/whitespace', true)
     ])
