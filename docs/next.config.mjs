@@ -7,11 +7,11 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSrcDomains};
   child-src *.youtube.com *.youtube-nocookie.com;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+  font-src 'self' fonts.gstatic.com;
   img-src * blob: data:;
   media-src 'self';
   connect-src *;
-  font-src 'self';
 `
 
 const headers = [

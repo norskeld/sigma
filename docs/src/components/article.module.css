@@ -57,7 +57,7 @@
 
 .article pre,
 .article code {
-  font-family: var(--font-mono);
+  font-family: var(--font-family-mono);
 }
 
 /** Code highlighting. */
@@ -293,7 +293,7 @@
 
 .article details > summary::before {
   content: '+';
-  font-family: var(--font-mono);
+  font-family: var(--font-family-mono);
   font-size: 1.25rem;
   padding-right: 0.5rem;
 }
