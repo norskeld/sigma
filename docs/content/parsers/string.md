@@ -1,6 +1,6 @@
 ---
 title: 'Parsers › string'
-description: 'string parses a sequence of ASCII characters. Returns the parsed string.'
+description: 'string parses an ASCII string. Returns the parsed string.'
 ---
 
 # string
@@ -13,7 +13,7 @@ function string(match: string): Parser<string>
 
 > Note: For Unicode strings consider using `ustring` parser.
 
-`string` parses a sequence of *ASCII characters*. Returns the parsed string.
+`string` parses an *ASCII* string. Returns the parsed string.
 
 ## Usage
 
