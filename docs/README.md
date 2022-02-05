@@ -4,11 +4,11 @@ This is the documentation site for [@nrsk/sigma] built with [Next.js].
 
 ## Development
 
-The documentation is hosted on Vercel, so every change made in directories and files, specified as exceptions in the `.vercelignore`, will be published automatically.
+The documentation is hosted on Vercel, so changes will be published automatically.
 
 ```bash
-npm run dev   # Start the development server
 npm run build # Build for production
+npm run dev   # Start the development server
 npm start     # Serve the production build
 ```
 
