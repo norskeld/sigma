@@ -9,11 +9,16 @@
 
 TypeScript [parser combinator] library for building fast and convenient parsers.
 
-## Note
+## Features
 
-> This library is still in active development, and although it can already parse complex stuff and
-> in fact do that *orders of magnitude* faster than some other parser combinator libraries, it still
-> lacks stability and some features.
+- [x] Tailored for parsing [context-free grammars][cfg].
+- [x] Ergonomic API with excellent TypeScript support.
+- [x] Zero dependencies. Supports tree shaking.
+- [x] [Performant enough][bench] to beat similar parser combinator libraries.
+
+## Docs
+
+You can find the documentation [here][docs]. If you want to contribute, feel free to check out [the source code][docs-source].
 
 ## Installation
 
@@ -128,4 +133,10 @@ And in the end we get the following output with the AST, which can then be manip
 
 [MIT](LICENSE).
 
+<!-- Links. -->
+
 [parser combinator]: https://en.wikipedia.org/wiki/Parser_combinator
+[cfg]: https://en.wikipedia.org/wiki/Context-free_grammar
+[docs]: https://sigma.vm.codes
+[docs-source]: ./docs
+[bench]: ./benchmarks
