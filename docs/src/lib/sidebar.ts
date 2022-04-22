@@ -71,7 +71,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('run', '/parsers/run'),
       createItem('string', '/parsers/string'),
       createItem('ustring', '/parsers/ustring'),
-      createItem('whitespace', '/parsers/whitespace', true)
+      createItem('whitespace', '/parsers/whitespace')
     ])
   ]
 }
