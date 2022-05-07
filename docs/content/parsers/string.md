@@ -1,9 +1,8 @@
 ---
-title: 'Parsers › string'
+title: 'string'
+kind: 'primitive'
 description: 'string parses an ASCII string. Returns the parsed string.'
 ---
-
-# string
 
 ```typescript {{ withLineNumbers: false }}
 function string(match: string): Parser<string>
@@ -11,7 +10,7 @@ function string(match: string): Parser<string>
 
 ## Description
 
-> Note: For Unicode strings consider using `ustring` parser.
+> For parsing Unicode strings, consider using [ustring].
 
 `string` parses an *ASCII* string. Returns the parsed string.
 
@@ -48,3 +47,7 @@ const Parser = string('hello')
   }
   ```
 </details>
+
+<!-- Parsers. -->
+
+[ustring]: ./ustring.md

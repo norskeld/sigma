@@ -18,6 +18,7 @@ import Article from '@/components/article'
 import Sidebar from '@/components/sidebar'
 import Content from '@/components/content'
 import Footer from '@/components/footer'
+import Label from '@/components/label'
 
 interface Props {
   article: Entry
@@ -27,20 +28,21 @@ interface Props {
 }
 
 export default function ({ article, sections, articleEditUrl, articleLastChange }: Props) {
-  const { title, content, description } = article
+  const { title, content, description, section, kind } = article
   const { asPath } = useRouter()
 
   const url = Common.host + asPath
+  const fullTitle = section ? `${section} ${Common.separator} ${title}` : `${title}`
 
   return (
     <>
       <NextSeo
-        title={title}
+        title={fullTitle}
         canonical={url}
         description={description ?? title}
         openGraph={{
           type: 'article',
-          title,
+          title: fullTitle,
           description: description ?? title,
           url
         }}
@@ -52,7 +54,13 @@ export default function ({ article, sections, articleEditUrl, articleLastChange 
         <Sidebar sections={sections} path={asPath} />
 
         <Content>
-          <Article content={content} editUrl={articleEditUrl} lastChange={articleLastChange} />
+          <Article
+            title={title}
+            content={content}
+            editUrl={articleEditUrl}
+            lastChange={articleLastChange}
+            label={kind && <Label kind={kind} />}
+          />
         </Content>
       </Container>
 

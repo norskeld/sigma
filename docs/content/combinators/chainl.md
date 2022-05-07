@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › chainl'
+title: 'chainl'
+kind: 'composite'
 description: 'chainl combinator parses zero or more occurrences of parser, separated by op. Returns a value obtained by a recursive left-associative application of a function to the values returned by op and parser.'
 ---
-
-# chainl
 
 ```typescript {{ withLineNumbers: false }}
 function chainl<T, L extends T, R>(
@@ -14,8 +13,6 @@ function chainl<T, L extends T, R>(
 ```
 
 ## Description
-
-> Note: This combinator is not primitive, i.e. it is defined using other combinators.
 
 `chainl` combinator parses *zero* or more occurrences of `parser`, separated by `op` (in [EBNF] notation: `parser (op parser)*`). Returns a value obtained by a recursive left-associative application of `fn` to the values returned by `op` and `parser`. This combinator is particularly useful for eliminating left recursion, which typically occurs in expression grammars.
 

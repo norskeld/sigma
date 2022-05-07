@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › takeSides'
+title: 'takeSides'
+kind: 'composite'
 description: 'takeSides combinator takes exactly three parsers and applies them in order. Returns a tuple of the results of the first and the last parsers.'
 ---
-
-# takeSides
 
 ```typescript {{ withLineNumbers: false }}
 function takeSides<T1, T2, T3>(
@@ -14,8 +13,6 @@ function takeSides<T1, T2, T3>(
 ```
 
 ## Description
-
-> Note: This combinator is not primitive, i.e. it is defined using other combinators.
 
 `takeSides` combinator takes exactly **three** parsers and applies them in order. Returns a tuple of the results of `p1` and `p3` parsers.
 

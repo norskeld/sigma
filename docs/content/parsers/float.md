@@ -1,17 +1,14 @@
 ---
-title: 'Parsers › float'
+title: 'float'
+kind: 'composite'
 description: 'float parses a floating point number.'
 ---
-
-# float
 
 ```typescript {{ withLineNumbers: false }}
 function float(): Parser<number>
 ```
 
 ## Description
-
-> Note: This parser is not primitive, i.e. it is defined using other parsers and combinators.
 
 `float` parses a floating point number.
 

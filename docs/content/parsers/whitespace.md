@@ -1,17 +1,14 @@
 ---
-title: 'Parsers › whitespace'
+title: 'whitespace'
+kind: 'composite'
 description: 'whitespace parses whitespace, either a single character or consecutive ones. Returns the matched character(s).'
 ---
-
-# whitespace
 
 ```typescript {{ withLineNumbers: false }}
 function whitespace(): Parser<string>
 ```
 
 ## Description
-
-> Note: This parser is not primitive, i.e. it is defined using other parsers and combinators.
 
 `whitespace` parses whitespace, either a single character or consecutive ones. Returns the matched character(s).
 

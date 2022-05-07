@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › choice'
+title: 'choice'
+kind: 'primitive'
 description: 'choice combinator tries to apply parsers in order, until one of them succeeds. Returns a value of the succeeding parser.'
 ---
-
-# choice
 
 ```typescript {{ withLineNumbers: false }}
 function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>

@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › takeMid'
+title: 'takeMid'
+kind: 'composite'
 description: 'takeMid combinator takes exactly three parsers and applies them in order. Returns the result of the parser in the middle.'
 ---
-
-# takeMid
 
 ```typescript {{ withLineNumbers: false }}
 function takeMid<T1, T2, T3>(
@@ -14,8 +13,6 @@ function takeMid<T1, T2, T3>(
 ```
 
 ## Description
-
-> Note: This combinator is not primitive, i.e. it is defined using other combinators.
 
 `takeMid` combinator takes exactly **three** parsers and applies them in order. Returns the result of the `p2` parser in the middle.
 

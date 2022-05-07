@@ -1,13 +1,14 @@
 ---
 title: 'Installation'
+description: 'Learn how to install and use this library.'
 ---
-
-# Installation
 
 Just use your favorite package manager.
 
-```shell
+```shell {{ withLineNumbers: false }}
 npm i @nrsk/sigma
+yarn add @nrsk/sigma
+pnpm add @nrsk/sigma
 ```
 
 ## Bundles
@@ -16,7 +17,7 @@ This library comes both in **CommonJS** and **ESM** flavors. `package.json` has 
 
 ## Structure
 
-There are three self-contained entry points which you may use.
+There are three self-contained entry points which you may use:
 
 ### @nrsk/sigma/combinators
 

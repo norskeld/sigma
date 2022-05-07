@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › error'
+title: 'error'
+kind: 'primitive'
 description: 'error combinator allows to replace error message for parser.'
 ---
-
-# error
 
 ```typescript {{ withLineNumbers: false }}
 function error<T>(parser: Parser<T>, expected: string): Parser<T>

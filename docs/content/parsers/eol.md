@@ -1,17 +1,14 @@
 ---
-title: 'Parsers › eol'
+title: 'eol'
+kind: 'composite'
 description: 'eol only succeeds at the end of the line with a matched line break character.'
 ---
-
-# eol
 
 ```typescript {{ withLineNumbers: false }}
 function eol(): Parser<string>
 ```
 
 ## Description
-
-> Note: This parser is not primitive, i.e. it is defined using other parsers and combinators.
 
 `eol` only succeeds at the end of the line with a matched line break character.
 

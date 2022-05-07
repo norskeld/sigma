@@ -1,0 +1,20 @@
+.base {
+  border-radius: 0.5rem;
+  margin-left: 1rem;
+  padding: 0.25rem 0.5rem;
+  color: var(--text);
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+.base:hover {
+  cursor: help;
+}
+
+.compound {
+  background: #99c9ff;
+}
+
+.primitive {
+  background: #ecce8e;
+}

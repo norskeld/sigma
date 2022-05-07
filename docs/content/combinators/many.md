@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › many'
+title: 'many'
+kind: 'primitive'
 description: 'many combinator applies parser zero or more times. Returns an array of the returned values of parser.'
 ---
-
-# many
 
 ```typescript {{ withLineNumbers: false }}
 function many<T>(parser: Parser<T>): Parser<Array<T>>

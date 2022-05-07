@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › map'
+title: 'map'
+kind: 'primitive'
 description: "map combinator applies a function to the parser's result and returns the result of that function."
 ---
-
-# map
 
 ```typescript {{ withLineNumbers: false }}
 function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R>

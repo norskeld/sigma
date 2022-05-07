@@ -8,6 +8,7 @@ import { type DefaultSeoProps } from 'next-seo'
 export const Common = {
   host: 'https://sigma.vm.codes',
   title: 'Sigma',
+  separator: '›',
   description:
     'Sigma is a TypeScript parser combinator library for building fast and convenient parsers.'
 } as const
@@ -15,7 +16,7 @@ export const Common = {
 /** Default SEO options/properties that are passed to `next-seo` and universal across all pages. */
 export const Seo: DefaultSeoProps = {
   defaultTitle: Common.title,
-  titleTemplate: `${Common.title} › %s `,
+  titleTemplate: `${Common.title} ${Common.separator} %s `,
   description: Common.description,
   openGraph: {
     type: 'website',

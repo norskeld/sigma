@@ -1,9 +1,8 @@
 ---
-title: 'Parsers › regexp'
+title: 'regexp'
+kind: 'primitive'
 description: 'regexp parses a string that matches a provided regular expression. Returns the matched string, or fails with a provided message.'
 ---
-
-# regexp
 
 ```typescript {{ withLineNumbers: false }}
 function regexp(re: RegExp, expected: string): Parser<string>

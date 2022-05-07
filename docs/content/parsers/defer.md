@@ -1,9 +1,8 @@
 ---
-title: 'Parsers › defer'
+title: 'defer'
+kind: 'primitive'
 description: 'defer is a special parser that is tailored for creating mutually recursive parsers.'
 ---
-
-# defer
 
 ```typescript {{ withLineNumbers: false }}
 interface Deferred<T> extends Parser<T> {

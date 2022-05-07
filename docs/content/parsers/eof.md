@@ -1,9 +1,8 @@
 ---
-title: 'Parsers › eof'
+title: 'eof'
+kind: 'primitive'
 description: 'eof only succeeds at the end of the input.'
 ---
-
-# eof
 
 ```typescript {{ withLineNumbers: false }}
 function eof(): Parser<null>

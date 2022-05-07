@@ -1,5 +1,5 @@
 import { readdir as readDir, readFile } from 'fs/promises'
-import { join, relative, resolve } from 'path'
+import { join, relative, resolve, dirname } from 'path'
 
 import simpleGit from 'simple-git'
 import matter from 'gray-matter'
@@ -13,6 +13,7 @@ export interface EntryId {
 }
 
 export interface EntryMatter {
+  kind?: string
   title: string
   description: string
 }
@@ -23,20 +24,8 @@ export interface EntryData {
 
 export type Entry = EntryId & EntryMatter & EntryData
 
-function getEntriesLocation(): string {
-  return DOCS_DIR
-}
-
-function getSyntaxTheme(): string {
-  return DOCS_SYNTAX_THEME
-}
-
-function getDocsEditUrlBase(): string {
-  return DOCS_EDIT_URL
-}
-
 export function getEntryEditLink(id: string): string {
-  return `${getDocsEditUrlBase()}/${id}.md`
+  return `${DOCS_EDIT_URL}/${id}.md`
 }
 
 export async function getEntryLastChange(id: string): Promise<string> {
@@ -48,7 +37,7 @@ export async function getEntryLastChange(id: string): Promise<string> {
   })
 
   const { latest } = await git.log({
-    file: `${baseDir}/${getEntriesLocation()}/${id}.md`,
+    file: `${baseDir}/${DOCS_DIR}/${id}.md`,
     format: {
       date: '%cI'
     }
@@ -71,7 +60,7 @@ async function getPathsR(location: string): Promise<Array<string>> {
 }
 
 export async function getEntriesId(): Promise<Array<{ params: EntryId }>> {
-  const entriesPath = join(process.cwd(), getEntriesLocation())
+  const entriesPath = join(process.cwd(), DOCS_DIR)
   const entries = await getPathsR(entriesPath)
 
   return entries.map((entry) => {
@@ -88,15 +77,20 @@ export async function getEntriesId(): Promise<Array<{ params: EntryId }>> {
 }
 
 export async function getEntry(id: string): Promise<Entry> {
-  const entryPath = join(process.cwd(), getEntriesLocation(), `${id}.md`)
+  const entryPath = join(process.cwd(), DOCS_DIR, `${id}.md`)
+  const sectionPath = join(dirname(entryPath), `@section.json`)
+
   const entryContents = await readFile(entryPath, { encoding: 'utf8' })
+  const sectionContents = await readFile(sectionPath, { encoding: 'utf8' })
 
   const { content: rawContent, ...rest } = extractFrontmatter(entryContents)
-  const content = await processMarkdown(rawContent, getSyntaxTheme())
+  const content = await processMarkdown(rawContent, DOCS_SYNTAX_THEME)
+  const section = JSON.parse(sectionContents)
 
   return {
     id,
     content,
+    ...section,
     ...rest
   }
 }

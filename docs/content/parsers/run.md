@@ -1,9 +1,8 @@
 ---
-title: 'Parsers › run'
+title: 'run'
+kind: 'primitive'
 description: 'run is not a parser, but is used to run parser with provided input.'
 ---
-
-# run
 
 ```typescript {{ withLineNumbers: false }}
 interface Runnable<T> {

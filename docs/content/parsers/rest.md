@@ -1,9 +1,8 @@
 ---
-title: 'Parsers › rest'
-description: 'rest simply returns the unparsed input as a string; never fails.'
+title: 'rest'
+kind: 'primitive'
+description: 'rest simply returns the unparsed input as a string. Never fails.'
 ---
-
-# rest
 
 ```typescript {{ withLineNumbers: false }}
 function rest(): Parser<string>

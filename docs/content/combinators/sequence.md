@@ -1,9 +1,8 @@
 ---
-title: 'Сombinators › sequence'
+title: 'sequence'
+kind: 'primitive'
 description: 'sequence combinator applies parsers in order, until all of them succeed. Returns a tuple of values returned by parsers.'
 ---
-
-# sequence
 
 ```typescript {{ withLineNumbers: false }}
 function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTuple<T>>

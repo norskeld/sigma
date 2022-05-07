@@ -1,9 +1,8 @@
 ---
-title: 'Parsers › ustring'
+title: 'ustring'
+kind: 'primitive'
 description: 'ustring parses a Unicode string. Returns the parsed string.'
 ---
-
-# ustring
 
 ```typescript {{ withLineNumbers: false }}
 function ustring(match: string): Parser<string>
@@ -11,7 +10,7 @@ function ustring(match: string): Parser<string>
 
 ## Description
 
-> If you need to parse ASCII strings only, consider using [string] for better performance.
+> For parsing ASCII-only strings, consider using [string].
 
 `ustring` parses a Unicode string. Returns the parsed string.
 
