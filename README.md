@@ -18,7 +18,7 @@ TypeScript [parser combinator] library for building fast and convenient parsers.
 
 ## Docs
 
-You can find the documentation [here][docs] (it is still work-in-progress, but basic combinators and parsers are documented).
+You can find the documentation [here][docs] (it is still work-in-progress, but almost all combinators and parsers are documented).
 
 If you want to contribute, feel free to check out [the source code][docs-source].
 
