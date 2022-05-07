@@ -1,5 +1,5 @@
 import { readdir as readDir, readFile } from 'fs/promises'
-import { join, relative, resolve, dirname } from 'path'
+import { join, relative, resolve, dirname, basename } from 'path'
 
 import simpleGit from 'simple-git'
 import matter from 'gray-matter'
@@ -63,17 +63,25 @@ export async function getEntriesId(): Promise<Array<{ params: EntryId }>> {
   const entriesPath = join(process.cwd(), DOCS_DIR)
   const entries = await getPathsR(entriesPath)
 
-  return entries.map((entry) => {
-    const entriesSubPath = relative(entriesPath, entry)
-    const entriesName = entriesSubPath.replace(/\.md$/, '')
-    const entriesId = entriesName.split('/')
+  return (
+    entries
+      // Exclude section files to avoid Next.js trying to render them.
+      .filter((entry) => {
+        const fileName = basename(entry)
+        return !(fileName.startsWith('@') && fileName.endsWith('.json'))
+      })
+      .map((entry) => {
+        const entriesSubPath = relative(entriesPath, entry)
+        const entriesName = entriesSubPath.replace(/\.md$/, '')
+        const entriesId = entriesName.split('/')
 
-    return {
-      params: {
-        id: entriesId
-      }
-    }
-  })
+        return {
+          params: {
+            id: entriesId
+          }
+        }
+      })
+  )
 }
 
 export async function getEntry(id: string): Promise<Entry> {
