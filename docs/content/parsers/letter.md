@@ -1,7 +1,7 @@
 ---
 title: 'letter'
 kind: 'composite'
-description: 'letter parses an alphabetical character. Matches any Unicode char.'
+description: 'letter parses a single alphabetical character. Returns the matched character. Unicode friendly.'
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -10,7 +10,7 @@ function letter(): Parser<string>
 
 ## Description
 
-`letter` parses an alphabetical character. Matches any Unicode char.
+`letter` parses a single alphabetical character. Returns the matched character. Unicode friendly.
 
 ## Usage
 
