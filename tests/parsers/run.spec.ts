@@ -8,7 +8,7 @@ describe(run, () => {
   it('should succeed if given a succeeding parser', () => {
     const parser = string('runnable')
     const actual = run(parser).with('runnable')
-    const expected = result('success', 'runnable')
+    const expected = result(true, 'runnable')
 
     should.matchState(actual, expected)
   })
@@ -19,7 +19,7 @@ describe(run, () => {
     deferred.with(string('deferred'))
 
     const actual = run(deferred).with('lazy')
-    const expected = result('failure', 'deferred')
+    const expected = result(false, 'deferred')
 
     should.matchState(actual, expected)
   })
@@ -29,7 +29,7 @@ describe(run, () => {
 
     expect(() => {
       const actual = run(deferred).with('deferred')
-      const expected = result('failure', 'deferred')
+      const expected = result(false, 'deferred')
 
       should.matchState(actual, expected)
     }).toThrow()

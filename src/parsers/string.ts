@@ -1,19 +1,28 @@
-import { success, failure, type Parser } from '../state'
+import { type Parser } from '../state'
+
 import { size } from '../utils/unicode'
 
 export function string(match: string): Parser<string> {
   return {
-    parse(state) {
-      const index = state.index + match.length
-      const slice = state.text.substring(state.index, index)
+    parse(input, pos) {
+      const nextPos = pos + match.length
+      const slice = input.substring(pos, nextPos)
 
       switch (slice === match) {
         case true: {
-          return success({ text: state.text, index }, match)
+          return {
+            isOk: true,
+            pos: nextPos,
+            value: match
+          }
         }
 
         case false: {
-          return failure(state, match)
+          return {
+            isOk: false,
+            pos: nextPos,
+            error: match
+          }
         }
       }
     }
@@ -22,17 +31,25 @@ export function string(match: string): Parser<string> {
 
 export function ustring(match: string): Parser<string> {
   return {
-    parse(state) {
-      const index = state.index + size(match)
-      const slice = state.text.substring(state.index, index)
+    parse(input, pos) {
+      const nextPos = pos + size(match)
+      const slice = input.substring(pos, nextPos)
 
       switch (slice === match) {
         case true: {
-          return success({ text: state.text, index }, match)
+          return {
+            isOk: true,
+            pos: nextPos,
+            value: match
+          }
         }
 
         case false: {
-          return failure(state, match)
+          return {
+            isOk: false,
+            pos: nextPos,
+            error: match
+          }
         }
       }
     }

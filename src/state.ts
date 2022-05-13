@@ -1,21 +1,16 @@
 export interface Parser<T> {
-  parse(state: State): Result<T>
+  parse(input: string, pos: number): Result<T>
 }
 
-export interface State {
-  text: string
-  index: number
+export type Failure = {
+  readonly isOk: false
+  readonly pos: number
+  readonly error: string
 }
 
-export interface Failure {
-  readonly kind: 'failure'
-  readonly state: State
-  readonly expected: string
-}
-
-export interface Success<T> {
-  readonly kind: 'success'
-  readonly state: State
+export type Success<T> = {
+  readonly isOk: true
+  readonly pos: number
   readonly value: T
 }
 

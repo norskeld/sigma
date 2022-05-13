@@ -6,8 +6,8 @@ interface Runnable<T> {
 
 export function run<T>(parser: Parser<T>): Runnable<T> {
   return {
-    with(text) {
-      return parser.parse({ text, index: 0 })
+    with(input) {
+      return parser.parse(input, 0)
     }
   }
 }

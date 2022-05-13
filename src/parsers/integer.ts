@@ -1,4 +1,4 @@
-import { success, type Parser } from '../state'
+import { type Parser } from '../state'
 
 import { regexp } from './regexp'
 
@@ -7,15 +7,19 @@ const INT_UNSIGNED_RE = /\d+/g
 
 function createIntegerParser(re: RegExp, expectation: string, radix: number): Parser<number> {
   return {
-    parse(state) {
-      const result = regexp(re, expectation).parse(state)
+    parse(input, pos) {
+      const result = regexp(re, expectation).parse(input, pos)
 
-      switch (result.kind) {
-        case 'success': {
-          return success(result.state, parseInt(result.value, radix))
+      switch (result.isOk) {
+        case true: {
+          return {
+            isOk: true,
+            pos: result.pos,
+            value: parseInt(result.value, radix)
+          }
         }
 
-        case 'failure': {
+        case false: {
           return result
         }
       }

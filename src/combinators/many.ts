@@ -1,23 +1,28 @@
-import { success, type Parser } from '../state'
+import { type Parser } from '../state'
 
 export function many<T>(parser: Parser<T>): Parser<Array<T>> {
   return {
-    parse(state) {
-      let values: Array<T> = []
-      let nextState = state
+    parse(input, pos) {
+      const values: Array<T> = []
+      let nextPos = pos
 
       while (true) {
-        const result = parser.parse(nextState)
+        const result = parser.parse(input, nextPos)
 
-        switch (result.kind) {
-          case 'success': {
-            values = [...values, result.value]
-            nextState = result.state
+        switch (result.isOk) {
+          case true: {
+            values.push(result.value)
+            nextPos = result.pos
             break
           }
 
-          case 'failure': {
-            return success(nextState, values)
+          case false: {
+            return {
+              isOk: true,
+              pos: nextPos,
+              input,
+              value: values
+            }
           }
         }
       }

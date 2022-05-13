@@ -1,4 +1,4 @@
-import { failure, type Parser } from '../state'
+import { type Parser } from '../state'
 
 interface Deferred<T> extends Parser<T> {
   with(parser: Parser<T>): void
@@ -12,12 +12,16 @@ export function defer<T>(): Deferred<T> {
       deferred = parser
     },
 
-    parse(state) {
+    parse(input, pos) {
       if (deferred) {
-        return deferred.parse(state)
+        return deferred.parse(input, pos)
       }
 
-      return failure(state, `Deferred parser wasn't initialized.`)
+      return {
+        isOk: false,
+        pos,
+        error: `Deferred parser wasn't initialized.`
+      }
     }
   }
 }

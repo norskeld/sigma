@@ -12,14 +12,14 @@ World
 describe(eol, () => {
   it('should succeed if given a newline (Unix)', () => {
     const actual = run(eol(), '\n')
-    const expected = result('success', '\n')
+    const expected = result(true, '\n')
 
     should.matchState(actual, expected)
   })
 
   it('should succeed if given a newline sequence (non-Unix)', () => {
     const actual = run(eol(), '\r\n')
-    const expected = result('success', '\r\n')
+    const expected = result(true, '\r\n')
 
     should.matchState(actual, expected)
   })
@@ -30,7 +30,7 @@ describe(eol, () => {
     const actualExplicit = run(parser, tcase)
     const actualImplicit = run(parser, tcaseLit)
 
-    const expected = result('success', ['Hello', '\n', 'World', '\n'])
+    const expected = result(true, ['Hello', '\n', 'World', '\n'])
 
     should.matchState(actualExplicit, expected)
     should.matchState(actualImplicit, expected)
@@ -38,7 +38,7 @@ describe(eol, () => {
 
   it('should fail if given a string without a newline', () => {
     const actual = run(sequence(letters(), eol()), 'Hello')
-    const expected = result('failure', 'end of line')
+    const expected = result(false, 'end of line')
 
     should.matchState(actual, expected)
   })

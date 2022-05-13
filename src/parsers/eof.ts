@@ -1,17 +1,25 @@
-import { success, failure, type Parser } from '../state'
+import { type Parser } from '../state'
 
 export function eof(): Parser<null> {
   return {
-    parse(state) {
-      const isEof = state.index === state.text.length
+    parse(input, pos) {
+      const isEof = pos === input.length
 
       switch (isEof) {
         case true: {
-          return success({ text: state.text, index: state.text.length }, null)
+          return {
+            isOk: true,
+            pos: input.length,
+            value: null
+          }
         }
 
         case false: {
-          return failure(state, 'end of input')
+          return {
+            isOk: false,
+            pos,
+            error: 'end of input'
+          }
         }
       }
     }

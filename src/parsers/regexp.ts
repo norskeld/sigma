@@ -1,21 +1,29 @@
-import { success, failure, type Parser } from '../state'
+import { type Parser } from '../state'
 
 export function regexp(re: RegExp, expected: string): Parser<string> {
   return {
-    parse(state) {
+    parse(input, pos) {
       // Reset RegExp index, because we abuse the 'g' flag.
-      re.lastIndex = state.index
+      re.lastIndex = pos
 
       // `.exec` is actually a little bit faster than `.test`.
-      const result = re.exec(state.text)
+      const result = re.exec(input)
 
-      if (result && result.index === state.index) {
+      if (result && result.index === pos) {
         const [match] = result
-        const index = state.index + match.length
+        const index = pos + match.length
 
-        return success({ text: state.text, index }, match)
+        return {
+          isOk: true,
+          pos: index,
+          value: match
+        }
       } else {
-        return failure(state, expected)
+        return {
+          isOk: false,
+          pos,
+          error: expected
+        }
       }
     }
   }

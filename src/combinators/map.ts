@@ -1,16 +1,20 @@
-import { success, type Parser } from '../state'
+import { type Parser } from '../state'
 
 export function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R> {
   return {
-    parse(state) {
-      const result = parser.parse(state)
+    parse(input, pos) {
+      const result = parser.parse(input, pos)
 
-      switch (result.kind) {
-        case 'success': {
-          return success(result.state, fn(result.value))
+      switch (result.isOk) {
+        case true: {
+          return {
+            isOk: true,
+            pos: result.pos,
+            value: fn(result.value)
+          }
         }
 
-        case 'failure': {
+        case false: {
           return result
         }
       }

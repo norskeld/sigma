@@ -7,7 +7,7 @@ describe(ustring, () => {
     const tcase = 'test'
 
     const actual = run(ustring(tcase), tcase)
-    const expected = result('success', tcase)
+    const expected = result(true, tcase)
 
     should.matchState(actual, expected)
   })
@@ -15,7 +15,7 @@ describe(ustring, () => {
   it('should succeed if given a Unicode string', () => {
     ;['语言处理', 'Hëllø!', 'Family :: 👨‍👩‍👧‍👦 👨‍👩‍👧‍👦 👨‍👩‍👧‍👦'].forEach((tcase) => {
       const actual = run(ustring(tcase), tcase)
-      const expected = result('success', tcase)
+      const expected = result(true, tcase)
 
       should.matchState(actual, expected)
     })
@@ -25,7 +25,7 @@ describe(ustring, () => {
     const tcase = 'test'
 
     const actual = run(ustring(tcase), tcase.repeat(2))
-    const expected = result('success', tcase)
+    const expected = result(true, tcase)
 
     should.matchState(actual, expected)
   })
@@ -34,7 +34,7 @@ describe(ustring, () => {
     const tcase = 'test'
 
     const actual = run(ustring(tcase), 'wrong')
-    const expected = result('failure', tcase)
+    const expected = result(false, tcase)
 
     should.matchState(actual, expected)
   })
@@ -43,7 +43,7 @@ describe(ustring, () => {
     const tcase = 'test'
 
     const actual = run(ustring(tcase), '')
-    const expected = result('failure', tcase)
+    const expected = result(false, tcase)
 
     should.matchState(actual, expected)
   })
@@ -54,7 +54,7 @@ describe(string, () => {
     const tcase = 'test'
 
     const actual = run(string(tcase), tcase)
-    const expected = result('success', tcase)
+    const expected = result(true, tcase)
 
     should.matchState(actual, expected)
   })
@@ -63,7 +63,7 @@ describe(string, () => {
     const tcase = 'test'
 
     const actual = run(string(tcase), tcase.repeat(2))
-    const expected = result('success', tcase)
+    const expected = result(true, tcase)
 
     should.matchState(actual, expected)
   })
@@ -72,7 +72,7 @@ describe(string, () => {
     const tcase = 'test'
 
     const actual = run(string(tcase), 'wrong')
-    const expected = result('failure', tcase)
+    const expected = result(false, tcase)
 
     should.matchState(actual, expected)
   })
@@ -81,7 +81,7 @@ describe(string, () => {
     const tcase = 'test'
 
     const actual = run(string(tcase), '')
-    const expected = result('failure', tcase)
+    const expected = result(false, tcase)
 
     should.matchState(actual, expected)
   })

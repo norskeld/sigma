@@ -1,15 +1,13 @@
-import { success, type Parser } from '../state'
+import { type Parser } from '../state'
 
 export function rest(): Parser<string> {
   return {
-    parse(state) {
-      return success(
-        {
-          text: state.text,
-          index: state.text.length
-        },
-        state.text.substring(state.index)
-      )
+    parse(input, pos) {
+      return {
+        isOk: true,
+        pos: input.length,
+        value: input.substring(pos)
+      }
     }
   }
 }

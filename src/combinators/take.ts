@@ -1,4 +1,4 @@
-import type { Parser } from '../state'
+import { type Parser } from '../state'
 
 import { sequence } from './sequence'
 import { map } from './map'

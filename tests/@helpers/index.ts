@@ -1,10 +1,8 @@
 import { run as internal$run } from '@lib/parsers/run'
 import type { Parser, Result } from '@lib/state'
 
-type ResultKind = 'success' | 'failure'
-
 interface ReducedResult<T> {
-  kind: ResultKind
+  isOk: boolean
   value: T
 }
 
@@ -14,15 +12,15 @@ export const should = {
   },
 
   matchState<T, R>(received: Result<T>, expected: ReducedResult<R>): void {
-    expect(received.kind).toEqual(expected.kind)
+    expect(received.isOk).toEqual(expected.isOk)
 
-    switch (received.kind) {
-      case 'success': {
+    switch (received.isOk) {
+      case true: {
         return expect(received.value).toEqual(expected.value)
       }
 
-      case 'failure': {
-        return expect(received.expected).toEqual(expected.value)
+      case false: {
+        return expect(received.error).toEqual(expected.value)
       }
     }
   }
@@ -32,13 +30,13 @@ export function run<T>(parser: Parser<T>, text: string): Result<T> {
   return internal$run(parser).with(text)
 }
 
-export function result<T>(kind: ResultKind, value: T): ReducedResult<T> {
-  return { kind, value } as const
+export function result<T>(isOk: boolean, value: T): ReducedResult<T> {
+  return { isOk, value } as const
 }
 
 export function testFailure<P extends () => Parser<unknown>>(input: string, parser: P) {
   const actual = run(parser(), input)
-  const expected = result('failure', actual.kind === 'failure' ? actual.expected : actual.value)
+  const expected = result(false, !actual.isOk ? actual.error : actual.value)
 
   should.matchState(actual, expected)
 }
@@ -49,7 +47,7 @@ export function testSuccess<T, P extends () => Parser<unknown>>(
   parser: P
 ) {
   const actual = run(parser(), input)
-  const expected = result('success', value)
+  const expected = result(true, value)
 
   should.matchState(actual, expected)
 }

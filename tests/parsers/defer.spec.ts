@@ -10,7 +10,7 @@ describe(defer, () => {
     deferred.with(string('deferred'))
 
     const actual = run(deferred, 'deferred')
-    const expected = result('success', 'deferred')
+    const expected = result(true, 'deferred')
 
     should.matchState(actual, expected)
   })
@@ -20,7 +20,7 @@ describe(defer, () => {
 
     expect(() => {
       const actual = run(deferred, 'deferred')
-      const expected = result('failure', 'deferred')
+      const expected = result(false, 'deferred')
 
       should.matchState(actual, expected)
     }).toThrow()
@@ -32,7 +32,7 @@ describe(defer, () => {
     deferred.with(string('deferred'))
 
     const actual = run(deferred, 'lazy')
-    const expected = result('failure', 'deferred')
+    const expected = result(false, 'deferred')
 
     should.matchState(actual, expected)
   })

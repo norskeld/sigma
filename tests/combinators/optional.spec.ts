@@ -9,7 +9,7 @@ describe(optional, () => {
     // TODO: This seems to be broken somehow? Because `optional` eats everything after 'Hello'...
     const parser = sequence(string('Hello'), optional(string('...')))
     const actual = run(parser, 'Hello')
-    const expected = result('success', ['Hello', null])
+    const expected = result(true, ['Hello', null])
 
     should.matchState(actual, expected)
   })
@@ -17,7 +17,7 @@ describe(optional, () => {
   it('should succeed with null anyway', () => {
     const parser = optional(string('left'))
     const actual = run(parser, 'between')
-    const expected = result('success', null)
+    const expected = result(true, null)
 
     should.matchState(actual, expected)
   })

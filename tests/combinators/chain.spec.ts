@@ -15,14 +15,14 @@ describe(chainl, () => {
 
   it('should succeed with eliminated left recursion and reduced to a value', () => {
     const actual = run(parser, '2 + 2 + 4')
-    const expected = result('success', 8)
+    const expected = result(true, 8)
 
     should.matchState(actual, expected)
   })
 
   it('should fail with expectation of the regexp parser', () => {
     const actual = run(parser, 'x + x + 4')
-    const expected = result('failure', 'integer')
+    const expected = result(false, 'integer')
 
     should.matchState(actual, expected)
   })
