@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/norskeld/sigma/compare/v2.0.0...v2.0.1) (2022-05-13)
+
+
+### Performance Improvements
+
+* improve performance by simplifying values passed around ([505dad8](https://github.com/norskeld/sigma/commit/505dad8d173ee3bd92da759233f36b164339b7d7))
+* **no-release:** add benchmarks ([fd39bb1](https://github.com/norskeld/sigma/commit/fd39bb16e894ee1cad6816a7130fb99b23de9923))
+
 # [2.0.0](https://github.com/norskeld/sigma/compare/v1.4.2...v2.0.0) (2022-01-23)
 
 
