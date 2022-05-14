@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/norskeld/sigma/compare/v2.1.0...v2.1.1) (2022-05-14)
+
+
+### Bug Fixes
+
+* **README:** update README ([3e0a3f2](https://github.com/norskeld/sigma/commit/3e0a3f22895bf8626c56aedf3fea7775470a6720))
+
 # [2.1.0](https://github.com/norskeld/sigma/compare/v2.0.2...v2.1.0) (2022-05-14)
 
 
