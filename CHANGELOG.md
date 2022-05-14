@@ -1,3 +1,15 @@
+# [2.1.0](https://github.com/norskeld/sigma/compare/v2.0.2...v2.1.0) (2022-05-14)
+
+
+### Features
+
+* **combinators/many1:** add `many1` combinator ([5342135](https://github.com/norskeld/sigma/commit/534213598672b4609f82dcbba37973155caf0a29))
+
+
+### Performance Improvements
+
+* **no-release:** refactor benchmarks & add another bench ([11d42b4](https://github.com/norskeld/sigma/commit/11d42b4ecbbb6527bc1b1b17660afefe7fea61eb))
+
 ## [2.0.2](https://github.com/norskeld/sigma/compare/v2.0.1...v2.0.2) (2022-05-14)
 
 
