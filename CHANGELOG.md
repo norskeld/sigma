@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/norskeld/sigma/compare/v2.0.1...v2.0.2) (2022-05-14)
+
+
+### Bug Fixes
+
+* change `error` back to `expected` ([d1ba6c3](https://github.com/norskeld/sigma/commit/d1ba6c3ebb4d5a09336cb5ba1fcb42ff492a0458))
+
 ## [2.0.1](https://github.com/norskeld/sigma/compare/v2.0.0...v2.0.1) (2022-05-13)
 
 
