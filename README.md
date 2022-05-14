@@ -7,7 +7,7 @@
 ![Tree Shaking](https://img.shields.io/static/v1?label=tree+shaking&message=supported&style=flat-square&colorA=22272d&colorB=22272d)
 [![Semantic Release](https://img.shields.io/static/v1?label=semantic&message=release&style=flat-square&colorA=22272d&colorB=22272d)](https://github.com/semantic-release/semantic-release)
 
-TypeScript [parser combinator] library for building fast and convenient parsers.
+TypeScript [parser combinator][parser-combinator] library for building fast and convenient parsers.
 
 ## Features
 
@@ -108,11 +108,8 @@ And in the end we get the following output with the AST, which can then be manip
 
 ```ts
 {
-  kind: 'success',
-  state: {
-    input: '(1, 2, (3, 4))',
-    index: 14
-  },
+  isOk: true,
+  pos: 14,
   value: {
     type: 'list',
     value: [
@@ -137,7 +134,7 @@ And in the end we get the following output with the AST, which can then be manip
 
 <!-- Links. -->
 
-[parser combinator]: https://en.wikipedia.org/wiki/Parser_combinator
+[parser-combinator]: https://en.wikipedia.org/wiki/Parser_combinator
 [cfg]: https://en.wikipedia.org/wiki/Context-free_grammar
 [docs]: https://sigma.vm.codes
 [docs-source]: ./docs
