@@ -1,7 +1,7 @@
-import { many } from '@lib/combinators/many'
+import { many, many1 } from '@lib/combinators/many'
 import { string } from '@lib/parsers/string'
 
-import { run, result, should } from '@tests/@helpers'
+import { run, result, should, testFailure } from '@tests/@helpers'
 
 describe(many, () => {
   it('should succeed with an array of matched strings', () => {
@@ -18,5 +18,19 @@ describe(many, () => {
     const expected = result(true, [])
 
     should.matchState(actual, expected)
+  })
+})
+
+describe(many1, () => {
+  it('should succeed with an array of matched strings', () => {
+    const parser = many1(string('x!'))
+    const actual = run(parser, 'x!x!x!')
+    const expected = result(true, ['x!', 'x!', 'x!'])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should fail if nothing matched', () => {
+    testFailure('y!y!y!', () => many1(string('x!')))
   })
 })
