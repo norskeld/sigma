@@ -14,7 +14,7 @@ export function error<T>(parser: Parser<T>, expected: string): Parser<T> {
           return {
             isOk: false,
             pos,
-            error: expected
+            expected
           }
         }
       }

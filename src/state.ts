@@ -5,7 +5,7 @@ export interface Parser<T> {
 export type Failure = {
   readonly isOk: false
   readonly pos: number
-  readonly error: string
+  readonly expected: string
 }
 
 export type Success<T> = {

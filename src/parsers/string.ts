@@ -21,7 +21,7 @@ export function string(match: string): Parser<string> {
           return {
             isOk: false,
             pos: nextPos,
-            error: match
+            expected: match
           }
         }
       }
@@ -48,7 +48,7 @@ export function ustring(match: string): Parser<string> {
           return {
             isOk: false,
             pos: nextPos,
-            error: match
+            expected: match
           }
         }
       }

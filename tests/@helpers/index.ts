@@ -20,7 +20,7 @@ export const should = {
       }
 
       case false: {
-        return expect(received.error).toEqual(expected.value)
+        return expect(received.expected).toEqual(expected.value)
       }
     }
   }
@@ -36,7 +36,7 @@ export function result<T>(isOk: boolean, value: T): ReducedResult<T> {
 
 export function testFailure<P extends () => Parser<unknown>>(input: string, parser: P) {
   const actual = run(parser(), input)
-  const expected = result(false, !actual.isOk ? actual.error : actual.value)
+  const expected = result(false, !actual.isOk ? actual.expected : actual.value)
 
   should.matchState(actual, expected)
 }

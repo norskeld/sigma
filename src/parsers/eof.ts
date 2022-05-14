@@ -18,7 +18,7 @@ export function eof(): Parser<null> {
           return {
             isOk: false,
             pos,
-            error: 'end of input'
+            expected: 'end of input'
           }
         }
       }

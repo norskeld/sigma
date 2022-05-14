@@ -22,7 +22,7 @@ export function regexp(re: RegExp, expected: string): Parser<string> {
         return {
           isOk: false,
           pos,
-          error: expected
+          expected
         }
       }
     }

@@ -20,7 +20,7 @@ export function defer<T>(): Deferred<T> {
       return {
         isOk: false,
         pos,
-        error: `Deferred parser wasn't initialized.`
+        expected: `Deferred parser wasn't initialized.`
       }
     }
   }
