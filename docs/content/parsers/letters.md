@@ -27,8 +27,8 @@ const Parser = letters()
   run(Parser).with('XY')
 
   {
-    kind: 'success',
-    state: { text: 'XY', index: 1 },
+    isOk: true,
+    pos: 1,
     value: 'XY'
   }
   ```
@@ -37,8 +37,8 @@ const Parser = letters()
   run(Parser).with('meaningOfLife42')
 
   {
-    kind: 'success',
-    state: { text: 'meaningOfLife42', index: 13 },
+    isOk: true,
+    pos: 13,
     value: 'meaningOfLife'
   }
   ```
@@ -49,8 +49,8 @@ const Parser = letters()
   run(Parser).with('42')
 
   {
-    kind: 'failure',
-    state: { text: '42', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'letters'
   }
   ```

@@ -32,8 +32,8 @@ const Parser = sequence(
   run(Parser).with(`<start><body><end>`)
 
   {
-    kind: 'success',
-    state: { text: '<start><body><end>', index: 18 },
+    isOk: true,
+    pos: 18,
     value: [ '<start>', '<body>', '<end>', null ]
   }
   ```
@@ -44,8 +44,8 @@ const Parser = sequence(
   run(Parser).with(`<start><body><end>\n`)
 
   {
-    kind: 'failure',
-    state: { text: '<start><body><end>\n', index: 18 },
+    isOk: false,
+    pos: 18,
     expected: 'end of input'
   }
   ```

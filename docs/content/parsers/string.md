@@ -29,8 +29,8 @@ const Parser = string('hello')
   run(Parser).with('hello')
 
   {
-    kind: 'success',
-    state: { text: 'hello', index: 5 },
+    isOk: true,
+    pos: 5,
     value: 'hello'
   }
   ```
@@ -41,8 +41,8 @@ const Parser = string('hello')
   run(Parser).with('bye')
 
   {
-    kind: 'failure',
-    state: { text: 'bye', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'hello'
   }
   ```

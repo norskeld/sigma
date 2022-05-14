@@ -34,8 +34,8 @@ const Parser = map(
   run(Parser).with('2+2')
 
   {
-    kind: 'success',
-    state: { text: '2+2', index: 3 },
+    isOk: true,
+    pos: 3,
     value: 4
   }
   ```
@@ -46,8 +46,8 @@ const Parser = map(
   run(Parser).with('2-2')
 
   {
-    kind: 'failure',
-    state: { text: '2-2', index: 1 },
+    isOk: false,
+    pos: 1,
     expected: '+'
   }
   ```

@@ -35,8 +35,8 @@ const Parser = regexp(/\p{Emoji_Presentation}/gu, 'emoji')
   run(Parser).with('👌')
 
   {
-    kind: 'success',
-    state: { text: '👌', index: 2 },
+    isOk: true,
+    pos: 2,
     value: '👌'
   }
   ```
@@ -47,8 +47,8 @@ const Parser = regexp(/\p{Emoji_Presentation}/gu, 'emoji')
   run(Parser).with('大')
 
   {
-    kind: 'failure',
-    state: { text: '大', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'emoji'
   }
   ```

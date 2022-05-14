@@ -30,8 +30,8 @@ const Parser = takeLeft(
   run(Parser).with('42 spartans')
 
   {
-    kind: 'success',
-    state: { text: '42 spartans', index: 11 },
+    isOk: true,
+    pos: 11,
     value: 42
   }
   ```
@@ -42,8 +42,8 @@ const Parser = takeLeft(
   run(Parser).with('300 haskellers')
 
   {
-    kind: 'failure',
-    state: { text: '300 haskellers', index: 4 },
+    isOk: false,
+    pos: 4,
     expected: 'spartans'
   }
   ```

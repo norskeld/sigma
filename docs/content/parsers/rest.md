@@ -27,8 +27,8 @@ const Parser = sequence(string('hello'), rest())
   run(Parser).with('hello world')
 
   {
-    kind: 'success',
-    state: { text: 'hello world', index: 11 },
+    isOk: true,
+    pos: 11,
     value: ['hello', ' world']
   }
   ```

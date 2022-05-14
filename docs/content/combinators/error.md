@@ -33,8 +33,8 @@ const Parser = error(
   run(Parser).with('true')
 
   {
-    kind: 'success',
-    state: { text: 'true', index: 4 },
+    isOk: true,
+    pos: 4,
     value: 'true'
   }
   ```
@@ -45,8 +45,8 @@ const Parser = error(
   run(Parser).with('maybe')
 
   {
-    kind: 'failure',
-    state: { text: 'maybe', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: "expecting either 'true' or 'false'"
   }
   ```

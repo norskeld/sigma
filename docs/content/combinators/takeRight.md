@@ -30,8 +30,8 @@ const Parser = takeRight(
   run(Parser).with('let binding')
 
   {
-    kind: 'success',
-    state: { text: 'let binding', index: 11 },
+    isOk: true,
+    pos: 11,
     value: 'binding'
   }
   ```
@@ -42,8 +42,8 @@ const Parser = takeRight(
   run(Parser).with('let 42')
 
   {
-    kind: 'failure',
-    state: { text: 'let 42', index: 4 },
+    isOk: false,
+    pos: 4,
     expected: 'letters'
   }
   ```

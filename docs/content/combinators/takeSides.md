@@ -38,8 +38,8 @@ const Parser = takeSides(
   run(Parser).with('100 & 200')
 
   {
-    kind: 'success',
-    state: { text: '100 & 200', index: 9 },
+    isOk: true,
+    pos: 9,
     value: [ 100, 200 ]
   }
   ```
@@ -50,8 +50,8 @@ const Parser = takeSides(
   run(Parser).with('100 ^ 200')
 
   {
-    kind: 'failure',
-    state: { text: '100 ^ 200', index: 4 },
+    isOk: false,
+    pos: 4,
     expected: '&'
   }
   ```

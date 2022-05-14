@@ -27,8 +27,8 @@ const Parser = sepBy(uint(), string('+'))
   run(Parser).with('1+2+3+4')
 
   {
-    kind: 'success',
-    state: { text: '1+2+3+4', index: 7 },
+    isOk: true,
+    pos: 7,
     value: [ 1, 2, 3, 4 ]
   }
   ```
@@ -37,8 +37,8 @@ const Parser = sepBy(uint(), string('+'))
   run(Parser).with('1-two')
 
   {
-    kind: 'success',
-    state: { text: '1-two', index: 1 },
+    isOk: true,
+    pos: 1,
     value: [ 1 ]
   }
   ```
@@ -49,8 +49,8 @@ const Parser = sepBy(uint(), string('+'))
   run(Parser).with('one+two')
 
   {
-    kind: 'failure',
-    state: { text: 'one+two', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'unsigned integer'
   }
   ```

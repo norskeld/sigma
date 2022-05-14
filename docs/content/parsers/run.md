@@ -29,8 +29,8 @@ run(string('hello world')).with('hello world')
 
   ```typescript
   {
-    kind: 'success',
-    state: { text: 'hello world', index: 11 },
+    isOk: true,
+    pos: 11,
     value: 'hello world'
   }
   ```
@@ -39,8 +39,8 @@ run(string('hello world')).with('hello world')
 
   ```typescript
   {
-    kind: 'failure',
-    state: { text: 'hello world', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'hello world'
   }
   ```

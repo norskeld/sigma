@@ -37,8 +37,8 @@ const Parser = ustring('语言处理')
   run(Parser).with('语言处理')
 
   {
-    kind: 'success',
-    state: { text: '语言处理', index: 12 },
+    isOk: true,
+    pos: 12,
     value: '语言处理'
   }
   ```
@@ -49,8 +49,8 @@ const Parser = ustring('语言处理')
   run(Parser).with('语言')
 
   {
-    kind: 'failure',
-    state: { text: '语言', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: '语言处理'
   }
   ```

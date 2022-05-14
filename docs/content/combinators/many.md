@@ -27,8 +27,8 @@ const Parser = many(string('+'))
   run(Parser).with('+++')
 
   {
-    kind: 'success',
-    state: { text: '+++', index: 3 },
+    isOk: true,
+    pos: 3,
     value: [ '+', '+', '+' ]
   }
   ```
@@ -41,8 +41,8 @@ const Parser = many(string('+'))
   run(Parser).with('---')
 
   {
-    kind: 'success',
-    state: { text: '---', index: 0 },
+    isOk: true,
+    pos: 0,
     value: []
   }
   ```

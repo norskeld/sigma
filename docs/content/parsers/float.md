@@ -27,8 +27,8 @@ const Parser = float()
   run(Parser).with('42.42')
 
   {
-    kind: 'success',
-    state: { text: '42.42', index: 5 },
+    isOk: true,
+    pos: 5,
     value: 42.42
   }
   ```
@@ -39,8 +39,8 @@ const Parser = float()
   run(Parser).with('42')
 
   {
-    kind: 'failure',
-    state: { text: '42', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'float'
   }
   ```

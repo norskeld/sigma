@@ -31,8 +31,8 @@ const Parser = sequence(
   run(Parser).with(`<start>\n<body>\n<end>\n`)
 
   {
-    kind: 'success',
-    state: { text: '<start>\n<body>\n<end>\n', index: 21 },
+    isOk: true,
+    pos: 21,
     value: [
       [ '<start>', '\n' ],
       [ '<body>', '\n' ],
@@ -47,8 +47,8 @@ const Parser = sequence(
   run(Parser).with(`<start>\n<body><end>\n`)
 
   {
-    kind: 'failure',
-    state: { text: '<start>\n<body><end>\n', index: 14 },
+    isOk: false,
+    pos: 14,
     expected: 'end of line'
   }
   ```

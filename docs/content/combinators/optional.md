@@ -30,8 +30,8 @@ const Parser = sequence(
   run(Parser).with('-2')
 
   {
-    kind: 'success',
-    state: { text: '-2', index: 2 },
+    isOk: true,
+    pos: 2,
     value: [ '-', 2 ]
   }
   ```
@@ -42,8 +42,8 @@ const Parser = sequence(
   run(Parser).with('~2')
 
   {
-    kind: 'failure',
-    state: { text: '~2', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'unsigned integer'
   }
   ```

@@ -31,8 +31,8 @@ const Parser = choice(
   run(Parser).with('true')
 
   {
-    kind: 'success',
-    state: { text: 'true', index: 4 },
+    isOk: true,
+    pos: 4,
     value: 'true'
   }
   ```
@@ -43,8 +43,8 @@ const Parser = choice(
   run(Parser).with('maybe')
 
   {
-    kind: 'failure',
-    state: { text: 'maybe', index: 0 },
+    isOk: false,
+    pos: 0,
     expected: 'true'
   }
   ```

@@ -28,8 +28,8 @@ const Parser = sequence(string('hello'), whitespace(), string('world'))
   run(Parser).with('hello world')
 
   {
-    kind: 'success',
-    state: { text: 'hello world', index: 11 },
+    isOk: true,
+    pos: 11,
     value: [ 'hello', ' ', 'world' ]
   }
   ```
@@ -40,8 +40,8 @@ const Parser = sequence(string('hello'), whitespace(), string('world'))
   run(Parser).with('hello friend')
 
   {
-    kind: 'failure',
-    state: { text: 'hello friend', index: 6 },
+    isOk: false,
+    pos: 6,
     expected: 'world'
   }
   ```

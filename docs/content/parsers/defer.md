@@ -70,8 +70,8 @@ We will get the following result:
 
 ```typescript
 {
-  kind: 'success',
-  state: { text: '(1,2,(3,(4,5)))', index: 15 },
+  isOk: true,
+  pos: 15,
   value: {
     type: 'list',
     value: [

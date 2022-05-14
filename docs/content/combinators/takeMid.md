@@ -35,8 +35,8 @@ const Parser = takeMid(
   run(Parser).with('fn multiply x y')
 
   {
-    kind: 'success',
-    state: { text: 'fn multiply x y', index: 15 },
+    isOk: true,
+    pos: 15,
     value: 'multiply'
   }
   ```
@@ -47,8 +47,8 @@ const Parser = takeMid(
   run(Parser).with('fn 100 x y')
 
   {
-    kind: 'failure',
-    state: { text: 'fn 100 x y', index: 3 },
+    isOk: false,
+    pos: 3,
     expected: 'letters'
   }
   ```

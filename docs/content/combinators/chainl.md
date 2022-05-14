@@ -63,8 +63,8 @@ You will get the following result:
 
 ```typescript {{ highlight: [4] }}
 {
-  kind: 'success',
-  state: { text: '10+10-5+15', index: 10 },
+  isOk: true,
+  pos: 10,
   value: 30
 }
 ```
@@ -181,8 +181,8 @@ We will get the following result:
 
 ```typescript
 {
-  kind: 'success',
-  state: { text: '10+10+(2*30)', index: 12 },
+  isOk: true,
+  pos: 12,
   value: 80
 }
 ```
