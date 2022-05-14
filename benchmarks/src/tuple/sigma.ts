@@ -49,12 +49,12 @@ TupleList.with(
 export function parse(text: string): Ast.ListNode {
   const result = run(TupleList).with(text)
 
-  switch (result.kind) {
-    case 'success': {
+  switch (result.isOk) {
+    case true: {
       return result.value
     }
 
-    case 'failure': {
+    case false: {
       return {
         type: 'list',
         value: []

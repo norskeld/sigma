@@ -1,4 +1,4 @@
-import { choice, sepBy, map, takeMid, optional, sequence } from '@nrsk/sigma/combinators'
+import { choice, sepBy, optional, map, takeMid, sequence } from '@nrsk/sigma/combinators'
 import { defer, float, int, regexp, run, string, whitespace } from '@nrsk/sigma/parsers'
 
 import * as Ast from './ast'
@@ -101,7 +101,7 @@ const Space = optional(whitespace())
 const StringLiteral = regexp(/"([^"]|\\.)*"/g, 'string')
 
 // Utility.
-const match = (match: string) => takeMid(Space, string(match), Space)
+const match = (s: string) => takeMid(Space, string(s), Space)
 
 // Composites.
 const JsonRoot = defer<Ast.JsonRoot>()
@@ -141,13 +141,9 @@ JsonArray.with(
 )
 
 JsonNull.with(map(match(Keywords.Null), toNull))
-
 JsonString.with(map(StringLiteral, toString))
-
 JsonNumber.with(map(NumberLiteral, toNumber))
-
 JsonBoolean.with(map(choice(match(Keywords.True), match(Keywords.False)), toBoolean))
-
 JsonValue.with(choice(JsonObject, JsonArray, JsonString, JsonNumber, JsonBoolean, JsonNull))
 
 /* Wrapper for bench runner. */
@@ -155,12 +151,12 @@ JsonValue.with(choice(JsonObject, JsonArray, JsonString, JsonNumber, JsonBoolean
 export function parse(text: string): Ast.JsonRoot {
   const result = run(JsonRoot).with(text)
 
-  switch (result.kind) {
-    case 'success': {
+  switch (result.isOk) {
+    case true: {
       return result.value
     }
 
-    case 'failure': {
+    case false: {
       return {
         type: 'object',
         values: []

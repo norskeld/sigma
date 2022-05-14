@@ -7,7 +7,7 @@ import { handlers } from '../@helpers'
 import { SAMPLE } from './@sample'
 
 suite(
-  'JSON :: sigma vs parjs',
+  'many :: sigma vs parjs',
 
   add('sigma', () => parseSigma(SAMPLE)),
   add('parjs', () => parseParjs(SAMPLE)),

@@ -1,20 +1,16 @@
-import { suite, add, cycle, complete } from 'benny'
+import { suite, add } from 'benny'
 
 import { parse as parseSigma } from './sigma'
 import { parse as parseParjs } from './parjs'
+import { handlers } from '../@helpers'
 
 import { SAMPLE } from './@sample'
-
-const options = {
-  minSamples: 50
-}
 
 suite(
   'Tuple :: sigma vs parjs',
 
-  add('sigma', () => parseSigma(SAMPLE), options),
-  add('parjs', () => parseParjs(SAMPLE), options),
+  add('sigma', () => parseSigma(SAMPLE)),
+  add('parjs', () => parseParjs(SAMPLE)),
 
-  cycle(),
-  complete()
+  ...handlers
 )
