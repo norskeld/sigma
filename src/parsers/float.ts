@@ -13,7 +13,6 @@ export function float(): Parser<number> {
         case true: {
           return {
             isOk: true,
-            input,
             pos: result.pos,
             value: parseFloat(result.value)
           }
