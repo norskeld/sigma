@@ -1,10 +1,17 @@
 import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 
-const it = suite('index file')
+import * as exposed from '../'
 
-it('', () => {
-  assert.equal(2, 2)
+import { should, expectedParsers, expectedCombinators } from './@helpers'
+
+const it = suite('index exports')
+
+it('should re-export combinators', () => {
+  should.expose(exposed, ...expectedCombinators)
+})
+
+it('should re-export parsers', () => {
+  should.expose(exposed, ...expectedParsers)
 })
 
 it.run()

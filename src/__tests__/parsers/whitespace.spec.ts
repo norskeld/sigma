@@ -1,11 +1,11 @@
-import { whitespace } from '../../parsers/whitespace'
+import { suite } from 'uvu'
+
 import { sequence } from '../../combinators/sequence'
-import { string } from '../../parsers/string'
 import { regexp } from '../../parsers/regexp'
+import { string } from '../../parsers/string'
+import { whitespace } from '../../parsers/whitespace'
 
 import { run, result, should } from '../@helpers'
-
-import { suite } from 'uvu'
 
 const it = suite('whitespace')
 
