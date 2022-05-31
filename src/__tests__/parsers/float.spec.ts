@@ -1,7 +1,6 @@
 import { suite } from 'uvu'
 
 import { float } from '../../parsers/float'
-
 import { testFailure, testSuccess } from '../@helpers'
 
 const it = suite('float')

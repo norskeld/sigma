@@ -1,7 +1,6 @@
 import { suite } from 'uvu'
 
 import { string, ustring } from '../../parsers/string'
-
 import { run, result, should } from '../@helpers'
 
 let it = suite('ustring')

@@ -1,9 +1,8 @@
 import { suite } from 'uvu'
 
 import { sequence } from '../../combinators/sequence'
-import { string } from '../../parsers/string'
 import { eof } from '../../parsers/eof'
-
+import { string } from '../../parsers/string'
 import { run, result, should } from '../@helpers'
 
 const it = suite('eof')

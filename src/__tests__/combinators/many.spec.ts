@@ -2,7 +2,6 @@ import { suite } from 'uvu'
 
 import { many, many1 } from '../../combinators/many'
 import { string } from '../../parsers/string'
-
 import { result, run, should, testFailure } from '../@helpers'
 
 let it = suite('many')

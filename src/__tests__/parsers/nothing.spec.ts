@@ -1,7 +1,6 @@
 import { suite } from 'uvu'
 
 import { nothing } from '../../parsers/nothing'
-
 import { result, run, should } from '../@helpers'
 
 const it = suite('nothing')

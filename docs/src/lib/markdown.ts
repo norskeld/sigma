@@ -2,9 +2,9 @@ import { readFile } from 'fs/promises'
 import { join } from 'path'
 
 import { shikigami, loadTheme } from '@nrsk/shikigami'
-import { BUNDLED_LANGUAGES } from 'shiki'
-import anchor from 'markdown-it-anchor'
 import markdown from 'markdown-it'
+import anchor from 'markdown-it-anchor'
+import { BUNDLED_LANGUAGES } from 'shiki'
 
 export async function processMarkdown(input: string, themeName: string) {
   const permalink = anchor.permalink.ariaHidden({ placement: 'after' })

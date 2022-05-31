@@ -2,7 +2,6 @@ import { suite } from 'uvu'
 
 import { takeLeft, takeMid, takeRight, takeSides } from '../../combinators/take'
 import { string } from '../../parsers/string'
-
 import { result, run, should } from '../@helpers'
 
 // TODO: Add failing cases.

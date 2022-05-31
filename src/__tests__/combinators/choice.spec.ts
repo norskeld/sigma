@@ -2,7 +2,6 @@ import { suite } from 'uvu'
 
 import { choice } from '../../combinators/choice'
 import { string } from '../../parsers/string'
-
 import { run, result, should } from '../@helpers'
 
 const it = suite('choice')

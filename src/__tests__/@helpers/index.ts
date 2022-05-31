@@ -1,6 +1,7 @@
 import * as assert from 'uvu/assert'
-import type { Parser, Result } from '../../state'
+
 import { run as internal$run } from '../../parsers/run'
+import type { Parser, Result } from '../../state'
 
 interface ReducedResult<T> {
   isOk: boolean

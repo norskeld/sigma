@@ -1,5 +1,5 @@
 import { complete, cycle } from 'benny'
-import * as kleur from 'kleur'
+import kleur from 'kleur'
 
 export const handlers = [
   cycle(),

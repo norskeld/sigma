@@ -1,7 +1,7 @@
 import { type Parser } from '../state'
 
-import { sequence } from './sequence'
 import { many } from './many'
+import { sequence } from './sequence'
 
 export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>> {
   return {

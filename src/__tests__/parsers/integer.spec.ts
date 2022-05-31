@@ -1,7 +1,6 @@
 import { suite } from 'uvu'
 
 import { int, uint } from '../../parsers/integer'
-
 import { testFailure, testSuccess } from '../@helpers'
 
 let it = suite('int')

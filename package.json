@@ -83,6 +83,8 @@
     "@typescript-eslint/parser": "^5.22.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.1",
     "nyc": "^15.1.0",

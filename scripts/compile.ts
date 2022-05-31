@@ -1,5 +1,5 @@
-import { rollup, InputOptions, OutputOptions } from 'rollup'
 import typescript from '@rollup/plugin-typescript'
+import { rollup, InputOptions, OutputOptions } from 'rollup'
 import dts from 'rollup-plugin-dts'
 
 interface BundleOptions {

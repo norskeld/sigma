@@ -2,7 +2,6 @@ import { suite } from 'uvu'
 
 import { sepBy } from '../../combinators/sepBy'
 import { string } from '../../parsers/string'
-
 import { run, result, should } from '../@helpers'
 
 const it = suite('sepBy')

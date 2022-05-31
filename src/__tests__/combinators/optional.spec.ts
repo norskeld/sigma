@@ -3,7 +3,6 @@ import { suite } from 'uvu'
 import { optional } from '../../combinators/optional'
 import { sequence } from '../../combinators/sequence'
 import { string } from '../../parsers/string'
-
 import { run, result, should } from '../@helpers'
 
 const it = suite('optional')
