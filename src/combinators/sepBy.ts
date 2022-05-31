@@ -24,12 +24,6 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
             value: values
           }
         }
-
-        return {
-          isOk: true,
-          pos: resultP.pos,
-          value: values
-        }
       }
 
       return {
