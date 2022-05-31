@@ -107,5 +107,6 @@
     "*.{js,ts}": [
       "eslint --fix"
     ]
-  }
+  },
+  "packageManager": "npm@8.10.0"
 }
