@@ -12,10 +12,18 @@ describe(sepBy, () => {
     should.matchState(actual, expected)
   })
 
-  it('should fail with the value of the first failed parser', () => {
+  it(`should succeed with an array of matched string if separator didn't match`, () => {
+    const parser = sepBy(string('x'), string('!'))
+    const actual = run(parser, 'x-y')
+    const expected = result(true, ['x'])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with an empty array if nothing matched', () => {
     const parser = sepBy(string('hello'), string('?'))
     const actual = run(parser, 'bye?bye?')
-    const expected = result(false, 'hello')
+    const expected = result(true, [])
 
     should.matchState(actual, expected)
   })
