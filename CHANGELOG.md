@@ -1,3 +1,12 @@
+## [2.1.3](https://github.com/norskeld/sigma/compare/v2.1.2...v2.1.3) (2022-05-31)
+
+
+### Bug Fixes
+
+* **combinators/choice:** get rid of non-null assertion and refactor a bit ([2f0a9f9](https://github.com/norskeld/sigma/commit/2f0a9f927ce903bf8d9252ba7554b278f4487722))
+* **combinators/sepBy:** remove unreachable `return` ([7b3a9d0](https://github.com/norskeld/sigma/commit/7b3a9d05f794b8e9fc60ed321d234ed13d706ec0))
+* **parsers/float:** do not return `input` ([bd92d3d](https://github.com/norskeld/sigma/commit/bd92d3d7256ced7273449290493a7d623e6ac298))
+
 ## [2.1.2](https://github.com/norskeld/sigma/compare/v2.1.1...v2.1.2) (2022-05-31)
 
 
