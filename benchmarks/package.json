@@ -12,7 +12,7 @@
     "start": "npm run build && npm run bench"
   },
   "dependencies": {
-    "@nrsk/sigma": "2.0.2",
+    "@nrsk/sigma": "^2.1.3",
     "benny": "^3.7.1",
     "parjs": "0.12.7"
   },
