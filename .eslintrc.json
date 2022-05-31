@@ -26,10 +26,10 @@
         "varsIgnorePattern": "_"
       }
     ],
-    "import/extensions": 0,
-    "import/no-named-as-default": 0,
+    "import/extensions": "off",
+    "import/no-named-as-default": "off",
     "import/order": [
-      2,
+      "error",
       {
         "alphabetize": {
           "caseInsensitive": true,
