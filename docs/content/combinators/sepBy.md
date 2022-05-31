@@ -1,6 +1,6 @@
 ---
 title: 'sepBy'
-kind: 'composite'
+kind: 'primitive'
 description: 'sepBy combinator parses zero or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
 ---
 
@@ -49,9 +49,9 @@ const Parser = sepBy(uint(), string('+'))
   run(Parser).with('one+two')
 
   {
-    isOk: false,
+    isOk: true,
     pos: 0,
-    expected: 'unsigned integer'
+    value: []
   }
   ```
 </details>
