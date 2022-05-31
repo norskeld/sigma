@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/norskeld/sigma/compare/v2.1.3...v2.2.0) (2022-05-31)
+
+
+### Features
+
+* **bench:** add latest sigma for benchmarks ([f48e132](https://github.com/norskeld/sigma/commit/f48e132a86732c340e217a2240053e9d070e304f))
+
 ## [2.1.3](https://github.com/norskeld/sigma/compare/v2.1.2...v2.1.3) (2022-05-31)
 
 
