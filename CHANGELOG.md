@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/norskeld/sigma/compare/v2.1.1...v2.1.2) (2022-05-31)
+
+
+### Bug Fixes
+
+* **combinators/sepBy:** fix behavior & improve perf ([f709a30](https://github.com/norskeld/sigma/commit/f709a304782b5048ed0b5fe7b360f4dfe65d446f))
+
 ## [2.1.1](https://github.com/norskeld/sigma/compare/v2.1.0...v2.1.1) (2022-05-14)
 
 
