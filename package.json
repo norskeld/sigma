@@ -46,6 +46,7 @@
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
     "test": "jest",
+    "test:new": "uvu -r tsm src/__tests__",
     "test:coverage": "jest --coverage --run-in-band",
     "test:watch": "jest --watch --max-workers=50%"
   },
@@ -93,7 +94,8 @@
     "semantic-release": "^19.0.2",
     "ts-jest": "^28.0.2",
     "tsm": "^2.2.1",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "uvu": "^0.5.3"
   },
   "commitlint": {
     "extends": [
