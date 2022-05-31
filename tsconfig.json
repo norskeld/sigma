@@ -11,8 +11,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@lib/*": ["src/*"],
-      "@tests/*": ["tests/*"]
+      "@lib/*": ["src/*"]
     }
   },
   "include": ["benchmarks", "scripts", "src"]

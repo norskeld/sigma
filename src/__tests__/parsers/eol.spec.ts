@@ -1,9 +1,8 @@
 import { suite } from 'uvu'
 
 import { sequence } from '../../combinators/sequence'
-import { letters } from '../../parsers/letter'
 import { eol } from '../../parsers/eol'
-
+import { letters } from '../../parsers/letter'
 import { run, result, should } from '../@helpers'
 
 const tcase = `Hello\nWorld\n`

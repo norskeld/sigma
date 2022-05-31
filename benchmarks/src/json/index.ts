@@ -1,10 +1,10 @@
 import { suite, add } from 'benny'
 
-import { parse as parseSigma } from './sigma'
-import { parse as parseParjs } from './parjs'
 import { handlers } from '../@helpers'
 
 import { SAMPLE } from './@sample'
+import { parse as parseParjs } from './parjs'
+import { parse as parseSigma } from './sigma'
 
 suite(
   'JSON :: sigma vs parjs',

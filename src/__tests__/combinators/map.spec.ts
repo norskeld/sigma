@@ -2,7 +2,6 @@ import { suite } from 'uvu'
 
 import { map, mapTo } from '../../combinators/map'
 import { string } from '../../parsers/string'
-
 import { result, run, should } from '../@helpers'
 
 let it = suite('map')

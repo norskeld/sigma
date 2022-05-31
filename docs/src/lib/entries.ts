@@ -1,8 +1,8 @@
 import { readdir as readDir, readFile } from 'fs/promises'
 import { join, relative, resolve, dirname, basename } from 'path'
 
-import simpleGit from 'simple-git'
 import matter from 'gray-matter'
+import simpleGit from 'simple-git'
 
 import { DOCS_SYNTAX_THEME, DOCS_EDIT_URL, DOCS_DIR } from '@/config/content'
 import { processMarkdown } from '@/lib/markdown'

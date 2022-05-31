@@ -4,7 +4,6 @@ import { sequence } from '../../combinators/sequence'
 import { regexp } from '../../parsers/regexp'
 import { string } from '../../parsers/string'
 import { whitespace } from '../../parsers/whitespace'
-
 import { run, result, should } from '../@helpers'
 
 const it = suite('whitespace')

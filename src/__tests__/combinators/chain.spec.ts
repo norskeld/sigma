@@ -1,11 +1,10 @@
 import { suite } from 'uvu'
 
-import { takeRight } from '../../combinators/take'
 import { chainl } from '../../combinators/chain'
+import { map } from '../../combinators/map'
+import { takeRight } from '../../combinators/take'
 import { regexp } from '../../parsers/regexp'
 import { string } from '../../parsers/string'
-import { map } from '../../combinators/map'
-
 import { run, result, should } from '../@helpers'
 
 const toSum = (left: number, right: number) => left + right

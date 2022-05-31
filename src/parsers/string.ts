@@ -1,5 +1,4 @@
 import { type Parser } from '../state'
-
 import { size } from '../utils/unicode'
 
 export function string(match: string): Parser<string> {

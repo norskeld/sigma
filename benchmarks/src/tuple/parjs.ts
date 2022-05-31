@@ -1,5 +1,5 @@
-import { between, later, manySepBy, map, or } from 'parjs/combinators'
 import { int, string, whitespace } from 'parjs'
+import { between, later, manySepBy, map, or } from 'parjs/combinators'
 
 import * as Ast from './ast'
 

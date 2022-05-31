@@ -2,7 +2,6 @@ import { suite } from 'uvu'
 
 import { error } from '../../combinators/error'
 import { string } from '../../parsers/string'
-
 import { run, result, should } from '../@helpers'
 
 const it = suite('error')

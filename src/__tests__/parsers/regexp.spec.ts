@@ -1,7 +1,6 @@
 import { suite } from 'uvu'
 
 import { regexp } from '../../parsers/regexp'
-
 import { result, run, should } from '../@helpers'
 
 const it = suite('regexp')

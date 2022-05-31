@@ -1,8 +1,9 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { pangrams } from './unicode.data'
 import { size } from '../../utils/unicode'
+
+import { pangrams } from './unicode.data'
 
 function check(locale: string) {
   const pangram = pangrams[locale]

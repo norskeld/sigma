@@ -1,9 +1,8 @@
 import { suite } from 'uvu'
 
-import { string } from '../../parsers/string'
 import { defer } from '../../parsers/defer'
 import { run } from '../../parsers/run'
-
+import { string } from '../../parsers/string'
 import { result, should, testFailure } from '../@helpers'
 
 const it = suite('run')

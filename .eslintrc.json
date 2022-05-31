@@ -1,11 +1,14 @@
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
   "env": {
     "node": true
@@ -22,6 +25,29 @@
         "argsIgnorePattern": "_",
         "varsIgnorePattern": "_"
       }
+    ],
+    "import/extensions": 0,
+    "import/no-named-as-default": 0,
+    "import/order": [
+      2,
+      {
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "newlines-between": "always"
+      }
     ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": ["./tsconfig.json", "./*/tsconfig.json"]
+      }
+    }
   }
 }

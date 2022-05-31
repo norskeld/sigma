@@ -1,5 +1,5 @@
-import { many } from 'parjs/combinators'
 import { string } from 'parjs'
+import { many } from 'parjs/combinators'
 
 const Parser = string('x!').pipe(many())
 
