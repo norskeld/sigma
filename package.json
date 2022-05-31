@@ -45,10 +45,9 @@
     "prerelease": "node --require tsm scripts/release.ts prepare",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
-    "test": "jest",
-    "test:new": "uvu -r tsm src/__tests__",
-    "test:coverage": "jest --coverage --run-in-band",
-    "test:watch": "jest --watch --max-workers=50%"
+    "test": "uvu -r tsm src/__tests__",
+    "test:coverage": "nyc npm test",
+    "test:watch": "watchlist src tests --eager -- npm run test"
   },
   "repository": {
     "type": "git",
@@ -75,27 +74,27 @@
   "homepage": "https://github.com/norskeld/sigma#readme",
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@nrsk/config-conventional": "^1.0.0",
     "@rollup/plugin-typescript": "^8.3.2",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@types/jest": "^27.5.0",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
-    "jest": "^28.1.0",
     "lint-staged": "^12.4.1",
+    "nyc": "^15.1.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.74.1",
     "rollup-plugin-dts": "^4.2.1",
     "semantic-release": "^19.0.2",
-    "ts-jest": "^28.0.2",
     "tsm": "^2.2.1",
     "typescript": "^4.6.4",
-    "uvu": "^0.5.3"
+    "uvu": "^0.5.3",
+    "watchlist": "^0.3.1"
   },
   "commitlint": {
     "extends": [
