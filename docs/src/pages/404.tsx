@@ -1,7 +1,7 @@
-import Navigation from '@/components/navigation'
 import Container from '@/components/container'
-import NotFound from '@/components/not-found'
 import Content from '@/components/content'
+import Navigation from '@/components/navigation'
+import NotFound from '@/components/not-found'
 
 export default function Custom404() {
   return (

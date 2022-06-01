@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router'
 import cx from 'classnames'
-
-import { useSidebar } from '@/context/sidebar.context'
+import { useRouter } from 'next/router'
 
 import { CloseIcon, DotsIcon, GitHubIcon, NpmIcon, type IconProps } from './icons'
 import AppLink from './link'
+
+import { useSidebar } from '@/context/sidebar.context'
 
 import styles from './navigation.module.css'
 

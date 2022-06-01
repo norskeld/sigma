@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import Link from 'next/link'
 import cx from 'classnames'
-
-import { type SectionNode, type ItemNode } from '@/lib/sidebar'
-import { useSidebar } from '@/context/sidebar.context'
+import Link from 'next/link'
+import { useState } from 'react'
 
 import { CaretRightIcon } from './icons'
+
+import { useSidebar } from '@/context/sidebar.context'
+import { type SectionNode, type ItemNode } from '@/lib/sidebar'
 
 import styles from './sidebar.module.css'
 
