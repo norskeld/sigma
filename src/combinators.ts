@@ -1,5 +1,6 @@
 export * from './combinators/chain'
 export * from './combinators/choice'
+export * from './combinators/when'
 export * from './combinators/error'
 export * from './combinators/many'
 export * from './combinators/map'
