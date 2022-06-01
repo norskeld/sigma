@@ -1,4 +1,5 @@
-import type { Parser, ToTuple } from '../state'
+import { type Parser } from '../state'
+import { type ToTuple } from '../utils/types'
 
 export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTuple<T>>
 export function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>> {
