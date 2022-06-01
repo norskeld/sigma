@@ -32,21 +32,32 @@ export function many<T>(parser: Parser<T>): SafeParser<Array<T>> {
 export function many1<T>(parser: Parser<T>): Parser<Array<T>> {
   return {
     parse(input, pos) {
-      const result = many(parser).parse(input, pos)
+      const resultP = parser.parse(input, pos)
 
-      switch (result.value.length > 0) {
-        case true: {
-          return result
-        }
+      if (resultP.isOk) {
+        const values: Array<T> = []
+        let nextPos = resultP.pos
 
-        case false: {
+        values.push(resultP.value)
+
+        while (true) {
+          const resultR = parser.parse(input, nextPos)
+
+          if (resultR.isOk) {
+            values.push(resultR.value)
+            nextPos = resultR.pos
+            continue
+          }
+
           return {
-            isOk: false,
-            pos: result.pos,
-            expected: 'at least one successful application of the parser'
+            isOk: true,
+            pos: nextPos,
+            value: values
           }
         }
       }
+
+      return resultP
     }
   }
 }
