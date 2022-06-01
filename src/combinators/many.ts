@@ -1,6 +1,6 @@
-import { type Parser } from '../state'
+import type { Parser, SafeParser } from '../state'
 
-export function many<T>(parser: Parser<T>): Parser<Array<T>> {
+export function many<T>(parser: Parser<T>): SafeParser<Array<T>> {
   return {
     parse(input, pos) {
       const values: Array<T> = []
@@ -34,7 +34,7 @@ export function many1<T>(parser: Parser<T>): Parser<Array<T>> {
     parse(input, pos) {
       const result = many(parser).parse(input, pos)
 
-      switch (result.isOk && result.value.length > 0) {
+      switch (result.value.length > 0) {
         case true: {
           return result
         }

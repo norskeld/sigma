@@ -15,14 +15,12 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
         const values = [resultP.value]
 
         // If the parsers succeed, concatenate the values sans the separator.
-        if (resultS.isOk) {
-          resultS.value.forEach(([, value]) => values.push(value))
+        resultS.value.forEach(([, value]) => values.push(value))
 
-          return {
-            isOk: true,
-            pos: resultS.pos,
-            value: values
-          }
+        return {
+          isOk: true,
+          pos: resultS.pos,
+          value: values
         }
       }
 
