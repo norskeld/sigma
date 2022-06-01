@@ -41,7 +41,7 @@
     "postbuild": "rimraf dist/types",
     "postversion": "node --require tsm ../scripts/release.ts restore",
     "prebuild": "rimraf dist",
-    "prepare": "echo husky install",
+    "prepare": "husky install",
     "prerelease": "node --require tsm scripts/release.ts prepare",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
