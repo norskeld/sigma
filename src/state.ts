@@ -15,13 +15,3 @@ export type Success<T> = {
 }
 
 export type Result<T> = Success<T> | Failure
-
-/** Given an array of `Parser`s, recursively extracts their types into a tuple. */
-export type ToTuple<T> = T extends [Parser<infer Head>, ...infer Tail]
-  ? [Head, ...ToTuple<Tail>]
-  : []
-
-/** Given an array of `Parser`s, recursively extracts their types into a union. */
-export type ToUnion<T> = T extends [Parser<infer Head>, ...infer Tail]
-  ? Head | ToUnion<Tail>
-  : never

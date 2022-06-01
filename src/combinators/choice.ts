@@ -1,4 +1,5 @@
-import type { Parser, ToUnion } from '../state'
+import { type Parser } from '../state'
+import { type ToUnion } from '../utils/types'
 
 export function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>
 export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
