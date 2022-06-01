@@ -1,6 +1,6 @@
-import { CopyIcon } from './icons'
 import Accent from './accent'
 import CopyText from './copy'
+import { CopyIcon } from './icons'
 import AppLink from './link'
 
 import styles from './landing.module.css'

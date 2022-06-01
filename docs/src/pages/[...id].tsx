@@ -1,7 +1,15 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
-import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 
+import Article from '@/components/article'
+import Container from '@/components/container'
+import Content from '@/components/content'
+import Footer from '@/components/footer'
+import Label from '@/components/label'
+import Navigation from '@/components/navigation'
+import Sidebar from '@/components/sidebar'
+import { Common } from '@/config/seo'
 import {
   getEntry,
   getEntriesId,
@@ -10,15 +18,6 @@ import {
   type Entry
 } from '@/lib/entries'
 import { getSidebarItems, type SectionNode } from '@/lib/sidebar'
-import { Common } from '@/config/seo'
-
-import Navigation from '@/components/navigation'
-import Container from '@/components/container'
-import Article from '@/components/article'
-import Sidebar from '@/components/sidebar'
-import Content from '@/components/content'
-import Footer from '@/components/footer'
-import Label from '@/components/label'
 
 interface Props {
   article: Entry

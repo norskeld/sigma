@@ -1,5 +1,5 @@
-import Link, { type LinkProps } from 'next/link'
 import cx from 'classnames'
+import Link, { type LinkProps } from 'next/link'
 
 import styles from './link.module.css'
 

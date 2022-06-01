@@ -31,6 +31,14 @@
     "import/order": [
       "error",
       {
+        "groups": ["builtin", "external", "parent", ["sibling", "index"], "internal", "object"],
+        "pathGroups": [
+          {
+            "pattern": "./*.css",
+            "group": "object",
+            "position": "after"
+          }
+        ],
         "alphabetize": {
           "caseInsensitive": true,
           "order": "asc"
