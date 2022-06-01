@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/norskeld/sigma/compare/v2.3.0...v2.3.1) (2022-06-01)
+
+
+### Bug Fixes
+
+* **combinators/many1:** fix `many1` behavior ([169bf2e](https://github.com/norskeld/sigma/commit/169bf2eef323b131bf3e670f5336fb0e002a18bd))
+
 # [2.3.0](https://github.com/norskeld/sigma/compare/v2.2.0...v2.3.0) (2022-06-01)
 
 
