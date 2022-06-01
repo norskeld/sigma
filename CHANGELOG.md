@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/norskeld/sigma/compare/v2.2.0...v2.3.0) (2022-06-01)
+
+
+### Features
+
+* **combinators/when:** add context-aware `when` combinator ([1537b51](https://github.com/norskeld/sigma/commit/1537b510e1ea2487519dadb62981a00aad01ceaa))
+
 # [2.2.0](https://github.com/norskeld/sigma/compare/v2.1.3...v2.2.0) (2022-05-31)
 
 
