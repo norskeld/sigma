@@ -8,7 +8,6 @@ import { run, result, should } from '../@helpers'
 const it = suite('optional')
 
 it('should succeed with the where optional non-matched value replaced with null', () => {
-  // TODO: This seems to be broken somehow? Because `optional` eats everything after 'Hello'...
   const parser = sequence(string('Hello'), optional(string('...')))
   const actual = run(parser, 'Hello')
   const expected = result(true, ['Hello', null])
