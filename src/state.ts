@@ -1,6 +1,14 @@
-export interface Parser<T> {
+/** Parsers of this type always succeed. */
+export interface SafeParser<T> {
+  parse(input: string, pos: number): Success<T>
+}
+
+/** Parsers of this type may fail. */
+export interface UnsafeParser<T> {
   parse(input: string, pos: number): Result<T>
 }
+
+export type Parser<T> = SafeParser<T> | UnsafeParser<T>
 
 export type Failure = {
   readonly isOk: false

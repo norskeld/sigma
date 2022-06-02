@@ -38,4 +38,12 @@ it('should fail if nothing matched', () => {
   testFailure('y!y!y!', many1(string('x!')))
 })
 
+it('should fail with the expectation of the parser', () => {
+  const parser = many1(string('x!'))
+  const actual = run(parser, 'a!b!c!')
+  const expected = result(false, 'x!')
+
+  should.matchState(actual, expected)
+})
+
 it.run()

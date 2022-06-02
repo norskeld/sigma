@@ -1,6 +1,6 @@
 import { type Parser } from '../state'
 
-interface Deferred<T> extends Parser<T> {
+type Deferred<T> = Parser<T> & {
   with(parser: Parser<T>): void
 }
 
