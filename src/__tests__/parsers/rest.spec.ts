@@ -1,26 +1,22 @@
-import { suite } from 'uvu'
-
 import { sequence } from '../../combinators/sequence'
 import { rest } from '../../parsers/rest'
 import { string } from '../../parsers/string'
-import { result, run, should } from '../@helpers'
+import { describe, result, run, should } from '../@helpers'
 
-const it = suite('rest')
+describe('rest', (it) => {
+  it('should succeed with the rest of input', () => {
+    const parser = sequence(string('start'), rest())
+    const actual = run(parser, 'startend')
+    const expected = result(true, ['start', 'end'])
 
-it('should succeed with the rest of input', () => {
-  const parser = sequence(string('start'), rest())
-  const actual = run(parser, 'startend')
-  const expected = result(true, ['start', 'end'])
+    should.matchState(actual, expected)
+  })
 
-  should.matchState(actual, expected)
+  it('should succeed with empty string if no input left to consume', () => {
+    const parser = sequence(string('start'), rest())
+    const actual = run(parser, 'start')
+    const expected = result(true, ['start', ''])
+
+    should.matchState(actual, expected)
+  })
 })
-
-it('should succeed with empty string if no input left to consume', () => {
-  const parser = sequence(string('start'), rest())
-  const actual = run(parser, 'start')
-  const expected = result(true, ['start', ''])
-
-  should.matchState(actual, expected)
-})
-
-it.run()
