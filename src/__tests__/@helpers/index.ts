@@ -1,3 +1,4 @@
+import { type Context, suite, uvu } from 'uvu'
 import * as assert from 'uvu/assert'
 
 import { run as internal$run } from '../../parsers/run'
@@ -14,6 +15,12 @@ export function run<T>(parser: Parser<T>, text: string): Result<T> {
 
 export function result<T>(isOk: boolean, value: T): ReducedResult<T> {
   return { isOk, value } as const
+}
+
+export function describe<T = Context>(name: string, f: (t: uvu.Test<T>) => void | Promise<void>) {
+  const test = suite<T>(name)
+  f(test)
+  test.run()
 }
 
 export const should = {
@@ -33,6 +40,14 @@ export const should = {
         return assert.equal(received.expected, expected.value)
       }
     }
+  },
+
+  beEqual<T = unknown>(a: T, b: T, message?: string) {
+    assert.equal(a, b, message)
+  },
+
+  throw(f: typeof assert.throws) {
+    assert.throws(f)
   }
 }
 
