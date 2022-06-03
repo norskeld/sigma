@@ -5,7 +5,7 @@ description: 'many combinator applies parser zero or more times. Returns an arra
 ---
 
 ```typescript {{ withLineNumbers: false }}
-function many<T>(parser: Parser<T>): Parser<Array<T>>
+function many<T>(parser: Parser<T>): SafeParser<Array<T>>
 ```
 
 ## Description
