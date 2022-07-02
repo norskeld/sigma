@@ -51,6 +51,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('mapTo', '/combinators/mapTo'),
       createItem('optional', '/combinators/optional'),
       createItem('sepBy', '/combinators/sepBy'),
+      createItem('sepBy1', '/combinators/sepBy1'),
       createItem('sequence', '/combinators/sequence'),
       createItem('takeLeft', '/combinators/takeLeft'),
       createItem('takeMid', '/combinators/takeMid'),
