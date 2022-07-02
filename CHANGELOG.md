@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/norskeld/sigma/compare/v2.3.1...v2.4.0) (2022-07-02)
+
+
+### Features
+
+* **combinators/sepBy1:** add `sepBy1` combinator ([52b7ddf](https://github.com/norskeld/sigma/commit/52b7ddf6fbdab2daae9ac43d6f6055ed833ab0ad))
+
 ## [2.3.1](https://github.com/norskeld/sigma/compare/v2.3.0...v2.3.1) (2022-06-01)
 
 
