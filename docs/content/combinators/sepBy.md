@@ -1,6 +1,6 @@
 ---
 title: 'sepBy'
-kind: 'primitive'
+kind: 'composite'
 description: 'sepBy combinator parses zero or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
 ---
 
@@ -10,7 +10,7 @@ function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
 ## Description
 
-`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`.
+`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. This combinator never fails and returns an empty list if nothing matched.
 
 ## Usage
 
@@ -44,6 +44,8 @@ const Parser = sepBy(uint(), string('+'))
   ```
 
   ### Failure
+
+  This combinator never fails.
 
   ```typescript
   run(Parser).with('one+two')
