@@ -1,3 +1,4 @@
+export * from './parsers/any'
 export * from './parsers/defer'
 export * from './parsers/eof'
 export * from './parsers/eol'
