@@ -70,6 +70,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('letter', '/parsers/letter'),
       createItem('letters', '/parsers/letters'),
       createItem('nothing', '/parsers/nothing'),
+      createItem('oneOf', '/parsers/oneOf'),
       createItem('regexp', '/parsers/regexp'),
       createItem('rest', '/parsers/rest'),
       createItem('run', '/parsers/run'),
