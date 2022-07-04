@@ -95,6 +95,7 @@ export const expectedParsers = [
   'uint',
   'letter',
   'letters',
+  'noneOf',
   'nothing',
   'oneOf',
   'regexp',
