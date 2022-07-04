@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/norskeld/sigma/compare/v2.4.0...v2.5.0) (2022-07-04)
+
+
+### Features
+
+* **parsers/any:** add `any` parser ([bfb9620](https://github.com/norskeld/sigma/commit/bfb96200c83d3f20b6c6b7414e84b7c9263080e4))
+
 # [2.4.0](https://github.com/norskeld/sigma/compare/v2.3.1...v2.4.0) (2022-07-02)
 
 
