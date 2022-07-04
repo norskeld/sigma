@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/norskeld/sigma/compare/v2.6.0...v2.7.0) (2022-07-04)
+
+
+### Features
+
+* **parsers/noneOf:** add `noneOf` parser ([d6bc81c](https://github.com/norskeld/sigma/commit/d6bc81c591cc5262183f9977bf54f45407aa9bc0))
+
 # [2.6.0](https://github.com/norskeld/sigma/compare/v2.5.0...v2.6.0) (2022-07-04)
 
 
