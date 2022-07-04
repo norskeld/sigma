@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/norskeld/sigma/compare/v2.5.0...v2.6.0) (2022-07-04)
+
+
+### Features
+
+* **parsers/oneOf:** add `oneOf` parser ([6d6c2a6](https://github.com/norskeld/sigma/commit/6d6c2a6d20c42ec0198b245f26cea0d08d615c08))
+
 # [2.5.0](https://github.com/norskeld/sigma/compare/v2.4.0...v2.5.0) (2022-07-04)
 
 
