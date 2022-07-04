@@ -71,17 +71,22 @@ export const expectedCombinators = [
   'error',
   'sepBy',
   'many',
+  'many1',
   'map',
   'mapTo',
   'optional',
+  'sepBy',
+  'sepBy1',
   'sequence',
   'takeLeft',
   'takeMid',
   'takeRight',
-  'takeSides'
+  'takeSides',
+  'when'
 ] as const
 
 export const expectedParsers = [
+  'any',
   'defer',
   'eof',
   'eol',
