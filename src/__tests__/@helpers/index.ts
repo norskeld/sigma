@@ -96,6 +96,7 @@ export const expectedParsers = [
   'letter',
   'letters',
   'nothing',
+  'oneOf',
   'regexp',
   'rest',
   'run',
