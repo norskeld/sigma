@@ -45,6 +45,12 @@
         },
         "newlines-between": "always"
       }
+    ],
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["bun(:.*|)"]
+      }
     ]
   },
   "settings": {

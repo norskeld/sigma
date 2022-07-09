@@ -45,7 +45,7 @@
     "prerelease": "node --require tsm scripts/release.ts prepare",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
-    "test": "uvu -r tsm src/__tests__",
+    "test": "bun wiptest",
     "test:coverage": "nyc npm test",
     "test:watch": "watchlist src tests --eager -- npm test"
   },
@@ -81,6 +81,7 @@
     "@semantic-release/git": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
+    "bun-types": "^0.1.2",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.7.1",
