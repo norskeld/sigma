@@ -1,5 +1,6 @@
-import { handlers } from '@test'
 import { suite, add } from 'benny'
+
+import { handlers } from '../@helpers'
 
 import { SAMPLE } from './@sample'
 import { parse as parseParjs } from './parjs'
