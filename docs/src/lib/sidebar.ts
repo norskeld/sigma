@@ -53,6 +53,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('sepBy', '/combinators/sepBy'),
       createItem('sepBy1', '/combinators/sepBy1'),
       createItem('sequence', '/combinators/sequence'),
+      createItem('skipUntil', '/combinators/skipUntil'),
       createItem('takeLeft', '/combinators/takeLeft'),
       createItem('takeMid', '/combinators/takeMid'),
       createItem('takeRight', '/combinators/takeRight'),
@@ -67,7 +68,6 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('eol', '/parsers/eol'),
       createItem('float', '/parsers/float'),
       createItem('int', '/parsers/int', true),
-      createItem('uint', '/parsers/uint', true),
       createItem('letter', '/parsers/letter'),
       createItem('letters', '/parsers/letters'),
       createItem('noneOf', '/parsers/noneOf'),
@@ -77,6 +77,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('rest', '/parsers/rest'),
       createItem('run', '/parsers/run'),
       createItem('string', '/parsers/string'),
+      createItem('uint', '/parsers/uint', true),
       createItem('ustring', '/parsers/ustring'),
       createItem('whitespace', '/parsers/whitespace')
     ])
