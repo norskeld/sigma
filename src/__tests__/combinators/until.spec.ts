@@ -15,7 +15,7 @@ describe('takeUntil', (it) => {
   })
 
   it('should fail if source parser fails', () => {
-    testFailure('one.', takeUntil(regexp(/\p{Nd}/g, 'decimal digit'), string('.')))
+    testFailure('one.', takeUntil(regexp(/\p{Nd}/gu, 'decimal digit'), string('.')))
   })
 })
 
@@ -29,6 +29,6 @@ describe('skipUntil', (it) => {
   })
 
   it('should fail if source parser fails', () => {
-    testFailure('one.', skipUntil(regexp(/\p{Nd}/g, 'decimal digit'), string('.')))
+    testFailure('one.', skipUntil(regexp(/\p{Nd}/gu, 'decimal digit'), string('.')))
   })
 })
