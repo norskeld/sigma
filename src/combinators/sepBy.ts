@@ -3,6 +3,14 @@ import { type Parser } from '../state'
 import { many } from './many'
 import { sequence } from './sequence'
 
+/**
+ * Parses *zero* or more occurrences of `parser`, separated by `sep`. Never fails.
+ *
+ * @param parser - Parser to apply
+ * @param sep - Separating parser
+ *
+ * @returns List of values (without separator) returned by `parser`
+ */
 export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>> {
   return {
     parse(input, pos) {
@@ -33,6 +41,14 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
   }
 }
 
+/**
+ * Parses *one* or more occurrences of `parser`, separated by `sep`.
+ *
+ * @param parser - Parser to apply
+ * @param sep - Separating parser
+ *
+ * @returns List of values (without separator) returned by `parser`
+ */
 export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>> {
   return {
     parse(input, pos) {
