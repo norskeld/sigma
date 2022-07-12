@@ -1,3 +1,12 @@
+# [2.9.0](https://github.com/norskeld/sigma/compare/v2.8.0...v2.9.0) (2022-07-12)
+
+
+### Features
+
+* **tsdoc:** add tsdocs for parsers ([c78d57a](https://github.com/norskeld/sigma/commit/c78d57a04bb373b2964a3ec0cfb20ad50818a3db))
+* **tsdoc:** add tsdocs to combinators ([5220e26](https://github.com/norskeld/sigma/commit/5220e2611a580b551b56eba75100c0f3c089d3c0))
+* **tsdoc:** final touches ([3233440](https://github.com/norskeld/sigma/commit/323344035537f3d8ece23ef6826a0a764b78f89e))
+
 # [2.8.0](https://github.com/norskeld/sigma/compare/v2.7.0...v2.8.0) (2022-07-12)
 
 
