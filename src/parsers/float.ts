@@ -4,6 +4,11 @@ import { regexp } from './regexp'
 
 const FLOAT_RE = /-?\d+\.\d+/g
 
+/**
+ * Parses a floating point number.
+ *
+ * @returns Parsed float as a number
+ */
 export function float(): Parser<number> {
   return {
     parse(input, pos) {

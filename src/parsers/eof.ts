@@ -1,5 +1,10 @@
 import { type Parser } from '../state'
 
+/**
+ * Only succeeds at the end of the input.
+ *
+ * @returns `null`
+ */
 export function eof(): Parser<null> {
   return {
     parse(input, pos) {

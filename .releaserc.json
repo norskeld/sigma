@@ -4,11 +4,7 @@
       "@semantic-release/commit-analyzer",
       {
         "preset": "angular",
-        "releaseRules": [
-          { "type": "docs", "scope": "readme", "release": "patch" },
-          { "type": "docs", "scope": "tsdoc", "release": "patch" },
-          { "scope": "no-release", "release": false }
-        ]
+        "releaseRules": [{ "scope": "no-release", "release": false }]
       }
     ],
     "@semantic-release/release-notes-generator",
