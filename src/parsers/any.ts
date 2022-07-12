@@ -1,5 +1,10 @@
 import { type Parser } from '../state'
 
+/**
+ * Parses any single character from the input and returns it. Fails at the end of input.
+ *
+ * @returns A single parsed character.
+ */
 export function any(): Parser<string> {
   return {
     parse(input, pos) {

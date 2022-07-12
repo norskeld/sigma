@@ -1,7 +1,7 @@
 ---
 title: 'oneOf'
 kind: 'primitive'
-description: 'oneOf tries to match one of the characters in the given string.'
+description: 'oneOf ensures that one of the characters in the given string matches the current character.'
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -10,7 +10,7 @@ function oneOf(): Parser<string>
 
 ## Description
 
-`oneOf` tries to match one of the characters in the given string.
+`oneOf` ensures that one of the characters in the given string matches the current character.
 
 ## Usage
 
