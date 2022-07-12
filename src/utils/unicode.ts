@@ -2,6 +2,8 @@
  * Iterates over a given Unicode string and counts its length in bytes.
  *
  * Covers Basic Multilingual Plane with all 163 blocks in range from `0x0000` to `0xFFFF`.
+ *
+ * @internal
  */
 export function size(string: string): number {
   const size = string.length
