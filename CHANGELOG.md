@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/norskeld/sigma/compare/v2.7.0...v2.8.0) (2022-07-12)
+
+
+### Features
+
+* **combinators/*Until:** add `takeUntil` and `skipUntil` combinators ([003f82d](https://github.com/norskeld/sigma/commit/003f82d51c79349905dc5808aaca3e0725797021))
+
 # [2.7.0](https://github.com/norskeld/sigma/compare/v2.6.0...v2.7.0) (2022-07-04)
 
 
