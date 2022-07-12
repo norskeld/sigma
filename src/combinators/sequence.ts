@@ -1,6 +1,13 @@
 import { type Parser } from '../state'
 import { type ToTuple } from '../utils/types'
 
+/**
+ * Applies `ps` parsers in order, until *all* of them succeed.
+ *
+ * @param ps - Parsers to apply
+ *
+ * @returns Tuple of values returned by `ps` parsers
+ */
 export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTuple<T>>
 export function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>> {
   return {

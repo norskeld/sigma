@@ -1,5 +1,12 @@
 import type { Parser, SafeParser } from '../state'
 
+/**
+ * Applies `parser` *zero* or more times, collecting its results. Never fails.
+ *
+ * @param parser - Parser to apply
+ *
+ * @returns Array of the returned values of `parser`
+ */
 export function many<T>(parser: Parser<T>): SafeParser<Array<T>> {
   return {
     parse(input, pos) {
@@ -29,6 +36,13 @@ export function many<T>(parser: Parser<T>): SafeParser<Array<T>> {
   }
 }
 
+/**
+ * Applies `parser` *one* or more times, collecting its results.
+ *
+ * @param parser - Parser to apply
+ *
+ * @returns Array of the returned values of `parser`
+ */
 export function many1<T>(parser: Parser<T>): Parser<Array<T>> {
   return {
     parse(input, pos) {

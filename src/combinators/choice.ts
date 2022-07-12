@@ -1,6 +1,13 @@
 import { type Parser } from '../state'
 import { type ToUnion } from '../utils/types'
 
+/**
+ * Applies `ps` parsers in order until one of them succeeds.
+ *
+ * @param ps - Parsers to apply
+ *
+ * @returns Value of the succeeding parser
+ */
 export function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>
 export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
   return {
