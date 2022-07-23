@@ -10,9 +10,18 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "types": ["bun-types"],
     "paths": {
-      "@lib/*": ["src/*"]
+      "@lib/*": ["src/*"],
+      "@main": ["src/index"],
+      "@parsers": ["src/parsers"],
+      "@parsers/*": ["src/parsers/*"],
+      "@combinators/*": ["src/combinators/*"],
+      "@combinators": ["src/combinators"],
+      "@utils/*": ["src/utils/*"],
+      "@test": ["tests/@helpers"],
+      "@state": ["src/state"]
     }
   },
-  "include": ["benchmarks", "scripts", "src"]
+  "include": ["benchmarks", "scripts", "src", "tests"]
 }
