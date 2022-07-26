@@ -1,15 +1,15 @@
-import { hexadecimal, binary, octal, whole, integer, float } from '../../parsers/numbers'
+import { hex, binary, octal, whole, integer, float } from '../../parsers/numbers'
 import { describe, testFailure, testSuccess } from '../@helpers'
 
-describe('hexadecimal', (it) => {
+describe('hex', (it) => {
   it('should succeed if given a hexadecimal number', () => {
     const tcases = ['0x1F', '0X1F', '0x1f', '0X1f']
-    tcases.forEach((tcase) => testSuccess(tcase, tcase, hexadecimal()))
+    tcases.forEach((tcase) => testSuccess(tcase, tcase, hex()))
   })
 
   it('should fail if given a non-hexadecimal number', () => {
     const tcases = ['', 'zero', '0', '-42', '0o42', '0b10', '0x', '0xXB']
-    tcases.forEach((tcase) => testFailure(tcase, hexadecimal()))
+    tcases.forEach((tcase) => testFailure(tcase, hex()))
   })
 })
 

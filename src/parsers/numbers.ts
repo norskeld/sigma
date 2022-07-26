@@ -14,7 +14,7 @@ const FLOAT_RE = /-?[0-9]+\.[0-9]+/g
  *
  * @returns Parsed hexadecimal number as a string
  */
-export function hexadecimal(): Parser<string> {
+export function hex(): Parser<string> {
   return {
     parse(input, pos) {
       const result = regexp(HEXADECIMAL_RE, 'hexadecimal number').parse(input, pos)
