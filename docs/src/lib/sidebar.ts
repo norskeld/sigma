@@ -67,7 +67,7 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('eof', '/parsers/eof'),
       createItem('eol', '/parsers/eol'),
       createItem('float', '/parsers/float'),
-      createItem('int', '/parsers/int', true),
+      createItem('hex', '/parsers/hex'),
       createItem('letter', '/parsers/letter'),
       createItem('letters', '/parsers/letters'),
       createItem('noneOf', '/parsers/noneOf'),
@@ -77,7 +77,6 @@ export function getSidebarItems(): Array<SectionNode> {
       createItem('rest', '/parsers/rest'),
       createItem('run', '/parsers/run'),
       createItem('string', '/parsers/string'),
-      createItem('uint', '/parsers/uint', true),
       createItem('ustring', '/parsers/ustring'),
       createItem('whitespace', '/parsers/whitespace')
     ])

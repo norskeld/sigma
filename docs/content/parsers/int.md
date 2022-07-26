@@ -1,7 +1,0 @@
----
-title: 'int'
----
-
-# int
-
-TBD.

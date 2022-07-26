@@ -1,7 +1,0 @@
----
-title: 'uint'
----
-
-# uint
-
-TBD.
