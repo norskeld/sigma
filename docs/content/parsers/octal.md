@@ -24,19 +24,19 @@ const Parser = octal()
   ### Success
 
   ```typescript
-  run(Parser).with('0b10')
+  run(Parser).with('0o42')
 
   {
     isOk: true,
     pos: 4,
-    value: '0x10'
+    value: '0o42'
   }
   ```
 
   ### Failure
 
   ```typescript
-  run(Parser).with('x10')
+  run(Parser).with('o42')
 
   {
     isOk: false,
