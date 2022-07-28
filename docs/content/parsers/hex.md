@@ -1,7 +1,7 @@
 ---
 title: 'hex'
 kind: 'composite'
-description: "hexadecimal parses a hexadecimal number prefixed with '0x' or '0X', e.g. '0xFF', '0XFF', '0xff'. Returns parsed string."
+description: "hexadecimal parses a hexadecimal number prefixed with '0x' or '0X', e.g. '0xFF', '0XFF', '0xff'. Returns parsed number as a string."
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -10,7 +10,7 @@ function hex(): Parser<string>
 
 ## Description
 
-`hex` parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`. Returns **parsed string**.
+`hex` parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`. Returns parsed number **as a string**.
 
 ## Usage
 
