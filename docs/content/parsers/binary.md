@@ -29,14 +29,14 @@ const Parser = binary()
   {
     isOk: true,
     pos: 4,
-    value: '0x10'
+    value: '0b10'
   }
   ```
 
   ### Failure
 
   ```typescript
-  run(Parser).with('x10')
+  run(Parser).with('b10')
 
   {
     isOk: false,
