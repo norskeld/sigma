@@ -1,7 +1,7 @@
 ---
 title: 'float'
 kind: 'composite'
-description: "float parses a float number with an optional minus sign, e.g. '0.25', '-7.90', '4.20'."
+description: "float parses a float number with an optional minus sign, e.g. '0.25', '-7.90', '4.20'. Returns parsed number as a string."
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -12,7 +12,7 @@ function float(): Parser<string>
 
 > Note: It doesn't handle floats with exponent parts.
 
-`float` parses a float number with an optional minus sign, e.g. `0.25`, `-7.90`, `4.20`. Returns parsed string.
+`float` parses a float number with an optional minus sign, e.g. `0.25`, `-7.90`, `4.20`. Returns parsed number **as a string**.
 
 ## Usage
 

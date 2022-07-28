@@ -1,7 +1,7 @@
 ---
 title: 'octal'
 kind: 'composite'
-description: "octal parses an octal number prefixed with '0o' or '0O', e.g. '0o42', '0O42'. Returns parsed string."
+description: "octal parses an octal number prefixed with '0o' or '0O', e.g. '0o42', '0O42'. Returns parsed number as a string."
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -10,7 +10,7 @@ function octal(): Parser<string>
 
 ## Description
 
-`octal` parses an octal number prefixed with `0o` or `0O`, e.g. `0o42`, `0O42`. Returns parsed string.
+`octal` parses an octal number prefixed with `0o` or `0O`, e.g. `0o42`, `0O42`. Returns parsed number **as a string**.
 
 ## Usage
 

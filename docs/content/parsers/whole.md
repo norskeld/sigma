@@ -1,7 +1,7 @@
 ---
 title: 'whole'
 kind: 'composite'
-description: "whole parses a positive whole number without leading zeros, e.g. '0', '7', '420'. Returns parsed string."
+description: "whole parses a positive whole number without leading zeros, e.g. '0', '7', '420'. Returns parsed number as a string."
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -10,7 +10,7 @@ function whole(): Parser<string>
 
 ## Description
 
-`whole` parses a positive whole number without leading zeros, e.g. `0`, `7`, `420`. Returns parsed string.
+`whole` parses a positive whole number without leading zeros, e.g. `0`, `7`, `420`. Returns parsed number **as a string**.
 
 ## Usage
 

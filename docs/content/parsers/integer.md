@@ -1,7 +1,7 @@
 ---
 title: 'integer'
 kind: 'composite'
-description: "integer parses an integer number with an optional minus sign, e.g. '0', '-7', '420'. Returns parsed string."
+description: "integer parses an integer number with an optional minus sign, e.g. '0', '-7', '420'. Returns parsed number as a string."
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -10,7 +10,7 @@ function integer(): Parser<string>
 
 ## Description
 
-`integer` parses an integer number with an optional minus sign, e.g. `0`, `-7`, `420`. Returns parsed string.
+`integer` parses an integer number with an optional minus sign, e.g. `0`, `-7`, `420`. Returns parsed number **as a string**.
 
 ## Usage
 

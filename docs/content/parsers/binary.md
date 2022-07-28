@@ -1,7 +1,7 @@
 ---
 title: 'binary'
 kind: 'composite'
-description: "binary parses a binary number prefixed with '0b' or '0B', e.g. '0b10', '0B10'. Returns parsed string."
+description: "binary parses a binary number prefixed with '0b' or '0B', e.g. '0b10', '0B10'. Returns parsed number as a string."
 ---
 
 ```typescript {{ withLineNumbers: false }}
@@ -10,7 +10,7 @@ function binary(): Parser<string>
 
 ## Description
 
-`binary` parses a binary number prefixed with `0b` or `0B`, e.g. `0b10`, `0B10`. Returns parsed string.
+`binary` parses a binary number prefixed with `0b` or `0B`, e.g. `0b10`, `0B10`. Returns parsed number **as a string**.
 
 ## Usage
 
