@@ -118,7 +118,7 @@ export function whole(): Parser<string> {
 }
 
 /**
- * Parses an integer number with an optional minuis sign, e.g. `0`, `-7`, `420`.
+ * Parses an integer number with an optional minus sign, e.g. `0`, `-7`, `420`.
  *
  * @returns Parsed integer number as a string
  */
