@@ -1,3 +1,10 @@
+# [2.10.0](https://github.com/norskeld/sigma/compare/v2.9.0...v2.10.0) (2022-07-29)
+
+
+### Features
+
+* number parsers ([c22af49](https://github.com/norskeld/sigma/commit/c22af49510f1241125b1b221be1e982066058fbe))
+
 # [2.9.0](https://github.com/norskeld/sigma/compare/v2.8.0...v2.9.0) (2022-07-12)
 
 
