@@ -24,7 +24,7 @@ function chainl<T, L extends T, R>(
   <summary>Combinators and parsers used in this section</summary>
 
   - Combinators: [chainl], [choice], [sequence]
-  - Parsers: [int], [string]
+  - Parsers: [integer], [string]
 </details>
 
 The code below showcases an implementation of a simple calculator that supports addition and subtraction.
@@ -41,13 +41,13 @@ function mapBinary(left: number, [op, right]: [string, number]) {
 }
 
 const Parser = chainl(
-  int(),
+  integer(),
   sequence(
     choice(
       string('+'),
       string('-')
     ),
-    int()
+    integer()
   ),
   mapBinary
 )
@@ -83,7 +83,7 @@ As you can see, it directly maps to the [EBNF] notation given above: `parser (op
   <summary>Combinators and parsers used in this section</summary>
 
   - Combinators: [chainl], [choice], [map], [sequence], [takeMid], [takeRight]
-  - Parsers: [defer], [int], [string]
+  - Parsers: [defer], [integer], [string]
 </details>
 
 This example builds upon what we had earlier, but this time we will add notion of grouping (with parentheses), a couple of new operators (like multiplication (`*`) and division (`/`)), and operator precedence.
@@ -130,7 +130,7 @@ Now we are ready to define parsers for the production rules. Let's start with th
 ```typescript
 Term.with(
   choice(
-    int(),
+    integer(),
     takeRight(choice(string('+'), string('-')), Term),
     takeMid(string('('), Expression, string(')'))
   )
@@ -192,7 +192,7 @@ We will get the following result:
 
   ```typescript
   import { chainl, choice, sequence, takeMid, takeRight } from '@nrsk/sigma/combinators'
-  import { defer, int, string } from '@nrsk/sigma/parsers'
+  import { defer, integer, string } from '@nrsk/sigma/parsers'
   import { run } from '@nrsk/sigma'
 
   function mapBinary(left: number, [op, right]: [string, number]) {
@@ -211,7 +211,7 @@ We will get the following result:
 
   Term.with(
     choice(
-      int(),
+      integer(),
       takeRight(choice(string('+'), string('-')), Term),
       takeMid(string('('), Expression, string(')'))
     )
@@ -255,5 +255,5 @@ We will get the following result:
 <!-- Parsers. -->
 
 [defer]: ../parsers/defer
-[int]: ../parsers/int
+[integer]: ../parsers/integer
 [string]: ../parsers/string
