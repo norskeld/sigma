@@ -38,7 +38,7 @@ Below is an example of parsing nested tuples like `(1, 2, (3, 4))` into an AST.
 
 ```ts
 import { choice, map, optional, sepBy, sequence, takeMid } from '@nrsk/sigma/combinators'
-import { defer, int, run, string, whitespace } from '@nrsk/sigma/parsers'
+import { defer, integer, run, string, whitespace } from '@nrsk/sigma/parsers'
 
 /* AST. */
 
@@ -80,7 +80,7 @@ const TupleList = defer<ListNode>()
 
 TupleNumber.with(
   map(
-    int(),
+    integer(),
     toNumber
   )
 )
