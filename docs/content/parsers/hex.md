@@ -1,16 +1,16 @@
 ---
 title: 'hex'
 kind: 'composite'
-description: "hexadecimal parses a hexadecimal number prefixed with '0x' or '0X', e.g. '0xFF', '0XFF', '0xff'. Returns parsed number as a string."
+description: "hexadecimal parses a hexadecimal number prefixed with '0x' or '0X', e.g. '0xFF', '0XFF', '0xff'. Returns a decimal number obtained using parseInt with radix of 16."
 ---
 
 ```typescript {{ withLineNumbers: false }}
-function hex(): Parser<string>
+function hex(): Parser<number>
 ```
 
 ## Description
 
-`hex` parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`. Returns parsed number **as a string**.
+`hex` parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`. Returns **a decimal number** obtained using [parseInt] with radix of 16.
 
 ## Usage
 
@@ -29,7 +29,7 @@ const Parser = hex()
   {
     isOk: true,
     pos: 4,
-    value: '0xFF'
+    value: 255
   }
   ```
 
@@ -45,3 +45,7 @@ const Parser = hex()
   }
   ```
 </details>
+
+<!-- Links. -->
+
+[parseInt]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt

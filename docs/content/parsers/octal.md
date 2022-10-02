@@ -1,16 +1,16 @@
 ---
 title: 'octal'
 kind: 'composite'
-description: "octal parses an octal number prefixed with '0o' or '0O', e.g. '0o42', '0O42'. Returns parsed number as a string."
+description: "octal parses an octal number prefixed with '0o' or '0O', e.g. '0o42', '0O42'. Returns a decimal number obtained using parseInt with radix of 8."
 ---
 
 ```typescript {{ withLineNumbers: false }}
-function octal(): Parser<string>
+function octal(): Parser<number>
 ```
 
 ## Description
 
-`octal` parses an octal number prefixed with `0o` or `0O`, e.g. `0o42`, `0O42`. Returns parsed number **as a string**.
+`octal` parses an octal number prefixed with `0o` or `0O`, e.g. `0o42`, `0O42`. Returns **a decimal number** obtained using [parseInt] with radix of 8.
 
 ## Usage
 
@@ -29,7 +29,7 @@ const Parser = octal()
   {
     isOk: true,
     pos: 4,
-    value: '0o42'
+    value: 34
   }
   ```
 
@@ -45,3 +45,7 @@ const Parser = octal()
   }
   ```
 </details>
+
+<!-- Links. -->
+
+[parseInt]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
