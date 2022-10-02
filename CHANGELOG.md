@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/norskeld/sigma/compare/v2.10.0...v3.0.0) (2022-10-02)
+
+
+### Code Refactoring
+
+* change the output type from to `number` for number parsers ([24406ab](https://github.com/norskeld/sigma/commit/24406abdbff934165c210966ad06768bab7ea420))
+
+
+### BREAKING CHANGES
+
+* The output type of number parsers has changed from `string` to `number`, i.e. these parsers now have the type of `Parser<number>` instead of `Parser<string>`.
+
 # [2.10.0](https://github.com/norskeld/sigma/compare/v2.9.0...v2.10.0) (2022-07-29)
 
 
