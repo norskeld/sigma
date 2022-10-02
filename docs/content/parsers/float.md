@@ -1,18 +1,18 @@
 ---
 title: 'float'
 kind: 'composite'
-description: "float parses a float number with an optional minus sign, e.g. '0.25', '-7.90', '4.20'. Returns parsed number as a string."
+description: "float parses a float number with an optional minus sign, e.g. '0.25', '-7.90', '4.20'. Returns a decimal number obtained using parseInt with radix of 8."
 ---
 
 ```typescript {{ withLineNumbers: false }}
-function float(): Parser<string>
+function float(): Parser<number>
 ```
 
 ## Description
 
 > Note: It doesn't handle floats with exponent parts.
 
-`float` parses a float number with an optional minus sign, e.g. `0.25`, `-7.90`, `4.20`. Returns parsed number **as a string**.
+`float` parses a float number with an optional minus sign, e.g. `0.25`, `-7.90`, `4.20`. Returns **a decimal number** obtained using [parseFloat].
 
 ## Usage
 
@@ -31,7 +31,7 @@ const Parser = float()
   {
     isOk: true,
     pos: 5,
-    value: '-42.0'
+    value: -42
   }
   ```
 
@@ -47,3 +47,7 @@ const Parser = float()
   }
   ```
 </details>
+
+<!-- Links. -->
+
+[parseFloat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat

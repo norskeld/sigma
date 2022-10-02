@@ -1,16 +1,16 @@
 ---
 title: 'binary'
 kind: 'composite'
-description: "binary parses a binary number prefixed with '0b' or '0B', e.g. '0b10', '0B10'. Returns parsed number as a string."
+description: "binary parses a binary number prefixed with '0b' or '0B', e.g. '0b10', '0B10'. Returns a decimal number obtained using parseInt with radix of 2."
 ---
 
 ```typescript {{ withLineNumbers: false }}
-function binary(): Parser<string>
+function binary(): Parser<number>
 ```
 
 ## Description
 
-`binary` parses a binary number prefixed with `0b` or `0B`, e.g. `0b10`, `0B10`. Returns parsed number **as a string**.
+`binary` parses a binary number prefixed with `0b` or `0B`, e.g. `0b10`, `0B10`. Returns **a decimal number** obtained using [parseInt] with radix of 2.
 
 ## Usage
 
@@ -29,7 +29,7 @@ const Parser = binary()
   {
     isOk: true,
     pos: 4,
-    value: '0b10'
+    value: 2
   }
   ```
 
@@ -45,3 +45,7 @@ const Parser = binary()
   }
   ```
 </details>
+
+<!-- Links. -->
+
+[parseInt]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt

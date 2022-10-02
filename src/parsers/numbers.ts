@@ -12,9 +12,9 @@ const FLOAT_RE = /-?[0-9]+\.[0-9]+/g
 /**
  * Parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`.
  *
- * @returns Parsed hexadecimal number as a string
+ * @returns Parsed hexadecimal number as a decimal one
  */
-export function hex(): Parser<string> {
+export function hex(): Parser<number> {
   return {
     parse(input, pos) {
       const result = regexp(HEXADECIMAL_RE, 'hexadecimal number').parse(input, pos)
@@ -24,7 +24,7 @@ export function hex(): Parser<string> {
           return {
             isOk: true,
             pos: result.pos,
-            value: result.value
+            value: parseInt(result.value.slice(2), 16)
           }
         }
 
@@ -39,9 +39,9 @@ export function hex(): Parser<string> {
 /**
  * Parses a binary number prefixed with `0b` or `0B`, e.g. `0b101`, `0B101`.
  *
- * @returns Parsed binary number as a string
+ * @returns Parsed binary number as a decimal one
  */
-export function binary(): Parser<string> {
+export function binary(): Parser<number> {
   return {
     parse(input, pos) {
       const result = regexp(BINARY_RE, 'binary number').parse(input, pos)
@@ -51,7 +51,7 @@ export function binary(): Parser<string> {
           return {
             isOk: true,
             pos: result.pos,
-            value: result.value
+            value: parseInt(result.value.slice(2), 2)
           }
         }
 
@@ -66,9 +66,9 @@ export function binary(): Parser<string> {
 /**
  * Parses an octal number prefixed with `0o` or `0O`, e.g. `0o420`, `0O420`.
  *
- * @returns Parsed octal number as a string
+ * @returns Parsed octal number as a decimal one
  */
-export function octal(): Parser<string> {
+export function octal(): Parser<number> {
   return {
     parse(input, pos) {
       const result = regexp(OCTAL_RE, 'octal number').parse(input, pos)
@@ -78,7 +78,7 @@ export function octal(): Parser<string> {
           return {
             isOk: true,
             pos: result.pos,
-            value: result.value
+            value: parseInt(result.value.slice(2), 8)
           }
         }
 
@@ -93,9 +93,9 @@ export function octal(): Parser<string> {
 /**
  * Parses a positive whole number without leading zeros, e.g. `0`, `7`, `420`.
  *
- * @returns Parsed whole number as a string
+ * @returns Parsed whole number
  */
-export function whole(): Parser<string> {
+export function whole(): Parser<number> {
   return {
     parse(input, pos) {
       const result = regexp(WHOLE_RE, 'whole number').parse(input, pos)
@@ -105,7 +105,7 @@ export function whole(): Parser<string> {
           return {
             isOk: true,
             pos: result.pos,
-            value: result.value
+            value: parseInt(result.value, 10)
           }
         }
 
@@ -120,9 +120,9 @@ export function whole(): Parser<string> {
 /**
  * Parses an integer number with an optional minus sign, e.g. `0`, `-7`, `420`.
  *
- * @returns Parsed integer number as a string
+ * @returns Parsed integer number
  */
-export function integer(): Parser<string> {
+export function integer(): Parser<number> {
   return {
     parse(input, pos) {
       const result = regexp(INTEGER_RE, 'integer number').parse(input, pos)
@@ -132,7 +132,7 @@ export function integer(): Parser<string> {
           return {
             isOk: true,
             pos: result.pos,
-            value: result.value
+            value: parseInt(result.value, 10)
           }
         }
 
@@ -149,9 +149,9 @@ export function integer(): Parser<string> {
  *
  * Note: It doesn't handle floats with exponent parts.
  *
- * @returns Parsed float number as a string
+ * @returns Parsed float number
  */
-export function float(): Parser<string> {
+export function float(): Parser<number> {
   return {
     parse(input, pos) {
       const result = regexp(FLOAT_RE, 'float number').parse(input, pos)
@@ -161,7 +161,7 @@ export function float(): Parser<string> {
           return {
             isOk: true,
             pos: result.pos,
-            value: result.value
+            value: parseFloat(result.value)
           }
         }
 

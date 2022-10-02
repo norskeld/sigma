@@ -1,16 +1,16 @@
 ---
 title: 'whole'
 kind: 'composite'
-description: "whole parses a positive whole number without leading zeros, e.g. '0', '7', '420'. Returns parsed number as a string."
+description: "whole parses a positive whole number without leading zeros, e.g. '0', '7', '420'. Returns a decimal number obtained using parseInt with radix of 10."
 ---
 
 ```typescript {{ withLineNumbers: false }}
-function whole(): Parser<string>
+function whole(): Parser<number>
 ```
 
 ## Description
 
-`whole` parses a positive whole number without leading zeros, e.g. `0`, `7`, `420`. Returns parsed number **as a string**.
+`whole` parses a positive whole number without leading zeros, e.g. `0`, `7`, `420`. Returns **a decimal number** obtained using [parseInt] with radix of 10.
 
 ## Usage
 
@@ -29,7 +29,7 @@ const Parser = whole()
   {
     isOk: true,
     pos: 2,
-    value: '42'
+    value: 42
   }
   ```
 
@@ -45,3 +45,7 @@ const Parser = whole()
   }
   ```
 </details>
+
+<!-- Links. -->
+
+[parseInt]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
