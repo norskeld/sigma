@@ -17,7 +17,7 @@ function optional<T>(parser: Parser<T>): Parser<T | null>
 ```typescript
 const Parser = sequence(
   optional(string('-')),
-  uint()
+  whole()
 )
 ```
 
@@ -44,7 +44,7 @@ const Parser = sequence(
   {
     isOk: false,
     pos: 0,
-    expected: 'unsigned integer'
+    expected: 'whole number'
   }
   ```
 </details>

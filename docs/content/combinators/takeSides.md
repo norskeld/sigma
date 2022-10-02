@@ -20,13 +20,13 @@ function takeSides<T1, T2, T3>(
 
 ```typescript
 const Parser = takeSides(
-  uint(),
+  whole(),
   sequence(
     whitespace(),
     string('&'),
     whitespace()
   ),
-  uint())
+  whole())
 ```
 
 <details>

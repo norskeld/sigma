@@ -16,7 +16,7 @@ function mapTo<T, R>(parser: Parser<T>, value: R): Parser<R>
 
 ```typescript
 const Parser = mapTo(
-  sequence(int(), string('+'), int()),
+  sequence(integer(), string('+'), integer()),
   5
 )
 ```

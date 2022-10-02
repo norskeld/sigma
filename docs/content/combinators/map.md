@@ -15,12 +15,12 @@ function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R>
 ## Usage
 
 ```typescript
-function add([left, _, right]: [number, string, number]): number {
+function add([left, right]: [number, number]): number {
   return left + right
 }
 
 const Parser = map(
-  sequence(int(), string('+'), int()),
+  takeSides(whole(), string('+'), whole()),
   add
 )
 ```

@@ -22,7 +22,7 @@ function defer<T>(): Deferred<T>
   <summary>Combinators and parsers used in this section</summary>
 
   - Combinators: [choice], [sepBy], [map], [takeMid]
-  - Parsers: [defer], [int], [string]
+  - Parsers: [defer], [integer], [string]
 </details>
 
 In the example below we are parsing simple nested tuples like `(1,2,(3,(4,5)))` into an AST, which then can be somehow manipulated.
@@ -43,7 +43,7 @@ const TupleNumber = defer<NumberNode>()
 
 TupleNumber.with(
   map(
-    int(),
+    integer(),
     (value) => ({ type: 'number', value })
   )
 )
@@ -105,5 +105,5 @@ We will get the following result:
 <!-- Parsers. -->
 
 [defer]: ./defer
-[int]: ./int
+[integer]: ./integer
 [string]: ./string

@@ -16,7 +16,7 @@ function takeLeft<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T1>
 
 ```typescript
 const Parser = takeLeft(
-  uint(),
+  whole(),
   sequence(whitespace(), string('spartans'))
 )
 ```
@@ -39,11 +39,11 @@ const Parser = takeLeft(
   ### Failure
 
   ```typescript
-  run(Parser).with('300 haskellers')
+  run(Parser).with('42 haskellers')
 
   {
     isOk: false,
-    pos: 4,
+    pos: 3,
     expected: 'spartans'
   }
   ```

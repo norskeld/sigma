@@ -16,7 +16,11 @@ function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>>
 ## Usage
 
 ```typescript
-const Parser = sequence(string('hello'), whitespace(), string('world'))
+const Parser = sequence(
+  string('hello'),
+  whitespace(),
+  string('world')
+)
 ```
 
 <details>
