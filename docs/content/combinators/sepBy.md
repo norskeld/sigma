@@ -15,7 +15,7 @@ function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 ## Usage
 
 ```typescript
-const Parser = sepBy(uint(), string('+'))
+const Parser = sepBy(whole(), string('+'))
 ```
 
 <details>

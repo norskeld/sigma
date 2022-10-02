@@ -15,7 +15,7 @@ function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 ## Usage
 
 ```typescript
-const Parser = sepBy1(uint(), string('+'))
+const Parser = sepBy1(whole(), string('+'))
 ```
 
 <details>
@@ -51,7 +51,7 @@ const Parser = sepBy1(uint(), string('+'))
   {
     isOk: false,
     pos: 0,
-    expected: 'unsigned integer'
+    expected: 'whole number'
   }
   ```
 </details>
