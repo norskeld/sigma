@@ -1,4 +1,4 @@
-import { type Parser } from '../state'
+import type { Parser } from '../state'
 import { size } from '../utils/unicode'
 
 /**

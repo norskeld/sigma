@@ -1,4 +1,4 @@
-import { type Parser } from '../state'
+import type { Parser } from '../state'
 
 /**
  * Parses a string that matches a provided `re` regular expression. Returns the matched string, or

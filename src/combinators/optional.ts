@@ -1,5 +1,5 @@
 import { nothing } from '../parsers/nothing'
-import { type Parser } from '../state'
+import type { Parser } from '../state'
 
 import { choice } from './choice'
 

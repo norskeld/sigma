@@ -1,6 +1,6 @@
 import { choice } from '../combinators/choice'
 import { error } from '../combinators/error'
-import { type Parser } from '../state'
+import type { Parser } from '../state'
 
 import { string } from './string'
 
