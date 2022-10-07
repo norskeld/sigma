@@ -1,7 +1,7 @@
-import { hex, binary, octal, whole, integer, float } from '../../parsers/numbers'
-import { describe, testFailure, testSuccess } from '../@helpers'
+import { hex, binary, octal, whole, integer, float } from '#parsers'
+import { describe, testFailure, testSuccess, it } from '#testing'
 
-describe('hex', (it) => {
+describe('hex', () => {
   it('should succeed if given a hexadecimal number', () => {
     const tcases = [
       ['0x1F', 31],
@@ -19,7 +19,7 @@ describe('hex', (it) => {
   })
 })
 
-describe('binary', (it) => {
+describe('binary', () => {
   it('should succeed if given a binary number', () => {
     const tcases = [
       ['0b10', 2],
@@ -35,7 +35,7 @@ describe('binary', (it) => {
   })
 })
 
-describe('octal', (it) => {
+describe('octal', () => {
   it('should succeed if given an octal number', () => {
     const tcases = [
       ['0o42', 34],
@@ -51,7 +51,7 @@ describe('octal', (it) => {
   })
 })
 
-describe('whole', (it) => {
+describe('whole', () => {
   it('should succeed if given a whole number', () => {
     const tcases = ['0', '1', '42', '1000']
     tcases.forEach((tcase) => testSuccess(tcase, parseInt(tcase, 10), whole()))
@@ -63,7 +63,7 @@ describe('whole', (it) => {
   })
 })
 
-describe('integer', (it) => {
+describe('integer', () => {
   it('should succeed if given an integer number', () => {
     const tcases = ['0', '1', '-1', '42', '-42']
     tcases.forEach((tcase) => testSuccess(tcase, parseInt(tcase, 10), integer()))
@@ -75,7 +75,7 @@ describe('integer', (it) => {
   })
 })
 
-describe('float', (it) => {
+describe('float', () => {
   it('should succeed if given an float number', () => {
     const tcases = ['0.25', '4.20', '-42.0']
     tcases.forEach((tcase) => testSuccess(tcase, parseFloat(tcase), float()))

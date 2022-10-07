@@ -1,4 +1,4 @@
-import type { Parser } from '../state'
+import type { Parser } from '#state'
 
 /**
  * Ensures that none of the characters in the given string matches the current character.

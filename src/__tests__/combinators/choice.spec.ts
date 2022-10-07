@@ -1,8 +1,8 @@
-import { choice } from '../../combinators/choice'
-import { string } from '../../parsers/string'
-import { run, result, should, describe } from '../@helpers'
+import { choice } from '#combinators'
+import { string } from '#parsers'
+import { run, result, should, describe, it } from '#testing'
 
-describe('choice', (it) => {
+describe('choice', () => {
   it('should succeed with the value of the first successful parser in sequence', () => {
     const parser = choice(string('left'), string('mid'), string('right'))
     const actual = run(parser, 'mid')

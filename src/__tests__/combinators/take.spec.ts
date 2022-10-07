@@ -1,8 +1,8 @@
-import { takeLeft, takeMid, takeRight, takeSides } from '../../combinators/take'
-import { string } from '../../parsers/string'
-import { describe, result, run, should } from '../@helpers'
+import { takeLeft, takeMid, takeRight, takeSides } from '#combinators'
+import { string } from '#parsers'
+import { describe, result, run, should, it } from '#testing'
 
-describe('takeLeft', (it) => {
+describe('takeLeft', () => {
   it('should succeed with the value of the parser on the left-hand side', () => {
     const parser = takeLeft(string('left'), string('mid'))
     const actual = run(parser, 'leftmid')
@@ -20,7 +20,7 @@ describe('takeLeft', (it) => {
   })
 })
 
-describe('takeMid', (it) => {
+describe('takeMid', () => {
   it('should succeed with the value of the parser in the middle', () => {
     const parser = takeMid(string('left'), string('mid'), string('right'))
     const actual = run(parser, 'leftmidright')
@@ -38,7 +38,7 @@ describe('takeMid', (it) => {
   })
 })
 
-describe('takeRight', (it) => {
+describe('takeRight', () => {
   it('should succeed with the value of the parser on right-hand side', () => {
     const parser = takeRight(string('mid'), string('right'))
     const actual = run(parser, 'midright')
@@ -56,7 +56,7 @@ describe('takeRight', (it) => {
   })
 })
 
-describe('takeSides', (it) => {
+describe('takeSides', () => {
   it('should succeed with the tuple of the first and the last values', () => {
     const parser = takeSides(string('left'), string('mid'), string('right'))
     const actual = run(parser, 'leftmidright')

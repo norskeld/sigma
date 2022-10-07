@@ -1,7 +1,7 @@
-import { regexp } from '../../parsers/regexp'
-import { describe, result, run, should } from '../@helpers'
+import { regexp } from '#parsers'
+import { describe, result, run, should, it } from '#testing'
 
-describe('regexp', (it) => {
+describe('regexp', () => {
   it('should succeed if given matching input', () => {
     const actualDigit = run(regexp(/\d/g, 'digit'), '0')
     const expectedDigit = result(true, '0')

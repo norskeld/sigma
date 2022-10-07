@@ -1,8 +1,8 @@
-import { sequence } from '../../combinators/sequence'
-import { string } from '../../parsers/string'
-import { run, result, should, describe } from '../@helpers'
+import { sequence } from '#combinators'
+import { string } from '#parsers'
+import { run, result, should, describe, it } from '#testing'
 
-describe('sequence', (it) => {
+describe('sequence', () => {
   it('should succeed if a sequence of parsers succeeds', () => {
     const parser = sequence(string('hello'), string(' '), string('world'))
     const actual = run(parser, 'hello world')

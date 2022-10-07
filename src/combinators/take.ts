@@ -1,7 +1,7 @@
-import type { Parser } from '../state'
-
 import { map } from './map'
 import { sequence } from './sequence'
+
+import type { Parser } from '#state'
 
 const toLeft = <T1, T2>([left]: [T1, T2]): T1 => left
 const toMiddle = <T1, T2, T3>([, middle]: [T1, T2, T3]): T2 => middle

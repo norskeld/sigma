@@ -1,6 +1,7 @@
 import typescript from '@rollup/plugin-typescript'
 import { rollup, InputOptions, OutputOptions } from 'rollup'
 import dts from 'rollup-plugin-dts'
+import tsConfigPaths from 'rollup-plugin-tsconfig-paths'
 
 interface BundleOptions {
   input: InputOptions
@@ -37,7 +38,7 @@ function createTypesBundleOptions(entry: string, destination: string): BundleOpt
   return {
     input: {
       input: `${entry}.d.ts`,
-      plugins: [dts()]
+      plugins: [tsConfigPaths(), dts()]
     },
     output: [
       {

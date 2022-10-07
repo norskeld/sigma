@@ -1,11 +1,8 @@
-import { map } from '../../combinators/map'
-import { takeUntil, skipUntil } from '../../combinators/until'
-import { any } from '../../parsers/any'
-import { regexp } from '../../parsers/regexp'
-import { string } from '../../parsers/string'
-import { run, result, should, describe, testFailure } from '../@helpers'
+import { map, takeUntil, skipUntil } from '#combinators'
+import { any, regexp, string } from '#parsers'
+import { run, result, should, describe, testFailure, it } from '#testing'
 
-describe('takeUntil', (it) => {
+describe('takeUntil', () => {
   it('should succeed with a tuple of values if given a correct string', () => {
     const parser = map(takeUntil(any(), string('*/')), (result) => result.flat().join(''))
     const actual = run(parser, '/* Comment */')
@@ -19,7 +16,7 @@ describe('takeUntil', (it) => {
   })
 })
 
-describe('skipUntil', (it) => {
+describe('skipUntil', () => {
   it('should succeed with a result of terminating parser if given a correct string', () => {
     const parser = skipUntil(any(), string('*/'))
     const actual = run(parser, '/* Comment */')

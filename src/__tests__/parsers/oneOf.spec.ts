@@ -1,7 +1,7 @@
-import { oneOf } from '../../parsers/oneOf'
-import { run, result, should, describe, testFailure } from '../@helpers'
+import { oneOf } from '#parsers'
+import { run, result, should, describe, testFailure, it } from '#testing'
 
-describe('oneOf', (it) => {
+describe('oneOf', () => {
   it('should succeed if input character is among given ones', () => {
     const actual = run(oneOf('xyz'), 'y-combinator')
     const expected = result(true, 'y')

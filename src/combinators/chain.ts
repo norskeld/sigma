@@ -1,8 +1,8 @@
-import type { Parser } from '../state'
-
 import { many } from './many'
 import { map } from './map'
 import { sequence } from './sequence'
+
+import type { Parser } from '#state'
 
 /** @internal */
 type Fn<L, R> = (left: L, right: R) => L

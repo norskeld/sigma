@@ -1,8 +1,8 @@
-import { many } from '../../combinators/many'
-import { any } from '../../parsers/any'
-import { run, result, should, describe, testFailure } from '../@helpers'
+import { many } from '#combinators'
+import { any } from '#parsers'
+import { run, result, should, describe, testFailure, it } from '#testing'
 
-describe('any', (it) => {
+describe('any', () => {
   it('should succeed with a single character from the input stream', () => {
     const actual = run(any(), 'xyz')
     const expected = result(true, 'x')

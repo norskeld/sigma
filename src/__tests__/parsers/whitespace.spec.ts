@@ -1,10 +1,8 @@
-import { sequence } from '../../combinators/sequence'
-import { regexp } from '../../parsers/regexp'
-import { string } from '../../parsers/string'
-import { whitespace } from '../../parsers/whitespace'
-import { describe, run, result, should } from '../@helpers'
+import { sequence } from '#combinators'
+import { regexp, string, whitespace } from '#parsers'
+import { describe, run, result, should, it } from '#testing'
 
-describe('whitespace', (it) => {
+describe('whitespace', () => {
   it('should succeed if given a string of spaces', () => {
     const space = ' '
 

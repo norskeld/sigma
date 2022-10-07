@@ -1,7 +1,7 @@
-import { letter, letters } from '../../parsers/letter'
-import { describe, result, run, should } from '../@helpers'
+import { letter, letters } from '#parsers'
+import { describe, result, run, should, it } from '#testing'
 
-describe('letter', (it) => {
+describe('letter', () => {
   it('should succeed with an ASCII letter', () => {
     const actual = run(letter(), 'A')
     const expected = result(true, 'A')
@@ -33,7 +33,7 @@ describe('letter', (it) => {
   })
 })
 
-describe('letters', (it) => {
+describe('letters', () => {
   it('should succeed with an ASCII letter if given input with a single ASCII letter', () => {
     const actual = run(letters(), 'A')
     const expected = result(true, 'A')

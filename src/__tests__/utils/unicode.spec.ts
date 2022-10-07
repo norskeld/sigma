@@ -1,7 +1,7 @@
-import { size } from '../../utils/unicode'
-import { describe, should } from '../@helpers'
-
 import { pangrams } from './unicode.data'
+
+import { describe, should, it } from '#testing'
+import { size } from '#unicode'
 
 function check(locale: string) {
   const pangram = pangrams[locale]
@@ -11,7 +11,7 @@ function check(locale: string) {
     : should.beEqual(size(pangram.text), pangram.size)
 }
 
-describe('unicode', (it) => {
+describe('unicode', () => {
   it('should correctly get length in bytes if given a unicode pangram', () => {
     check('da')
     check('en')
