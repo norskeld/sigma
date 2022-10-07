@@ -1,6 +1,6 @@
-import type { Parser } from '../state'
-
 import { regexp } from './regexp'
+
+import type { Parser } from '#state'
 
 const WHITESPACE_REQUIRED_RE = /\s+/g
 

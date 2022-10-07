@@ -1,17 +1,12 @@
-import { suite } from 'uvu'
+import * as exposed from '#lib'
+import { should, expectedParsers, expectedCombinators, describe, it } from '#testing'
 
-import * as exposed from '../'
+describe('index exports', () => {
+  it('should re-export combinators', () => {
+    should.expose(exposed, ...expectedCombinators)
+  })
 
-import { should, expectedParsers, expectedCombinators } from './@helpers'
-
-const it = suite('index exports')
-
-it('should re-export combinators', () => {
-  should.expose(exposed, ...expectedCombinators)
+  it('should re-export parsers', () => {
+    should.expose(exposed, ...expectedParsers)
+  })
 })
-
-it('should re-export parsers', () => {
-  should.expose(exposed, ...expectedParsers)
-})
-
-it.run()

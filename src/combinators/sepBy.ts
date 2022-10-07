@@ -1,7 +1,7 @@
-import type { Parser } from '../state'
-
 import { many } from './many'
 import { sequence } from './sequence'
+
+import type { Parser } from '#state'
 
 /**
  * Parses *zero* or more occurrences of `parser`, separated by `sep`. Never fails.

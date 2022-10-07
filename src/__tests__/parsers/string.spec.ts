@@ -1,7 +1,7 @@
-import { string, ustring } from '../../parsers/string'
-import { run, result, should, describe } from '../@helpers'
+import { string, ustring } from '#parsers'
+import { run, result, should, describe, it } from '#testing'
 
-describe('ustring', (it) => {
+describe('ustring', () => {
   it('should succeed if given an ASCII string', () => {
     const tcase = 'test'
 
@@ -48,7 +48,7 @@ describe('ustring', (it) => {
   })
 })
 
-describe('string', (it) => {
+describe('string', () => {
   it('should succeed if given an ASCII string', () => {
     const tcase = 'test'
 

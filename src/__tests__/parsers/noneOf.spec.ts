@@ -1,7 +1,7 @@
-import { noneOf } from '../../parsers/noneOf'
-import { run, result, should, describe, testFailure } from '../@helpers'
+import { noneOf } from '#parsers'
+import { run, result, should, describe, testFailure, it } from '#testing'
 
-describe('noneOf', (it) => {
+describe('noneOf', () => {
   it('should succeed with input character is not among given ones', () => {
     const actual = run(noneOf('xyz'), 'q-combinator')
     const expected = result(true, 'q')

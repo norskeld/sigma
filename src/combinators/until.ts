@@ -1,4 +1,4 @@
-import type { Parser } from '../state'
+import type { Parser } from '#state'
 
 /**
  * Applies source `parser`, collects its output, and stops after `terminator` parser succeeds.

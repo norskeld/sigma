@@ -1,8 +1,7 @@
-import { type Context, suite, uvu } from 'uvu'
-import * as assert from 'uvu/assert'
+import { expect } from 'vitest'
 
-import { run as internal$run } from '../../parsers/run'
-import type { Parser, Result } from '../../state'
+import { run as internal$run } from '#parsers'
+import type { Parser, Result } from '#state'
 
 interface ReducedResult<T> {
   isOk: boolean
@@ -17,37 +16,31 @@ export function result<T>(isOk: boolean, value: T): ReducedResult<T> {
   return { isOk, value } as const
 }
 
-export function describe<T = Context>(name: string, f: (t: uvu.Test<T>) => void | Promise<void>) {
-  const test = suite<T>(name)
-  f(test)
-  test.run()
-}
-
 export const should = {
   expose(exposed: Record<string, unknown>, ...exposees: Array<string>): void {
-    exposees.forEach((exposee) => assert.ok(exposed[exposee]))
+    exposees.forEach((exposee) => expect(exposed[exposee]).toBeTruthy())
   },
 
   matchState<T, R>(received: Result<T>, expected: ReducedResult<R>): void {
-    assert.equal(received.isOk, expected.isOk)
+    expect(received.isOk).toBe(expected.isOk)
 
     switch (received.isOk) {
       case true: {
-        return assert.equal(received.value, expected.value)
+        return expect(received.value).toStrictEqual(expected.value)
       }
 
       case false: {
-        return assert.equal(received.expected, expected.value)
+        return expect(received.expected).toStrictEqual(expected.value)
       }
     }
   },
 
   beEqual<T = unknown>(a: T, b: T, message?: string) {
-    assert.equal(a, b, message)
+    expect(a, message).toBe(b)
   },
 
-  throw(f: typeof assert.throws) {
-    assert.throws(f)
+  throw(f: () => void) {
+    expect(f).toThrow()
   }
 }
 
@@ -107,3 +100,5 @@ export const expectedParsers = [
   'whitespace',
   'whole'
 ] as const
+
+export { describe, expect, it } from 'vitest'

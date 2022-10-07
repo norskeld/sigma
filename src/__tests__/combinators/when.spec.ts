@@ -1,10 +1,10 @@
-import { when } from '../../combinators/when'
-import { string } from '../../parsers'
-import { run, result, should, describe } from '../@helpers'
+import { when } from '#combinators'
+import { string } from '#parsers'
+import { run, result, should, describe, it } from '#testing'
 
 const parser = when(string('x'), () => string('y'))
 
-describe('when', (it) => {
+describe('when', () => {
   it('should succeed with the value of chained parser', () => {
     const actual = run(parser, 'xy')
     const expected = result(true, 'y')

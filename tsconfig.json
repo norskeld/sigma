@@ -11,7 +11,17 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@lib/*": ["src/*"]
+      "#lib": ["src"],
+      "#lib/*": ["src/*"],
+      "#parsers": ["src/parsers"],
+      "#parsers/*": ["src/parsers/*"],
+      "#combinators/*": ["src/combinators/*"],
+      "#combinators": ["src/combinators"],
+      "#testing": ["src/__tests__/@helpers"],
+      "#state": ["src/state"],
+      "#state/*": ["src/state/*"],
+      "#unicode": ["src/utils/unicode"],
+      "#types": ["src/utils/types"]
     }
   },
   "include": ["benchmarks", "scripts", "src"]

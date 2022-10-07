@@ -1,8 +1,8 @@
-import { many, many1 } from '../../combinators/many'
-import { string } from '../../parsers/string'
-import { describe, result, run, should, testFailure } from '../@helpers'
+import { many, many1 } from '#combinators'
+import { string } from '#parsers'
+import { describe, result, run, should, testFailure, it } from '#testing'
 
-describe('many', (it) => {
+describe('many', () => {
   it('should succeed with an array of matched strings', () => {
     const parser = many(string('x!'))
     const actual = run(parser, 'x!x!x!')
@@ -19,7 +19,7 @@ describe('many', (it) => {
     should.matchState(actual, expected)
   })
 })
-describe('many1', (it) => {
+describe('many1', () => {
   it('should succeed with an array of matched strings', () => {
     const parser = many1(string('x!'))
     const actual = run(parser, 'x!x!x!')

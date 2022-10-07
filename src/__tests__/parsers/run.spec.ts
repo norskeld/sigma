@@ -1,9 +1,7 @@
-import { defer } from '../../parsers/defer'
-import { run } from '../../parsers/run'
-import { string } from '../../parsers/string'
-import { describe, result, should, testFailure } from '../@helpers'
+import { defer, run, string } from '#parsers'
+import { describe, result, should, testFailure, it } from '#testing'
 
-describe('run', (it) => {
+describe('run', () => {
   it('should succeed if given a succeeding parser', () => {
     const parser = string('runnable')
     const actual = run(parser).with('runnable')

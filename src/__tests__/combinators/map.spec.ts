@@ -1,8 +1,8 @@
-import { map, mapTo } from '../../combinators/map'
-import { string } from '../../parsers/string'
-import { describe, result, run, should } from '../@helpers'
+import { map, mapTo } from '#combinators'
+import { string } from '#parsers'
+import { describe, result, run, should, it } from '#testing'
 
-describe('map', (it) => {
+describe('map', () => {
   it('should succeed if a single given parser succeeds', () => {
     const parser = map(string('9000'), (value) => parseInt(value, 10))
     const actual = run(parser, '9000')
@@ -20,7 +20,7 @@ describe('map', (it) => {
   })
 })
 
-describe('mapTo', (it) => {
+describe('mapTo', () => {
   it('should succeed if a single given parser succeeds', () => {
     const parser = mapTo(string('9000'), 'constant')
     const actual = run(parser, '9000')

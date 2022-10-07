@@ -1,14 +1,13 @@
-import { sequence } from '../../combinators/sequence'
-import { eol } from '../../parsers/eol'
-import { letters } from '../../parsers/letter'
-import { run, result, should, describe } from '../@helpers'
+import { sequence } from '#combinators'
+import { eol, letters } from '#parsers'
+import { run, result, should, describe, it } from '#testing'
 
 const tcase = `Hello\nWorld\n`
 const tcaseLit = `Hello
 World
 `
 
-describe('eol', (it) => {
+describe('eol', () => {
   it('should succeed if given a newline (Unix)', () => {
     const actual = run(eol(), '\n')
     const expected = result(true, '\n')

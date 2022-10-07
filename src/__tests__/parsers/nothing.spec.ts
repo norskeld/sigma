@@ -1,7 +1,7 @@
-import { nothing } from '../../parsers/nothing'
-import { describe, result, run, should } from '../@helpers'
+import { nothing } from '#parsers'
+import { describe, result, run, should, it } from '#testing'
 
-describe('nothing', (it) => {
+describe('nothing', () => {
   it('should succeed with null value', () => {
     const actual = run(nothing(), 'test')
     const expected = result(true, null)

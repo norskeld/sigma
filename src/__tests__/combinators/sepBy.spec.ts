@@ -1,8 +1,8 @@
-import { sepBy, sepBy1 } from '../../combinators/sepBy'
-import { string } from '../../parsers/string'
-import { run, result, should, describe } from '../@helpers'
+import { sepBy, sepBy1 } from '#combinators'
+import { string } from '#parsers'
+import { run, result, should, describe, it } from '#testing'
 
-describe('sepBy', (it) => {
+describe('sepBy', () => {
   it('should succeed with an array of matched strings without separator', () => {
     const parser = sepBy(string('x'), string('!'))
     const actual = run(parser, 'x!x!x!')
@@ -28,7 +28,7 @@ describe('sepBy', (it) => {
   })
 })
 
-describe('sepBy1', (it) => {
+describe('sepBy1', () => {
   it('should succeed with an array of matched strings without separator', () => {
     const parser = sepBy1(string('x'), string('!'))
     const actual = run(parser, 'x!x!x!')

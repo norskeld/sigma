@@ -1,8 +1,7 @@
-import { defer } from '../../parsers/defer'
-import { string } from '../../parsers/string'
-import { run, result, should, testFailure, describe } from '../@helpers'
+import { string, defer } from '#parsers'
+import { run, result, should, testFailure, describe, it } from '#testing'
 
-describe('defer', (it) => {
+describe('defer', () => {
   it('should succeed if the deferred parser is not set', () => {
     const deferred = defer<string>()
 

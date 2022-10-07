@@ -1,8 +1,8 @@
-import { error } from '../../combinators/error'
-import { string } from '../../parsers/string'
-import { run, result, should, describe } from '../@helpers'
+import { error } from '#combinators'
+import { string } from '#parsers'
+import { run, result, should, describe, it } from '#testing'
 
-describe('error', (it) => {
+describe('error', () => {
   it('should successfully replace error message (expectation)', () => {
     const parser = error(string('9000'), 'replaced-error-message')
     const actual = run(parser, 'xxxx')
