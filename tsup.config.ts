@@ -22,7 +22,7 @@ const mainConfig = defineConfig({
 const createDTSConfig = (e: string): Options =>
   defineConfig({
     ...sharedConfig,
-    entry,
+    entry: [e],
     dts: {
       entry: e,
       only: true
