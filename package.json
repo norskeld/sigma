@@ -2,7 +2,9 @@
   "name": "@nrsk/sigma",
   "version": "3.1.0",
   "description": "TypeScript parser combinator library for building fast and convenient parsers.",
+  "packageManager": "npm@8.10.0",
   "sideEffects": false,
+  "type": "module",
   "main": "./index.cjs",
   "module": "./index.js",
   "types": "./index.d.ts",
@@ -30,7 +32,7 @@
     "*.js*"
   ],
   "engines": {
-    "node": ">=14.17.0"
+    "node": "^14.16.0 || ^16.10.0 || ^18.0.0"
   },
   "scripts": {
     "build": "tsup",
@@ -106,7 +108,5 @@
     "*.{js,ts}": [
       "eslint --fix"
     ]
-  },
-  "type": "module",
-  "packageManager": "npm@8.10.0"
+  }
 }
