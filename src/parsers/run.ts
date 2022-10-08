@@ -1,4 +1,4 @@
-import type { Parser, Result } from '@state'
+import type { Parser, Result } from '@types'
 
 /** @internal */
 interface Runnable<T> {

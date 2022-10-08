@@ -17,11 +17,9 @@
       "@lib/*": ["src/*"],
       "@parsers": ["src/parsers"],
       "@parsers/*": ["src/parsers/*"],
-      "@state": ["src/state"],
-      "@state/*": ["src/state/*"],
       "@testing": ["src/__tests__/@helpers"],
-      "@types": ["src/utils/types"],
-      "@unicode": ["src/utils/unicode"]
+      "@types": ["src/types"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["benchmarks", "scripts", "src"]

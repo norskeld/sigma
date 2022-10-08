@@ -1,4 +1,4 @@
-import type { Parser } from '@state'
+import type { Parser } from '@types'
 
 /**
  * Simply resolves to `null`.

@@ -1,4 +1,4 @@
-import type { Parser } from '@state'
+import type { Parser } from '@types'
 
 /**
  * Applies `fn` to the `parser`'s result.

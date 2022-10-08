@@ -1,5 +1,5 @@
-import type { Parser } from '@state'
-import { size } from '@unicode'
+import type { Parser } from '@types'
+import { size } from '@utils/unicode'
 
 /**
  * Parses an *ASCII* string. For parsing Unicode strings, consider using `ustring`.

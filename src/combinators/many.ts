@@ -1,4 +1,4 @@
-import type { Parser, SafeParser } from '@state'
+import type { Parser, SafeParser } from '@types'
 
 /**
  * Applies `parser` *zero* or more times, collecting its results. Never fails.
