@@ -7,7 +7,6 @@ const entry = ['src/index.ts', 'src/parsers.ts', 'src/combinators.ts']
 const sharedConfig = defineConfig({
   splitting: false,
   sourcemap: true,
-  clean: true,
   format: ['esm', 'cjs'],
   treeshake: true,
   minify: isCI,
