@@ -1,7 +1,7 @@
 import { pangrams } from './unicode.data'
 
 import { describe, should, it } from '@testing'
-import { size } from '@unicode'
+import { size } from '@utils/unicode'
 
 function check(locale: string) {
   const pangram = pangrams[locale]
