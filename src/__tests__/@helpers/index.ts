@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 
-import { run as internal$run } from '#parsers'
-import type { Parser, Result } from '#state'
+import { run as internal$run } from '@parsers'
+import type { Parser, Result } from '@state'
 
 interface ReducedResult<T> {
   isOk: boolean

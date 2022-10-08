@@ -1,6 +1,6 @@
-import { chainl, map, takeRight } from '#combinators'
-import { regexp, string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { chainl, map, takeRight } from '@combinators'
+import { regexp, string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 const toSum = (left: number, right: number) => left + right
 const toNumber = (value: string) => parseInt(value, 10)

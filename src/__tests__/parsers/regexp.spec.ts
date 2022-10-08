@@ -1,5 +1,5 @@
-import { regexp } from '#parsers'
-import { describe, result, run, should, it } from '#testing'
+import { regexp } from '@parsers'
+import { describe, result, run, should, it } from '@testing'
 
 describe('regexp', () => {
   it('should succeed if given matching input', () => {

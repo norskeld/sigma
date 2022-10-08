@@ -1,6 +1,6 @@
-import { when } from '#combinators'
-import { string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { when } from '@combinators'
+import { string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 const parser = when(string('x'), () => string('y'))
 

@@ -1,6 +1,6 @@
-import { optional, sequence } from '#combinators'
-import { string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { optional, sequence } from '@combinators'
+import { string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 describe('optional', () => {
   it('should succeed with the where optional non-matched value replaced with null', () => {

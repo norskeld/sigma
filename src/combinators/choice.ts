@@ -1,5 +1,5 @@
-import type { Parser } from '#state'
-import type { ToUnion } from '#types'
+import type { Parser } from '@state'
+import type { ToUnion } from '@types'
 
 /**
  * Applies `ps` parsers in order until one of them succeeds.

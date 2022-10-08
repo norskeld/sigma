@@ -1,5 +1,5 @@
-import { oneOf } from '#parsers'
-import { run, result, should, describe, testFailure, it } from '#testing'
+import { oneOf } from '@parsers'
+import { run, result, should, describe, testFailure, it } from '@testing'
 
 describe('oneOf', () => {
   it('should succeed if input character is among given ones', () => {

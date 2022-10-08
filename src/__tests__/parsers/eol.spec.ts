@@ -1,6 +1,6 @@
-import { sequence } from '#combinators'
-import { eol, letters } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { sequence } from '@combinators'
+import { eol, letters } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 const tcase = `Hello\nWorld\n`
 const tcaseLit = `Hello

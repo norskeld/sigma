@@ -1,5 +1,5 @@
-import { string, defer } from '#parsers'
-import { run, result, should, testFailure, describe, it } from '#testing'
+import { string, defer } from '@parsers'
+import { run, result, should, testFailure, describe, it } from '@testing'
 
 describe('defer', () => {
   it('should succeed if the deferred parser is not set', () => {

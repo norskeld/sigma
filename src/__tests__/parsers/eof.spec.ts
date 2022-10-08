@@ -1,6 +1,6 @@
-import { sequence } from '#combinators'
-import { eof, string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { sequence } from '@combinators'
+import { eof, string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 describe('eof', () => {
   it('should succeed if reached the end of input', () => {

@@ -1,5 +1,5 @@
-import { string, ustring } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { string, ustring } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 describe('ustring', () => {
   it('should succeed if given an ASCII string', () => {

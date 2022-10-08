@@ -1,4 +1,4 @@
-import type { Parser } from '#state'
+import type { Parser } from '@state'
 
 /**
  * Only succeeds at the end of the input.

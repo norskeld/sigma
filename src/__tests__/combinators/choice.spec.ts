@@ -1,6 +1,6 @@
-import { choice } from '#combinators'
-import { string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { choice } from '@combinators'
+import { string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 describe('choice', () => {
   it('should succeed with the value of the first successful parser in sequence', () => {

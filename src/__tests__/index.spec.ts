@@ -1,5 +1,5 @@
-import * as exposed from '#lib'
-import { should, expectedParsers, expectedCombinators, describe, it } from '#testing'
+import * as exposed from '@lib'
+import { should, expectedParsers, expectedCombinators, describe, it } from '@testing'
 
 describe('index exports', () => {
   it('should re-export combinators', () => {

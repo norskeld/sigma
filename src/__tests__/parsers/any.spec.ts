@@ -1,6 +1,6 @@
-import { many } from '#combinators'
-import { any } from '#parsers'
-import { run, result, should, describe, testFailure, it } from '#testing'
+import { many } from '@combinators'
+import { any } from '@parsers'
+import { run, result, should, describe, testFailure, it } from '@testing'
 
 describe('any', () => {
   it('should succeed with a single character from the input stream', () => {

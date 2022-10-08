@@ -1,6 +1,6 @@
-import { sequence } from '#combinators'
-import { string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { sequence } from '@combinators'
+import { string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 describe('sequence', () => {
   it('should succeed if a sequence of parsers succeeds', () => {
