@@ -1,3 +1,18 @@
+# [3.1.0](https://github.com/norskeld/sigma/compare/v3.0.0...v3.1.0) (2022-10-08)
+
+
+### Bug Fixes
+
+* **scripts:** move tsm back ([cf899d0](https://github.com/norskeld/sigma/commit/cf899d0c2d495ec7e8ded8a992c50548a671b183))
+
+
+### Features
+
+* **build:** finalize tsup setup with multiple options for build ([d9a54a8](https://github.com/norskeld/sigma/commit/d9a54a86f8f8856b7c76c3385df86dbdbcaa75e7))
+* **build:** introduce tsup, simplify build, make package a module ([e803455](https://github.com/norskeld/sigma/commit/e803455d24909769096d04b699bfe4f5e28e101b))
+* **chore:** cleanup packages and files ([6cd7146](https://github.com/norskeld/sigma/commit/6cd714630e29cc9bb06bf6919c41ae46996850ef))
+* **vitest:** add vitest, aliasing, cleanup uvu deps ([a4883a3](https://github.com/norskeld/sigma/commit/a4883a35a62d541e50e32634a341000a96b28e5a))
+
 # [3.0.0](https://github.com/norskeld/sigma/compare/v2.10.0...v3.0.0) (2022-10-02)
 
 
