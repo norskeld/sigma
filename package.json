@@ -74,6 +74,7 @@
     "@nrsk/config-conventional": "^1.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
+    "@types/is-ci": "^3.0.0",
     "@types/node": "^16.11.64",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",

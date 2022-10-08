@@ -1,8 +1,7 @@
-// @ts-expect-error missing types
 import isCI from 'is-ci'
 import { defineConfig, type Options } from 'tsup'
 
-const entry = ['src/index.ts', 'src/parsers.ts', 'src/combinators.ts']
+const entries = ['src/index.ts', 'src/parsers.ts', 'src/combinators.ts']
 
 const sharedConfig = defineConfig({
   splitting: false,
@@ -15,18 +14,19 @@ const sharedConfig = defineConfig({
 
 const mainConfig = defineConfig({
   ...sharedConfig,
-  entry,
+  entry: entries,
   dts: false
 }) as Options
 
-const createDTSConfig = (e: string): Options =>
-  defineConfig({
+function createDTSConfig(entry: string): Options {
+  return defineConfig({
     ...sharedConfig,
-    entry: [e],
+    entry: [entry],
     dts: {
-      entry: e,
+      entry,
       only: true
     }
   }) as Options
+}
 
-export default defineConfig([mainConfig, ...entry.map(createDTSConfig)])
+export default defineConfig([mainConfig, ...entries.map(createDTSConfig)])
