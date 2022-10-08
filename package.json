@@ -41,9 +41,8 @@
     "prerelease": "node --loader @esbuild-kit/esm-loader scripts/release.ts prepare",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
-    "test": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "repository": {
     "type": "git",
