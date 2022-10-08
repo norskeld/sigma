@@ -1,4 +1,4 @@
-import type { Parser } from '@state'
+import type { Parser } from '@types'
 
 /**
  * Intersection type to add a method for deferred parser definition.

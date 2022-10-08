@@ -1,5 +1,4 @@
-import type { Parser } from '@state'
-import type { ToTuple } from '@types'
+import type { Parser, ToTuple } from '@types'
 
 /**
  * Applies `ps` parsers in order, until *all* of them succeed.

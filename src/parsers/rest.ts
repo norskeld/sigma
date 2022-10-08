@@ -1,4 +1,4 @@
-import type { Parser } from '@state'
+import type { Parser } from '@types'
 
 /**
  * Simply returns the unparsed input as a string. Never fails.

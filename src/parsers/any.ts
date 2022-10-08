@@ -1,4 +1,4 @@
-import type { Parser } from '@state'
+import type { Parser } from '@types'
 
 /**
  * Parses any single character from the input and returns it. Fails at the end of input.

@@ -1,6 +1,6 @@
 import { regexp } from './regexp'
 
-import type { Parser } from '@state'
+import type { Parser } from '@types'
 
 const HEXADECIMAL_RE = /0[xX][0-9a-fA-F]+/g
 const BINARY_RE = /0[bB][01]+/g

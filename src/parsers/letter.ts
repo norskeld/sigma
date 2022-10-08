@@ -1,6 +1,6 @@
 import { regexp } from './regexp'
 
-import type { Parser } from '@state'
+import type { Parser } from '@types'
 
 const LETTER_RE = /\p{Letter}/gu
 const LETTERS_RE = /\p{Letter}+/gu

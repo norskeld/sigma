@@ -1,5 +1,4 @@
-import type { Parser } from '@state'
-import type { ToParser } from '@types'
+import type { Parser, ToParser } from '@types'
 
 /**
  * Context provided to a callback for producing conditional/chained parser.
