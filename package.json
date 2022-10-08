@@ -36,7 +36,7 @@
     "build": "tsup",
     "fmt:lint": "eslint --fix --ext .js,.ts,.tsx .",
     "fmt:prettier": "prettier --write \"**/*.{js,ts,tsx,json}\"",
-    "postversion": "tsx scripts/release.ts restore",
+    "postversion": "tsx ../scripts/release.ts restore",
     "prebuild": "rimraf dist",
     "prepare": "is-ci || husky install",
     "prerelease": "tsx scripts/release.ts prepare",
