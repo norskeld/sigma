@@ -1,3 +1,4 @@
+import isCI from 'is-ci'
 import { defineConfig, type Options } from 'tsup'
 
 const entry = ['src/index.ts', 'src/parsers.ts', 'src/combinators.ts']
@@ -8,7 +9,7 @@ const sharedConfig = defineConfig({
   clean: true,
   format: ['esm', 'cjs'],
   treeshake: true,
-  minify: false,
+  minify: isCI,
   bundle: true
 })
 
