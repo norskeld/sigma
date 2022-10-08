@@ -1,6 +1,6 @@
-import { map, mapTo } from '#combinators'
-import { string } from '#parsers'
-import { describe, result, run, should, it } from '#testing'
+import { map, mapTo } from '@combinators'
+import { string } from '@parsers'
+import { describe, result, run, should, it } from '@testing'
 
 describe('map', () => {
   it('should succeed if a single given parser succeeds', () => {

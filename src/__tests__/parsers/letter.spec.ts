@@ -1,5 +1,5 @@
-import { letter, letters } from '#parsers'
-import { describe, result, run, should, it } from '#testing'
+import { letter, letters } from '@parsers'
+import { describe, result, run, should, it } from '@testing'
 
 describe('letter', () => {
   it('should succeed with an ASCII letter', () => {

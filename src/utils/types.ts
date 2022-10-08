@@ -1,4 +1,4 @@
-import type { Parser } from '#state'
+import type { Parser } from '@state'
 
 /** Given a tuple of `Parser<T>`s, recursively extracts inner `T`s into a tuple. */
 export type ToTuple<T> = T extends [Parser<infer Head>, ...infer Tail]

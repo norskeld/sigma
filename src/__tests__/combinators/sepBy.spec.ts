@@ -1,6 +1,6 @@
-import { sepBy, sepBy1 } from '#combinators'
-import { string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { sepBy, sepBy1 } from '@combinators'
+import { string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 describe('sepBy', () => {
   it('should succeed with an array of matched strings without separator', () => {

@@ -1,6 +1,6 @@
-import { takeLeft, takeMid, takeRight, takeSides } from '#combinators'
-import { string } from '#parsers'
-import { describe, result, run, should, it } from '#testing'
+import { takeLeft, takeMid, takeRight, takeSides } from '@combinators'
+import { string } from '@parsers'
+import { describe, result, run, should, it } from '@testing'
 
 describe('takeLeft', () => {
   it('should succeed with the value of the parser on the left-hand side', () => {

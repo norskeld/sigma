@@ -1,6 +1,6 @@
-import { error } from '#combinators'
-import { string } from '#parsers'
-import { run, result, should, describe, it } from '#testing'
+import { error } from '@combinators'
+import { string } from '@parsers'
+import { run, result, should, describe, it } from '@testing'
 
 describe('error', () => {
   it('should successfully replace error message (expectation)', () => {

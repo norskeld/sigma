@@ -1,5 +1,5 @@
-import { defer, run, string } from '#parsers'
-import { describe, result, should, testFailure, it } from '#testing'
+import { defer, run, string } from '@parsers'
+import { describe, result, should, testFailure, it } from '@testing'
 
 describe('run', () => {
   it('should succeed if given a succeeding parser', () => {

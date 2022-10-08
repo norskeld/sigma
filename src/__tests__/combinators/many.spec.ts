@@ -1,6 +1,6 @@
-import { many, many1 } from '#combinators'
-import { string } from '#parsers'
-import { describe, result, run, should, testFailure, it } from '#testing'
+import { many, many1 } from '@combinators'
+import { string } from '@parsers'
+import { describe, result, run, should, testFailure, it } from '@testing'
 
 describe('many', () => {
   it('should succeed with an array of matched strings', () => {

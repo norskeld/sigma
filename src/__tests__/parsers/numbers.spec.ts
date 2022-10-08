@@ -1,5 +1,5 @@
-import { hex, binary, octal, whole, integer, float } from '#parsers'
-import { describe, testFailure, testSuccess, it } from '#testing'
+import { hex, binary, octal, whole, integer, float } from '@parsers'
+import { describe, testFailure, testSuccess, it } from '@testing'
 
 describe('hex', () => {
   it('should succeed if given a hexadecimal number', () => {

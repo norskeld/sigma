@@ -1,7 +1,7 @@
 import { choice } from './choice'
 
-import { nothing } from '#parsers/nothing'
-import type { Parser } from '#state'
+import { nothing } from '@parsers/nothing'
+import type { Parser } from '@state'
 
 /**
  * Applies `parser`. Only fails if `parser` fails.

@@ -1,4 +1,4 @@
-import type { Parser } from '#state'
+import type { Parser } from '@state'
 
 /**
  * Replaces `parser`'s error message with `expected`.

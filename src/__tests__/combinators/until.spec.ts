@@ -1,6 +1,6 @@
-import { map, takeUntil, skipUntil } from '#combinators'
-import { any, regexp, string } from '#parsers'
-import { run, result, should, describe, testFailure, it } from '#testing'
+import { map, takeUntil, skipUntil } from '@combinators'
+import { any, regexp, string } from '@parsers'
+import { run, result, should, describe, testFailure, it } from '@testing'
 
 describe('takeUntil', () => {
   it('should succeed with a tuple of values if given a correct string', () => {
