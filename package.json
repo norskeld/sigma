@@ -36,10 +36,10 @@
     "build": "tsup",
     "fmt:lint": "eslint --fix --ext .js,.ts,.tsx .",
     "fmt:prettier": "prettier --write \"**/*.{js,ts,tsx,json}\"",
-    "postversion": "node --loader @esbuild-kit/esm-loader scripts/release.ts restore",
+    "postversion": "tsx scripts/release.ts restore",
     "prebuild": "rimraf dist",
     "prepare": "is-ci || husky install",
-    "prerelease": "node --loader @esbuild-kit/esm-loader scripts/release.ts prepare",
+    "prerelease": "tsx scripts/release.ts prepare",
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
     "test": "vitest",
@@ -70,7 +70,6 @@
   "homepage": "https://github.com/norskeld/sigma#readme",
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
-    "@esbuild-kit/esm-loader": "^2.5.0",
     "@nrsk/config-conventional": "^1.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
@@ -90,6 +89,7 @@
     "rimraf": "^3.0.2",
     "semantic-release": "^19.0.2",
     "tsup": "^6.2.3",
+    "tsx": "^3.10.1",
     "typescript": "^4.8.4",
     "vite-tsconfig-paths": "^3.5.1",
     "vitest": "^0.24.0"
