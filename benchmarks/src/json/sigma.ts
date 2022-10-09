@@ -1,5 +1,5 @@
-import { choice, sepBy, optional, map, takeMid, sequence } from '@nrsk/sigma/combinators'
-import { defer, float, int, regexp, run, string, whitespace } from '@nrsk/sigma/parsers'
+import { choice, sepBy, optional, map, takeMid, sequence } from '@combinators'
+import { defer, float, integer, regexp, run, string, whitespace } from '@parsers'
 
 import * as Ast from './ast'
 
@@ -95,7 +95,7 @@ function toNull(): Ast.JsonNull {
 /* Parsers. */
 
 // Non-Terminals.
-const NumberLiteral = choice(float(), int())
+const NumberLiteral = choice(float(), integer())
 
 const Space = optional(whitespace())
 const StringLiteral = regexp(/"([^"]|\\.)*"/g, 'string')
