@@ -55,13 +55,18 @@ async function main() {
           await access(`${cwd}/package.json`, constants.F_OK)
 
           // Copy necessary files.
+          //
+          // Strictly speaking, `package-lock.json` is not needed (and actually ignored when
+          // publishing to npm), but this is to allow semantic-release/npm to bump version in it as
+          // well, not only in the `package.json`.
           await copyFile(`${cwd}/package.json`, `${cwd}/dist/package.json`)
+          await copyFile(`${cwd}/package-lock.json`, `${cwd}/dist/package-lock.json`)
           await copyFile(`${cwd}/CHANGELOG.md`, `${cwd}/dist/CHANGELOG.md`)
           await copyFile(`${cwd}/README.md`, `${cwd}/dist/README.md`)
           await copyFile(`${cwd}/LICENSE`, `${cwd}/dist/LICENSE`)
 
-          // This is kinda needed for local publishes to `verdaccio`, so I do not accidentally
-          // publish my experiments to the actual `npm` registry.
+          // This is kinda needed for local publishes to verdaccio, so I do not accidentally
+          // publish my experiments to the actual npm registry.
           await copyFile(`${cwd}/.npmrc`, `${cwd}/dist/.npmrc`)
 
           return {
@@ -81,10 +86,11 @@ async function main() {
         try {
           // Copy back.
           await copyFile(`${cwd}/package.json`, resolve(cwd, '..', 'package.json'))
+          await copyFile(`${cwd}/package-lock.json`, resolve(cwd, '..', 'package-lock.json'))
 
           return {
             kind: 'success',
-            message: 'Successfully restored `package.json`.'
+            message: 'Successfully restored `package.json` and `package-lock.json`.'
           }
         } catch (error) {
           return {
