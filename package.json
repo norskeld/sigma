@@ -65,6 +65,10 @@
     "name": "Vladislav Mamon",
     "email": "hello@vm.codes"
   },
+  "contributors": [
+    "Vladislav Mamon <hello@vm.codes>",
+    "Danil Tarasov <thefedaikin@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/norskeld/sigma/issues"
