@@ -12,7 +12,7 @@ npm i
 npm run bench
 ```
 
-Ideally, if you want to explore the source code, you would need to invoke `npm i` at the root of the repository, otherwise, because of how everything is set up, TypeScript is gonna complain.
+Ideally, if you want to explore the source code, you will need to invoke `npm i` at the root of the repository, otherwise, because of how everything is set up, TypeScript is gonna complain.
 
 ## Notes
 
