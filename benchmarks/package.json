@@ -7,17 +7,13 @@
     "bench": "tsx src/index.ts",
     "bench:many": "tsx src/many/index.js",
     "bench:json": "tsx src/json/index.js",
-    "bench:tuple": "tsx src/tuple/index.js",
-    "start": "npm run build && npm run bench"
+    "bench:tuple": "tsx src/tuple/index.js"
   },
   "dependencies": {
     "benny": "^3.7.1",
     "parjs": "0.12.7"
   },
   "devDependencies": {
-    "@types/benchmark": "^2.1.1",
-    "@types/node": "^18.8.3",
-    "rimraf": "^3.0.2",
     "tsx": "^3.10.1",
     "typescript": "^4.8.4"
   }
