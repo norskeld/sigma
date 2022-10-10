@@ -6,13 +6,14 @@ Here you will find some benchmarks and rough performance comparison with similar
 
 Like a piece of cake.
 
+> **Note**
+>
+> Make sure to run `npm i` at the root of the repository as well before running benchmarks, because `benchmarks` depend on the `@nrsk/sigma` sources outside this package.
+
 ```shell
-cd benchmarks
 npm i
 npm run bench
 ```
-
-Ideally, if you want to explore the source code, you will need to invoke `npm i` at the root of the repository, otherwise, because of how everything is set up, TypeScript is gonna complain.
 
 ## Notes
 
