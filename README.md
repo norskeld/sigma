@@ -23,10 +23,22 @@ You can find the documentation [here][docs]. If you want to contribute, feel fre
 
 ## Installation
 
+### Node
+
 Just use your favorite package manager.
 
 ```bash
 npm i @nrsk/sigma
+```
+
+### Deno
+
+You can import the library via [Skypack] (note that `?dts` query parameter, that will pull types as well, **strongly** recommended):
+
+```ts
+import { ... } from 'https://cdn.skypack.dev/@nrsk/sigma?dts'
+import { ... } from 'https://cdn.skypack.dev/@nrsk/sigma/parsers?dts'
+import { ... } from 'https://cdn.skypack.dev/@nrsk/sigma/combinators?dts'
 ```
 
 ## Example
@@ -138,3 +150,4 @@ And in the end we get the following output with the AST, which can then be manip
 [docs]: https://sigma.vm.codes
 [docs-source]: ./docs
 [bench]: ./benchmarks
+[skypack]: https://skypack.dev
