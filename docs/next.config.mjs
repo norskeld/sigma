@@ -44,6 +44,9 @@ const headers = [
 export default {
   reactStrictMode: true,
 
+  eslint: {
+    ignoreDuringBuilds: true
+  },
   async redirects() {
     return [
       {

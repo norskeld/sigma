@@ -24,3 +24,4 @@ coverage
 # Dotenv files
 .env.local
 .env.*.local
+.turbo

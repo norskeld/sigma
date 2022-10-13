@@ -7,6 +7,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
+    "turbo",
     "plugin:import/recommended",
     "plugin:import/typescript"
   ],
@@ -45,6 +46,12 @@
         },
         "newlines-between": "always"
       }
+    ],
+    "turbo/no-undeclared-env-vars": [
+      "error",
+      {
+        "allowList": ["^NODE_ENV$", "^.*NEXT_PUBLIC.*$"]
+      }
     ]
   },
   "settings": {
@@ -54,7 +61,7 @@
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true,
-        "project": ["./tsconfig.json", "./*/tsconfig.json"]
+        "project": ["./*/tsconfig.json", "./packages/*/tsconfig.json"]
       }
     }
   }

@@ -1,15 +1,7 @@
 {
+  "extends": "@nrsk/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
-    "strict": true,
-    "target": "es2020",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "declaration": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "paths": {
       "@combinators": ["src/combinators"],
       "@combinators/*": ["src/combinators/*"],
@@ -22,5 +14,5 @@
       "@utils/*": ["src/utils/*"]
     }
   },
-  "include": ["benchmarks", "scripts", "src"]
+  "exclude": ["dist"]
 }

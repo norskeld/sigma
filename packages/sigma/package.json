@@ -1,0 +1,78 @@
+{
+  "name": "@nrsk/sigma",
+  "version": "3.1.0",
+  "description": "TypeScript parser combinator library for building fast and convenient parsers.",
+  "packageManager": "npm@8.10.0",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./combinators": {
+      "import": "./dist/combinators.js",
+      "require": "./dist/combinators.cjs",
+      "types": "./dist/combinators.d.ts"
+    },
+    "./parsers": {
+      "import": "./dist/parsers.js",
+      "require": "./dist/parsers.cjs",
+      "types": "./dist/parsers.d.ts"
+    }
+  },
+  "files": [
+    "CHANGELOG.md",
+    "dist/*.d.ts",
+    "dist/*.cjs*",
+    "dist/*.js*"
+  ],
+  "engines": {
+    "node": "^14.16.0 || ^16.10.0 || ^18.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "postversion": "tsx ../dist/scripts/release.ts restore",
+    "prebuild": "rimraf dist",
+    "prerelease": "tsx scripts/release.ts prepare",
+    "release": "npx semantic-release",
+    "release:dry": "npx semantic-release --dry-run",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@nrsk/tsconfig": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norskeld/sigma.git"
+  },
+  "keywords": [
+    "typescript",
+    "parser-combinators",
+    "parser",
+    "combinators",
+    "parsec",
+    "bnf",
+    "ebnf",
+    "abnf"
+  ],
+  "author": {
+    "name": "Vladislav Mamon",
+    "email": "hello@vm.codes"
+  },
+  "contributors": [
+    "Vladislav Mamon <hello@vm.codes>",
+    "Danil Tarasov <thefedaikin@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/norskeld/sigma/issues"
+  },
+  "homepage": "https://github.com/norskeld/sigma#readme"
+}

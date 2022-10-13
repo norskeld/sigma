@@ -1,6 +1,7 @@
 node_modules
 coverage
 dist
+.next
 
 # Ignore Markdown at the root.
 /*.md

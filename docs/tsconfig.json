@@ -1,4 +1,5 @@
 {
+  "extends": "@nrsk/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "preserve",

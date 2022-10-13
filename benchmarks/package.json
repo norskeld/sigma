@@ -10,11 +10,12 @@
     "bench:tuple": "tsx src/tuple/index.ts"
   },
   "dependencies": {
+    "@nrsk/sigma": "*",
     "benny": "^3.7.1",
     "parjs": "0.12.7"
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.2",
-    "tsx": "^3.10.1"
+    "@nrsk/tsconfig": "*"
   }
 }

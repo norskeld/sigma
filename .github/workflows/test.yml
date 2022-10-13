@@ -18,9 +18,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-          cache: 'npm'
       - name: Install Deps
-        run: npm ci
+        run: npm i
       - name: Build, Test & Coverage
         run: |
           npm run build
