@@ -19,7 +19,6 @@ jobs:
         with:
           node-version: '16'
           cache: 'npm'
-          architecture: 'x64'
       - name: Install Deps
         run: npm ci
       - name: Build, Test & Coverage
