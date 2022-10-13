@@ -57,5 +57,11 @@
     "*.{js,ts}": [
       "eslint --fix"
     ]
+  },
+  "optionalDependencies": {
+    "@next/swc-linux-x64-gnu": "^12.1.6",
+    "@next/swc-linux-x64-gnux32": "*",
+    "@next/swc-linux-x64-musl": "^12.1.6",
+    "turbo-linux-64": "^1.5.6"
   }
 }
