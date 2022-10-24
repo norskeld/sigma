@@ -4,7 +4,11 @@ kind: 'primitive'
 description: "when combinator allows to create chained, context-aware parsers, that may depend on the output of the context parser."
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function when<T, R extends Parser<unknown>>(
   context: Parser<T>,
   parser: (ctx: Context<T>) => R
@@ -17,34 +21,30 @@ function when<T, R extends Parser<unknown>>(
 
 ## Usage
 
-```typescript
+```ts
 const Parser = when(string('x'), () => string('y'))
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('xy')
 
-  ### Success
+{
+  isOk: true,
+  pos: 2,
+  value: 'y'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('xy')
+::: danger Failure
+```ts
+run(Parser).with('yy')
 
-  {
-    isOk: true,
-    pos: 2,
-    value: 'y'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('yy')
-
-  {
-    isOk: false,
-    pos: 1,
-    expected: 'x'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 1,
+  expected: 'x'
+}
+```
+:::

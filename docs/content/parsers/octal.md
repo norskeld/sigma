@@ -4,7 +4,11 @@ kind: 'composite'
 description: "octal parses an octal number prefixed with '0o' or '0O', e.g. '0o42', '0O42'. Returns a decimal number obtained using parseInt with radix of 8."
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function octal(): Parser<number>
 ```
 
@@ -14,37 +18,33 @@ function octal(): Parser<number>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = octal()
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('0o42')
 
-  ### Success
+{
+  isOk: true,
+  pos: 4,
+  value: 34
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('0o42')
+::: danger Failure
+```ts
+run(Parser).with('o42')
 
-  {
-    isOk: true,
-    pos: 4,
-    value: 34
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('o42')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'octal number'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'octal number'
+}
+```
+:::
 
 <!-- Links. -->
 

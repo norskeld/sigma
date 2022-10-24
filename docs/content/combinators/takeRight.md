@@ -4,7 +4,11 @@ kind: 'composite'
 description: 'takeRight combinator takes exactly two parsers and applies them in order. Returns the result of the rightmost parser.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function takeRight<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T2>
 ```
 
@@ -14,37 +18,33 @@ function takeRight<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T2>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = takeRight(
   sequence(string('let'), whitespace()),
   letters()
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('let binding')
 
-  ### Success
+{
+  isOk: true,
+  pos: 11,
+  value: 'binding'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('let binding')
+::: danger Failure
+```ts
+run(Parser).with('let 42')
 
-  {
-    isOk: true,
-    pos: 11,
-    value: 'binding'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('let 42')
-
-  {
-    isOk: false,
-    pos: 4,
-    expected: 'letters'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 4,
+  expected: 'letters'
+}
+```
+:::

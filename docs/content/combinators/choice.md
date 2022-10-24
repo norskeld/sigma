@@ -1,10 +1,13 @@
 ---
 title: 'choice'
-kind: 'primitive'
 description: 'choice combinator tries to apply parsers in order, until one of them succeeds. Returns a value of the succeeding parser.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>
 function choice<T>(...ps: Array<Parser<T>>): Parser<T>
 ```
@@ -15,37 +18,32 @@ function choice<T>(...ps: Array<Parser<T>>): Parser<T>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = choice(
   string('true'),
   string('false')
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('true')
 
-  ### Success
+{
+  isOk: true,
+  pos: 4,
+  value: 'true'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('true')
+::: danger Failure
+```ts
+run(Parser).with('maybe')
 
-  {
-    isOk: true,
-    pos: 4,
-    value: 'true'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('maybe')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'true'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'true'
+}
+:::

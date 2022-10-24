@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'sequence combinator applies parsers in order, until all of them succeed. Returns a tuple of values returned by parsers.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTuple<T>>
 function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>>
 ```
@@ -15,7 +19,7 @@ function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = sequence(
   string('hello'),
   whitespace(),
@@ -23,33 +27,29 @@ const Parser = sequence(
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('hello world')
 
-  ### Success
+{
+  isOk: true,
+  pos: 11,
+  value: [ 'hello', ' ', 'world' ]
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('hello world')
+::: danger Failure
+```ts
+run(Parser).with('hello friend')
 
-  {
-    isOk: true,
-    pos: 11,
-    value: [ 'hello', ' ', 'world' ]
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('hello friend')
-
-  {
-    isOk: false,
-    pos: 6,
-    expected: 'world'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 6,
+  expected: 'world'
+}
+```
+:::
 
 <!-- Links. -->
 

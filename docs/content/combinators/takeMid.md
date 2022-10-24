@@ -4,7 +4,11 @@ kind: 'composite'
 description: 'takeMid combinator takes exactly three parsers and applies them in order. Returns the result of the parser in the middle.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function takeMid<T1, T2, T3>(
   p1: Parser<T1>,
   p2: Parser<T2>,
@@ -18,7 +22,7 @@ function takeMid<T1, T2, T3>(
 
 ## Usage
 
-```typescript
+```ts
 const Parser = takeMid(
   sequence(string('fn'), whitespace()),
   letters(),
@@ -26,30 +30,26 @@ const Parser = takeMid(
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('fn multiply x y')
 
-  ### Success
+{
+  isOk: true,
+  pos: 15,
+  value: 'multiply'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('fn multiply x y')
+::: danger Failure
+```ts
+run(Parser).with('fn 100 x y')
 
-  {
-    isOk: true,
-    pos: 15,
-    value: 'multiply'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('fn 100 x y')
-
-  {
-    isOk: false,
-    pos: 3,
-    expected: 'letters'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 3,
+  expected: 'letters'
+}
+```
+:::

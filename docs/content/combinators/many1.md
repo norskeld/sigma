@@ -4,7 +4,11 @@ kind: 'composite'
 description: 'many1 combinator applies parser one or more times. Returns an array of the returned values of parser.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function many1<T>(parser: Parser<T>): Parser<Array<T>>
 ```
 
@@ -14,34 +18,30 @@ function many1<T>(parser: Parser<T>): Parser<Array<T>>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = many1(string('+'))
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('+++')
 
-  ### Success
+{
+  isOk: true,
+  pos: 3,
+  value: [ '+', '+', '+' ]
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('+++')
+::: danger Failure
+```ts
+run(Parser).with('---')
 
-  {
-    isOk: true,
-    pos: 3,
-    value: [ '+', '+', '+' ]
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('---')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'at least one successful application of the parser'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'at least one successful application of the parser'
+}
+```
+:::

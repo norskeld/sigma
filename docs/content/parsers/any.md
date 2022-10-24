@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'any parses any single character from the input and returns it; it fails at the end of input.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function any(): Parser<string>
 ```
 
@@ -14,35 +18,31 @@ function any(): Parser<string>
 
 ## Usage
 
-```typescript
+```ts
 const ManyParser = many(any())
 const SingleParser = any()
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(ManyParser).with('xyz')
 
-  ### Success
+{
+  isOk: true,
+  pos: 3,
+  value: [ 'x', 'y', 'z' ]
+}
+```
+:::
 
-  ```typescript
-  run(ManyParser).with('xyz')
+::: danger Failure
+```ts
+run(SingleParser).with('')
 
-  {
-    isOk: true,
-    pos: 3,
-    value: [ 'x', 'y', 'z' ]
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(SingleParser).with('')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'reached the end of input'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'reached the end of input'
+}
+```
+:::

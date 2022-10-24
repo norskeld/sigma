@@ -1,0 +1,42 @@
+/**
+ * Colors Theme
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-c-bg: var(--vp-c-white);
+  --vp-c-bg-soft: var(--vp-c-white-soft);
+  --vp-c-bg-mute: var(--vp-c-white-mute);
+  --vp-c-bg-alt: var(--vp-c-white-soft);
+
+  --vp-c-brand: var(--vp-c-black);
+  --vp-c-brand-light: var(--vp-c-black);
+  --vp-c-brand-lighter: var(--vp-c-black);
+  --vp-c-brand-dark: var(--vp-c-black);
+  --vp-c-brand-darker: var(--vp-c-black);
+
+  --vp-home-hero-name-color: var(--vp-c-black);
+
+  --vp-c-text-code: var(--vp-c-text-1);
+
+  --vp-code-block-bg: var(--vp-c-black);
+  --vp-code-line-highlight-color: #2e3338;
+}
+
+.dark {
+  --vp-c-bg: var(--vp-c-black-soft);
+  --vp-c-bg-soft: var(--vp-c-black-mute);
+  --vp-c-bg-mute: var(--vp-c-gray-dark-3);
+  --vp-c-bg-alt: var(--vp-c-black);
+
+  --vp-c-brand: var(--vp-c-white);
+  --vp-c-brand-light: var(--vp-c-white);
+  --vp-c-brand-lighter: var(--vp-c-white);
+  --vp-c-brand-dark: var(--vp-c-white);
+  --vp-c-brand-darker: var(--vp-c-white);
+
+  --vp-home-hero-name-color: var(--vp-c-white);
+
+  --vp-button-brand-text: var(--vp-c-black-soft);
+  --vp-button-brand-hover-text: var(--vp-c-black);
+  --vp-button-brand-active-text: var(--vp-c-black);
+}

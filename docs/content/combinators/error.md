@@ -1,10 +1,13 @@
 ---
 title: 'error'
-kind: 'primitive'
 description: 'error combinator allows to replace error message for parser.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function error<T>(parser: Parser<T>, expected: string): Parser<T>
 ```
 
@@ -14,7 +17,7 @@ function error<T>(parser: Parser<T>, expected: string): Parser<T>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = error(
   choice(
     string('true'),
@@ -24,30 +27,25 @@ const Parser = error(
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('true')
 
-  ### Success
+{
+  isOk: true,
+  pos: 4,
+  value: 'true'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('true')
+::: danger Failure
+```ts
+run(Parser).with('maybe')
 
-  {
-    isOk: true,
-    pos: 4,
-    value: 'true'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('maybe')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: "expecting either 'true' or 'false'"
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: "expecting either 'true' or 'false'"
+}
+:::

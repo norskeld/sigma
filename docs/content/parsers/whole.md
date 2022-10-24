@@ -4,7 +4,11 @@ kind: 'composite'
 description: "whole parses a positive whole number without leading zeros, e.g. '0', '7', '420'. Returns a decimal number obtained using parseInt with radix of 10."
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function whole(): Parser<number>
 ```
 
@@ -14,16 +18,12 @@ function whole(): Parser<number>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = whole()
 ```
 
-<details>
-  <summary>Output</summary>
-
-  ### Success
-
-  ```typescript
+::: tip Success
+  ```ts
   run(Parser).with('42')
 
   {
@@ -32,10 +32,10 @@ const Parser = whole()
     value: 42
   }
   ```
+:::
 
-  ### Failure
-
-  ```typescript
+::: danger Failure
+  ```ts
   run(Parser).with('x')
 
   {
@@ -44,7 +44,7 @@ const Parser = whole()
     expected: 'whole number'
   }
   ```
-</details>
+:::
 
 <!-- Links. -->
 

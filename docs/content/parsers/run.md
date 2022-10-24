@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'run is not a parser, but is used to run parser with provided input.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 interface Runnable<T> {
   with(input: string): Result<T>
 }
@@ -18,30 +22,26 @@ function run<T>(parser: Parser<T>): Runnable<T>
 
 ## Usage
 
-```typescript
+```ts
 run(string('hello world')).with('hello world')
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+{
+  isOk: true,
+  pos: 11,
+  value: 'hello world'
+}
+```
+:::
 
-  ### Success
-
-  ```typescript
-  {
-    isOk: true,
-    pos: 11,
-    value: 'hello world'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'hello world'
-  }
-  ```
-</details>
+::: danger Failure
+```ts
+{
+  isOk: false,
+  pos: 0,
+  expected: 'hello world'
+}
+```
+:::

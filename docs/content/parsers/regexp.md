@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'regexp parses a string that matches a provided regular expression. Returns the matched string, or fails with a provided message.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function regexp(re: RegExp, expected: string): Parser<string>
 ```
 
@@ -22,34 +26,30 @@ The regular expression must obey three simple rules:
 
 ## Usage
 
-```typescript
+```ts
 const Parser = regexp(/\p{Emoji_Presentation}/gu, 'emoji')
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('👌')
 
-  ### Success
+{
+  isOk: true,
+  pos: 2,
+  value: '👌'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('👌')
+::: danger Failure
+```ts
+run(Parser).with('大')
 
-  {
-    isOk: true,
-    pos: 2,
-    value: '👌'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('大')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'emoji'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'emoji'
+}
+```
+:::

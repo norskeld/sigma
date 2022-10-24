@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'defer is a special parser that is tailored for creating mutually recursive parsers.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 interface Deferred<T> extends Parser<T> {
   with(parser: Parser<T>): void
 }
@@ -18,16 +22,14 @@ function defer<T>(): Deferred<T>
 
 ## Example
 
-<details>
-  <summary>Combinators and parsers used in this section</summary>
-
-  - Combinators: [choice], [sepBy], [map], [takeMid]
-  - Parsers: [defer], [integer], [string]
-</details>
+::: info Combinators and parsers used in this section
+- Combinators: [choice], [sepBy], [map], [takeMid]
+- Parsers: [defer], [integer], [string]
+:::
 
 In the example below we are parsing simple nested tuples like `(1,2,(3,(4,5)))` into an AST, which then can be somehow manipulated.
 
-```typescript
+```ts
 interface NumberNode {
   type: 'number'
   value: number
@@ -62,13 +64,14 @@ TupleList.with(
 
 If we run our parser and feed it with input:
 
-```typescript
+```ts
 run(TupleList).with('(1,2,(3,(4,5)))')
 ```
 
 We will get the following result:
 
-```typescript
+::: tip Success
+```ts
 {
   isOk: true,
   pos: 15,
@@ -94,6 +97,7 @@ We will get the following result:
   }
 }
 ```
+:::
 
 <!-- Combinators. -->
 

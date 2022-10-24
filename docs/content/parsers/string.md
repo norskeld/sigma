@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'string parses an ASCII string. Returns the parsed string.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function string(match: string): Parser<string>
 ```
 
@@ -16,37 +20,33 @@ function string(match: string): Parser<string>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = string('hello')
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('hello')
 
-  ### Success
+{
+  isOk: true,
+  pos: 5,
+  value: 'hello'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('hello')
+::: danger Failure
+```ts
+run(Parser).with('bye')
 
-  {
-    isOk: true,
-    pos: 5,
-    value: 'hello'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('bye')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'hello'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'hello'
+}
+```
+:::
 
 <!-- Parsers. -->
 

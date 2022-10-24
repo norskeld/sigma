@@ -4,7 +4,11 @@ kind: 'composite'
 description: 'eol only succeeds at the end of the line with a matched line break character.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function eol(): Parser<string>
 ```
 
@@ -14,7 +18,7 @@ function eol(): Parser<string>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = sequence(
   sequence(string('<start>'), eol()),
   sequence(string('<body>'), eol()),
@@ -22,34 +26,30 @@ const Parser = sequence(
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with(`<start>\n<body>\n<end>\n`)
 
-  ### Success
+{
+  isOk: true,
+  pos: 21,
+  value: [
+    [ '<start>', '\n' ],
+    [ '<body>', '\n' ],
+    [ '<end>', '\n' ]
+  ]
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with(`<start>\n<body>\n<end>\n`)
+::: danger Failure
+```ts
+run(Parser).with(`<start>\n<body><end>\n`)
 
-  {
-    isOk: true,
-    pos: 21,
-    value: [
-      [ '<start>', '\n' ],
-      [ '<body>', '\n' ],
-      [ '<end>', '\n' ]
-    ]
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with(`<start>\n<body><end>\n`)
-
-  {
-    isOk: false,
-    pos: 14,
-    expected: 'end of line'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 14,
+  expected: 'end of line'
+}
+```
+:::

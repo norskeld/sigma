@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'nothing simply resolves to null.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function nothing(): Parser<null>
 ```
 
