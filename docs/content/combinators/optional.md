@@ -4,7 +4,11 @@ kind: 'composite'
 description: 'optional combinator tries to apply parser. Returns the result of parser or null, and only fails if parser fails.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function optional<T>(parser: Parser<T>): Parser<T | null>
 ```
 
@@ -14,37 +18,33 @@ function optional<T>(parser: Parser<T>): Parser<T | null>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = sequence(
   optional(string('-')),
   whole()
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('-2')
 
-  ### Success
+{
+  isOk: true,
+  pos: 2,
+  value: [ '-', 2 ]
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('-2')
+::: danger Failure
+```ts
+run(Parser).with('~2')
 
-  {
-    isOk: true,
-    pos: 2,
-    value: [ '-', 2 ]
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('~2')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'whole number'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'whole number'
+}
+```
+:::

@@ -4,7 +4,11 @@ kind: 'composite'
 description: "binary parses a binary number prefixed with '0b' or '0B', e.g. '0b10', '0B10'. Returns a decimal number obtained using parseInt with radix of 2."
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function binary(): Parser<number>
 ```
 
@@ -14,37 +18,33 @@ function binary(): Parser<number>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = binary()
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('0b10')
 
-  ### Success
+{
+  isOk: true,
+  pos: 4,
+  value: 2
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('0b10')
+::: danger Failure
+```ts
+run(Parser).with('b10')
 
-  {
-    isOk: true,
-    pos: 4,
-    value: 2
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('b10')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'binary number'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'binary number'
+}
+```
+:::
 
 <!-- Links. -->
 

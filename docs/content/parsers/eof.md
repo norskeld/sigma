@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'eof only succeeds at the end of the input.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function eof(): Parser<null>
 ```
 
@@ -14,7 +18,7 @@ function eof(): Parser<null>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = sequence(
   string('<start>'),
   string('<body>'),
@@ -23,30 +27,26 @@ const Parser = sequence(
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with(`<start><body><end>`)
 
-  ### Success
+{
+  isOk: true,
+  pos: 18,
+  value: [ '<start>', '<body>', '<end>', null ]
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with(`<start><body><end>`)
+::: danger Failure
+```ts
+run(Parser).with(`<start><body><end>\n`)
 
-  {
-    isOk: true,
-    pos: 18,
-    value: [ '<start>', '<body>', '<end>', null ]
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with(`<start><body><end>\n`)
-
-  {
-    isOk: false,
-    pos: 18,
-    expected: 'end of input'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 18,
+  expected: 'end of input'
+}
+```
+:::

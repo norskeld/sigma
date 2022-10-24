@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'noneOf ensures that none of the characters in the given string matches the current character.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function noneOf(): Parser<string>
 ```
 
@@ -14,34 +18,30 @@ function noneOf(): Parser<string>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = noneOf('xyz')
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('q-combinator')
 
-  ### Success
+{
+  isOk: true,
+  pos: 1,
+  value: 'q'
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('q-combinator')
+::: danger Failure
+```ts
+run(Parser).with('q-combinator')
 
-  {
-    isOk: true,
-    pos: 1,
-    value: 'q'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('q-combinator')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'none of: x, y, z'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'none of: x, y, z'
+}
+```
+:::

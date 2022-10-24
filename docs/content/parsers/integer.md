@@ -4,7 +4,11 @@ kind: 'composite'
 description: "integer parses an integer number with an optional minus sign, e.g. '0', '-7', '420'. Returns a decimal number obtained using parseInt with radix of 10."
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function integer(): Parser<number>
 ```
 
@@ -14,37 +18,33 @@ function integer(): Parser<number>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = integer()
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('-42')
 
-  ### Success
+{
+  isOk: true,
+  pos: 3,
+  value: -42
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('-42')
+::: danger Failure
+```ts
+run(Parser).with('x')
 
-  {
-    isOk: true,
-    pos: 3,
-    value: -42
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('x')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'integer number'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'integer number'
+}
+```
+:::
 
 <!-- Links. -->
 

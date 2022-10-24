@@ -5,6 +5,7 @@
   "useTabs": false,
   "singleQuote": true,
   "trailingComma": "none",
+  "embeddedLanguageFormatting": "off",
   "overrides": [
     {
       "files": ["*.ts"],

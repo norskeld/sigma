@@ -4,7 +4,11 @@ kind: 'composite'
 description: "float parses a float number with an optional minus sign, e.g. '0.25', '-7.90', '4.20'. Returns a decimal number obtained using parseInt with radix of 8."
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function float(): Parser<number>
 ```
 
@@ -16,37 +20,33 @@ function float(): Parser<number>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = float()
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('-42.0')
 
-  ### Success
+{
+  isOk: true,
+  pos: 5,
+  value: -42
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('-42.0')
+::: danger Failure
+```ts
+run(Parser).with('42')
 
-  {
-    isOk: true,
-    pos: 5,
-    value: -42
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('42')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'float number'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'float number'
+}
+```
+:::
 
 <!-- Links. -->
 

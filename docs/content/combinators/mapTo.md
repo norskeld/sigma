@@ -4,7 +4,11 @@ kind: 'composite'
 description: "mapTo combinator maps the parser's result to a constant value."
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function mapTo<T, R>(parser: Parser<T>, value: R): Parser<R>
 ```
 
@@ -14,37 +18,33 @@ function mapTo<T, R>(parser: Parser<T>, value: R): Parser<R>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = mapTo(
   sequence(integer(), string('+'), integer()),
   5
 )
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('2+2')
 
-  ### Success
+{
+  isOk: true,
+  pos: 3,
+  value: 5
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('2+2')
+::: danger Failure
+```ts
+run(Parser).with('2-2')
 
-  {
-    isOk: true,
-    pos: 3,
-    value: 5
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('2-2')
-
-  {
-    isOk: false,
-    pos: 1,
-    expected: '+'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 1,
+  expected: '+'
+}
+```
+:::

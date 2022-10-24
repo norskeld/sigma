@@ -4,7 +4,11 @@ kind: 'composite'
 description: 'letter parses a single alphabetical character. Returns the matched character. Unicode friendly.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function letter(): Parser<string>
 ```
 
@@ -14,44 +18,40 @@ function letter(): Parser<string>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = letter()
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('X')
 
-  ### Success
+{
+  isOk: true,
+  pos: 1,
+  value: 'X'
+}
+```
+---
+```ts
+run(Parser).with('こ')
 
-  ```typescript
-  run(Parser).with('X')
+{
+  isOk: true,
+  pos: 1,
+  value: 'こ'
+}
+```
+:::
 
-  {
-    isOk: true,
-    pos: 1,
-    value: 'X'
-  }
-  ```
+::: danger Failure
+```ts
+run(Parser).with('8')
 
-  ```typescript
-  run(Parser).with('こ')
-
-  {
-    isOk: true,
-    pos: 1,
-    value: 'こ'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('8')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'letter'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: 'letter'
+}
+```
+:::

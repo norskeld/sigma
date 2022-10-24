@@ -4,7 +4,11 @@ kind: 'composite'
 description: 'whitespace parses whitespace, either a single character or consecutive ones. Returns the matched character(s).'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function whitespace(): Parser<string>
 ```
 
@@ -14,34 +18,30 @@ function whitespace(): Parser<string>
 
 ## Usage
 
-```typescript
+```ts
 const Parser = sequence(string('hello'), whitespace(), string('world'))
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+```ts
+run(Parser).with('hello world')
 
-  ### Success
+{
+  isOk: true,
+  pos: 11,
+  value: [ 'hello', ' ', 'world' ]
+}
+```
+:::
 
-  ```typescript
-  run(Parser).with('hello world')
+::: danger Failure
+```ts
+run(Parser).with('helloworld')
 
-  {
-    isOk: true,
-    pos: 11,
-    value: [ 'hello', ' ', 'world' ]
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('helloworld')
-
-  {
-    isOk: false,
-    pos: 5,
-    expected: 'whitespace'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 5,
+  expected: 'whitespace'
+}
+```
+:::

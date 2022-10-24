@@ -4,7 +4,11 @@ kind: 'primitive'
 description: 'ustring parses a Unicode string. Returns the parsed string.'
 ---
 
-```typescript {{ withLineNumbers: false }}
+# {{ $frontmatter.title }}
+
+## Signature
+
+```ts
 function ustring(match: string): Parser<string>
 ```
 
@@ -22,39 +26,35 @@ It was tested on code points from the [Basic Multilingual Plane][bmp], but vario
 
 ## Usage
 
-```typescript
+```ts
 const Parser = ustring('语言处理')
 ```
 
-<details>
-  <summary>Output</summary>
+::: tip Success
+Note that the index is **12**, which is correct, since every hieroglyph here takes **3 bytes**.
 
-  ### Success
+```ts{5}
+run(Parser).with('语言处理')
 
-  Note that the index is **12**, which is correct, since every hieroglyph here takes **3 bytes**.
+{
+  isOk: true,
+  pos: 12,
+  value: '语言处理'
+}
+```
+:::
 
-  ```typescript {{ highlight: [5] }}
-  run(Parser).with('语言处理')
+::: danger Failure
+```ts
+run(Parser).with('语言')
 
-  {
-    isOk: true,
-    pos: 12,
-    value: '语言处理'
-  }
-  ```
-
-  ### Failure
-
-  ```typescript
-  run(Parser).with('语言')
-
-  {
-    isOk: false,
-    pos: 0,
-    expected: '语言处理'
-  }
-  ```
-</details>
+{
+  isOk: false,
+  pos: 0,
+  expected: '语言处理'
+}
+```
+:::
 
 <!-- Links. -->
 
