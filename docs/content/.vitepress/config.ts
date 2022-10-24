@@ -1,4 +1,4 @@
-import { defineConfig, type MarkdownOptions, type DefaultTheme } from 'vitepress'
+import { defineConfig, type HeadConfig, type MarkdownOptions, type DefaultTheme } from 'vitepress'
 
 import { format, Sidebar, Social, Nav } from './helpers'
 import { Github, Npm } from './icons'
@@ -9,18 +9,80 @@ const NPM_URL = 'https://npm.im/@nrsk/sigma'
 export default defineConfig({
   lang: 'en-US',
   title: 'Sigma',
-  titleTemplate: 'Sigma',
+  titleTemplate: false,
   description: 'TypeScript parser combinator library for building fast and convenient parsers.',
 
-  appearance: 'dark',
   lastUpdated: true,
 
   outDir: '../dist',
   cleanUrls: 'with-subfolders',
 
+  head: getHeadConfig(),
   markdown: getMarkdownConfig(),
   themeConfig: getThemeConfig()
 })
+
+function getHeadConfig(): Array<HeadConfig> {
+  return [
+    // Additional link tags.
+    [
+      'link',
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/favicon/apple-touch-icon.png'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon/favicon-32x32.png'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon/favicon-16x16.png'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'mask-icon',
+        color: '#5bbad5',
+        href: '/favicon/safari-pinned-tab.svg'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'manifest',
+        href: '/favicon/site.webmanifest'
+      }
+    ],
+    // Additional meta tags.
+    [
+      'meta',
+      {
+        name: 'theme-color',
+        content: '#ffffff'
+      }
+    ],
+    [
+      'meta',
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      }
+    ]
+  ]
+}
 
 function getMarkdownConfig(): MarkdownOptions {
   return {
