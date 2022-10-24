@@ -45,8 +45,8 @@ function getThemeConfig(): DefaultTheme.Config {
 function getNav() {
   const items = getSidebar().flatMap((item) => item.items)
 
-  const combinators = items.filter((item) => item.link?.startsWith('/combinators')).at(0)!
-  const parsers = items.filter((item) => item.link?.startsWith('/parsers')).at(0)!
+  const [combinators] = items.filter((item) => item.link?.startsWith('/combinators'))
+  const [parsers] = items.filter((item) => item.link?.startsWith('/parsers'))
 
   return [Nav.item('Combinators', combinators.link!), Nav.item('Parsers', parsers.link!)]
 }
