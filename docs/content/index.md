@@ -5,6 +5,10 @@ hero:
   name: Sigma
   tagline: TypeScript parser combinator library for building fast and convenient parsers
 
+  image:
+    src: /images/bg.svg
+    alt: Sigma
+
   actions:
     - theme: brand
       text: Get Started
