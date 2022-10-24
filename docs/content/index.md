@@ -1,6 +1,5 @@
 ---
 layout: home
-title: TypeScript parser combinator library for building fast and convenient parsers
 
 hero:
   name: Sigma
