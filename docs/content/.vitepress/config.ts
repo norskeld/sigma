@@ -92,6 +92,11 @@ function getMarkdownConfig(): MarkdownOptions {
 
 function getThemeConfig(): DefaultTheme.Config {
   return {
+    logo: {
+      light: '/images/logo-light.svg',
+      dark: '/images/logo-dark.svg'
+    },
+
     editLink: {
       text: 'Edit this page on GitHub',
       pattern: `${GH_URL}/edit/master/docs/docs/:path`
