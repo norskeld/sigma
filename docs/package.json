@@ -9,7 +9,7 @@
     "serve": "vitepress serve content"
   },
   "devDependencies": {
-    "vitepress": "^1.0.0-alpha.22",
+    "vitepress": "^1.0.0-alpha.25",
     "vue": "^3.2.41"
   }
 }

@@ -1,0 +1,7 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+  <title>Sigma</title>
+  <g fill="none" fill-rule="evenodd">
+    <rect fill="#ffffff" width="24" height="24" rx="5"/>
+    <path fill="#1a1a1a" fill-rule="nonzero" d="M14.37 11.92v.15l-3.25 4.52h5.42V19H7v-1.44L11.23 12 7 6.45V5h9.54v2.41h-5.42z"/>
+  </g>
+</svg>
