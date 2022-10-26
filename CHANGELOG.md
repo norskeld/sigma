@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/norskeld/sigma/compare/v3.1.0...v3.1.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* **vitest:** fix coverage collection ([91a1f9b](https://github.com/norskeld/sigma/commit/91a1f9bd5e9cd545ad2e9fefb66d792894146b59))
+
 # [3.1.0](https://github.com/norskeld/sigma/compare/v3.0.0...v3.1.0) (2022-10-08)
 
 

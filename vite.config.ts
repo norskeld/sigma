@@ -5,8 +5,10 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     coverage: {
+      all: true,
       provider: 'istanbul',
-      reporter: ['text', 'lcov']
+      reporter: ['text', 'lcov'],
+      include: ['src/**/*.ts']
     }
   }
 })
