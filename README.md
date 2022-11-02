@@ -12,10 +12,12 @@ TypeScript [parser combinator][parser-combinator] library for building fast and 
 
 ## Features
 
-- [x] Tailored for parsing [context-free grammars][cfg].
+- [x] Capable of parsing [LL grammars][ll-grammar] using [recursive descent][rd] with backtracking.
 - [x] Ergonomic API with excellent TypeScript support.
 - [x] Zero dependencies. Supports tree shaking.
 - [x] [Performant enough][bench] to beat similar parser combinator libraries.
+
+All-in-all, Sigma is easy to use and extend, reasonably fast and convenient, *but* a bit limited regarding what types of grammars it can parse.
 
 ## Docs
 
@@ -145,6 +147,8 @@ And in the end we get the following output with the AST, which can then be manip
 
 <!-- Links. -->
 
+[ll-grammar]: https://en.wikipedia.org/wiki/LL_grammar
+[rd]: https://en.wikipedia.org/wiki/Recursive_descent_parser
 [parser-combinator]: https://en.wikipedia.org/wiki/Parser_combinator
 [cfg]: https://en.wikipedia.org/wiki/Context-free_grammar
 [docs]: https://sigma.vm.codes
