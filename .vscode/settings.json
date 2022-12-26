@@ -1,6 +1,4 @@
 {
-  "cSpell.enabledLanguageIds": ["markdown"],
-  "cSpell.useGitignore": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.rulers": [100],
   "editor.formatOnSave": true,
@@ -10,16 +8,8 @@
   },
   "json.schemas": [
     {
-      "fileMatch": ["/tsconfig.*.json"],
-      "url": "http://json.schemastore.org/tsconfig"
-    },
-    {
       "fileMatch": ["/.prettierrc", "/.prettierrc.json"],
       "url": "http://json.schemastore.org/prettierrc"
-    },
-    {
-      "fileMatch": ["/.lintstagedrc", "/.lintstagedrc.json"],
-      "url": "http://json.schemastore.org/lintstagedrc.schema"
     }
   ]
 }
