@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'takeMid combinator takes exactly three parsers and applies them in order. Returns the result of the parser in the middle.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Composite />
 
 ## Signature
 

@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'optional combinator tries to apply parser. Returns the result of parser or null, and only fails if parser fails.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Composite />
 
 ## Signature
 

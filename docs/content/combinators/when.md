@@ -4,7 +4,7 @@ kind: 'primitive'
 description: "when combinator allows to create chained, context-aware parsers, that may depend on the output of the context parser."
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 

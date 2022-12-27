@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'oneOf ensures that one of the characters in the given string matches the current character.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 

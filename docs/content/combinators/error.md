@@ -1,9 +1,10 @@
 ---
 title: 'error'
+kind: 'primitive'
 description: 'error combinator allows to replace error message for parser.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 

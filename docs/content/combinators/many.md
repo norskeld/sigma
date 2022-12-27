@@ -1,9 +1,10 @@
 ---
 title: 'many'
+kind: 'primitive'
 description: 'many combinator applies parser zero or more times. Returns an array of the returned values of parser.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 

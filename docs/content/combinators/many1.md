@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'many1 combinator applies parser one or more times. Returns an array of the returned values of parser.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 
