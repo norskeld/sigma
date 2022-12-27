@@ -1,0 +1,22 @@
+.kind {
+  display: inline-block;
+  padding: 0 0.4rem;
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1.25rem;
+  vertical-align: middle;
+}
+
+.kind--composite {
+  border-color: var(--vp-badge-warning-border);
+  background-color: var(--vp-badge-warning-bg);
+  color: var(--vp-badge-warning-text);
+}
+
+.kind--primitive {
+  border-color: var(--vp-badge-tip-border);
+  background-color: var(--vp-badge-tip-bg);
+  color: var(--vp-badge-tip-text);
+}
