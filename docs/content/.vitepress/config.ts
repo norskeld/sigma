@@ -129,6 +129,9 @@ function getSidebar() {
     Sidebar.group('Introduction', '/introduction', [
       Sidebar.item('Getting started', '/getting-started')
     ]),
+    Sidebar.group('Guides', '/guides', [
+      Sidebar.item('Primitives and composites', '/primitives-and-composites')
+    ]),
     Sidebar.group('Combinators', '/combinators', [
       Sidebar.item('chainl', '/chainl'),
       Sidebar.item('choice', '/choice'),
