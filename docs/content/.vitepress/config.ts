@@ -15,6 +15,8 @@ export default defineConfig({
   lastUpdated: true,
 
   outDir: '../dist',
+  cacheDir: '../cache',
+
   cleanUrls: 'with-subfolders',
 
   head: getHeadConfig(),
