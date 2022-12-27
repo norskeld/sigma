@@ -4,7 +4,7 @@ kind: 'composite'
 description: "binary parses a binary number prefixed with '0b' or '0B', e.g. '0b10', '0B10'. Returns a decimal number obtained using parseInt with radix of 2."
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Composite />
 
 ## Signature
 

@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'any parses any single character from the input and returns it; it fails at the end of input.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 

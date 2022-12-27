@@ -4,7 +4,7 @@ kind: 'composite'
 description: "float parses a float number with an optional minus sign, e.g. '0.25', '-7.90', '4.20'. Returns a decimal number obtained using parseInt with radix of 8."
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Composite />
 
 ## Signature
 

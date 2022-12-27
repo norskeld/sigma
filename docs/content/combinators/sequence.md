@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'sequence combinator applies parsers in order, until all of them succeed. Returns a tuple of values returned by parsers.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 

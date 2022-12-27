@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'rest simply returns the unparsed input as a string. Never fails.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 

@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'regexp parses a string that matches a provided regular expression. Returns the matched string, or fails with a provided message.'
 ---
 
-# {{ $frontmatter.title }}
+# {{ $frontmatter.title }} <Primitive />
 
 ## Signature
 
