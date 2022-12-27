@@ -5,12 +5,14 @@ import './Type.css'
 export const Composite = defineComponent({
   setup() {
     return () => (
-      <span
-        title="Composite parsers and combinators are built using other parsers/combinators."
-        class="kind kind--composite"
-      >
-        composite
-      </span>
+      <a href="/guides/primitives-and-composites#composite">
+        <span
+          title="Composite parsers and combinators are built using other parsers/combinators."
+          class="kind kind--composite"
+        >
+          composite
+        </span>
+      </a>
     )
   }
 })
@@ -18,12 +20,14 @@ export const Composite = defineComponent({
 export const Primitive = defineComponent({
   setup() {
     return () => (
-      <span
-        title="Primitive parsers and combinators are not using other parsers/combinators as building blocks."
-        class="kind kind--primitive"
-      >
-        primitive
-      </span>
+      <a href="/guides/primitives-and-composites#primitive">
+        <span
+          title="Primitive parsers and combinators are built without using other parsers/combinators."
+          class="kind kind--primitive"
+        >
+          primitive
+        </span>
+      </a>
     )
   }
 })
