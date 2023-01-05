@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/norskeld/sigma/compare/v3.1.1...v3.1.2) (2023-01-05)
+
+
+### Bug Fixes
+
+* **combinators/many:** fix an edge case when combined with `noneOf` ([4630bf4](https://github.com/norskeld/sigma/commit/4630bf4e53749b91efb906be8ece5429aa74eddb))
+
 ## [3.1.1](https://github.com/norskeld/sigma/compare/v3.1.0...v3.1.1) (2022-10-25)
 
 
