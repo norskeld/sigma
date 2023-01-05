@@ -12,6 +12,14 @@ export function oneOf(chars: string): Parser<string> {
 
   return {
     parse(input, pos) {
+      if (input.length === pos) {
+        return {
+          isOk: false,
+          pos,
+          expected: 'oneOf @ reached the end of input'
+        }
+      }
+
       const nextPos = pos + 1
       const char = input.substring(pos, nextPos)
 
