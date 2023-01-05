@@ -19,11 +19,20 @@ describe('many', () => {
     should.matchState(actual, expected)
   })
 })
+
 describe('many1', () => {
   it('should succeed with an array of matched strings', () => {
     const parser = many1(string('x!'))
     const actual = run(parser, 'x!x!x!')
     const expected = result(true, ['x!', 'x!', 'x!'])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed exactly one time', () => {
+    const parser = many1(string('x!'))
+    const actual = run(parser, 'x!y!y!')
+    const expected = result(true, ['x!'])
 
     should.matchState(actual, expected)
   })
