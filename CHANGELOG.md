@@ -1,3 +1,11 @@
+## [3.1.3](https://github.com/norskeld/sigma/compare/v3.1.2...v3.1.3) (2023-01-05)
+
+
+### Bug Fixes
+
+* **parsers/noneOf:** halt at reaching eoi ([06779bd](https://github.com/norskeld/sigma/commit/06779bd77babd2dc523782d0ffa3f6419071a18f))
+* **parsers/oneOf:** halt at reaching eoi ([b20f2a2](https://github.com/norskeld/sigma/commit/b20f2a25a523794de68fb4416e885697b2d46dfb))
+
 ## [3.1.2](https://github.com/norskeld/sigma/compare/v3.1.1...v3.1.2) (2023-01-05)
 
 
