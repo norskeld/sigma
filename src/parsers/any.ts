@@ -12,7 +12,7 @@ export function any(): Parser<string> {
         return {
           isOk: false,
           pos,
-          expected: 'reached the end of input'
+          expected: 'any @ reached the end of input'
         }
       }
 
