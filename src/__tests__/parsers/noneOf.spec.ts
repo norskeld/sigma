@@ -1,4 +1,5 @@
-import { noneOf } from '@parsers'
+import { sequence } from '@combinators'
+import { string, noneOf } from '@parsers'
 import { run, result, should, describe, testFailure, it } from '@testing'
 
 describe('noneOf', () => {
@@ -11,5 +12,9 @@ describe('noneOf', () => {
 
   it('should fail if input character is among given ones', () => {
     testFailure('y-combinator', noneOf('xyz'))
+  })
+
+  it('should fail if reached the end of input', () => {
+    testFailure('prefix', sequence(string('prefix'), noneOf('XY')))
   })
 })

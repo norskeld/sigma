@@ -12,6 +12,14 @@ export function noneOf(chars: string): Parser<string> {
 
   return {
     parse(input, pos) {
+      if (input.length === pos) {
+        return {
+          isOk: false,
+          pos,
+          expected: 'noneOf @ reached the end of input'
+        }
+      }
+
       const nextPos = pos + 1
       const char = input.substring(pos, nextPos)
 
