@@ -19,7 +19,7 @@ function regexp(rs: RegExp, expected: string): Parser<string>
 ## Implementation notes
 
 ::: warning
-It automatically injects `g` flag if it's *not* present so the parser will work correctly.
+If `g` flag is missing, it will be automatically injected. It's still better to always provide it to avoid small performance penalty and clearly document the intention.
 :::
 
 The regular expression must obey two simple rules:

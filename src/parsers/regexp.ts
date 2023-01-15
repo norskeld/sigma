@@ -9,6 +9,9 @@ import type { Parser } from '@types'
  * - It *does* use `g` flag. Flags like u and i are allowed and can be added if needed.
  * - It *doesn't* use `^` and `$` to match at the beginning or at the end of the text.
  *
+ * If `g` flag is missing, it will be automatically injected. It's still better to always provide it
+ * to avoid small performance penalty and clearly document the intention.
+ *
  * @param rs - Regular expression
  * @param expected - Error message if the regular expression does not match input
  *
