@@ -1,3 +1,10 @@
+## [3.1.4](https://github.com/norskeld/sigma/compare/v3.1.3...v3.1.4) (2023-01-14)
+
+
+### Bug Fixes
+
+* **types:** fix toUnion signature to correctly infer type ([4dca5e0](https://github.com/norskeld/sigma/commit/4dca5e0f7adb876ef0aa8bc7378a5bdca1affdcd))
+
 ## [3.1.3](https://github.com/norskeld/sigma/compare/v3.1.2...v3.1.3) (2023-01-05)
 
 

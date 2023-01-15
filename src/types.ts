@@ -54,7 +54,9 @@ export type ToTuple<T> = T extends [Parser<infer Head>, ...infer Tail]
  * type R = ToUnion<U> // type R = string | number | boolean
  * ```
  */
-export type ToUnion<T> = T extends [Parser<infer Head>, ...infer Tail]
+export type ToUnion<T> = T extends Array<Parser<infer Inner>>
+  ? Inner
+  : T extends [Parser<infer Head>, ...infer Tail]
   ? Head | ToUnion<Tail>
   : never
 
