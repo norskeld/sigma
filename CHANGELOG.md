@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/norskeld/sigma/compare/v3.1.4...v3.2.0) (2023-01-15)
+
+
+### Features
+
+* **parsers/regexp:** add injection of global flag if it's not present ([#61](https://github.com/norskeld/sigma/issues/61)) ([90f86d3](https://github.com/norskeld/sigma/commit/90f86d3e8a63e700fb02992886c51d7a2a2861b8))
+
 ## [3.1.4](https://github.com/norskeld/sigma/compare/v3.1.3...v3.1.4) (2023-01-14)
 
 
