@@ -1,4 +1,5 @@
-import { defineConfig, type HeadConfig, type MarkdownOptions, type DefaultTheme } from 'vitepress'
+import type { HeadConfig, MarkdownOptions, DefaultTheme } from 'vitepress'
+import { defineConfig } from 'vitepress'
 
 import { format, Sidebar, Social, Nav } from './helpers'
 import { Github, Npm } from './icons'
@@ -171,6 +172,7 @@ function getSidebar() {
       Sidebar.item('rest', '/rest'),
       Sidebar.item('run', '/run'),
       Sidebar.item('string', '/string'),
+      Sidebar.item('tryRun', '/tryRun'),
       Sidebar.item('ustring', '/ustring'),
       Sidebar.item('whitespace', '/whitespace'),
       Sidebar.item('whole', '/whole')

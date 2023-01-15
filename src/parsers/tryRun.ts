@@ -11,6 +11,7 @@ type ErrorResult = Omit<Failure, 'isOk'>
 export class ParserError extends Error {
   readonly name = 'ParserError'
   readonly pos: number
+
   constructor(res: ErrorResult) {
     super(res.expected)
     this.pos = res.pos
@@ -18,11 +19,10 @@ export class ParserError extends Error {
 }
 
 /**
- * Runs a parser with provided input.
- * Throws on failure
+ * Runs a parser with provided input, throwing on failure.
  *
  * @param parser - Parser to run
- * @throws {@link ParserError} Special parser error that includes `pos` and `expected` fields
+ * @throws {@link ParserError} Parser error with `message` (`expected`) and `pos`
  *
  * @returns Parser result
  */
@@ -35,6 +35,7 @@ export function tryRun<T>(parser: Parser<T>): Runnable<T> {
         case true: {
           return result
         }
+
         case false: {
           throw new ParserError(result)
         }
