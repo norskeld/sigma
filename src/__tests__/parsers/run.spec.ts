@@ -22,6 +22,6 @@ describe('run', () => {
   })
 
   it('should throw if given a non-initialized deferred parser', () => {
-    testFailure('deffered', defer<string>())
+    testFailure('deferred', defer<string>())
   })
 })
