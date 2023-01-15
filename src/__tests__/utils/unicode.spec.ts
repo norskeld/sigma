@@ -46,7 +46,7 @@ describe('unicode', () => {
       '\uFE30', // CJK Compatibility Forms
       '\uFE50', // Small Form Variants
       '\uFE70', // Arabic Presentation Forms-B
-      '\uFF00', // Half-Width and Fullwidth Forms
+      '\uFF00', // Half-Width and Full-width Forms
       '\uFFF0' // Specials
     ].forEach((char) => {
       should.beEqual(size(char), 3)

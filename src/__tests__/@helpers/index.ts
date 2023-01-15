@@ -17,8 +17,8 @@ export function result<T>(isOk: boolean, value: T): ReducedResult<T> {
 }
 
 export const should = {
-  expose(exposed: Record<string, unknown>, ...exposees: Array<string>): void {
-    exposees.forEach((exposee) => expect(exposed[exposee]).toBeTruthy())
+  expose(exposed: Record<string, unknown>, ...exposes: Array<string>): void {
+    exposes.forEach((expose) => expect(exposed[expose]).toBeTruthy())
   },
 
   matchState<T, R>(received: Result<T>, expected: ReducedResult<R>): void {

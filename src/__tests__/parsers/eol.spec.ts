@@ -2,8 +2,8 @@ import { sequence } from '@combinators'
 import { eol, letters } from '@parsers'
 import { run, result, should, describe, it } from '@testing'
 
-const tcase = `Hello\nWorld\n`
-const tcaseLit = `Hello
+const tCase = `Hello\nWorld\n`
+const tCaseLit = `Hello
 World
 `
 
@@ -25,8 +25,8 @@ describe('eol', () => {
   it('should succeed if given a string with a newline at the end', () => {
     const parser = sequence(letters(), eol(), letters(), eol())
 
-    const actualExplicit = run(parser, tcase)
-    const actualImplicit = run(parser, tcaseLit)
+    const actualExplicit = run(parser, tCase)
+    const actualImplicit = run(parser, tCaseLit)
 
     const expected = result(true, ['Hello', '\n', 'World', '\n'])
 
