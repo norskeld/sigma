@@ -41,6 +41,10 @@ export const should = {
 
   throw(f: () => void) {
     expect(f).toThrow()
+  },
+
+  throwError<T extends Error>(f: () => void, error: T) {
+    expect(f).toThrowError(error)
   }
 }
 
