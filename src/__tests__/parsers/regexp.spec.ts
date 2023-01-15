@@ -17,8 +17,44 @@ describe('regexp', () => {
     should.matchState(actualMatchGroups, expectedMatchGroups)
   })
 
+  it('should succeed if given matching input without Global flag', () => {
+    const actualDigit = run(regexp(/\d/, 'digit'), '0')
+    const expectedDigit = result(true, '0')
+
+    const actualDigits = run(regexp(/\d+/, 'digits'), '9000')
+    const expectedDigits = result(true, '9000')
+
+    const actualMatchGroups = run(regexp(/\((\s)+\)/, 'match-groups'), '( )')
+    const expectedMatchGroups = result(true, '( )')
+
+    should.matchState(actualDigit, expectedDigit)
+    should.matchState(actualDigits, expectedDigits)
+    should.matchState(actualMatchGroups, expectedMatchGroups)
+  })
+
+  it('should succeed if matches the beginning of input', () => {
+    const actualDigits = run(regexp(/\d{2,3}/g, 'first-digits'), '90000')
+    const expectedDigits = result(true, '900')
+
+    should.matchState(actualDigits, expectedDigits)
+  })
+
+  it('should succeed if matches the beginning of input without Global flag', () => {
+    const actualDigits = run(regexp(/\d{2,3}/, 'first-digits'), '90000')
+    const expectedDigits = result(true, '900')
+
+    should.matchState(actualDigits, expectedDigits)
+  })
+
   it('should succeed if given a RegExp with Unicode flag', () => {
     const actualReEmoji = run(regexp(/\w+\s+👌/gu, 'words, spaces, ok emoji'), 'Yes 👌')
+    const expectedReEmoji = result(true, 'Yes 👌')
+
+    should.matchState(actualReEmoji, expectedReEmoji)
+  })
+
+  it('should succeed if given a RegExp with Unicode flag and without Global one', () => {
+    const actualReEmoji = run(regexp(/\w+\s+👌/u, 'words, spaces, ok emoji'), 'Yes 👌')
     const expectedReEmoji = result(true, 'Yes 👌')
 
     should.matchState(actualReEmoji, expectedReEmoji)
@@ -29,17 +65,21 @@ describe('regexp', () => {
     const expectedReEmoji = result(true, '👌👌👌')
 
     const actualReNonLatin = run(regexp(/\P{Script_Extensions=Latin}+/gu, 'non-latin'), '大阪')
-    const expectedReNonLation = result(true, '大阪')
+    const expectedReNonLatin = result(true, '大阪')
 
     should.matchState(actualReEmoji, expectedReEmoji)
-    should.matchState(actualReNonLatin, expectedReNonLation)
+    should.matchState(actualReNonLatin, expectedReNonLatin)
   })
 
-  it('should succeeed if matches the beginning of input', () => {
-    const actualDigits = run(regexp(/\d{2,3}/g, 'first-digits'), '90000')
-    const expectedDigits = result(true, '900')
+  it('should succeed if given a RegExp with Unicode property escapes without Global flag', () => {
+    const actualReEmoji = run(regexp(/\p{Emoji_Presentation}+/u, 'emoji'), '👌👌👌')
+    const expectedReEmoji = result(true, '👌👌👌')
 
-    should.matchState(actualDigits, expectedDigits)
+    const actualReNonLatin = run(regexp(/\P{Script_Extensions=Latin}+/u, 'non-latin'), '大阪')
+    const expectedReNonLatin = result(true, '大阪')
+
+    should.matchState(actualReEmoji, expectedReEmoji)
+    should.matchState(actualReNonLatin, expectedReNonLatin)
   })
 
   it('should fail if does not match input', () => {
