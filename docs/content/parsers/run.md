@@ -1,7 +1,7 @@
 ---
 title: 'run'
 kind: 'primitive'
-description: 'run is not a parser, but is used to run parser with provided input.'
+description: 'run is used to run parser with provided input.'
 ---
 
 # {{ $frontmatter.title }} <Primitive />
@@ -18,7 +18,7 @@ function run<T>(parser: Parser<T>): Runnable<T>
 
 ## Description
 
-`run` is not a parser, but is used to run `parser` with provided input.
+`run` is used to run `parser` with provided input.
 
 ## Usage
 
