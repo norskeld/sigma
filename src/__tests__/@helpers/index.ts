@@ -100,6 +100,7 @@ export const expectedParsers = [
   'rest',
   'run',
   'string',
+  'tryRun',
   'ustring',
   'whitespace',
   'whole'
