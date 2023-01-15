@@ -6,15 +6,17 @@ import type { Parser } from '@types'
  *
  * The regular expression must obey two simple rules:
  *
- * - It *does* use `g` flag. Flags like `u` and `i` are allowed and can be added if needed.
+ * - It *does* use `g` flag. Flags like u and i are allowed and can be added if needed.
  * - It *doesn't* use `^` and `$` to match at the beginning or at the end of the text.
  *
- * @param re - Regular expression
+ * @param rs - Regular expression
  * @param expected - Error message if the regular expression does not match input
  *
  * @returns Matched string
  */
-export function regexp(re: RegExp, expected: string): Parser<string> {
+export function regexp(rs: RegExp, expected: string): Parser<string> {
+  const re = rs.global ? rs : new RegExp(rs.source, rs.flags + 'g')
+
   return {
     parse(input, pos) {
       // Reset RegExp index, because we abuse the 'g' flag.
