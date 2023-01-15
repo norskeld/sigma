@@ -1,6 +1,8 @@
 import type { HeadConfig, MarkdownOptions, DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 
+import pkg from '../../../package.json'
+
 import { format, Sidebar, Social, Nav } from './helpers'
 import { Github, Npm } from './icons'
 
@@ -118,7 +120,11 @@ function getNav() {
   const [combinators] = items.filter((item) => item.link?.startsWith('/combinators'))
   const [parsers] = items.filter((item) => item.link?.startsWith('/parsers'))
 
-  return [Nav.item('Combinators', combinators.link!), Nav.item('Parsers', parsers.link!)]
+  return [
+    Nav.item('Combinators', combinators.link!),
+    Nav.item('Parsers', parsers.link!),
+    Nav.items(pkg.version, [Nav.item('Changelog', GH_URL + '/blob/master/CHANGELOG.md')])
+  ]
 }
 
 function getSocialLinks() {

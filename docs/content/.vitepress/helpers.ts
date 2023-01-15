@@ -29,8 +29,12 @@ export const Sidebar = {
 }
 
 export const Nav = {
-  item(text: string, link: string): DefaultTheme.NavItem {
+  item(text: string, link: string): DefaultTheme.NavItemWithLink {
     return { text, link }
+  },
+
+  items(text: string, items: Array<DefaultTheme.NavItemWithLink>): DefaultTheme.NavItem {
+    return { text, items }
   }
 }
 

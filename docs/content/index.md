@@ -22,12 +22,12 @@ features:
   - title: TypeScript-first
     details: 'Sigma leverages advanced TypeScript features to provide you with clean and concise API that is both typesafe and easy to use'
 
-  - title: Zero dependencies
-    details: 'Sigma is truly lightweight — the whole library is only 1.9 kB gzipped and reasonably tree-shakeable, so you ship only what you need'
+  - title: Capable
+    details: 'Sigma is capable of parsing LL grammars using recursive descent with backtracking, which is enough for most of the cases'
+
+  - title: Fast
+    details: 'Sigma was built with performance in mind and it can actually perform on par with some Rust libraries like pom or chumsky'
 
   - title: Node + Deno + Browsers
     details: 'Sigma works in any modern environment: Node — both CommonJS and ESM, Deno and browsers — via Skypack or esm.run'
-
-  - title: Fast as f*ck
-    details: 'Sigma was built with performance in mind and it can actually perform on par with some Rust libraries like pom or chumsky'
 ---
