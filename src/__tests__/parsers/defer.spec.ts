@@ -14,7 +14,7 @@ describe('defer', () => {
   })
 
   it('should throw if the deferred parser is not set', () => {
-    testFailure('deffered', defer<string>())
+    testFailure('deferred', defer<string>())
   })
 
   it('should fail if the deferred parser fails', () => {

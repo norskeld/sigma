@@ -24,8 +24,8 @@ describe('letter', () => {
   })
 
   it('should fail if given something other than a letter', () => {
-    ;['1', '+', '~', '`', ':', `'`].forEach((tcase) => {
-      const actual = run(letter(), tcase)
+    ;['1', '+', '~', '`', ':', `'`].forEach((tCase) => {
+      const actual = run(letter(), tCase)
       const expected = result(false, 'letter')
 
       should.matchState(actual, expected)
