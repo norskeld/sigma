@@ -39,6 +39,10 @@ export const should = {
     expect(a, message).toBe(b)
   },
 
+  beStrictEqual<T = unknown>(a: T, b: T, message?: string) {
+    expect(a, message).toStrictEqual(b)
+  },
+
   throw(f: () => void) {
     expect(f).toThrow()
   },
@@ -66,6 +70,7 @@ export const expectedCombinators = [
   'chainl',
   'choice',
   'error',
+  'lookahead',
   'many',
   'many1',
   'map',
