@@ -140,6 +140,7 @@ function getSidebar() {
       Sidebar.item('Primitives and composites', '/primitives-and-composites')
     ]),
     Sidebar.group('Combinators', '/combinators', [
+      Sidebar.item('attempt', '/attempt'),
       Sidebar.item('chainl', '/chainl'),
       Sidebar.item('choice', '/choice'),
       Sidebar.item('error', '/error'),
