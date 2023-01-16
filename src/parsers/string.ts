@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 import { size } from '@utils/unicode'
 
 /**
@@ -13,11 +13,13 @@ export function string(match: string): Parser<string> {
     parse(input, pos) {
       const nextPos = Math.min(pos + match.length, input.length)
       const slice = input.substring(pos, nextPos)
+      const span = [pos, nextPos] as Span
 
       switch (slice === match) {
         case true: {
           return {
             isOk: true,
+            span,
             pos: nextPos,
             value: match
           }
@@ -26,6 +28,7 @@ export function string(match: string): Parser<string> {
         case false: {
           return {
             isOk: false,
+            span,
             pos: nextPos,
             expected: match
           }
@@ -47,11 +50,13 @@ export function ustring(match: string): Parser<string> {
     parse(input, pos) {
       const nextPos = Math.min(pos + size(match), input.length)
       const slice = input.substring(pos, nextPos)
+      const span = [pos, nextPos] as Span
 
       switch (slice === match) {
         case true: {
           return {
             isOk: true,
+            span,
             pos: nextPos,
             value: match
           }
@@ -60,6 +65,7 @@ export function ustring(match: string): Parser<string> {
         case false: {
           return {
             isOk: false,
+            span,
             pos: nextPos,
             expected: match
           }

@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Ensures that one of the characters in the given string matches the current character.
@@ -15,6 +15,7 @@ export function oneOf(chars: string): Parser<string> {
       if (input.length === pos) {
         return {
           isOk: false,
+          span: [pos, pos] as Span,
           pos,
           expected: 'oneOf @ reached the end of input'
         }
@@ -26,6 +27,7 @@ export function oneOf(chars: string): Parser<string> {
       if (charset.includes(char)) {
         return {
           isOk: true,
+          span: [pos, nextPos] as Span,
           pos: nextPos,
           value: char
         }
@@ -33,6 +35,7 @@ export function oneOf(chars: string): Parser<string> {
 
       return {
         isOk: false,
+        span: [pos, pos] as Span,
         pos,
         expected: `one of: ${charset.join(', ')}`
       }

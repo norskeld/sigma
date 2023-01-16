@@ -1,7 +1,7 @@
 import { many } from './many'
 import { sequence } from './sequence'
 
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Parses *zero* or more occurrences of `parser`, separated by `sep`. Never fails.
@@ -23,10 +23,13 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
         const values = [resultP.value]
 
         // If the parsers succeed, concatenate the values sans the separator.
-        resultS.value.forEach(([, value]) => values.push(value))
+        for (const [, value] of resultS.value) {
+          values.push(value)
+        }
 
         return {
           isOk: true,
+          span: [pos, resultS.pos] as Span,
           pos: resultS.pos,
           value: values
         }
@@ -34,6 +37,7 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
       return {
         isOk: true,
+        span: [pos, resultP.pos] as Span,
         pos: resultP.pos,
         value: []
       }
@@ -61,10 +65,13 @@ export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>
         const values = [resultP.value]
 
         // If the parsers succeed, concatenate the values sans the separator.
-        resultS.value.forEach(([, value]) => values.push(value))
+        for (const [, value] of resultS.value) {
+          values.push(value)
+        }
 
         return {
           isOk: true,
+          span: [pos, resultS.pos] as Span,
           pos: resultS.pos,
           value: values
         }
@@ -72,6 +79,7 @@ export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>
 
       return {
         isOk: false,
+        span: [pos, resultP.pos] as Span,
         pos: resultP.pos,
         expected: resultP.expected
       }

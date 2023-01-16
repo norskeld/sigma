@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Intersection type to add a method for deferred parser definition.
@@ -71,6 +71,7 @@ export function defer<T>(): Deferred<T> {
 
       return {
         isOk: false,
+        span: [pos, pos] as Span,
         pos,
         expected: `Deferred parser wasn't initialized.`
       }

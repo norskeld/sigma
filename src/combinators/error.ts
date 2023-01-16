@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Replaces `parser`'s error message with `expected`.
@@ -21,6 +21,7 @@ export function error<T>(parser: Parser<T>, expected: string): Parser<T> {
         case false: {
           return {
             isOk: false,
+            span: [pos, result.pos] as Span,
             pos,
             expected
           }

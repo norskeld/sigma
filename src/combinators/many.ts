@@ -1,4 +1,4 @@
-import type { Parser, SafeParser } from '@types'
+import type { Parser, SucceedingParser, Span } from '@types'
 
 /**
  * Applies `parser` *zero* or more times, collecting its results. Never fails.
@@ -7,7 +7,7 @@ import type { Parser, SafeParser } from '@types'
  *
  * @returns Array of the returned values of `parser`
  */
-export function many<T>(parser: Parser<T>): SafeParser<Array<T>> {
+export function many<T>(parser: Parser<T>): SucceedingParser<Array<T>> {
   return {
     parse(input, pos) {
       const values: Array<T> = []
@@ -26,6 +26,7 @@ export function many<T>(parser: Parser<T>): SafeParser<Array<T>> {
 
       return {
         isOk: true,
+        span: [pos, nextPos] as Span,
         pos: nextPos,
         value: values
       }
@@ -65,6 +66,7 @@ export function many1<T>(parser: Parser<T>): Parser<Array<T>> {
 
         return {
           isOk: true,
+          span: [pos, nextPos] as Span,
           pos: nextPos,
           value: values
         }

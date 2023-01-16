@@ -1,4 +1,4 @@
-import type { Failure, Parser, Success } from '@types'
+import type { Failure, Parser, Span, Success } from '@types'
 
 /** @internal */
 interface Runnable<T> {
@@ -10,10 +10,14 @@ type ErrorResult = Omit<Failure, 'isOk'>
 
 export class ParserError extends Error {
   readonly name = 'ParserError'
+
+  readonly span: Span
   readonly pos: number
 
   constructor(res: ErrorResult) {
     super(res.expected)
+
+    this.span = res.span
     this.pos = res.pos
   }
 }

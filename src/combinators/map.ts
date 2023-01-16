@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Applies `fn` to the `parser`'s result.
@@ -8,17 +8,20 @@ import type { Parser } from '@types'
  *
  * @returns Result of `fn`
  */
-export function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R> {
+export function map<T, R>(parser: Parser<T>, fn: (value: T, span: Span) => R): Parser<R> {
   return {
     parse(input, pos) {
       const result = parser.parse(input, pos)
 
       switch (result.isOk) {
         case true: {
+          const span = [pos, result.pos] as Span
+
           return {
             isOk: true,
+            span,
             pos: result.pos,
-            value: fn(result.value)
+            value: fn(result.value, span)
           }
         }
 

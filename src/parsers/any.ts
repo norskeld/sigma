@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Parses any single character from the input and returns it. Fails at the end of input.
@@ -11,6 +11,7 @@ export function any(): Parser<string> {
       if (input.length === pos) {
         return {
           isOk: false,
+          span: [pos, pos] as Span,
           pos,
           expected: 'any @ reached the end of input'
         }
@@ -21,6 +22,7 @@ export function any(): Parser<string> {
 
       return {
         isOk: true,
+        span: [pos, nextPos] as Span,
         pos: nextPos,
         value
       }
