@@ -1,6 +1,7 @@
 export * from '@combinators/chain'
 export * from '@combinators/choice'
 export * from '@combinators/error'
+export * from '@combinators/lookahead'
 export * from '@combinators/many'
 export * from '@combinators/map'
 export * from '@combinators/optional'

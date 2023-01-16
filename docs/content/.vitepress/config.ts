@@ -143,6 +143,7 @@ function getSidebar() {
       Sidebar.item('chainl', '/chainl'),
       Sidebar.item('choice', '/choice'),
       Sidebar.item('error', '/error'),
+      Sidebar.item('lookahead', '/lookahead'),
       Sidebar.item('many', '/many'),
       Sidebar.item('many1', '/many1'),
       Sidebar.item('map', '/map'),
