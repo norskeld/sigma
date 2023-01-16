@@ -11,7 +11,7 @@ import { size } from '@utils/unicode'
 export function string(match: string): Parser<string> {
   return {
     parse(input, pos) {
-      const nextPos = pos + match.length
+      const nextPos = Math.min(pos + match.length, input.length)
       const slice = input.substring(pos, nextPos)
 
       switch (slice === match) {
@@ -45,7 +45,7 @@ export function string(match: string): Parser<string> {
 export function ustring(match: string): Parser<string> {
   return {
     parse(input, pos) {
-      const nextPos = pos + size(match)
+      const nextPos = Math.min(pos + size(match), input.length)
       const slice = input.substring(pos, nextPos)
 
       switch (slice === match) {
