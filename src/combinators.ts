@@ -1,3 +1,4 @@
+export * from '@combinators/attempt'
 export * from '@combinators/chain'
 export * from '@combinators/choice'
 export * from '@combinators/error'
