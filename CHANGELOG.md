@@ -1,3 +1,15 @@
+# [3.4.0](https://github.com/norskeld/sigma/compare/v3.3.0...v3.4.0) (2023-01-16)
+
+
+### Bug Fixes
+
+* **parsers/string:** correctly determine pos without getting out of bounds ([9927128](https://github.com/norskeld/sigma/commit/9927128f8ce104dbd9566e30606295ca504700c4))
+
+
+### Features
+
+* **combinators/lookahead:** add `lookahead` combinator ([497c7a8](https://github.com/norskeld/sigma/commit/497c7a8fd0ef37d225cebb21ba67e53a1b6c2116))
+
 # [3.3.0](https://github.com/norskeld/sigma/compare/v3.2.0...v3.3.0) (2023-01-15)
 
 
