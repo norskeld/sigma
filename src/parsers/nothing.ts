@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Simply resolves to `null`.
@@ -10,6 +10,7 @@ export function nothing(): Parser<null> {
     parse(_, pos) {
       return {
         isOk: true,
+        span: [pos, pos] as Span,
         pos,
         value: null
       }

@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Applies source `parser`, collects its output, and stops after `terminator` parser succeeds.
@@ -23,6 +23,7 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
           case true: {
             return {
               isOk: true,
+              span: [pos, resultT.pos] as Span,
               pos: resultT.pos,
               value: [values, resultT.value]
             }
@@ -68,6 +69,7 @@ export function skipUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
           case true: {
             return {
               isOk: true,
+              span: [pos, resultT.pos] as Span,
               pos: resultT.pos,
               value: resultT.value
             }

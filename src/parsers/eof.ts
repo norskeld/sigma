@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Only succeeds at the end of the input.
@@ -8,12 +8,11 @@ import type { Parser } from '@types'
 export function eof(): Parser<null> {
   return {
     parse(input, pos) {
-      const isEof = pos === input.length
-
-      switch (isEof) {
+      switch (pos === input.length) {
         case true: {
           return {
             isOk: true,
+            span: [pos, pos] as Span,
             pos: input.length,
             value: null
           }
@@ -22,6 +21,7 @@ export function eof(): Parser<null> {
         case false: {
           return {
             isOk: false,
+            span: [pos, pos] as Span,
             pos,
             expected: 'end of input'
           }

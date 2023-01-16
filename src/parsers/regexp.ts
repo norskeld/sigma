@@ -1,4 +1,4 @@
-import type { Parser } from '@types'
+import type { Parser, Span } from '@types'
 
 /**
  * Parses a string that matches a provided `re` regular expression. Returns the matched string, or
@@ -34,12 +34,15 @@ export function regexp(rs: RegExp, expected: string): Parser<string> {
 
         return {
           isOk: true,
+          span: [pos, index] as Span,
           pos: index,
           value: match
         }
       } else {
         return {
           isOk: false,
+          // TODO: Can this be improved? Zero-length span for this parser doesn't look helpful.
+          span: [pos, pos] as Span,
           pos,
           expected
         }
