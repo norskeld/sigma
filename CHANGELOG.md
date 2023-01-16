@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/norskeld/sigma/compare/v3.4.0...v3.5.0) (2023-01-16)
+
+
+### Features
+
+* **combinators/attempt:** add `attempt` combinator ([7133746](https://github.com/norskeld/sigma/commit/7133746e68c09b72b49a6eea9afc6877c4327d69))
+
 # [3.4.0](https://github.com/norskeld/sigma/compare/v3.3.0...v3.4.0) (2023-01-16)
 
 
