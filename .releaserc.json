@@ -17,6 +17,13 @@
         "message": "chore(release): release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
-    "@semantic-release/github"
+    [
+      "@semantic-release/github",
+      {
+        "failTitle": false,
+        "labels": ["R-failing"],
+        "releasedLabels": ["R-released"]
+      }
+    ]
   ]
 }
