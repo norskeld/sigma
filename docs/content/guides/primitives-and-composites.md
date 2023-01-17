@@ -1,6 +1,6 @@
 ---
-title: Primitives and composites
-description: What is the difference?
+title: 'Primitives and composites'
+description: 'What is the difference?'
 ---
 
 # {{ $frontmatter.title }}
