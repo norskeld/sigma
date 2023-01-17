@@ -23,27 +23,29 @@ const Parser = whole()
 ```
 
 ::: tip Success
-  ```ts
-  run(Parser).with('42')
+```ts
+run(Parser).with('42')
 
-  {
-    isOk: true,
-    pos: 2,
-    value: 42
-  }
-  ```
+{
+  isOk: true,
+  span: [ 0, 2 ],
+  pos: 2,
+  value: 42
+}
+```
 :::
 
 ::: danger Failure
-  ```ts
-  run(Parser).with('x')
+```ts
+run(Parser).with('x')
 
-  {
-    isOk: false,
-    pos: 0,
-    expected: 'whole number'
-  }
-  ```
+{
+  isOk: false,
+  span: [ 0, 0 ],
+  pos: 0,
+  expected: 'whole number'
+}
+```
 :::
 
 <!-- Links. -->

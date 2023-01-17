@@ -28,6 +28,7 @@ run(Parser).with('0o42')
 
 {
   isOk: true,
+  span: [ 0, 4 ],
   pos: 4,
   value: 34
 }
@@ -40,6 +41,7 @@ run(Parser).with('o42')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'octal number'
 }

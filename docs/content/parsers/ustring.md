@@ -38,6 +38,7 @@ run(Parser).with('语言处理')
 
 {
   isOk: true,
+  span: [ 0, 12 ],
   pos: 12,
   value: '语言处理'
 }
@@ -50,6 +51,7 @@ run(Parser).with('语言')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: '语言处理'
 }

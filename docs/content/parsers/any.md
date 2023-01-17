@@ -29,6 +29,7 @@ run(ManyParser).with('xyz')
 
 {
   isOk: true,
+  span: [ 0, 3 ],
   pos: 3,
   value: [ 'x', 'y', 'z' ]
 }
@@ -41,8 +42,9 @@ run(SingleParser).with('')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
-  expected: 'reached the end of input'
+  expected: 'any @ reached the end of input'
 }
 ```
 :::

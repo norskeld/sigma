@@ -30,6 +30,7 @@ run(Parser).with('hello')
 
 {
   isOk: true,
+  span: [ 0, 5 ],
   pos: 5,
   value: 'hello'
 }
@@ -42,6 +43,7 @@ run(Parser).with('bye')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'hello'
 }

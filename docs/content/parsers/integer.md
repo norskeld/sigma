@@ -28,8 +28,20 @@ run(Parser).with('-42')
 
 {
   isOk: true,
+  span: [ 0, 3 ],
   pos: 3,
   value: -42
+}
+```
+---
+```ts
+run(Parser).with('134912398891')
+
+{
+  isOk: true,
+  span: [ 0, 12 ],
+  pos: 12,
+  value: 134912398891
 }
 ```
 :::
@@ -40,6 +52,7 @@ run(Parser).with('x')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'integer number'
 }
