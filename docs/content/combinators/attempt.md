@@ -34,6 +34,7 @@ run(Parser).with('hello lettuce')
 
 {
   isOk: true,
+  span: [ 0, 13 ],
   pos: 13,
   value: [ 'hello', 'let', 'lettuce' ]
 }
@@ -46,18 +47,18 @@ run(Parser).with('hello let')
 
 {
   isOk: false,
+  span: [ 6, 9 ],
   pos: 9, // [!code warning]
   expected: 'lettuce'
 }
 ```
-:::
-
-::: danger Failure
+---
 ```ts
 run(Parser).with('hello something')
 
 {
   isOk: false,
+  span: [ 6, 9 ],
   pos: 6, // [!code warning]
   expected: 'let'
 }

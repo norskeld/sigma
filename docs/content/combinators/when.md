@@ -1,7 +1,7 @@
 ---
 title: 'when'
 kind: 'primitive'
-description: "when combinator allows to create chained, context-aware parsers, that may depend on the output of the context parser."
+description: 'when combinator allows to create chained, context-aware parsers, that may depend on the output of the context parser.'
 ---
 
 # {{ $frontmatter.title }} <Primitive />
@@ -38,43 +38,41 @@ run(Parser).with('integer 42')
 
 {
   isOk: true,
+  span: [ 8, 10 ],
   pos: 10,
   value: 42
 }
 ```
-:::
-
-::: tip Success
+---
 ```ts
 run(Parser).with('string Something')
 
 {
   isOk: true,
+  span: [ 7, 16 ],
   pos: 16,
   value: 'Something'
 }
 ```
-:::
-
-::: tip Success
+---
 ```ts
 run(Parser).with('bracketed (Something)')
 
 {
   isOk: true,
+  span: [ 10, 21 ],
   pos: 21,
   value: 'Something'
 }
 ```
-:::
-
-::: tip Success
+---
 ```ts
-run(Parser).with('unknown input')
+run(Parser).with('some input')
 
 {
   isOk: true,
-  pos: 13,
+  span: [ 5, 10 ],
+  pos: 10,
   value: 'input'
 }
 ```
@@ -86,6 +84,7 @@ run(Parser).with('0x42')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'letters'
 }

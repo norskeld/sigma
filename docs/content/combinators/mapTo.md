@@ -31,6 +31,7 @@ run(Parser).with('2+2')
 
 {
   isOk: true,
+  span: [ 0, 3 ],
   pos: 3,
   value: 5
 }
@@ -43,7 +44,8 @@ run(Parser).with('2-2')
 
 {
   isOk: false,
-  pos: 1,
+  span: [ 1, 2 ],
+  pos: 2,
   expected: '+'
 }
 ```

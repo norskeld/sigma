@@ -28,6 +28,7 @@ run(Parser).with('1+2+3+4')
 
 {
   isOk: true,
+  span: [ 0, 7 ],
   pos: 7,
   value: [ 1, 2, 3, 4 ]
 }
@@ -38,6 +39,7 @@ run(Parser).with('1-two')
 
 {
   isOk: true,
+  span: [ 0, 1 ],
   pos: 1,
   value: [ 1 ]
 }
@@ -50,6 +52,7 @@ run(Parser).with('one+two')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'whole number'
 }

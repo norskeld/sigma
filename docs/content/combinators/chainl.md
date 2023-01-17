@@ -67,6 +67,7 @@ You will get the following result:
 ```ts{4}
 {
   isOk: true,
+  span: [ 0, 10 ],
   pos: 10,
   value: 30
 }
@@ -187,6 +188,7 @@ We will get the following result:
 ```ts
 {
   isOk: true,
+  span: [ 0, 12 ],
   pos: 12,
   value: 80
 }

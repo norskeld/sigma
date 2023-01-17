@@ -28,6 +28,7 @@ run(Parser).with('+++')
 
 {
   isOk: true,
+  span: [ 0, 3 ],
   pos: 3,
   value: [ '+', '+', '+' ]
 }
@@ -40,8 +41,9 @@ run(Parser).with('---')
 
 {
   isOk: false,
-  pos: 0,
-  expected: 'at least one successful application of the parser'
+  span: [ 0, 1 ],
+  pos: 1,
+  expected: '+'
 }
 ```
 :::
