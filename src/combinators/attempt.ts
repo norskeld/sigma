@@ -1,4 +1,4 @@
-import type { Parser, Span } from '@types'
+import type { Parser } from '@types'
 
 /**
  * Applies `parser` without consuming any input. It doesn't care if `parser` succeeds or fails, it
@@ -18,7 +18,7 @@ export function attempt<T>(parser: Parser<T>): Parser<T> {
         case true: {
           return {
             isOk: true,
-            span: [pos, pos] as Span,
+            span: [pos, pos],
             pos,
             value: result.value
           }
@@ -28,7 +28,7 @@ export function attempt<T>(parser: Parser<T>): Parser<T> {
         case false: {
           return {
             isOk: false,
-            span: [pos, pos] as Span,
+            span: [pos, pos],
             pos,
             expected: result.expected
           }

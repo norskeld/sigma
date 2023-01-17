@@ -1,4 +1,4 @@
-import type { Parser, Span, ToTuple } from '@types'
+import type { Parser, ToTuple } from '@types'
 
 /**
  * Applies `ps` parsers in order, until *all* of them succeed.
@@ -32,7 +32,7 @@ export function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>> {
 
       return {
         isOk: true,
-        span: [pos, nextPos] as Span,
+        span: [pos, nextPos],
         pos: nextPos,
         value: values
       }
