@@ -18,7 +18,7 @@ function attempt<T>(parser: Parser<T>): Parser<T>
 
 ## Usage
 
-The example is the same as in the docs for [`lookahead` combinators][lookahead]. Notice how differs the output for the last failing case: `attempt` doesn't consume any input, i.e. it doesn't advance `pos`.
+The example is the same as in the docs for [`lookahead` combinators][lookahead].
 
 ```ts
 const Parser = sequence(
@@ -40,6 +40,8 @@ run(Parser).with('hello lettuce')
 }
 ```
 :::
+
+Notice how differs the output for the last failing case: `attempt` doesn't consume any input, i.e. it doesn't advance `pos`.
 
 ::: danger Failure
 ```ts
