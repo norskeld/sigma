@@ -1,4 +1,4 @@
-import type { Span, SucceedingParser } from '@types'
+import type { SucceedingParser } from '@types'
 
 /**
  * Simply returns the unparsed input as a string. Never fails.
@@ -10,7 +10,7 @@ export function rest(): SucceedingParser<string> {
     parse(input, pos) {
       return {
         isOk: true,
-        span: [pos, input.length] as Span,
+        span: [pos, input.length],
         pos: input.length,
         value: input.substring(pos)
       }

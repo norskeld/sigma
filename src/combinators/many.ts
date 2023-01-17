@@ -1,4 +1,4 @@
-import type { Parser, SucceedingParser, Span } from '@types'
+import type { Parser, SucceedingParser } from '@types'
 
 /**
  * Applies `parser` *zero* or more times, collecting its results. Never fails.
@@ -26,7 +26,7 @@ export function many<T>(parser: Parser<T>): SucceedingParser<Array<T>> {
 
       return {
         isOk: true,
-        span: [pos, nextPos] as Span,
+        span: [pos, nextPos],
         pos: nextPos,
         value: values
       }
@@ -66,7 +66,7 @@ export function many1<T>(parser: Parser<T>): Parser<Array<T>> {
 
         return {
           isOk: true,
-          span: [pos, nextPos] as Span,
+          span: [pos, nextPos],
           pos: nextPos,
           value: values
         }

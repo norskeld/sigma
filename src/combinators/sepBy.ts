@@ -1,7 +1,7 @@
 import { many } from './many'
 import { sequence } from './sequence'
 
-import type { Parser, Span } from '@types'
+import type { Parser } from '@types'
 
 /**
  * Parses *zero* or more occurrences of `parser`, separated by `sep`. Never fails.
@@ -29,7 +29,7 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
         return {
           isOk: true,
-          span: [pos, resultS.pos] as Span,
+          span: [pos, resultS.pos],
           pos: resultS.pos,
           value: values
         }
@@ -37,7 +37,7 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
       return {
         isOk: true,
-        span: [pos, resultP.pos] as Span,
+        span: [pos, resultP.pos],
         pos: resultP.pos,
         value: []
       }
@@ -71,7 +71,7 @@ export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>
 
         return {
           isOk: true,
-          span: [pos, resultS.pos] as Span,
+          span: [pos, resultS.pos],
           pos: resultS.pos,
           value: values
         }
@@ -79,7 +79,7 @@ export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>
 
       return {
         isOk: false,
-        span: [pos, resultP.pos] as Span,
+        span: [pos, resultP.pos],
         pos: resultP.pos,
         expected: resultP.expected
       }

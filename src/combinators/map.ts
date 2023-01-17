@@ -15,7 +15,7 @@ export function map<T, R>(parser: Parser<T>, fn: (value: T, span: Span) => R): P
 
       switch (result.isOk) {
         case true: {
-          const span = [pos, result.pos] as Span
+          const span: Span = [pos, result.pos]
 
           return {
             isOk: true,

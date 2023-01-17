@@ -1,4 +1,4 @@
-import type { Parser, Span } from '@types'
+import type { Parser } from '@types'
 
 /**
  * Only succeeds at the end of the input.
@@ -12,7 +12,7 @@ export function eof(): Parser<null> {
         case true: {
           return {
             isOk: true,
-            span: [pos, pos] as Span,
+            span: [pos, pos],
             pos: input.length,
             value: null
           }
@@ -21,7 +21,7 @@ export function eof(): Parser<null> {
         case false: {
           return {
             isOk: false,
-            span: [pos, pos] as Span,
+            span: [pos, pos],
             pos,
             expected: 'end of input'
           }

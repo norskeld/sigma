@@ -13,7 +13,7 @@ export function string(match: string): Parser<string> {
     parse(input, pos) {
       const nextPos = Math.min(pos + match.length, input.length)
       const slice = input.substring(pos, nextPos)
-      const span = [pos, nextPos] as Span
+      const span: Span = [pos, nextPos]
 
       switch (slice === match) {
         case true: {
@@ -50,7 +50,7 @@ export function ustring(match: string): Parser<string> {
     parse(input, pos) {
       const nextPos = Math.min(pos + size(match), input.length)
       const slice = input.substring(pos, nextPos)
-      const span = [pos, nextPos] as Span
+      const span: Span = [pos, nextPos]
 
       switch (slice === match) {
         case true: {
