@@ -22,7 +22,7 @@ export function error<T>(parser: Parser<T>, expected: string): Parser<T> {
           return {
             isOk: false,
             span: [pos, result.pos],
-            pos,
+            pos: result.pos,
             expected
           }
         }
