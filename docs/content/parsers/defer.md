@@ -27,16 +27,18 @@ function defer<T>(): Deferred<T>
 - Parsers: [defer], [integer], [string]
 :::
 
-In the example below we are parsing simple nested tuples like `(1,2,(3,(4,5)))` into an AST, which then can be somehow manipulated.
+In the example below we are parsing simple nested tuples like `(1,2,(3,(4,5)))` into an AST, which then can be somehow manipulated. Every parsed node also has a span, that is location information.
 
 ```ts
 interface NumberNode {
   type: 'number'
+  span: Span
   value: number
 }
 
 interface ListNode {
   type: 'list'
+  span: Span
   value: Array<NumberNode | ListNode>
 }
 
@@ -46,7 +48,7 @@ const TupleNumber = defer<NumberNode>()
 TupleNumber.with(
   map(
     integer(),
-    (value) => ({ type: 'number', value })
+    (value, span) => ({ type: 'number', span, value })
   )
 )
 
@@ -57,7 +59,7 @@ TupleList.with(
       sepBy(choice(TupleList, TupleNumber), string(',')),
       string(')')
     ),
-    (value) => ({ type: 'list', value })
+    (value, span) => ({ type: 'list', span, value })
   )
 )
 ```
@@ -74,21 +76,25 @@ We will get the following result:
 ```ts
 {
   isOk: true,
+  span: [ 0, 15 ],
   pos: 15,
   value: {
     type: 'list',
+    span: [ 0, 15 ],
     value: [
-      { type: 'number', value: 1 },
-      { type: 'number', value: 2 },
+      { type: 'number', span: [ 1, 2 ], value: 1 },
+      { type: 'number', span: [ 3, 4 ], value: 2 },
       {
         type: 'list',
+        span: [ 5, 14 ],
         value: [
-          { type: 'number', value: 3 },
+          { type: 'number', span: [ 6, 7 ], value: 3 },
           {
             type: 'list',
+            span: [ 8, 13 ],
             value: [
-              { type: 'number', value: 4 },
-              { type: 'number', value: 5 }
+              { type: 'number', span: [ 9, 10 ], value: 4 },
+              { type: 'number', span: [ 11, 12 ], value: 5 }
             ]
           }
         ]

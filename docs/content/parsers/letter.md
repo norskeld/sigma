@@ -28,6 +28,7 @@ run(Parser).with('X')
 
 {
   isOk: true,
+  span: [ 0, 1 ],
   pos: 1,
   value: 'X'
 }
@@ -38,6 +39,7 @@ run(Parser).with('こ')
 
 {
   isOk: true,
+  span: [ 0, 1 ],
   pos: 1,
   value: 'こ'
 }
@@ -46,10 +48,11 @@ run(Parser).with('こ')
 
 ::: danger Failure
 ```ts
-run(Parser).with('8')
+run(Parser).with('42')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'letter'
 }

@@ -30,6 +30,7 @@ tryRun(string('hello world')).with('hello world')
 ```ts
 {
   isOk: true,
+  span: [ 0, 11 ],
   pos: 11,
   value: 'hello world'
 }

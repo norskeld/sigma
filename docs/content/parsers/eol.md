@@ -32,6 +32,7 @@ run(Parser).with(`<start>\n<body>\n<end>\n`)
 
 {
   isOk: true,
+  span: [ 0, 21 ],
   pos: 21,
   value: [
     [ '<start>', '\n' ],
@@ -48,6 +49,7 @@ run(Parser).with(`<start>\n<body><end>\n`)
 
 {
   isOk: false,
+  span: [ 14, 16 ],
   pos: 14,
   expected: 'end of line'
 }

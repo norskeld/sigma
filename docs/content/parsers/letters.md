@@ -28,18 +28,20 @@ run(Parser).with('XY')
 
 {
   isOk: true,
-  pos: 1,
+  span: [ 0, 2 ],
+  pos: 2,
   value: 'XY'
 }
 ```
 ---
 ```ts
-run(Parser).with('meaningOfLife42')
+run(Parser).with('meaningOfLifeIs42')
 
 {
   isOk: true,
-  pos: 13,
-  value: 'meaningOfLife'
+  span: [ 0, 15 ],
+  pos: 15,
+  value: 'meaningOfLifeIs'
 }
 ```
 :::
@@ -50,6 +52,7 @@ run(Parser).with('42')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'letters'
 }

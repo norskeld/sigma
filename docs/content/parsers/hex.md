@@ -28,6 +28,7 @@ run(Parser).with('0xFF')
 
 {
   isOk: true,
+  span: [ 0, 4 ],
   pos: 4,
   value: 255
 }
@@ -40,6 +41,7 @@ run(Parser).with('xFF')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'hexadecimal number'
 }

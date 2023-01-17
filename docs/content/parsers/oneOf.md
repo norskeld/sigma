@@ -28,6 +28,7 @@ run(Parser).with('y-combinator')
 
 {
   isOk: true,
+  span: [ 0, 1 ],
   pos: 1,
   value: 'y'
 }
@@ -40,6 +41,7 @@ run(Parser).with('q-combinator')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'one of: x, y, z'
 }

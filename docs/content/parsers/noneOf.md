@@ -28,6 +28,7 @@ run(Parser).with('q-combinator')
 
 {
   isOk: true,
+  span: [ 0, 1 ],
   pos: 1,
   value: 'q'
 }
@@ -36,10 +37,11 @@ run(Parser).with('q-combinator')
 
 ::: danger Failure
 ```ts
-run(Parser).with('q-combinator')
+run(Parser).with('y-combinator')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'none of: x, y, z'
 }

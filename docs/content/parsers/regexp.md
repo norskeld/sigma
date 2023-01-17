@@ -39,6 +39,7 @@ run(Parser).with('👌')
 
 {
   isOk: true,
+  span: [ 0, 2 ],
   pos: 2,
   value: '👌'
 }
@@ -51,6 +52,7 @@ run(Parser).with('大')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'emoji'
 }

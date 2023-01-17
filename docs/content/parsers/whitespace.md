@@ -28,6 +28,7 @@ run(Parser).with('hello world')
 
 {
   isOk: true,
+  span: [ 0, 11 ],
   pos: 11,
   value: [ 'hello', ' ', 'world' ]
 }
@@ -40,6 +41,7 @@ run(Parser).with('helloworld')
 
 {
   isOk: false,
+  span: [ 5, 5 ],
   pos: 5,
   expected: 'whitespace'
 }
