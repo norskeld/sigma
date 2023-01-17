@@ -64,7 +64,7 @@ run(Parser).with('10+10-5+15')
 You will get the following result:
 
 ::: tip Success
-```ts{4}
+```ts{5}
 {
   isOk: true,
   span: [ 0, 10 ],
