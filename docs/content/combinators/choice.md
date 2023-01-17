@@ -42,7 +42,7 @@ run(Parser).with('true')
 Notice how the `expected` field differs depending on the input, specifically its length.
 
 ::: danger Failure
-```ts
+```ts{7}
 run(Parser).with('yank')
 
 {
@@ -53,7 +53,7 @@ run(Parser).with('yank')
 }
 ```
 ---
-```ts
+```ts{7}
 run(Parser).with('maybe')
 
 {
