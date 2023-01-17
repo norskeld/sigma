@@ -32,19 +32,35 @@ run(Parser).with('true')
 
 {
   isOk: true,
+  span: [ 0, 4 ],
   pos: 4,
   value: 'true'
 }
 ```
 :::
 
+Notice how the `expected` field differs depending on the input, specifically its length.
+
 ::: danger Failure
+```ts
+run(Parser).with('yank')
+
+{
+  isOk: false,
+  span: [ 0, 4 ],
+  pos: 0,
+  expected: 'true'
+}
+```
+---
 ```ts
 run(Parser).with('maybe')
 
 {
   isOk: false,
+  span: [ 0, 5 ],
   pos: 0,
-  expected: 'true'
+  expected: 'false'
 }
+```
 :::

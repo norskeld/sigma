@@ -36,6 +36,7 @@ run(Parser).with('fn multiply x y')
 
 {
   isOk: true,
+  span: [ 0, 15 ],
   pos: 15,
   value: 'multiply'
 }
@@ -48,6 +49,7 @@ run(Parser).with('fn 100 x y')
 
 {
   isOk: false,
+  span: [ 3, 3 ],
   pos: 3,
   expected: 'letters'
 }

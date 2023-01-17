@@ -28,18 +28,20 @@ run(Parser).with('+++')
 
 {
   isOk: true,
+  span: [ 0, 3 ],
   pos: 3,
   value: [ '+', '+', '+' ]
 }
 ```
 :::
 
-::: danger Failure
+::: danger Success
 ```ts
 run(Parser).with('---')
 
 {
   isOk: true,
+  span: [ 0, 0 ],
   pos: 0,
   value: []
 }

@@ -31,8 +31,20 @@ run(Parser).with('-2')
 
 {
   isOk: true,
+  pan: [ 0, 2 ],
   pos: 2,
   value: [ '-', 2 ]
+}
+```
+---
+```ts
+run(Parser).with('2')
+
+{
+  isOk: true,
+  pan: [ 0, 1 ],
+  pos: 1,
+  value: [ null, 2 ]
 }
 ```
 :::
@@ -43,6 +55,7 @@ run(Parser).with('~2')
 
 {
   isOk: false,
+  span: [ 0, 0 ],
   pos: 0,
   expected: 'whole number'
 }
