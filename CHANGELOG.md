@@ -1,3 +1,15 @@
+# [3.6.0](https://github.com/norskeld/sigma/compare/v3.5.0...v3.6.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* **combinators/error:** return correct `pos` ([c11002c](https://github.com/norskeld/sigma/commit/c11002ca93d9eba3b2cc273a4585286e95f01817))
+
+
+### Features
+
+* add spans ([88b13b1](https://github.com/norskeld/sigma/commit/88b13b11d54559d913a242bdc6f120f07db4f0a7))
+
 # [3.5.0](https://github.com/norskeld/sigma/compare/v3.4.0...v3.5.0) (2023-01-16)
 
 
