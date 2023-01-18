@@ -26,7 +26,7 @@ export class ParserError extends Error {
  * Runs a parser with provided input, throwing on failure.
  *
  * @param parser - Parser to run
- * @throws {@link ParserError} Parser error with `message` (`expected`) and `pos`
+ * @throws {@link ParserError} Parser error with `message` (`expected`) `span`, and `pos`
  *
  * @returns Parser result
  */
