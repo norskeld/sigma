@@ -1,6 +1,6 @@
 import { regexp } from './regexp'
 
-import type { Parser, Span } from '@types'
+import type { Parser } from '@types'
 
 const HEXADECIMAL_RE = /0[xX][0-9a-fA-F]+/g
 const BINARY_RE = /0[bB][01]+/g
@@ -23,7 +23,7 @@ export function hex(): Parser<number> {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos] as Span,
+            span: [pos, result.pos],
             pos: result.pos,
             value: parseInt(result.value.slice(2), 16)
           }
@@ -51,7 +51,7 @@ export function binary(): Parser<number> {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos] as Span,
+            span: [pos, result.pos],
             pos: result.pos,
             value: parseInt(result.value.slice(2), 2)
           }
@@ -79,7 +79,7 @@ export function octal(): Parser<number> {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos] as Span,
+            span: [pos, result.pos],
             pos: result.pos,
             value: parseInt(result.value.slice(2), 8)
           }
@@ -107,7 +107,7 @@ export function whole(): Parser<number> {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos] as Span,
+            span: [pos, result.pos],
             pos: result.pos,
             value: parseInt(result.value, 10)
           }
@@ -135,7 +135,7 @@ export function integer(): Parser<number> {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos] as Span,
+            span: [pos, result.pos],
             pos: result.pos,
             value: parseInt(result.value, 10)
           }
@@ -165,7 +165,7 @@ export function float(): Parser<number> {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos] as Span,
+            span: [pos, result.pos],
             pos: result.pos,
             value: parseFloat(result.value)
           }
