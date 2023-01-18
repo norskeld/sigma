@@ -53,31 +53,36 @@ Below is an example of parsing nested tuples like `(1, 2, (3, 4))` into an AST.
 ```ts
 import { choice, map, optional, sepBy, sequence, takeMid } from '@nrsk/sigma/combinators'
 import { defer, integer, run, string, whitespace } from '@nrsk/sigma/parsers'
+import type { Span } from '@nrsk/sigma'
 
 /* AST. */
 
 interface NumberNode {
   type: 'number'
+  span: Span
   value: number
 }
 
 interface ListNode {
   type: 'list'
+  span: Span
   value: Array<NumberNode | ListNode>
 }
 
 /* Mapping functions to turn parsed string values into AST nodes. */
 
-function toNumber(value: number): NumberNode {
+function toNumber(value: number, span: Span): NumberNode {
   return {
     type: 'number',
+    span,
     value
   }
 }
 
-function toList(value: Array<NumberNode | ListNode>): ListNode {
+function toList(value: Array<NumberNode | ListNode>, span: Span): ListNode {
   return {
     type: 'list',
+    span,
     value
   }
 }
@@ -111,7 +116,7 @@ TupleList.with(
 )
 ```
 
-Then we simply `run` the root parser, feeding it `.with` text:
+Then we simply `run` the root parser, feeding it `with` text:
 
 ```ts
 run(TupleList).with('(1, 2, (3, 4))')
@@ -122,17 +127,20 @@ And in the end we get the following output with the AST, which can then be manip
 ```ts
 {
   isOk: true,
+  span: [ 0, 14 ],
   pos: 14,
   value: {
     type: 'list',
+    span: [ 0, 14 ],
     value: [
-      { type: 'number', value: 1 },
-      { type: 'number', value: 2 },
+      { type: 'number', span: [ 1, 2 ], value: 1 },
+      { type: 'number', span: [ 4, 5 ], value: 2 },
       {
         type: 'list',
+        span: [ 7, 13 ],
         value: [
-          { type: 'number', value: 3 },
-          { type: 'number', value: 4 }
+          { type: 'number', span: [ 8, 9 ], value: 3 },
+          { type: 'number', span: [ 11, 12 ], value: 4 }
         ]
       }
     ]
