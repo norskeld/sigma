@@ -1,9 +1,10 @@
-import type { HeadConfig, MarkdownOptions, DefaultTheme } from 'vitepress'
+import type { DefaultTheme, HeadConfig, MarkdownOptions } from 'vitepress'
 import { defineConfig } from 'vitepress'
 
 import pkg from '../../../package.json'
 
-import { format, Sidebar, Social, Nav } from './helpers'
+import type { SideBarItemWithLink } from './helpers'
+import { capitalize, Content, format, Nav, Sidebar, Social } from './helpers'
 import { Github, Npm } from './icons'
 
 const GH_URL = 'https://github.com/norskeld/sigma'
@@ -117,12 +118,17 @@ function getThemeConfig(): DefaultTheme.Config {
 function getNav() {
   const items = getSidebar().flatMap((item) => item.items)
 
-  const [combinators] = items.filter((item) => item.link?.startsWith('/combinators'))
-  const [parsers] = items.filter((item) => item.link?.startsWith('/parsers'))
+  const [combinators] = items.filter(
+    (item): item is SideBarItemWithLink => item.link?.startsWith('/combinators') ?? false
+  )
+
+  const [parsers] = items.filter(
+    (item): item is SideBarItemWithLink => item.link?.startsWith('/parsers') ?? false
+  )
 
   return [
-    Nav.item('Combinators', combinators.link!),
-    Nav.item('Parsers', parsers.link!),
+    Nav.item('Combinators', combinators.link),
+    Nav.item('Parsers', parsers.link),
     Nav.items(pkg.version, [Nav.item('Changelog', GH_URL + '/blob/master/CHANGELOG.md')])
   ]
 }
@@ -132,60 +138,11 @@ function getSocialLinks() {
 }
 
 function getSidebar() {
-  return [
-    Sidebar.group('Introduction', '/introduction', [
-      Sidebar.item('Getting started', '/getting-started')
-    ]),
-    Sidebar.group('Guides', '/guides', [
-      Sidebar.item('Primitives and composites', '/primitives-and-composites')
-    ]),
-    Sidebar.group('Combinators', '/combinators', [
-      Sidebar.item('attempt', '/attempt'),
-      Sidebar.item('chainl', '/chainl'),
-      Sidebar.item('choice', '/choice'),
-      Sidebar.item('error', '/error'),
-      Sidebar.item('lookahead', '/lookahead'),
-      Sidebar.item('many', '/many'),
-      Sidebar.item('many1', '/many1'),
-      Sidebar.item('map', '/map'),
-      Sidebar.item('mapTo', '/mapTo'),
-      Sidebar.item('optional', '/optional'),
-      Sidebar.item('sepBy', '/sepBy'),
-      Sidebar.item('sepBy1', '/sepBy1'),
-      Sidebar.item('sequence', '/sequence'),
-      Sidebar.item('skipUntil', '/skipUntil'),
-      Sidebar.item('takeLeft', '/takeLeft'),
-      Sidebar.item('takeMid', '/takeMid'),
-      Sidebar.item('takeRight', '/takeRight'),
-      Sidebar.item('takeSides', '/takeSides'),
-      Sidebar.item('takeUntil', '/takeUntil'),
-      Sidebar.item('when', '/when')
-    ]),
-    Sidebar.group('Parsers', '/parsers', [
-      Sidebar.item('any', '/any'),
-      Sidebar.item('binary', '/binary'),
-      Sidebar.item('defer', '/defer'),
-      Sidebar.item('eof', '/eof'),
-      Sidebar.item('eol', '/eol'),
-      Sidebar.item('float', '/float'),
-      Sidebar.item('hex', '/hex'),
-      Sidebar.item('integer', '/integer'),
-      Sidebar.item('letter', '/letter'),
-      Sidebar.item('letters', '/letters'),
-      Sidebar.item('noneOf', '/noneOf'),
-      Sidebar.item('nothing', '/nothing'),
-      Sidebar.item('octal', '/octal'),
-      Sidebar.item('oneOf', '/oneOf'),
-      Sidebar.item('regexp', '/regexp'),
-      Sidebar.item('rest', '/rest'),
-      Sidebar.item('run', '/run'),
-      Sidebar.item('string', '/string'),
-      Sidebar.item('tryRun', '/tryRun'),
-      Sidebar.item('ustring', '/ustring'),
-      Sidebar.item('whitespace', '/whitespace'),
-      Sidebar.item('whole', '/whole')
-    ])
-  ]
+  const contentDir = Content.getContentDir()
+
+  return Content.getContentFolders(contentDir).map((folder) =>
+    Sidebar.group(capitalize(folder), `/${folder}`, Content.getItems(`${contentDir}/${folder}`))
+  )
 }
 
 function getFooter() {
