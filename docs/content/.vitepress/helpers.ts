@@ -1,8 +1,19 @@
+import { readdirSync } from 'node:fs'
+import { dirname, join, parse } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import frontmatter from 'gray-matter'
+
 import type { DefaultTheme } from 'vitepress'
 
 export function format(...strings: Array<string>): string {
   return strings.join(String())
 }
+
+export type SideBarItemWithLink = Exclude<
+  DefaultTheme.SidebarItem,
+  { items: DefaultTheme.SidebarItem[] }
+>
 
 export const Sidebar = {
   group(
@@ -44,5 +55,52 @@ export const Social = {
       icon: { svg },
       link
     }
+  }
+}
+
+export type Frontmatter = { title: string }
+
+function getSorting(f: string) {
+  // prettier-ignore
+  switch (f) {
+    case 'introduction': return 0
+    case 'guides': return 1
+    default: return 2
+  }
+}
+
+export function capitalize([head, ...raw]: string): string {
+  return head.toUpperCase() + String.raw({ raw }).toLowerCase()
+}
+
+export const Markdown = {
+  getFrontmatter<T extends Record<string, any>>(path: string): T {
+    const { data } = frontmatter.read(path)
+    return data as T
+  }
+}
+
+export const Content = {
+  getContentDir() {
+    const currentDir = dirname(fileURLToPath(import.meta.url))
+
+    return join(currentDir, '..')
+  },
+  getContentFolders(contentDir: string) {
+    const directoriesBlackList = ['.vitepress', 'public']
+
+    return readdirSync(contentDir, { withFileTypes: true })
+      .filter((x) => x.isDirectory() && !directoriesBlackList.includes(x.name))
+      .map((folder) => folder.name)
+      .sort((a, b) => getSorting(a) - getSorting(b))
+  },
+  getItems(docFolder: string) {
+    return readdirSync(docFolder).map((filename) => {
+      const { name } = parse(filename)
+
+      const { title } = Markdown.getFrontmatter<Frontmatter>(`${docFolder}/${filename}`)
+
+      return Sidebar.item(title, `/${name}`)
+    })
   }
 }
