@@ -21,8 +21,11 @@
       "@semantic-release/github",
       {
         "failTitle": false,
+        "failComment": false,
         "labels": ["R-failing"],
-        "releasedLabels": ["R-released"]
+        "releasedLabels": ["R-released"],
+        "successComment": "This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version [${nextRelease.version}](https://github.com/norskeld/sigma/releases/tag/v${nextRelease.version}).",
+        "
       }
     ]
   ]
