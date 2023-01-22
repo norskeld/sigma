@@ -55,6 +55,27 @@ export type ToTuple<T> = T extends [Parser<infer Head>, ...infer Tail]
   : []
 
 /**
+ * Given a an array or a tuple of `Parser<T>`s, recursively extracts inner `T`s into a tuple or array.
+ *
+ * @example
+ *
+ * ```ts
+ * type U = [Parser<string>, Parser<number>, Parser<boolean>]
+ * type R = ToTuple<U> // type R = [string, number, boolean]
+ *
+ * type A = Parser<Array<string>>
+ * type T = ToTupleOrArray<A> // type T = string[]
+ * ```
+ */
+export type ToTupleOrArray<T> = T extends Array<Parser<infer Inner>>
+  ? Inner extends unknown
+    ? T extends [Parser<infer Head>, ...infer Tail]
+      ? [Head, ...ToTuple<Tail>]
+      : Inner[]
+    : []
+  : []
+
+/**
  * Given a tuple of `Parser<T>`s, recursively extracts inner `T`s into a union.
  *
  * @example

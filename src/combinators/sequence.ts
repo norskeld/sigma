@@ -1,4 +1,4 @@
-import type { Parser, ToTuple } from '@types'
+import type { Parser, ToTuple, ToTupleOrArray } from '@types'
 
 /**
  * Applies `ps` parsers in order, until *all* of them succeed.
@@ -8,6 +8,7 @@ import type { Parser, ToTuple } from '@types'
  * @returns Tuple of values returned by `ps` parsers
  */
 export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTuple<T>>
+export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTupleOrArray<T>>
 export function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>> {
   return {
     parse(input, pos) {
