@@ -11,7 +11,7 @@ export default defineConfig({
       include: ['src/**/*.ts']
     },
     typecheck: {
-      include: ['src/**/*.type.spec.ts'],
+      include: ['src/**/*.spec-d.ts'],
       ignoreSourceErrors: true
     }
   }
