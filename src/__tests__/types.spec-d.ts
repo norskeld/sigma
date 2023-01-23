@@ -1,4 +1,4 @@
-import { describe, it, expectTypeOf } from '@testing'
+import { describe, expectTypeOf, it } from '@testing'
 import * as t from '@types'
 
 describe('library', () => {
