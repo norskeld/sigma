@@ -87,16 +87,28 @@ describe('nothing', () => {
 describe('numbers', () => {
   const { binary, float, hex, integer, octal, whole } = p
 
+  it('binary should have correct inferred signature', () => {
+    expectTypeOf(binary).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf(binary).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf(binary).returns.not.toMatchTypeOf<StringParser>()
+  })
+
+  it('float should have correct inferred signature', () => {
+    expectTypeOf(float).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf(float).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf(float).returns.not.toMatchTypeOf<StringParser>()
+  })
+
   it('hex should have correct inferred signature', () => {
     expectTypeOf(hex).returns.toMatchTypeOf<NumberParser>()
     expectTypeOf(hex).returns.toMatchTypeOf<UnknownParser>()
     expectTypeOf(hex).returns.not.toMatchTypeOf<StringParser>()
   })
 
-  it('binary should have correct inferred signature', () => {
-    expectTypeOf(binary).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(binary).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(binary).returns.not.toMatchTypeOf<StringParser>()
+  it('integer should have correct inferred signature', () => {
+    expectTypeOf(integer).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf(integer).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf(integer).returns.not.toMatchTypeOf<StringParser>()
   })
 
   it('octal should have correct inferred signature', () => {
@@ -109,18 +121,6 @@ describe('numbers', () => {
     expectTypeOf(whole).returns.toMatchTypeOf<NumberParser>()
     expectTypeOf(whole).returns.toMatchTypeOf<UnknownParser>()
     expectTypeOf(whole).returns.not.toMatchTypeOf<StringParser>()
-  })
-
-  it('integer should have correct inferred signature', () => {
-    expectTypeOf(integer).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(integer).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(integer).returns.not.toMatchTypeOf<StringParser>()
-  })
-
-  it('float should have correct inferred signature', () => {
-    expectTypeOf(float).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(float).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(float).returns.not.toMatchTypeOf<StringParser>()
   })
 })
 
