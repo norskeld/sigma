@@ -9,6 +9,10 @@ export default defineConfig({
       provider: 'istanbul',
       reporter: ['text', 'lcov'],
       include: ['src/**/*.ts']
+    },
+    typecheck: {
+      include: ['src/**/*.spec-d.ts'],
+      ignoreSourceErrors: true
     }
   }
 })

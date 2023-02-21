@@ -45,6 +45,7 @@
     "release": "npx semantic-release",
     "release:dry": "npx semantic-release --dry-run",
     "test": "vitest",
+    "test:types": "vitest typecheck",
     "test:coverage": "vitest --coverage"
   },
   "repository": {
@@ -98,7 +99,7 @@
     "tsx": "^3.10.1",
     "typescript": "^4.8.4",
     "vite-tsconfig-paths": "^3.5.1",
-    "vitest": "^0.24.1"
+    "vitest": "^0.27.3"
   },
   "commitlint": {
     "extends": [

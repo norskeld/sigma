@@ -112,4 +112,4 @@ export const expectedParsers = [
   'whole'
 ] as const
 
-export { describe, expect, it } from 'vitest'
+export { describe, expect, it, assertType, expectTypeOf } from 'vitest'
