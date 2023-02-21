@@ -12,9 +12,9 @@ describe('any', () => {
   const { any } = p
 
   it('any should have correct inferred signature', () => {
-    expectTypeOf(any).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(any).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(any).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof any>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof any>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof any>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -22,9 +22,9 @@ describe('defer', () => {
   const { defer } = p
 
   it('defer should have correct inferred signature', () => {
-    expectTypeOf(defer).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(defer<string>).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(defer<number>).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof defer>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof defer<string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof defer<number>>().returns.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -32,9 +32,9 @@ describe('eof', () => {
   const { eof } = p
 
   it('eof should have correct inferred signature', () => {
-    expectTypeOf(eof).returns.toMatchTypeOf<NullParser>()
-    expectTypeOf(eof).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(eof).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof eof>().returns.toMatchTypeOf<NullParser>()
+    expectTypeOf<typeof eof>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof eof>().returns.not.toMatchTypeOf<StringParser>()
   })
 })
 
@@ -42,9 +42,9 @@ describe('eol', () => {
   const { eol } = p
 
   it('eol should have correct inferred signature', () => {
-    expectTypeOf(eol).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(eol).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(eol).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof eol>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof eol>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof eol>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -52,15 +52,15 @@ describe('letter', () => {
   const { letter, letters } = p
 
   it('letter should have correct inferred signature', () => {
-    expectTypeOf(letter).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(letter).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(letter).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof letter>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof letter>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof letter>().returns.not.toMatchTypeOf<NumberParser>()
   })
 
   it('letters should have correct inferred signature', () => {
-    expectTypeOf(letters).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(letters).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(letters).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof letters>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof letters>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof letters>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -68,9 +68,9 @@ describe('noneOf', () => {
   const { noneOf } = p
 
   it('noneOf should have correct inferred signature', () => {
-    expectTypeOf(noneOf).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(noneOf).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(noneOf).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof noneOf>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof noneOf>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof noneOf>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -78,9 +78,9 @@ describe('nothing', () => {
   const { nothing } = p
 
   it('nothing should have correct inferred signature', () => {
-    expectTypeOf(nothing).returns.toMatchTypeOf<NullParser>()
-    expectTypeOf(nothing).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(nothing).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof nothing>().returns.toMatchTypeOf<NullParser>()
+    expectTypeOf<typeof nothing>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof nothing>().returns.not.toMatchTypeOf<StringParser>()
   })
 })
 
@@ -88,39 +88,39 @@ describe('numbers', () => {
   const { binary, float, hex, integer, octal, whole } = p
 
   it('binary should have correct inferred signature', () => {
-    expectTypeOf(binary).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(binary).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(binary).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof binary>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof binary>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof binary>().returns.not.toMatchTypeOf<StringParser>()
   })
 
   it('float should have correct inferred signature', () => {
-    expectTypeOf(float).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(float).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(float).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof float>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof float>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof float>().returns.not.toMatchTypeOf<StringParser>()
   })
 
   it('hex should have correct inferred signature', () => {
-    expectTypeOf(hex).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(hex).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(hex).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof hex>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof hex>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof hex>().returns.not.toMatchTypeOf<StringParser>()
   })
 
   it('integer should have correct inferred signature', () => {
-    expectTypeOf(integer).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(integer).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(integer).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof integer>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof integer>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof integer>().returns.not.toMatchTypeOf<StringParser>()
   })
 
   it('octal should have correct inferred signature', () => {
-    expectTypeOf(octal).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(octal).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(octal).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof octal>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof octal>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof octal>().returns.not.toMatchTypeOf<StringParser>()
   })
 
   it('whole should have correct inferred signature', () => {
-    expectTypeOf(whole).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(whole).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(whole).returns.not.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof whole>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof whole>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof whole>().returns.not.toMatchTypeOf<StringParser>()
   })
 })
 
@@ -128,9 +128,9 @@ describe('oneOf', () => {
   const { oneOf } = p
 
   it('oneOf should have correct inferred signature', () => {
-    expectTypeOf(oneOf).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(oneOf).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(oneOf).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof oneOf>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof oneOf>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof oneOf>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -138,9 +138,9 @@ describe('regexp', () => {
   const { regexp } = p
 
   it('regexp should have correct inferred signature', () => {
-    expectTypeOf(regexp).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(regexp).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(regexp).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof regexp>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof regexp>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof regexp>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -148,9 +148,9 @@ describe('rest', () => {
   const { rest } = p
 
   it('rest should have correct inferred signature', () => {
-    expectTypeOf(rest).returns.toMatchTypeOf<SucceedingParser<string>>()
-    expectTypeOf(rest).returns.toMatchTypeOf<SucceedingParser<unknown>>()
-    expectTypeOf(rest).returns.not.toMatchTypeOf<SucceedingParser<number>>()
+    expectTypeOf<typeof rest>().returns.toMatchTypeOf<SucceedingParser<string>>()
+    expectTypeOf<typeof rest>().returns.toMatchTypeOf<SucceedingParser<unknown>>()
+    expectTypeOf<typeof rest>().returns.not.toMatchTypeOf<SucceedingParser<number>>()
   })
 })
 
@@ -158,9 +158,11 @@ describe('run', () => {
   const { run } = p
 
   it('run should have correct inferred signature', () => {
-    expectTypeOf(run).returns.toMatchTypeOf<{ with: (input: string) => Result<unknown> }>()
-    expectTypeOf(run<string>).returns.toMatchTypeOf<{ with: (input: string) => Result<string> }>()
-    expectTypeOf(run<string>).returns.not.toMatchTypeOf<{
+    expectTypeOf<typeof run>().returns.toMatchTypeOf<{ with: (input: string) => Result<unknown> }>()
+    expectTypeOf<typeof run<string>>().returns.toMatchTypeOf<{
+      with: (input: string) => Result<string>
+    }>()
+    expectTypeOf<typeof run<string>>().returns.not.toMatchTypeOf<{
       with: (input: string) => Result<number>
     }>()
   })
@@ -170,15 +172,15 @@ describe('string', () => {
   const { string, ustring } = p
 
   it('string should have correct inferred signature', () => {
-    expectTypeOf(string).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(string).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(string).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof string>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof string>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof string>().returns.not.toMatchTypeOf<NumberParser>()
   })
 
   it('ustring should have correct inferred signature', () => {
-    expectTypeOf(ustring).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(ustring).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(ustring).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof ustring>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof ustring>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof ustring>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -186,11 +188,13 @@ describe('tryRun', () => {
   const { tryRun } = p
 
   it('tryRun should have correct inferred signature', () => {
-    expectTypeOf(tryRun).returns.toMatchTypeOf<{ with: (input: string) => Success<unknown> }>()
-    expectTypeOf(tryRun<string>).returns.toMatchTypeOf<{
+    expectTypeOf<typeof tryRun>().returns.toMatchTypeOf<{
+      with: (input: string) => Success<unknown>
+    }>()
+    expectTypeOf<typeof tryRun<string>>().returns.toMatchTypeOf<{
       with: (input: string) => Success<string>
     }>()
-    expectTypeOf(tryRun<string>).returns.not.toMatchTypeOf<{
+    expectTypeOf<typeof tryRun<string>>().returns.not.toMatchTypeOf<{
       with: (input: string) => Success<number>
     }>()
   })
@@ -200,8 +204,8 @@ describe('whitespace', () => {
   const { whitespace } = p
 
   it('whitespace should have correct inferred signature', () => {
-    expectTypeOf(whitespace).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(whitespace).returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf(whitespace).returns.not.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof whitespace>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof whitespace>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof whitespace>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })

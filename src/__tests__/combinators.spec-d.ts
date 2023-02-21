@@ -15,8 +15,8 @@ describe('attempt', () => {
   const { attempt } = c
 
   it('attempt should have correct inferred signature', () => {
-    expectTypeOf(attempt<string>).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(attempt).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof attempt>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof attempt<string>>().returns.toMatchTypeOf<StringParser>()
   })
 })
 
@@ -24,23 +24,25 @@ describe('chain', () => {
   const { chainl } = c
 
   it('chainl should have correct inferred signature', () => {
-    expectTypeOf(chainl).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof chainl>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(chainl<string, string, string>).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(chainl<number, number, string>).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof chainl<string, string, string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof chainl<number, number, string>>().returns.toMatchTypeOf<NumberParser>()
   })
 })
 
-describe.todo('choice', () => {
+describe('choice', () => {
   const { choice } = c
 
   it('choice should have correct inferred signature', () => {
-    // expectTypeOf(choice<string[]>).returns.toMatchTypeOf<
-    //  StringParser
-    // >()
-    // expectTypeOf(choice<number, number, string>).returns.toMatchTypeOf<
-    //   NumberParser
-    // >()
+    expectTypeOf<typeof choice<[]>>().returns.toMatchTypeOf<UnknownParser>()
+
+    expectTypeOf<typeof choice<[StringParser, NumberParser]>>().returns.toMatchTypeOf<
+      Parser<string | number>
+    >()
+    expectTypeOf<typeof choice<[StringParser, StringParser]>>().returns.toMatchTypeOf<
+      Parser<string>
+    >()
   })
 })
 
@@ -48,12 +50,12 @@ describe('error', () => {
   const { error } = c
 
   it('error should have correct inferred signature', () => {
-    expectTypeOf(error).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof error>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(error<string>).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(error<number>).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof error<string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof error<number>>().returns.toMatchTypeOf<NumberParser>()
 
-    expectTypeOf(error<number | string>).returns.toMatchTypeOf<StringOrNumberParser>()
+    expectTypeOf<typeof error<number | string>>().returns.toMatchTypeOf<StringOrNumberParser>()
   })
 })
 
@@ -61,12 +63,12 @@ describe('lookahead', () => {
   const { lookahead } = c
 
   it('lookahead should have correct inferred signature', () => {
-    expectTypeOf(lookahead).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof lookahead>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(lookahead<string>).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(lookahead<number>).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof lookahead<string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof lookahead<number>>().returns.toMatchTypeOf<NumberParser>()
 
-    expectTypeOf(lookahead<number | string>).returns.toMatchTypeOf<StringOrNumberParser>()
+    expectTypeOf<typeof lookahead<number | string>>().returns.toMatchTypeOf<StringOrNumberParser>()
   })
 })
 
@@ -74,17 +76,17 @@ describe('many', () => {
   const { many, many1 } = c
 
   it('many should have correct inferred signature', () => {
-    expectTypeOf(many).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof many>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(many<string>).returns.toMatchTypeOf<SucceedingParser<string[]>>()
-    expectTypeOf(many<number>).returns.toMatchTypeOf<SucceedingParser<number[]>>()
+    expectTypeOf<typeof many<string>>().returns.toMatchTypeOf<SucceedingParser<string[]>>()
+    expectTypeOf<typeof many<number>>().returns.toMatchTypeOf<SucceedingParser<number[]>>()
   })
 
   it('many1 should have correct inferred signature', () => {
-    expectTypeOf(many1).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof many1>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(many1<string>).returns.toMatchTypeOf<StringParsers>()
-    expectTypeOf(many1<number>).returns.toMatchTypeOf<NumberParsers>()
+    expectTypeOf<typeof many1<string>>().returns.toMatchTypeOf<StringParsers>()
+    expectTypeOf<typeof many1<number>>().returns.toMatchTypeOf<NumberParsers>()
   })
 })
 
@@ -92,10 +94,10 @@ describe('map', () => {
   const { map } = c
 
   it('map should have correct inferred signature', () => {
-    expectTypeOf(map).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof map>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(map<string, number>).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(map<string, string>).returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof map<string, number>>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof map<string, string>>().returns.toMatchTypeOf<StringParser>()
   })
 })
 
@@ -103,10 +105,10 @@ describe('optional', () => {
   const { optional } = c
 
   it('optional should have correct inferred signature', () => {
-    expectTypeOf(optional).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof optional>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(optional<string>).returns.toMatchTypeOf<Parser<string | null>>()
-    expectTypeOf(optional<number>).returns.toMatchTypeOf<Parser<number | null>>()
+    expectTypeOf<typeof optional<string>>().returns.toMatchTypeOf<Parser<string | null>>()
+    expectTypeOf<typeof optional<number>>().returns.toMatchTypeOf<Parser<number | null>>()
   })
 })
 
@@ -114,37 +116,41 @@ describe('sepBy', () => {
   const { sepBy, sepBy1 } = c
 
   it('sepBy should have correct inferred signature', () => {
-    expectTypeOf(sepBy).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof sepBy>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(sepBy<string, number>).returns.toMatchTypeOf<StringParsers>()
-    expectTypeOf(sepBy<number, string>).returns.toMatchTypeOf<NumberParsers>()
+    expectTypeOf<typeof sepBy<string, number>>().returns.toMatchTypeOf<StringParsers>()
+    expectTypeOf<typeof sepBy<number, string>>().returns.toMatchTypeOf<NumberParsers>()
   })
 
   it('sepBy1 should have correct inferred signature', () => {
-    expectTypeOf(sepBy1).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof sepBy1>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(sepBy1<string, number>).returns.toMatchTypeOf<StringParsers>()
-    expectTypeOf(sepBy1<number, string>).returns.toMatchTypeOf<NumberParsers>()
+    expectTypeOf<typeof sepBy1<string, number>>().returns.toMatchTypeOf<StringParsers>()
+    expectTypeOf<typeof sepBy1<number, string>>().returns.toMatchTypeOf<NumberParsers>()
   })
 })
 
 describe('sequence', () => {
   const { sequence } = c
 
-  it('sequence should have correct inferred signature', () => {
-    expectTypeOf(sequence<[StringParser, StringParser]>).returns.toMatchTypeOf<
+  it('sequence should have correct inferred signature (from tuple)', () => {
+    expectTypeOf<typeof sequence<[StringParser, StringParser]>>().returns.toMatchTypeOf<
       Parser<[string, string]>
     >()
-    expectTypeOf(sequence<[StringParser, NumberParser]>).returns.toMatchTypeOf<
+
+    expectTypeOf<typeof sequence<[StringParser, NumberParser]>>().returns.toMatchTypeOf<
       Parser<[string, number]>
     >()
-    expectTypeOf(sequence<StringParser[]>).returns.toMatchTypeOf<StringParsers>()
-    expectTypeOf(sequence<NumberParser[]>).returns.toMatchTypeOf<NumberParsers>()
 
     // Fix this ?
-    expectTypeOf(sequence<(NumberParser | StringParser)[]>).returns.toMatchTypeOf<
+    expectTypeOf<typeof sequence<(NumberParser | StringParser)[]>>().returns.toMatchTypeOf<
       Parser<string[] | number[]>
     >()
+  })
+
+  it('should have correct inferred signature (from array)', () => {
+    expectTypeOf<typeof sequence<Array<StringParser>>>().returns.toMatchTypeOf<StringParsers>()
+    expectTypeOf<typeof sequence<Array<NumberParser>>>().returns.toMatchTypeOf<NumberParsers>()
   })
 })
 
@@ -152,33 +158,33 @@ describe('take', () => {
   const { takeLeft, takeMid, takeRight, takeSides } = c
 
   it('takeLeft should have correct inferred signature', () => {
-    expectTypeOf(takeLeft).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof takeLeft>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(takeLeft<string, number>).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(takeLeft<number, string>).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof takeLeft<string, number>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof takeLeft<number, string>>().returns.toMatchTypeOf<NumberParser>()
   })
 
   it('takeRight should have correct inferred signature', () => {
-    expectTypeOf(takeRight).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof takeRight>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(takeRight<string, number>).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(takeRight<number, string>).returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof takeRight<string, number>>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof takeRight<number, string>>().returns.toMatchTypeOf<StringParser>()
   })
 
   it('takeMid should have correct inferred signature', () => {
-    expectTypeOf(takeMid).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof takeMid>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(takeMid<string, number, string>).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(takeMid<number, string, number>).returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof takeMid<string, number, string>>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof takeMid<number, string, number>>().returns.toMatchTypeOf<StringParser>()
   })
 
   it('takeSides should have correct inferred signature', () => {
-    expectTypeOf(takeSides).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof takeSides>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(takeSides<string, number, string>).returns.toMatchTypeOf<
+    expectTypeOf<typeof takeSides<string, number, string>>().returns.toMatchTypeOf<
       Parser<[string, string]>
     >()
-    expectTypeOf(takeSides<number, string, number>).returns.toMatchTypeOf<
+    expectTypeOf<typeof takeSides<number, string, number>>().returns.toMatchTypeOf<
       Parser<[number, number]>
     >()
   })
@@ -188,17 +194,21 @@ describe('until', () => {
   const { takeUntil, skipUntil } = c
 
   it('takeUntil should have correct inferred signature', () => {
-    expectTypeOf(takeUntil).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof takeUntil>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(takeUntil<string, number>).returns.toMatchTypeOf<Parser<[string[], number]>>()
-    expectTypeOf(takeUntil<number, string>).returns.toMatchTypeOf<Parser<[number[], string]>>()
+    expectTypeOf<typeof takeUntil<string, number>>().returns.toMatchTypeOf<
+      Parser<[string[], number]>
+    >()
+    expectTypeOf<typeof takeUntil<number, string>>().returns.toMatchTypeOf<
+      Parser<[number[], string]>
+    >()
   })
 
   it('skipUntil should have correct inferred signature', () => {
-    expectTypeOf(skipUntil).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof skipUntil>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(skipUntil<string, number>).returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf(skipUntil<number, string>).returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof skipUntil<string, number>>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof skipUntil<number, string>>().returns.toMatchTypeOf<StringParser>()
   })
 })
 
@@ -206,9 +216,9 @@ describe('when', () => {
   const { when } = c
 
   it('when should have correct inferred signature', () => {
-    expectTypeOf(when).returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof when>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf(when<number, StringParser>).returns.toMatchTypeOf<StringParser>()
-    expectTypeOf(when<number, NumberParser>).returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof when<number, StringParser>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof when<number, NumberParser>>().returns.toMatchTypeOf<NumberParser>()
   })
 })

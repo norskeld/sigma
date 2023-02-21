@@ -1,25 +1,25 @@
 import { Parser } from './library'
 
-/* @internal */
+/** @internal */
 export type UnionToIntersection<U> = (U extends never ? never : (arg: U) => never) extends (
   arg: infer I
 ) => void
   ? I
   : never
 
-/* @internal */
+/** @internal */
 export type UnionToTuplePreserving<T> = UnionToIntersection<
   T extends never ? never : (t: T) => T
 > extends (_: never) => infer W
   ? [...UnionToTuplePreserving<Exclude<T, W>>, W]
   : []
 
-/* @internal */
+/** @internal */
 export type UnwrapParserTuple<T> = T extends [Parser<infer Head>, ...infer Tail]
   ? [Head, ...UnwrapParserTuple<Tail>]
   : []
 
-/* @internal */
+/** @internal */
 export type TupleToUnion<T> = T extends [infer Head, ...infer Rest]
   ? Head | TupleToUnion<Rest>
   : never
