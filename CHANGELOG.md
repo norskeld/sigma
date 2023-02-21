@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/norskeld/sigma/compare/v3.6.0...v3.6.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* **types:** fix inference for some parsers, add type testing ([#75](https://github.com/norskeld/sigma/issues/75)) ([80cccf0](https://github.com/norskeld/sigma/commit/80cccf090c620cb1d715a9f49e45334b5f4307bd)), closes [#48](https://github.com/norskeld/sigma/issues/48)
+
 # [3.6.0](https://github.com/norskeld/sigma/compare/v3.5.0...v3.6.0) (2023-01-17)
 
 
