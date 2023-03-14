@@ -1,3 +1,10 @@
+## [3.6.2](https://github.com/norskeld/sigma/compare/v3.6.1...v3.6.2) (2023-03-14)
+
+
+### Bug Fixes
+
+* **package:** re-order `exports` fields for proper resolution in some setups ([b7cb115](https://github.com/norskeld/sigma/commit/b7cb1150ea332b37d997f7c8ef1836d606180d27))
+
 ## [3.6.1](https://github.com/norskeld/sigma/compare/v3.6.0...v3.6.1) (2023-02-21)
 
 
