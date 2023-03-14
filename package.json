@@ -10,19 +10,19 @@
   "types": "./index.d.ts",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./index.js",
-      "require": "./index.cjs",
-      "types": "./index.d.ts"
+      "require": "./index.cjs"
     },
     "./combinators": {
+      "types": "./combinators.d.ts",
       "import": "./combinators.js",
-      "require": "./combinators.cjs",
-      "types": "./combinators.d.ts"
+      "require": "./combinators.cjs"
     },
     "./parsers": {
+      "types": "./parsers.d.ts",
       "import": "./parsers.js",
-      "require": "./parsers.cjs",
-      "types": "./parsers.d.ts"
+      "require": "./parsers.cjs"
     }
   },
   "files": [
