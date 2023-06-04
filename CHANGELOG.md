@@ -1,3 +1,10 @@
+## [3.6.3](https://github.com/norskeld/sigma/compare/v3.6.2...v3.6.3) (2023-06-04)
+
+
+### Bug Fixes
+
+* **combinators/sepBy:** do not mutate position on no match ([#79](https://github.com/norskeld/sigma/issues/79)) ([baf8c16](https://github.com/norskeld/sigma/commit/baf8c164e0373a779be93d42b232bc484536dfce)), closes [#77](https://github.com/norskeld/sigma/issues/77)
+
 ## [3.6.2](https://github.com/norskeld/sigma/compare/v3.6.1...v3.6.2) (2023-03-14)
 
 
