@@ -1,4 +1,4 @@
-import { sepBy, sepBy1 } from '@combinators'
+import { sepBy, sepBy1, sequence } from '@combinators'
 import { string } from '@parsers'
 import { run, result, should, describe, it } from '@testing'
 
@@ -23,6 +23,14 @@ describe('sepBy', () => {
     const parser = sepBy(string('hello'), string('?'))
     const actual = run(parser, 'bye?bye?')
     const expected = result(true, [])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should successfully continue if nothing matched', () => {
+    const parser = sequence(sepBy(string('hello'), string('?')), sepBy(string('bye'), string('?')))
+    const actual = run(parser, 'bye?bye?')
+    const expected = result(true, [[], ['bye', 'bye']])
 
     should.matchState(actual, expected)
   })

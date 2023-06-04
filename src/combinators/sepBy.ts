@@ -37,8 +37,8 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
       return {
         isOk: true,
-        span: [pos, resultP.pos],
-        pos: resultP.pos,
+        span: [pos, pos],
+        pos,
         value: []
       }
     }
