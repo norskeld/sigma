@@ -3,7 +3,7 @@
 [![Build/Test](https://img.shields.io/github/actions/workflow/status/norskeld/sigma/test.yml?style=flat-square&colorA=22272d&colorB=22272d)](https://github.com/norskeld/sigma/actions 'Build and test workflows')
 [![Coverage](https://img.shields.io/coverallsCoverage/github/norskeld/sigma?style=flat-square&colorA=22272d&colorB=22272d)](https://coveralls.io/github/norskeld/sigma 'Test coverage')
 [![NPM](https://img.shields.io/npm/v/@nrsk/sigma?style=flat-square&colorA=22272d&colorB=22272d)](https://npm.im/@nrsk/sigma 'This package on NPM')
-[![Supported Node Versions](https://img.shields.io/static/v1?label=node&message=14+|+16+|+18&style=flat-square&colorA=22272d&colorB=22272d)](https://github.com/norskeld/sigma/blob/master/package.json#L35 'Supported Node versions')
+[![Supported Node Versions](https://img.shields.io/static/v1?label=node&message=≥18.16+≤20&style=flat-square&colorA=22272d&colorB=22272d)](https://github.com/norskeld/sigma/blob/master/package.json#L35 'Supported Node versions')
 [![Bundlephobia](https://img.shields.io/bundlephobia/minzip/@nrsk/sigma?style=flat-square&colorA=22272d&colorB=22272d&label=minzipped)](https://bundlephobia.com/package/@nrsk/sigma)
 ![Tree Shaking](https://img.shields.io/static/v1?label=tree+shaking&message=✔&style=flat-square&colorA=22272d&colorB=22272d)
 [![Semantic Release](https://img.shields.io/static/v1?label=semantic+release&message=✔&style=flat-square&colorA=22272d&colorB=22272d)](https://github.com/semantic-release/semantic-release 'This package uses semantic release to handle releasing, versioning, changelog generation and tagging')
