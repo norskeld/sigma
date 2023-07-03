@@ -32,7 +32,7 @@
     "*.js*"
   ],
   "engines": {
-    "node": ">=18.16.0 <=20"
+    "node": ">=18 <=20"
   },
   "scripts": {
     "build": "tsup",
