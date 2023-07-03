@@ -1,3 +1,10 @@
+## [3.6.4](https://github.com/norskeld/sigma/compare/v3.6.3...v3.6.4) (2023-07-03)
+
+
+### Bug Fixes
+
+* **package:** remove `postinstall` script, relax engine constraints ([#81](https://github.com/norskeld/sigma/issues/81)) ([52dc1e4](https://github.com/norskeld/sigma/commit/52dc1e4b0c417053b31cf35739bce54740fc6373)), closes [#80](https://github.com/norskeld/sigma/issues/80)
+
 ## [3.6.3](https://github.com/norskeld/sigma/compare/v3.6.2...v3.6.3) (2023-06-04)
 
 
