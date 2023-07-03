@@ -149,6 +149,18 @@ And in the end we get the following output with the AST, which can then be manip
 ```
 </details>
 
+## Development
+
+Fork, clone, then instead of `npm install` run:
+
+```sh
+npm run install:all
+```
+
+> **Note**
+>
+> This will install dependencies for the package itself, and also for **docs** and **benchmarks** packages. This is due to limitations of the current repository setup and needed to avoid problems with eslint that runs on pre-commit hook.
+
 ## License
 
 [MIT](LICENSE).
