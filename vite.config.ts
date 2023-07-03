@@ -15,6 +15,7 @@ export default defineConfig({
       include: ['src/**/*.ts']
     },
     typecheck: {
+      tsconfig: './tsconfig.test.json',
       include: ['src/**/*.spec-d.ts'],
       ignoreSourceErrors: true
     }
