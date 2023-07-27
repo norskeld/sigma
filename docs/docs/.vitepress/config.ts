@@ -5,7 +5,6 @@ import pkg from '../../../package.json'
 
 import { capitalize, Content, format, Nav, Sidebar, Social } from './helpers'
 import { Github, Npm } from './icons'
-import { inspect } from 'node:util'
 
 const GH_URL = 'https://github.com/norskeld/sigma'
 const NPM_URL = 'https://npm.im/@nrsk/sigma'
@@ -136,13 +135,9 @@ function getSocialLinks() {
 function getSidebar() {
   const contentDir = Content.getContentDir()
 
-  const sidebar = Content.getContentFolders(contentDir).map((folder) =>
+  return Content.getContentFolders(contentDir).map((folder) =>
     Sidebar.group(capitalize(folder), `/${folder}`, Content.getItems(`${contentDir}/${folder}`))
   )
-
-  console.log(inspect(sidebar, { depth: null, colors: true }))
-
-  return sidebar
 }
 
 function getFooter() {
