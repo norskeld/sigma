@@ -4,7 +4,7 @@ kind: 'primitive'
 description: "map combinator applies a function to the parser's result and returns the result of that function."
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# map <Primitive />
 
 ## Signature
 

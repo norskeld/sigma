@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'letters parses a sequence of alphabetical characters. Returns matched characters as a string. Unicode friendly.'
 ---
 
-# {{ $frontmatter.title }} <Composite />
+# letters <Composite />
 
 ## Signature
 

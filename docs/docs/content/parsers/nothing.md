@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'nothing simply resolves to null.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# nothing <Primitive />
 
 ## Signature
 

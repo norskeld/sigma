@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'takeUntil combinator applies source parser, collects its output, and stops after terminator parser succeeds. Returns a tuple of values collected by parser and terminator. Fails if parser fails.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# takeUntil <Primitive />
 
 ## Signature
 

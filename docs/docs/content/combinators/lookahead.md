@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'lookahead combinator applies parser without consuming any input. If parser fails and consumes some input, so does lookahead.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# lookahead <Primitive />
 
 ## Signature
 

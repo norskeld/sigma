@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'defer is a special parser that is tailored for creating mutually recursive parsers.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# defer <Primitive />
 
 ## Signature
 

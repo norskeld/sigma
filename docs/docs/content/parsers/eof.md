@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'eof only succeeds at the end of the input.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# eof <Primitive />
 
 ## Signature
 

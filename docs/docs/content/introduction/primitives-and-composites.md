@@ -3,7 +3,7 @@ title: 'Primitives and composites'
 description: 'What is the difference?'
 ---
 
-# {{ $frontmatter.title }}
+# Primitives and composites
 
 There are two types of parser and combinators: primitive and composite ones. Technically, you do not need to know any of that to use the library, but if you ever want or need to write a custom parser or combinator, knowing the difference may help to avoid some performance issues.
 

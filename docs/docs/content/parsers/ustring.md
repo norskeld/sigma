@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'ustring parses a Unicode string. Returns the parsed string.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# ustring <Primitive />
 
 ## Signature
 

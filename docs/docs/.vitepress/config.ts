@@ -111,7 +111,11 @@ function getThemeConfig(): DefaultTheme.Config {
     nav: getNav(),
     footer: getFooter(),
     sidebar: getSidebar(),
-    socialLinks: getSocialLinks()
+    socialLinks: getSocialLinks(),
+
+    search: {
+      provider: 'local'
+    }
   }
 }
 

@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'tryRun is used to run parser with provided input, throwing an error on failure.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# tryRun <Primitive />
 
 ## Signature
 

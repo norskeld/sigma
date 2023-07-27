@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'run is used to run parser with provided input.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# run <Primitive />
 
 ## Signature
 

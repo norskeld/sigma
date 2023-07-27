@@ -4,7 +4,7 @@ kind: 'composite'
 description: "mapTo combinator maps the parser's result to a constant value."
 ---
 
-# {{ $frontmatter.title }} <Composite />
+# mapTo <Composite />
 
 ## Signature
 

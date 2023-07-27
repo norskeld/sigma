@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'whitespace parses whitespace, either a single character or consecutive ones. Returns the matched character(s).'
 ---
 
-# {{ $frontmatter.title }} <Composite />
+# whitespace <Composite />
 
 ## Signature
 

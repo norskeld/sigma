@@ -4,7 +4,7 @@ kind: 'primitive'
 description: "attempt combinator applies parser without consuming any input. It doesn't care if parser succeeds or fails, it won't consume any input."
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# attempt <Primitive />
 
 ## Signature
 

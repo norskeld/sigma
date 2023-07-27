@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'eol only succeeds at the end of the line with a matched line break character.'
 ---
 
-# {{ $frontmatter.title }} <Composite />
+# eol <Composite />
 
 ## Signature
 

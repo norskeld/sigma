@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'chainl combinator parses zero or more occurrences of parser, separated by op. Returns a value obtained by a recursive left-associative application of a function to the values returned by op and parser.'
 ---
 
-# {{ $frontmatter.title }} <Composite />
+# chainl <Composite />
 
 ## Signature
 

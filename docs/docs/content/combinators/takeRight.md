@@ -4,7 +4,7 @@ kind: 'composite'
 description: 'takeRight combinator takes exactly two parsers and applies them in order. Returns the result of the rightmost parser.'
 ---
 
-# {{ $frontmatter.title }} <Composite />
+# takeRight <Composite />
 
 ## Signature
 

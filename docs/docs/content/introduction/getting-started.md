@@ -1,9 +1,9 @@
 ---
-title: Getting started
-description: Learn how to install and get started with Sigma.
+title: 'Getting started'
+description: 'Learn how to install and get started with Sigma.'
 ---
 
-# {{ $frontmatter.title }}
+# Getting started
 
 ## Installation
 

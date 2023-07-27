@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'noneOf ensures that none of the characters in the given string matches the current character.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# noneOf <Primitive />
 
 ## Signature
 

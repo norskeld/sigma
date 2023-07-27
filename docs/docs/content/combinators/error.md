@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'error combinator allows to replace error message for parser.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# error <Primitive />
 
 ## Signature
 

@@ -4,7 +4,7 @@ kind: 'primitive'
 description: "skipUntil combinator applies source parser, ignores its output, and stops after terminator parser succeeds. Returns a terminator's value. Fails if parser fails."
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# skipUntil <Primitive />
 
 ## Signature
 

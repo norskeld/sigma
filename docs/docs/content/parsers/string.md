@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'string parses an ASCII string. Returns the parsed string.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# string <Primitive />
 
 ## Signature
 

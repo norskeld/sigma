@@ -4,7 +4,7 @@ kind: 'primitive'
 description: 'many combinator applies parser zero or more times. Returns an array of the returned values of parser.'
 ---
 
-# {{ $frontmatter.title }} <Primitive />
+# many <Primitive />
 
 ## Signature
 
