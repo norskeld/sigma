@@ -10,27 +10,16 @@ export function format(...strings: Array<string>): string {
   return strings.join(String())
 }
 
-export type SideBarItemWithLink = Exclude<
-  DefaultTheme.SidebarItem,
-  { items: DefaultTheme.SidebarItem[] }
->
-
 export const Sidebar = {
   group(
     text: string,
     base: string,
     items: Array<DefaultTheme.SidebarItem>
-  ): DefaultTheme.SidebarGroup {
-    const sidebarItems = items.map((item) => ({
-      ...item,
-      link: base + item.link
-    }))
-
+  ): DefaultTheme.SidebarItem {
     return {
       text,
-      items: sidebarItems,
-      collapsed: true,
-      collapsible: true
+      items: items.map((item) => ({ ...item, link: `${base}/${item.link}` })),
+      collapsed: false
     }
   },
 
@@ -84,23 +73,25 @@ export const Content = {
   getContentDir() {
     const currentDir = dirname(fileURLToPath(import.meta.url))
 
-    return join(currentDir, '..')
+    return join(currentDir, '..', 'content')
   },
+
   getContentFolders(contentDir: string) {
-    const directoriesBlackList = ['.vitepress', 'public']
+    const ignoredDirs = ['.vitepress', 'public']
 
     return readdirSync(contentDir, { withFileTypes: true })
-      .filter((x) => x.isDirectory() && !directoriesBlackList.includes(x.name))
+      .filter((x) => x.isDirectory() && !ignoredDirs.includes(x.name))
       .map((folder) => folder.name)
       .sort((a, b) => getSorting(a) - getSorting(b))
   },
+
   getItems(docFolder: string) {
     return readdirSync(docFolder).map((filename) => {
       const { name } = parse(filename)
 
       const { title } = Markdown.getFrontmatter<Frontmatter>(`${docFolder}/${filename}`)
 
-      return Sidebar.item(title, `/${name}`)
+      return Sidebar.item(title, name)
     })
   }
 }

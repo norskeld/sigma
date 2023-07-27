@@ -1,10 +1,11 @@
 import DefaultTheme from 'vitepress/theme'
+import type { Theme } from 'vitepress'
 
 import './custom.css'
 
 import { Composite, Primitive } from './components/Type'
 
-export default <typeof DefaultTheme>{
+export default {
   ...DefaultTheme,
 
   enhanceApp(ctx) {
@@ -12,4 +13,4 @@ export default <typeof DefaultTheme>{
     ctx.app.component('Composite', Composite)
     ctx.app.component('Primitive', Primitive)
   }
-}
+} satisfies Theme

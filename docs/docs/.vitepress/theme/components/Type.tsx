@@ -5,7 +5,7 @@ import './Type.css'
 export const Composite = defineComponent({
   setup() {
     return () => (
-      <a href="/guides/primitives-and-composites#composite">
+      <a href="/introduction/primitives-and-composites#composite">
         <span
           title="Composite parsers and combinators are built using other parsers/combinators."
           class="kind kind--composite"
@@ -20,7 +20,7 @@ export const Composite = defineComponent({
 export const Primitive = defineComponent({
   setup() {
     return () => (
-      <a href="/guides/primitives-and-composites#primitive">
+      <a href="/introduction/primitives-and-composites#primitive">
         <span
           title="Primitive parsers and combinators are built without using other parsers/combinators."
           class="kind kind--primitive"

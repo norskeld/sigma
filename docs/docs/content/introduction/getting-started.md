@@ -49,11 +49,11 @@ Alternatively, you can use any other delivery network/service, e.g. [esm.run].
 
 There are three self-contained entry points which you may use:
 
-| Entry point               | Description                                                       |
-| ------------------------- | ----------------------------------------------------------------- |
-| `@nrsk/sigma`             | Contains public types and re-exports all combinators and parsers. |
-| `@nrsk/sigma/parsers`     | Contains only parsers and associated types.                       |
-| `@nrsk/sigma/combinators` | Contains only combinators and associated types.                   |
+| Entry point               | What's inside                                         |
+| ------------------------- | ----------------------------------------------------- |
+| `@nrsk/sigma`             | Re-exports all combinators, parsers and public types. |
+| `@nrsk/sigma/parsers`     | Only parsers and associated types.                    |
+| `@nrsk/sigma/combinators` | Only combinators and associated types.                |
 
 <!-- Links. -->
 

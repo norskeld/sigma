@@ -1,0 +1,126 @@
+/**
+ * Custom palette.
+ * ---------------------------------------------------------------------------------------------- */
+
+:root {
+  --sig-white-mute: #f6f6f7;
+  --sig-white-mute-light: #f9f9fc;
+  --sig-white-mute-lighter: #ffffff;
+  --sig-white-mute-dark: #e3e3e5;
+  --sig-white-mute-darker: #d7d7d9;
+
+  --sig-black-mute: #313136;
+  --sig-black-mute-light: #3a3a3c;
+  --sig-black-mute-lighter: #505053;
+  --sig-black-mute-dark: #2c2c30;
+  --sig-black-mute-darker: #252529;
+}
+
+/**
+ * Default palette overrides.
+ * ---------------------------------------------------------------------------------------------- */
+
+:root {
+  --vp-c-green-dimm-1: rgba(16, 185, 129, 0.5);
+  --vp-c-green-dimm-2: rgba(16, 185, 129, 0.25);
+  --vp-c-green-dimm-3: rgba(16, 185, 129, 0.05);
+
+  --vp-c-yellow-dimm-1: rgba(234, 179, 8, 0.5);
+  --vp-c-yellow-dimm-2: rgba(234, 179, 8, 0.25);
+  --vp-c-yellow-dimm-3: rgba(234, 179, 8, 0.05);
+
+  --vp-c-red-dimm-1: rgba(237, 60, 80, 0.5);
+  --vp-c-red-dimm-2: rgba(237, 60, 80, 0.25);
+  --vp-c-red-dimm-3: rgba(237, 60, 80, 0.05);
+}
+
+/**
+ * Brand and button colors.
+ * ---------------------------------------------------------------------------------------------- */
+
+:root {
+  --vp-home-hero-name-color: var(--vp-c-black);
+
+  --vp-button-brand-bg: var(--vp-c-black);
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-border: var(--vp-c-black);
+
+  --vp-button-brand-hover-bg: var(--sig-black-mute-light);
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-border: var(--sig-black-mute-light);
+
+  --vp-c-brand: var(--vp-c-black);
+  --vp-c-brand-light: var(--vp-c-black);
+  --vp-c-brand-lighter: var(--vp-c-black);
+  --vp-c-brand-dark: var(--vp-c-black);
+  --vp-c-brand-darker: var(--vp-c-black);
+}
+
+.dark {
+  --vp-home-hero-name-color: var(--vp-c-white);
+
+  --vp-button-brand-bg: var(--vp-c-white);
+  --vp-button-brand-text: var(--vp-c-black);
+  --vp-button-brand-border: var(--vp-c-white);
+
+  --vp-button-brand-hover-bg: var(--sig-white-mute-darker);
+  --vp-button-brand-hover-text: var(--vp-c-black);
+  --vp-button-brand-hover-border: var(--sig-white-mute-darker);
+
+  --vp-button-brand-active-bg: var(--sig-white-mute-darker);
+  --vp-button-brand-active-text: var(--vp-c-black);
+  --vp-button-brand-active-border: var(--sig-white-mute-darker);
+
+  --vp-c-brand: var(--vp-c-white);
+  --vp-c-brand-light: var(--vp-c-white);
+  --vp-c-brand-lighter: var(--vp-c-white);
+  --vp-c-brand-dark: var(--vp-c-white);
+  --vp-c-brand-darker: var(--vp-c-white);
+}
+
+/**
+ * Misc colors.
+ * ---------------------------------------------------------------------------------------------- */
+
+:root {
+  --vp-c-gutter: var(--sig-white-mute);
+
+  --vp-code-line-highlight-color: #2e3338;
+}
+
+.dark {
+  --vp-c-gutter: var(--sig-black-mute-dark);
+}
+
+/**
+ * Component: Custom Block
+ * ---------------------------------------------------------------------------------------------- */
+
+:root {
+  --vp-custom-block-tip-bg: var(--vp-c-green-dimm-3);
+  --vp-custom-block-tip-border: var(--vp-c-green-dimm-2);
+
+  --vp-custom-block-warning-bg: var(--vp-c-yellow-dimm-3);
+  --vp-custom-block-warning-border: var(--vp-c-yellow-dimm-2);
+
+  --vp-custom-block-danger-bg: var(--vp-c-red-dimm-3);
+  --vp-custom-block-danger-border: var(--vp-c-red-dimm-2);
+}
+
+/**
+ * Component: Badge
+ * ---------------------------------------------------------------------------------------------- */
+
+:root {
+  --vp-badge-tip-bg: var(--vp-c-green-dimm-3);
+  --vp-badge-tip-border: var(--vp-c-green);
+
+  --vp-badge-warning-bg: var(--vp-c-yellow-dimm-3);
+  --vp-badge-warning-border: var(--vp-c-yellow);
+}
+
+.dark {
+  --vp-badge-tip-border: var(--vp-c-green-dimm-2);
+
+  --vp-badge-warning-border: var(--vp-c-yellow-dimm-2);
+}

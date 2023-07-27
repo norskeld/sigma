@@ -3,9 +3,9 @@ import { defineConfig } from 'vitepress'
 
 import pkg from '../../../package.json'
 
-import type { SideBarItemWithLink } from './helpers'
 import { capitalize, Content, format, Nav, Sidebar, Social } from './helpers'
 import { Github, Npm } from './icons'
+import { inspect } from 'node:util'
 
 const GH_URL = 'https://github.com/norskeld/sigma'
 const NPM_URL = 'https://npm.im/@nrsk/sigma'
@@ -19,9 +19,10 @@ export default defineConfig({
   lastUpdated: true,
 
   outDir: '../dist',
+  srcDir: './content',
   cacheDir: '../cache',
 
-  cleanUrls: 'with-subfolders',
+  cleanUrls: true,
 
   head: getHeadConfig(),
   markdown: getMarkdownConfig(),
@@ -105,7 +106,7 @@ function getThemeConfig(): DefaultTheme.Config {
 
     editLink: {
       text: 'Edit this page on GitHub',
-      pattern: `${GH_URL}/edit/master/docs/docs/:path`
+      pattern: `${GH_URL}/edit/master/docs/docs/content/:path`
     },
 
     nav: getNav(),
@@ -116,19 +117,14 @@ function getThemeConfig(): DefaultTheme.Config {
 }
 
 function getNav() {
-  const items = getSidebar().flatMap((item) => item.items)
+  const items = getSidebar().flatMap((item) => item.items ?? [])
 
-  const [combinators] = items.filter(
-    (item): item is SideBarItemWithLink => item.link?.startsWith('/combinators') ?? false
-  )
-
-  const [parsers] = items.filter(
-    (item): item is SideBarItemWithLink => item.link?.startsWith('/parsers') ?? false
-  )
+  const [combinators] = items.filter((item) => item.link?.startsWith('/combinators') ?? false)
+  const [parsers] = items.filter((item) => item.link?.startsWith('/parsers') ?? false)
 
   return [
-    Nav.item('Combinators', combinators.link),
-    Nav.item('Parsers', parsers.link),
+    Nav.item('Combinators', combinators.link!),
+    Nav.item('Parsers', parsers.link!),
     Nav.items(pkg.version, [Nav.item('Changelog', GH_URL + '/blob/master/CHANGELOG.md')])
   ]
 }
@@ -140,9 +136,13 @@ function getSocialLinks() {
 function getSidebar() {
   const contentDir = Content.getContentDir()
 
-  return Content.getContentFolders(contentDir).map((folder) =>
+  const sidebar = Content.getContentFolders(contentDir).map((folder) =>
     Sidebar.group(capitalize(folder), `/${folder}`, Content.getItems(`${contentDir}/${folder}`))
   )
+
+  console.log(inspect(sidebar, { depth: null, colors: true }))
+
+  return sidebar
 }
 
 function getFooter() {
