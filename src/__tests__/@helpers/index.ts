@@ -66,6 +66,8 @@ export function testSuccess<T, P extends Parser<unknown>>(input: string, value: 
   should.matchState(actual, expected)
 }
 
+export const expectedCore = ['run', 'tryRun'] as const
+
 export const expectedCombinators = [
   'attempt',
   'chainl',
@@ -104,9 +106,7 @@ export const expectedParsers = [
   'oneOf',
   'regexp',
   'rest',
-  'run',
   'string',
-  'tryRun',
   'ustring',
   'whitespace',
   'whole'
