@@ -1,6 +1,6 @@
 import * as p from '@parsers'
 import { describe, expectTypeOf, it } from '@testing'
-import { Parser, SucceedingParser, Result, Success } from '@types'
+import { Parser, SucceedingParser } from '@types'
 
 type UnknownParser = Parser<unknown>
 type NullParser = Parser<null>
@@ -154,20 +154,6 @@ describe('rest', () => {
   })
 })
 
-describe('run', () => {
-  const { run } = p
-
-  it('run should have correct inferred signature', () => {
-    expectTypeOf<typeof run>().returns.toMatchTypeOf<{ with: (input: string) => Result<unknown> }>()
-    expectTypeOf<typeof run<string>>().returns.toMatchTypeOf<{
-      with: (input: string) => Result<string>
-    }>()
-    expectTypeOf<typeof run<string>>().returns.not.toMatchTypeOf<{
-      with: (input: string) => Result<number>
-    }>()
-  })
-})
-
 describe('string', () => {
   const { string, ustring } = p
 
@@ -181,22 +167,6 @@ describe('string', () => {
     expectTypeOf<typeof ustring>().returns.toMatchTypeOf<StringParser>()
     expectTypeOf<typeof ustring>().returns.toMatchTypeOf<UnknownParser>()
     expectTypeOf<typeof ustring>().returns.not.toMatchTypeOf<NumberParser>()
-  })
-})
-
-describe('tryRun', () => {
-  const { tryRun } = p
-
-  it('tryRun should have correct inferred signature', () => {
-    expectTypeOf<typeof tryRun>().returns.toMatchTypeOf<{
-      with: (input: string) => Success<unknown>
-    }>()
-    expectTypeOf<typeof tryRun<string>>().returns.toMatchTypeOf<{
-      with: (input: string) => Success<string>
-    }>()
-    expectTypeOf<typeof tryRun<string>>().returns.not.toMatchTypeOf<{
-      with: (input: string) => Success<number>
-    }>()
   })
 })
 

@@ -13,6 +13,8 @@
     "paths": {
       "@combinators": ["src/combinators"],
       "@combinators/*": ["src/combinators/*"],
+      "@core": ["src/core"],
+      "@core/*": ["src/core/*"],
       "@lib": ["src"],
       "@lib/*": ["src/*"],
       "@parsers": ["src/parsers"],
