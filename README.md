@@ -35,7 +35,7 @@ npm i @nrsk/sigma
 
 ### Deno
 
-You can import the library via [Skypack] (note that `?dts` query parameter, that will pull types as well, **strongly** recommended):
+You can import the library via [Skypack] (note the `?dts` query parameter, this is to pull types):
 
 ```ts
 import { ... } from 'https://cdn.skypack.dev/@nrsk/sigma?dts'
@@ -161,6 +161,8 @@ npm run install:all
 >
 > This will install dependencies for the package itself, and also for **docs** and **benchmarks** packages. This is due to limitations of the current repository setup and needed to avoid problems with eslint that runs on pre-commit hook.
 
+This project follows [the conventional commits spec][cc-spec] and uses [a slightly modified commitlint preset][commitlint-preset] for automatic linting commits and generating changelog.
+
 ## License
 
 [MIT](LICENSE).
@@ -175,3 +177,5 @@ npm run install:all
 [docs-source]: ./docs
 [bench]: ./benchmarks
 [skypack]: https://skypack.dev
+[cc-spec]: https://www.conventionalcommits.org/en/v1.0.0/#summary
+[commitlint-preset]: https://github.com/norskeld/config-conventional
