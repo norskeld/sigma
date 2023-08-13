@@ -1,10 +1,10 @@
 ---
 title: 'run'
-kind: 'primitive'
+kind: 'core'
 description: 'run is used to run parser with provided input.'
 ---
 
-# run <Primitive />
+# run
 
 ## Signature
 

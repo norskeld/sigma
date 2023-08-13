@@ -122,10 +122,12 @@ function getThemeConfig(): DefaultTheme.Config {
 function getNav() {
   const items = getSidebar().flatMap((item) => item.items ?? [])
 
+  const [core] = items.filter((item) => item.link?.startsWith('/core') ?? false)
   const [combinators] = items.filter((item) => item.link?.startsWith('/combinators') ?? false)
   const [parsers] = items.filter((item) => item.link?.startsWith('/parsers') ?? false)
 
   return [
+    Nav.item('Core', core.link!),
     Nav.item('Combinators', combinators.link!),
     Nav.item('Parsers', parsers.link!),
     Nav.items(pkg.version, [Nav.item('Changelog', GH_URL + '/blob/master/CHANGELOG.md')])
