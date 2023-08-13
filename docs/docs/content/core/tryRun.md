@@ -1,10 +1,10 @@
 ---
 title: 'tryRun'
-kind: 'primitive'
+kind: 'core'
 description: 'tryRun is used to run parser with provided input, throwing an error on failure.'
 ---
 
-# tryRun <Primitive />
+# tryRun
 
 ## Signature
 

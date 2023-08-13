@@ -53,7 +53,7 @@ function getSorting(f: string) {
   // prettier-ignore
   switch (f) {
     case 'introduction': return 0
-    case 'guides': return 1
+    case 'core': return 1
     default: return 2
   }
 }
