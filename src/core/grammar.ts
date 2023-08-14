@@ -21,7 +21,7 @@ export function grammar<T extends GrammarType>(init: GrammarInit<T>): Grammar<T>
         if (!initialized[key]) {
           initialized[key] = true
 
-          grammar[key] = init[key].apply(grammar)
+          grammar[key].parse = init[key].apply(grammar).parse
         }
 
         return grammar[key].parse(input, pos)
