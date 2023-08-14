@@ -13,20 +13,16 @@ type GrammarType = {
 export function grammar<T extends GrammarType>(init: GrammarInit<T>): Grammar<T> {
   const grammar = {} as { [key: string]: Parser<unknown> }
 
-  const initialized = {} as { [key: string]: true }
-
   for (const key in init) {
     grammar[key] = {
-      parse(input, pos) {
-        if (!initialized[key]) {
-          initialized[key] = true
-
-          grammar[key].parse = init[key].apply(grammar).parse
-        }
-
-        return grammar[key].parse(input, pos)
+      parse() {
+        throw new Error()
       }
-    } as Parser<unknown>
+    }
+  }
+
+  for (const key in init) {
+    grammar[key].parse = init[key].apply(grammar).parse
   }
 
   return grammar as Grammar<T>
