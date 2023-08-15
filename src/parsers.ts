@@ -1,4 +1,4 @@
-export * from '@core' // TODO keep this here for BC? or move to a dedicated core export?
+export * from '@core'
 export * from '@parsers/any'
 export * from '@parsers/defer'
 export * from '@parsers/eof'
