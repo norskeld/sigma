@@ -1,3 +1,15 @@
+## [3.6.5](https://github.com/norskeld/sigma/compare/v3.6.4...v3.6.5) (2023-08-17)
+
+
+### Bug Fixes
+
+* deferred parsers should throw if not initialized ([b244cda](https://github.com/norskeld/sigma/commit/b244cda5b83aab805f66db2f4f8bd97d6ee2e0f2))
+
+
+### Reverts
+
+* keeping core exports for now ([8c2849d](https://github.com/norskeld/sigma/commit/8c2849db7935597bb015f3f074a743f21fb7252b))
+
 ## [3.6.4](https://github.com/norskeld/sigma/compare/v3.6.3...v3.6.4) (2023-07-03)
 
 
