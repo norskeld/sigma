@@ -69,12 +69,7 @@ export function defer<T>(): Deferred<T> {
         return deferred.parse(input, pos)
       }
 
-      return {
-        isOk: false,
-        span: [pos, pos],
-        pos,
-        expected: `Deferred parser wasn't initialized.`
-      }
+      throw new Error('Deferred parser was not initialized')
     }
   }
 }
