@@ -1,5 +1,5 @@
-import { defer, string, tryRun, ParserError } from '@parsers'
-import { describe, result, should, testFailure, it } from '@testing'
+import { defer, string, tryRun, ParserError, run } from '@parsers'
+import { describe, result, should, it } from '@testing'
 
 describe('tryRun', () => {
   it('should succeed if given a succeeding parser', () => {
@@ -10,7 +10,7 @@ describe('tryRun', () => {
     should.matchState(actual, expected)
   })
 
-  it('should fail if given a failing parser', () => {
+  it('should throw if given a failing parser', () => {
     const deferred = defer<string>()
 
     deferred.with(string('deferred'))
@@ -21,7 +21,11 @@ describe('tryRun', () => {
     should.throwError(actual, expected)
   })
 
-  it('should throw if given a non-initialized deferred parser', () => {
-    testFailure('deferred', defer<string>())
+  it('should throw if given a parser that throws', () => {
+    const parser = defer<string>()
+
+    should.throwError(() => {
+      run(parser).with('')
+    }, new Error('Deferred parser was not initialized'))
   })
 })
