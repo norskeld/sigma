@@ -64,6 +64,7 @@ export function grammar<T extends GrammarType>(init: GrammarInit<T>): Grammar<T>
 
   for (const key in init) {
     grammar[key] = {
+      // istanbul ignore next
       parse() {
         throw new Error()
       }
