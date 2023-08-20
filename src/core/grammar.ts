@@ -37,6 +37,16 @@ export type GrammarType = {
  * @example
  *
  * ```typescript
+ * interface NumberNode {
+ *   type: 'number'
+ *   value: number
+ * }
+ *
+ * interface ListNode {
+ *   type: 'list'
+ *   value: Array<NumberNode | ListNode>
+ * }
+ *
  * const tupleGrammar = grammar({
  *   tupleNumber(): Parser<NumberNode> {
  *     return map(integer(), (value, span) => ({ type: 'number', span, value }))
