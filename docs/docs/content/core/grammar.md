@@ -37,7 +37,13 @@ const ab = grammar({
     )
   },
   b(): Parser<string> {
-    return map(sequence(string('b'), choice(this.a, this.b)), ([b, a]) => b + a)
+    return map(
+      sequence(
+        string('b'),
+        choice(this.a, this.b)
+      ),
+      ([b, a]) => b + a
+    )
   }
 })
 ```
