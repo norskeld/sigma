@@ -28,7 +28,13 @@ Here is an example of a simple grammar that recursively matches `ab` sequences:
 ```ts
 const ab = grammar({
   a(): Parser<string> {
-    return map(sequence(string('a'), optional(this.b)), ([a, b]) => a + (b || ''))
+    return map(
+      sequence(
+        string('a'),
+        optional(this.b)
+      ),
+      ([a, b]) => a + (b ?? '')
+    )
   },
   b(): Parser<string> {
     return map(sequence(string('b'), choice(this.a, this.b)), ([b, a]) => b + a)
