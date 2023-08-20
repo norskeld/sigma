@@ -65,9 +65,6 @@ export type GrammarType = {
  *
  * const result = run(tupleGrammar.tupleList).with('(1,2,(3,4))')
  * ```
- *
- * @param init
- * @returns
  */
 export function grammar<T extends GrammarType>(init: GrammarInit<T>): Grammar<T> {
   const grammar = {} as { [key: string]: Parser<unknown> }
