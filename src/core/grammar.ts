@@ -1,4 +1,4 @@
-import { Parser } from '@lib/types'
+import type { Parser } from '@lib/types'
 
 /**
  * This type extracts the return-types from the parser initializers.
