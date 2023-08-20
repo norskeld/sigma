@@ -73,7 +73,7 @@ export function grammar<T extends GrammarType>(init: GrammarInit<T>): Grammar<T>
     grammar[key] = {
       // istanbul ignore next
       parse() {
-        throw new Error()
+        throw new Error(`internal error`) // this line should never execute
       }
     }
   }
