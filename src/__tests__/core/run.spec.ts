@@ -21,7 +21,11 @@ describe('run', () => {
     should.matchState(actual, expected)
   })
 
-  it('should throw if given a non-initialized deferred parser', () => {
-    testFailure('deferred', defer<string>())
+  it('should throw if given a parser that throws', () => {
+    const parser = defer<string>()
+
+    should.throwError(() => {
+      run(parser).with('')
+    }, new Error('Deferred parser was not initialized'))
   })
 })
