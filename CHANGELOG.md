@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/norskeld/sigma/compare/v3.6.5...v3.7.0) (2023-08-22)
+
+
+### Features
+
+* add grammar helper ([#93](https://github.com/norskeld/sigma/issues/93)) ([e8074be](https://github.com/norskeld/sigma/commit/e8074bed9fe4074e801104c54cefbb808f1b48f2))
+
 ## [3.6.5](https://github.com/norskeld/sigma/compare/v3.6.4...v3.6.5) (2023-08-17)
 
 
