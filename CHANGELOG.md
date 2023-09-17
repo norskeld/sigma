@@ -1,3 +1,10 @@
+# [3.8.0](https://github.com/norskeld/sigma/compare/v3.7.0...v3.8.0) (2023-09-17)
+
+
+### Features
+
+* **tsconfig:** deprecate node 16 ([#96](https://github.com/norskeld/sigma/issues/96)) ([e81d8c4](https://github.com/norskeld/sigma/commit/e81d8c42052a426798c80cab85fa56f24731c9ba))
+
 # [3.7.0](https://github.com/norskeld/sigma/compare/v3.6.5...v3.7.0) (2023-08-22)
 
 
