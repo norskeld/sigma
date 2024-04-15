@@ -4,7 +4,7 @@ This is the documentation site for [@nrsk/sigma] built with [VitePress].
 
 ## Development
 
-The documentation is hosted on Vercel, so changes will be published automatically.
+The documentation is hosted on CloudFlare Pages, so changes will be published automatically.
 
 ```bash
 npm run build  # Build for production

@@ -157,8 +157,7 @@ Fork, clone, then instead of `npm install` run:
 npm run install:all
 ```
 
-> **Note**
->
+> [!NOTE]\
 > This will install dependencies for the package itself, and also for **docs** and **benchmarks** packages. This is due to limitations of the current repository setup and needed to avoid problems with eslint that runs on pre-commit hook.
 
 This project follows [the conventional commits spec][cc-spec] and uses [a slightly modified commitlint preset][commitlint-preset] for automatic linting commits and generating changelog.
@@ -173,9 +172,9 @@ This project follows [the conventional commits spec][cc-spec] and uses [a slight
 [rd]: https://en.wikipedia.org/wiki/Recursive_descent_parser
 [parser-combinator]: https://en.wikipedia.org/wiki/Parser_combinator
 [cfg]: https://en.wikipedia.org/wiki/Context-free_grammar
-[docs]: https://sigma.vm.codes
+[docs]: https://sigma.nrsk.dev
 [docs-source]: ./docs
 [bench]: ./benchmarks
 [skypack]: https://skypack.dev
-[cc-spec]: https://www.conventionalcommits.org/en/v1.0.0/#summary
+[cc-spec]: https://conventionalcommits.org/en/v1.0.0/#summary
 [commitlint-preset]: https://github.com/norskeld/config-conventional
