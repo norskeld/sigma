@@ -8,9 +8,7 @@ description: "attempt combinator applies parser without consuming any input. It 
 
 ## Signature
 
-```ts
-function attempt<T>(parser: Parser<T>): Parser<T>
-```
+<<< ../../../../src/combinators/attempt.ts{signature, attempt}
 
 ## Description
 
@@ -20,13 +18,7 @@ function attempt<T>(parser: Parser<T>): Parser<T>
 
 The example is the same as in the docs for [`lookahead` combinators][lookahead].
 
-```ts
-const Parser = sequence(
-  takeLeft(string('hello'), whitespace()),
-  lookahead(string('let')),
-  string('lettuce')
-)
-```
+<<< ../../../../src/combinators/attempt.ts{example, attempt}
 
 ::: tip Success
 ```ts

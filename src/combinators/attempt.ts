@@ -7,6 +7,13 @@ import type { Parser } from '@types'
  * @param parser - Parser to apply
  *
  * @returns Result of `parser`
+ *
+ * @example
+ * const Parser = sequence(
+ *   takeLeft(string('hello'), whitespace()),
+ *   attempt(string('let')),
+ *   string('lettuce')
+ * )
  */
 export function attempt<T>(parser: Parser<T>): Parser<T> {
   return {
