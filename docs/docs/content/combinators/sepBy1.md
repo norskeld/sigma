@@ -1,20 +1,18 @@
 ---
 title: 'sepBy1'
 kind: 'composite'
-description: 'sepBy combinator parses zero or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
+description: 'sepBy1 combinator parses zero or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
 ---
 
 # sepBy1 <Composite />
 
 ## Signature
 
-```ts
-function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
-```
+<<< @/../../../src/combinators/sepBy.ts{signature}
 
 ## Description
 
-`sepBy1` combinator parses *one* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. Otherwise returns an error produced by `parser`.
+`sepBy1` combinator parses *one* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`.
 
 ## Usage
 

@@ -8,13 +8,11 @@ description: "map combinator applies a function to the parser's result and retur
 
 ## Signature
 
-```ts
-function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R>
-```
+<<< @/../../../src/combinators/map.ts{signature}
 
 ## Description
 
-`map` combinator applies `fn` to the `parser`'s result and returns the result of that `fn`.
+<<< @/../../../src/combinators/map.ts{description}
 
 ## Usage
 

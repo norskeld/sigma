@@ -8,13 +8,11 @@ description: 'sepBy combinator parses zero or more occurrences of parser, separa
 
 ## Signature
 
-```ts
-function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
-```
+<<< @/../../../src/combinators/sepBy.ts{signature}
 
 ## Description
 
-`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. This combinator never fails and returns an empty list if nothing matched.
+<<< @/../../../src/combinators/sepBy.ts{description}
 
 ## Usage
 

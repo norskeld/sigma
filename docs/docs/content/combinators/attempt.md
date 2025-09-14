@@ -8,17 +8,17 @@ description: "attempt combinator applies parser without consuming any input. It 
 
 ## Signature
 
-<<< ../../../../src/combinators/attempt.ts{signature, attempt}
+<<< @/../../../src/combinators/attempt.ts{signature}
 
 ## Description
 
-`attempt` combinator applies `parser` without consuming any input. It doesn't care if `parser` succeeds or fails, it won't consume any input.
+<<< @/../../../src/combinators/attempt.ts{description}
 
 ## Usage
 
 The example is the same as in the docs for [`lookahead` combinators][lookahead].
 
-<<< ../../../../src/combinators/attempt.ts{example, attempt}
+<<< @/../../../src/combinators/attempt.ts{example}
 
 ::: tip Success
 ```ts

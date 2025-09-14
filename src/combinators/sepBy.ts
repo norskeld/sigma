@@ -4,12 +4,15 @@ import { sequence } from './sequence'
 import type { Parser } from '@types'
 
 /**
- * Parses *zero* or more occurrences of `parser`, separated by `sep`. Never fails.
+ * Parses *zero* or more occurrences of `parser`, separated by `sep`.
+ *
+ * @kind composite
  *
  * @param parser - Parser to apply
  * @param sep - Separating parser
  *
- * @returns List of values (without separator) returned by `parser`
+ * @returns List of values (without separator) returned by `parser`. This combinator _**never**_ fails and returns an empty list if nothing matched.
+ *
  */
 export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>> {
   return {
@@ -48,10 +51,12 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 /**
  * Parses *one* or more occurrences of `parser`, separated by `sep`.
  *
+ * @kind composite
+ *
  * @param parser - Parser to apply
  * @param sep - Separating parser
  *
- * @returns List of values (without separator) returned by `parser`
+ * @returns List of values (without separator) returned by `parser`. Otherwise returns an *error* produced by `parser`.
  */
 export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>> {
   return {

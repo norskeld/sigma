@@ -10,13 +10,25 @@
     "serve": "vitepress serve docs"
   },
   "devDependencies": {
+    "@types/node": "^24.3.3",
     "@vitejs/plugin-vue-jsx": "^5.1.1",
     "@vue/tsconfig": "^0.8.1",
     "gray-matter": "^4.0.3",
+    "typescript": "^5.9.2",
     "vitepress": "^1.6.4",
     "vue": "^3.5.21"
   },
   "overrides": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "vitepress": {
+      "shiki": "^3.0.0",
+      "@shikijs/core": "^3.0.0",
+      "@shikijs/transformers": "^3.0.0",
+      "@shikijs/types": "^3.0.0"
+    },
+    "shiki": "^3.0.0",
+    "@shikijs/core": "^3.0.0",
+    "@shikijs/transformers": "^3.0.0",
+    "@shikijs/types": "^3.0.0"
   }
 }

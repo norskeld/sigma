@@ -8,13 +8,11 @@ description: 'many combinator applies parser zero or more times. Returns an arra
 
 ## Signature
 
-```ts
-function many<T>(parser: Parser<T>): SafeParser<Array<T>>
-```
+<<< @/../../../src/combinators/many.ts{signature}
 
 ## Description
 
-`many` combinator applies `parser` *zero* or more times. Returns an array of the returned values of `parser`. This combinator never fails and returns an empty list if nothing matched.
+<<< @/../../../src/combinators/many.ts{description}
 
 ## Usage
 

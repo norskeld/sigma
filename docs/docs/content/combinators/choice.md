@@ -8,14 +8,11 @@ description: 'choice combinator tries to apply parsers in order, until one of th
 
 ## Signature
 
-```ts
-function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>
-function choice<T>(...ps: Array<Parser<T>>): Parser<T>
-```
+<<< @/../../../src/combinators/choice.ts{signature}
 
 ## Description
 
-`choice` combinator tries to apply `ps` parsers in order, until one of them succeeds. Returns a value of the succeeding parser.
+<<< @/../../../src/combinators/choice.ts{description}
 
 ## Usage
 

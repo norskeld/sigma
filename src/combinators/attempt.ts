@@ -1,8 +1,10 @@
 import type { Parser } from '@types'
 
 /**
- * Applies `parser` without consuming any input. It doesn't care if `parser` succeeds or fails, it
- * won't consume any input.
+ * Applies `parser` without consuming any input.
+ * It doesn't care if `parser` succeeds or fails, it won't consume any input.
+ *
+ * @see {@link https://sigma.nrsk.dev/combinators/attempt Docs}
  *
  * @param parser - Parser to apply
  *
