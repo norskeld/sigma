@@ -41,4 +41,15 @@ describe('lookahead', () => {
       expected: 'let'
     })
   })
+
+  it('should return failure as is with the deepest pos', () => {
+    const actual = run(lookahead(sequence(string('hello'), string(' world'))), 'hello there')
+
+    should.beStrictEqual(actual, {
+      isOk: false,
+      span: [5, 11],
+      pos: 5,
+      expected: ' world'
+    })
+  })
 })

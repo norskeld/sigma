@@ -1,8 +1,9 @@
 import type { Parser } from '@types'
 
 /**
- * Applies `parser` without consuming any input. It doesn't care if `parser` succeeds or fails, it
- * won't consume any input.
+ * Applies `parser` and behaves exactly like it on success. On failure it pretends that no input
+ * was consumed: the failure's `pos` is reset to the entry position, while `span` still covers the
+ * attempted region.
  *
  * @param parser - Parser to apply
  *
@@ -14,17 +15,11 @@ export function attempt<T>(parser: Parser<T>): Parser<T> {
       const result = parser.parse(input, pos)
 
       switch (result.isOk) {
-        // If parser succeeded, keep the position untouched.
         case true: {
-          return {
-            isOk: true,
-            span: result.span,
-            pos,
-            value: result.value
-          }
+          return result
         }
 
-        // If parser failed, keep the position untouched as well.
+        // If parser failed, reset the position to pretend no input was consumed.
         case false: {
           return {
             isOk: false,

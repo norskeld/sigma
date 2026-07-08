@@ -1,7 +1,8 @@
 import type { Parser } from '@types'
 
 /**
- * Applies `parser` without consuming any input, whether it succeeds or fails.
+ * Applies `parser` without consuming any input on success. On failure the failure is returned as
+ * is, with `pos` pointing to the deepest position reached, which yields more precise errors.
  *
  * @param parser - Parser to apply
  *

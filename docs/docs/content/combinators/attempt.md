@@ -1,7 +1,7 @@
 ---
 title: 'attempt'
 kind: 'primitive'
-description: "attempt combinator applies parser without consuming any input. It doesn't care if parser succeeds or fails, it won't consume any input."
+description: "attempt combinator applies parser and behaves exactly like it on success. On failure it pretends that no input was consumed."
 ---
 
 # attempt <Primitive />
@@ -14,59 +14,46 @@ function attempt<T>(parser: Parser<T>): Parser<T>
 
 ## Description
 
-`attempt` combinator applies `parser` without consuming any input. It doesn't care if `parser` succeeds or fails, it won't consume any input.
+`attempt` combinator applies `parser` and behaves exactly like it on success. On failure it pretends that no input was consumed: the failure's `pos` is reset to the position `attempt` was applied at, while `span` still covers the attempted region.
+
+Since [choice] retries alternatives from the same position regardless of how much a failed alternative consumed, `attempt` doesn't change what can be parsed. It only affects error reporting: [choice] reports the failure that consumed the most input, and wrapping an alternative in `attempt` excludes it from that selection.
 
 ## Usage
 
-The example is the same as in the docs for [`lookahead` combinators][lookahead].
+Both parsers below fail on the same input, but report different errors: `Plain` reports the deepest failure, coming from the first alternative, while `Attempted` demotes the first alternative and reports the failure of the second one.
 
 ```ts
-const Parser = sequence(
-  takeLeft(string('hello'), whitespace()),
-  attempt(string('let')),
-  string('lettuce')
-)
+const First = sequence(string('foo'), string('bar'))
+const Second = sequence(string('fo'), string('x'))
+
+const Plain = choice(First, Second)
+const Attempted = choice(attempt(First), Second)
 ```
-
-::: tip Success
-```ts
-run(Parser).with('hello lettuce')
-
-{
-  isOk: true,
-  span: [ 0, 13 ],
-  pos: 13,
-  value: [ 'hello', 'let', 'lettuce' ]
-}
-```
-:::
-
-In both failing cases `pos` stays untouched, while `span` still covers the attempted region.
 
 ::: danger Failure
 ```ts
-run(Parser).with('hello let')
+run(Plain).with('football')
 
 {
   isOk: false,
-  span: [ 6, 9 ],
-  pos: 6,
-  expected: 'lettuce'
+  span: [ 3, 6 ],
+  pos: 3,
+  expected: 'bar'
 }
 ```
 ---
 ```ts
-run(Parser).with('hello something')
+run(Attempted).with('football')
 
 {
   isOk: false,
-  span: [ 6, 9 ],
-  pos: 6,
-  expected: 'let'
+  span: [ 2, 3 ],
+  pos: 2,
+  expected: 'x'
 }
 ```
 :::
 
 <!-- Links. -->
 
-[lookahead]: ./lookahead
+[choice]: ./choice
