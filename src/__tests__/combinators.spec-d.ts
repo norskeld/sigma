@@ -21,13 +21,20 @@ describe('attempt', () => {
 })
 
 describe('chain', () => {
-  const { chainl } = c
+  const { chainl, chainr } = c
 
   it('chainl should have correct inferred signature', () => {
     expectTypeOf<typeof chainl>().returns.toMatchTypeOf<UnknownParser>()
 
     expectTypeOf<typeof chainl<string, string, string>>().returns.toMatchTypeOf<StringParser>()
     expectTypeOf<typeof chainl<number, number, string>>().returns.toMatchTypeOf<NumberParser>()
+  })
+
+  it('chainr should have correct inferred signature', () => {
+    expectTypeOf<typeof chainr>().returns.toMatchTypeOf<UnknownParser>()
+
+    expectTypeOf<typeof chainr<string, string, string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof chainr<number, number, string>>().returns.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -46,6 +53,17 @@ describe('choice', () => {
   })
 })
 
+describe('count', () => {
+  const { count } = c
+
+  it('count should have correct inferred signature', () => {
+    expectTypeOf<typeof count>().returns.toMatchTypeOf<UnknownParser>()
+
+    expectTypeOf<typeof count<string>>().returns.toMatchTypeOf<StringParsers>()
+    expectTypeOf<typeof count<number>>().returns.toMatchTypeOf<NumberParsers>()
+  })
+})
+
 describe('error', () => {
   const { error } = c
 
@@ -56,6 +74,17 @@ describe('error', () => {
     expectTypeOf<typeof error<number>>().returns.toMatchTypeOf<NumberParser>()
 
     expectTypeOf<typeof error<number | string>>().returns.toMatchTypeOf<StringOrNumberParser>()
+  })
+})
+
+describe('filter', () => {
+  const { filter } = c
+
+  it('filter should have correct inferred signature', () => {
+    expectTypeOf<typeof filter>().returns.toMatchTypeOf<UnknownParser>()
+
+    expectTypeOf<typeof filter<string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof filter<number>>().returns.toMatchTypeOf<NumberParser>()
   })
 })
 
@@ -98,6 +127,15 @@ describe('map', () => {
 
     expectTypeOf<typeof map<string, number>>().returns.toMatchTypeOf<NumberParser>()
     expectTypeOf<typeof map<string, string>>().returns.toMatchTypeOf<StringParser>()
+  })
+})
+
+describe('not', () => {
+  const { not } = c
+
+  it('not should have correct inferred signature', () => {
+    expectTypeOf<typeof not>().returns.toMatchTypeOf<UnknownParser>()
+    expectTypeOf<typeof not>().returns.toMatchTypeOf<Parser<null>>()
   })
 })
 

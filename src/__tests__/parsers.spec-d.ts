@@ -1,6 +1,6 @@
 import * as p from '@parsers'
 import { describe, expectTypeOf, it } from '@testing'
-import { Parser, SucceedingParser } from '@types'
+import { FailingParser, Parser, SucceedingParser } from '@types'
 
 type UnknownParser = Parser<unknown>
 type NullParser = Parser<null>
@@ -45,6 +45,15 @@ describe('eol', () => {
     expectTypeOf<typeof eol>().returns.toMatchTypeOf<StringParser>()
     expectTypeOf<typeof eol>().returns.toMatchTypeOf<UnknownParser>()
     expectTypeOf<typeof eol>().returns.not.toMatchTypeOf<NumberParser>()
+  })
+})
+
+describe('fail', () => {
+  const { fail } = p
+
+  it('fail should have correct inferred signature', () => {
+    expectTypeOf<typeof fail>().returns.toMatchTypeOf<FailingParser>()
+    expectTypeOf<typeof fail>().returns.toMatchTypeOf<UnknownParser>()
   })
 })
 
