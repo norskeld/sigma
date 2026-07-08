@@ -23,7 +23,7 @@ The example is the same as in the docs for [`lookahead` combinators][lookahead].
 ```ts
 const Parser = sequence(
   takeLeft(string('hello'), whitespace()),
-  lookahead(string('let')),
+  attempt(string('let')),
   string('lettuce')
 )
 ```
@@ -41,7 +41,7 @@ run(Parser).with('hello lettuce')
 ```
 :::
 
-Notice how differs the output for the last failing case: `attempt` doesn't consume any input, i.e. it doesn't advance `pos`.
+In both failing cases `pos` stays untouched, while `span` still covers the attempted region.
 
 ::: danger Failure
 ```ts
@@ -50,7 +50,7 @@ run(Parser).with('hello let')
 {
   isOk: false,
   span: [ 6, 9 ],
-  pos: 9, // [!code warning]
+  pos: 6,
   expected: 'lettuce'
 }
 ```
@@ -61,7 +61,7 @@ run(Parser).with('hello something')
 {
   isOk: false,
   span: [ 6, 9 ],
-  pos: 6, // [!code warning]
+  pos: 6,
   expected: 'let'
 }
 ```

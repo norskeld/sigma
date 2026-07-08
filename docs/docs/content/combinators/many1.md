@@ -14,7 +14,7 @@ function many1<T>(parser: Parser<T>): Parser<Array<T>>
 
 ## Description
 
-`many1` combinator applies `parser` *one* or more times. Returns an array of the returned values of `parser`.
+`many1` combinator applies `parser` *one* or more times. Returns an array of the returned values of `parser`. After the first match, successes that consume no input are not collected, so the combinator always terminates.
 
 ## Usage
 
@@ -42,7 +42,7 @@ run(Parser).with('---')
 {
   isOk: false,
   span: [ 0, 1 ],
-  pos: 1,
+  pos: 0,
   expected: '+'
 }
 ```

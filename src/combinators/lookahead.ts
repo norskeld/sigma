@@ -1,8 +1,7 @@
 import type { Parser } from '@types'
 
 /**
- * Applies `parser` without consuming any input. If `parser` fails and consumes some input, so does
- * `lookahead`.
+ * Applies `parser` without consuming any input, whether it succeeds or fails.
  *
  * @param parser - Parser to apply
  *
@@ -24,7 +23,6 @@ export function lookahead<T>(parser: Parser<T>): Parser<T> {
           }
         }
 
-        // If the parser failed, then still advance the pos cursor.
         case false: {
           return result
         }

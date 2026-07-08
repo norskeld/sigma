@@ -2,6 +2,7 @@ import type { Parser } from '@types'
 
 /**
  * Applies source `parser`, collects its output, and stops after `terminator` parser succeeds.
+ * Fails with the `terminator`'s error if `parser` succeeds without consuming input.
  *
  * @param parser - Parser to apply
  * @param terminator - Terminating parser to stop after
@@ -35,6 +36,11 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
             const resultP = parser.parse(input, nextPos)
 
             if (resultP.isOk) {
+              // Guard against infinite loops on zero-width successes.
+              if (resultP.pos === nextPos) {
+                return resultT
+              }
+
               values.push(resultP.value)
               nextPos = resultP.pos
               continue
@@ -50,6 +56,7 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
 
 /**
  * Applies source `parser`, ignores its output, and stops after `terminator` parser succeeds.
+ * Fails with the `terminator`'s error if `parser` succeeds without consuming input.
  *
  * @param parser - Parser to apply
  * @param terminator - Terminating parser to stop after
@@ -81,6 +88,11 @@ export function skipUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
             const resultP = parser.parse(input, nextPos)
 
             if (resultP.isOk) {
+              // Guard against infinite loops on zero-width successes.
+              if (resultP.pos === nextPos) {
+                return resultT
+              }
+
               nextPos = resultP.pos
               continue
             }

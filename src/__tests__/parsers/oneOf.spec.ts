@@ -14,6 +14,13 @@ describe('oneOf', () => {
     testFailure('q-combinator', oneOf('xyz'))
   })
 
+  it('should match characters outside the Basic Multilingual Plane', () => {
+    const actual = run(oneOf('💩x'), '💩!')
+    const expected = result(true, '💩')
+
+    should.matchState(actual, expected)
+  })
+
   it('should fail if reached the end of input', () => {
     testFailure('prefix', sequence(string('prefix'), oneOf('XY')))
   })

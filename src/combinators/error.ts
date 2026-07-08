@@ -21,7 +21,7 @@ export function error<T>(parser: Parser<T>, expected: string): Parser<T> {
         case false: {
           return {
             isOk: false,
-            span: [pos, result.pos],
+            span: result.span,
             pos: result.pos,
             expected
           }

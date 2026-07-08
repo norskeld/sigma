@@ -77,12 +77,7 @@ export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>
         }
       }
 
-      return {
-        isOk: false,
-        span: [pos, resultP.pos],
-        pos: resultP.pos,
-        expected: resultP.expected
-      }
+      return resultP
     }
   }
 }

@@ -1,7 +1,7 @@
 ---
 title: 'optional'
 kind: 'composite'
-description: 'optional combinator tries to apply parser. Returns the result of parser or null, and only fails if parser fails.'
+description: 'optional combinator tries to apply parser. Returns the result of parser or null. Never fails.'
 ---
 
 # optional <Composite />
@@ -14,7 +14,7 @@ function optional<T>(parser: Parser<T>): Parser<T | null>
 
 ## Description
 
-`optional` combinator tries to apply `parser`. Returns the result of `parser` or `null`, and only fails if `parser` fails.
+`optional` combinator tries to apply `parser`. Returns the result of `parser` or `null`. Never fails.
 
 ## Usage
 
@@ -31,7 +31,7 @@ run(Parser).with('-2')
 
 {
   isOk: true,
-  pan: [ 0, 2 ],
+  span: [ 0, 2 ],
   pos: 2,
   value: [ '-', 2 ]
 }
@@ -42,7 +42,7 @@ run(Parser).with('2')
 
 {
   isOk: true,
-  pan: [ 0, 1 ],
+  span: [ 0, 1 ],
   pos: 1,
   value: [ null, 2 ]
 }

@@ -39,14 +39,15 @@ describe('octal', () => {
   it('should succeed if given an octal number', () => {
     const tCases = [
       ['0o42', 34],
-      ['0O42', 34]
+      ['0O42', 34],
+      ['0o17', 15]
     ] as const
 
     tCases.forEach(([tCase, tResult]) => testSuccess(tCase, tResult, octal()))
   })
 
   it('should fail if given a non-octal number', () => {
-    const tCases = ['', 'zero', '0', '-42', '0x42', '0b11', '0o', '0off']
+    const tCases = ['', 'zero', '0', '-42', '0x42', '0b11', '0o', '0off', '0o8', '0o9']
     tCases.forEach((tCase) => testFailure(tCase, octal()))
   })
 })

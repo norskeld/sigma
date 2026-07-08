@@ -1,5 +1,5 @@
-import { many, many1 } from '@combinators'
-import { string } from '@parsers'
+import { many, many1, optional } from '@combinators'
+import { nothing, string } from '@parsers'
 import { describe, result, run, should, testFailure, it } from '@testing'
 
 describe('many', () => {
@@ -15,6 +15,22 @@ describe('many', () => {
     const parser = many(string('hello'))
     const actual = run(parser, 'byebye')
     const expected = result(true, [])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should terminate on zero-width successes', () => {
+    const parser = many(nothing())
+    const actual = run(parser, 'aaa')
+    const expected = result(true, [])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should not collect trailing zero-width successes', () => {
+    const parser = many(optional(string('x')))
+    const actual = run(parser, 'xxy')
+    const expected = result(true, ['x', 'x'])
 
     should.matchState(actual, expected)
   })
@@ -45,6 +61,14 @@ describe('many1', () => {
     const parser = many1(string('x!'))
     const actual = run(parser, 'a!b!c!')
     const expected = result(false, 'x!')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should terminate on zero-width successes', () => {
+    const parser = many1(nothing())
+    const actual = run(parser, 'aaa')
+    const expected = result(true, [null])
 
     should.matchState(actual, expected)
   })

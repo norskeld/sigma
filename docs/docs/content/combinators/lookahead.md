@@ -1,7 +1,7 @@
 ---
 title: 'lookahead'
 kind: 'primitive'
-description: 'lookahead combinator applies parser without consuming any input. If parser fails and consumes some input, so does lookahead.'
+description: 'lookahead combinator applies parser without consuming any input.'
 ---
 
 # lookahead <Primitive />
@@ -14,7 +14,7 @@ function lookahead<T>(parser: Parser<T>): Parser<T>
 
 ## Description
 
-`lookahead` combinator applies `parser` without consuming any input. If `parser` fails and consumes some input, so does `lookahead`.
+`lookahead` combinator applies `parser` without consuming any input, whether it succeeds or fails.
 
 ## Usage
 
@@ -48,7 +48,7 @@ run(Parser).with('hello let')
 {
   isOk: false,
   span: [ 6, 9 ],
-  pos: 9,
+  pos: 6,
   expected: 'lettuce'
 }
 ```
@@ -59,7 +59,7 @@ run(Parser).with('hello something')
 {
   isOk: false,
   span: [ 6, 9 ],
-  pos: 9,
+  pos: 6,
   expected: 'let'
 }
 ```

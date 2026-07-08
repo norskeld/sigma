@@ -49,7 +49,7 @@ run(Parser).with(`<start>\n<body><end>\n`)
 
 {
   isOk: false,
-  span: [ 14, 16 ],
+  span: [ 14, 15 ],
   pos: 14,
   expected: 'end of line'
 }

@@ -1,4 +1,4 @@
-import { choice } from '@combinators'
+import { choice, sequence } from '@combinators'
 import { string } from '@parsers'
 import { run, result, should, describe, it } from '@testing'
 
@@ -11,10 +11,18 @@ describe('choice', () => {
     should.matchState(actual, expected)
   })
 
-  it('should fail with the expectation of the last parser in sequence', () => {
+  it('should fail with the expectation of the first parser if all fail equally', () => {
     const parser = choice(string('left'), string('mid'), string('right'))
     const actual = run(parser, 'between')
-    const expected = result(false, 'right')
+    const expected = result(false, 'left')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should fail with the expectation of the parser that progressed furthest', () => {
+    const parser = choice(sequence(string('be'), string('xx')), string('mid'))
+    const actual = run(parser, 'between')
+    const expected = result(false, 'xx')
 
     should.matchState(actual, expected)
   })

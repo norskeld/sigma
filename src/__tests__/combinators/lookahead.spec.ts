@@ -26,18 +26,18 @@ describe('lookahead', () => {
     should.beStrictEqual(actual, {
       isOk: false,
       span: [6, 9],
-      pos: 9,
+      pos: 6,
       expected: 'lettuce'
     })
   })
 
-  it('should correctly fail if given a failing parser (consuming check)', () => {
+  it('should correctly fail if given a failing parser (non-consuming check)', () => {
     const actual = run(parser, 'hello const')
 
     should.beStrictEqual(actual, {
       isOk: false,
       span: [6, 9],
-      pos: 9,
+      pos: 6,
       expected: 'let'
     })
   })

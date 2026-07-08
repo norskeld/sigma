@@ -45,7 +45,7 @@ run(Parser).with('2-2')
 {
   isOk: false,
   span: [ 1, 2 ],
-  pos: 2,
+  pos: 1,
   expected: '+'
 }
 ```

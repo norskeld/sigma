@@ -4,7 +4,7 @@ import { nothing } from '@parsers'
 import type { Parser } from '@types'
 
 /**
- * Applies `parser`. Only fails if `parser` fails.
+ * Applies `parser`, falling back to `null` if it fails. Never fails.
  *
  * @param parser - Parser to apply
  *

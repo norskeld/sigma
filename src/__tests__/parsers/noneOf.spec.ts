@@ -14,6 +14,17 @@ describe('noneOf', () => {
     testFailure('y-combinator', noneOf('xyz'))
   })
 
+  it('should not advance pos on failure', () => {
+    const actual = run(noneOf('xyz'), 'y-combinator')
+
+    should.beEqual(actual.isOk, false)
+    should.beEqual(actual.pos, 0)
+  })
+
+  it('should reject characters outside the Basic Multilingual Plane', () => {
+    testFailure('💩!', noneOf('💩'))
+  })
+
   it('should fail if reached the end of input', () => {
     testFailure('prefix', sequence(string('prefix'), noneOf('XY')))
   })

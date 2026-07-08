@@ -155,18 +155,12 @@ describe('rest', () => {
 })
 
 describe('string', () => {
-  const { string, ustring } = p
+  const { string } = p
 
   it('string should have correct inferred signature', () => {
     expectTypeOf<typeof string>().returns.toMatchTypeOf<StringParser>()
     expectTypeOf<typeof string>().returns.toMatchTypeOf<UnknownParser>()
     expectTypeOf<typeof string>().returns.not.toMatchTypeOf<NumberParser>()
-  })
-
-  it('ustring should have correct inferred signature', () => {
-    expectTypeOf<typeof ustring>().returns.toMatchTypeOf<StringParser>()
-    expectTypeOf<typeof ustring>().returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf<typeof ustring>().returns.not.toMatchTypeOf<NumberParser>()
   })
 })
 

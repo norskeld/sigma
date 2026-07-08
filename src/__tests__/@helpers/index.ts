@@ -107,7 +107,6 @@ export const expectedParsers = [
   'regexp',
   'rest',
   'string',
-  'ustring',
   'whitespace',
   'whole'
 ] as const

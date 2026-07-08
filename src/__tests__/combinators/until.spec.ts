@@ -1,5 +1,5 @@
 import { map, takeUntil, skipUntil } from '@combinators'
-import { any, regexp, string } from '@parsers'
+import { any, nothing, regexp, string } from '@parsers'
 import { run, result, should, describe, testFailure, it } from '@testing'
 
 describe('takeUntil', () => {
@@ -14,6 +14,10 @@ describe('takeUntil', () => {
   it('should fail if source parser fails', () => {
     testFailure('one.', takeUntil(regexp(/\p{Nd}/gu, 'decimal digit'), string('.')))
   })
+
+  it('should fail instead of looping on zero-width successes', () => {
+    testFailure('one.', takeUntil(nothing(), string('!')))
+  })
 })
 
 describe('skipUntil', () => {
@@ -27,5 +31,9 @@ describe('skipUntil', () => {
 
   it('should fail if source parser fails', () => {
     testFailure('one.', skipUntil(regexp(/\p{Nd}/gu, 'decimal digit'), string('.')))
+  })
+
+  it('should fail instead of looping on zero-width successes', () => {
+    testFailure('one.', skipUntil(nothing(), string('!')))
   })
 })

@@ -4,7 +4,7 @@ import type { Parser } from '@types'
 
 const HEXADECIMAL_RE = /0[xX][0-9a-fA-F]+/g
 const BINARY_RE = /0[bB][01]+/g
-const OCTAL_RE = /0[oO][0-8]+/g
+const OCTAL_RE = /0[oO][0-7]+/g
 const WHOLE_RE = /(0|[1-9][0-9]*)/g
 const INTEGER_RE = /-?(0|[1-9][0-9]*)/g
 const FLOAT_RE = /-?[0-9]+\.[0-9]+/g

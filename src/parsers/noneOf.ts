@@ -21,8 +21,9 @@ export function noneOf(chars: string): Parser<string> {
         }
       }
 
-      const nextPos = pos + 1
-      const char = input.substring(pos, nextPos)
+      // Read a full code point to avoid splitting surrogate pairs.
+      const char = String.fromCodePoint(input.codePointAt(pos) as number)
+      const nextPos = pos + char.length
 
       if (!charset.includes(char)) {
         return {
@@ -36,7 +37,7 @@ export function noneOf(chars: string): Parser<string> {
       return {
         isOk: false,
         span: [pos, pos],
-        pos: nextPos,
+        pos,
         expected: `none of: ${charset.join(', ')}`
       }
     }

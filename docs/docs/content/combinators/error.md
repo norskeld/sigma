@@ -47,8 +47,8 @@ run(Parser).with('maybe')
 
 {
   isOk: false,
-  span: [ 0, 5 ],
-  pos: 5,
+  span: [ 0, 4 ],
+  pos: 0,
   expected: "expecting either 'true' or 'false'"
 }
 :::

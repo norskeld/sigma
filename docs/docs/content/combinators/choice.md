@@ -39,7 +39,7 @@ run(Parser).with('true')
 ```
 :::
 
-Notice how the `expected` field differs depending on the input, specifically its length.
+If all parsers fail, the failure that progressed furthest into the input is reported; on a tie, the first one wins.
 
 ::: danger Failure
 ```ts{7}
@@ -58,9 +58,9 @@ run(Parser).with('maybe')
 
 {
   isOk: false,
-  span: [ 0, 5 ],
+  span: [ 0, 4 ],
   pos: 0,
-  expected: 'false'
+  expected: 'true'
 }
 ```
 :::

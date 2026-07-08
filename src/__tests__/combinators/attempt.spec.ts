@@ -26,7 +26,7 @@ describe('attempt', () => {
     should.beStrictEqual(actual, {
       isOk: false,
       span: [6, 9],
-      pos: 9,
+      pos: 6,
       expected: 'lettuce'
     })
   })
@@ -36,7 +36,7 @@ describe('attempt', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [6, 6],
+      span: [6, 9],
       pos: 6,
       expected: 'let'
     })

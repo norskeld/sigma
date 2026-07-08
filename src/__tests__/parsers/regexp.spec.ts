@@ -82,6 +82,13 @@ describe('regexp', () => {
     should.matchState(actualReNonLatin, expectedReNonLatin)
   })
 
+  it('should fail if the pattern only matches later in the input', () => {
+    const actual = run(regexp(/\d+/g, 'digits'), 'abc123')
+    const expected = result(false, 'digits')
+
+    should.matchState(actual, expected)
+  })
+
   it('should fail if does not match input', () => {
     const actualDigitFailure = run(regexp(/\d/g, 'digit'), 'hello')
     const expectedDigitFailure = result(false, 'digit')

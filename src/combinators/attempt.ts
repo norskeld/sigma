@@ -18,7 +18,7 @@ export function attempt<T>(parser: Parser<T>): Parser<T> {
         case true: {
           return {
             isOk: true,
-            span: [pos, pos],
+            span: result.span,
             pos,
             value: result.value
           }
@@ -28,7 +28,7 @@ export function attempt<T>(parser: Parser<T>): Parser<T> {
         case false: {
           return {
             isOk: false,
-            span: [pos, pos],
+            span: result.span,
             pos,
             expected: result.expected
           }

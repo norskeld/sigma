@@ -15,13 +15,11 @@ export function map<T, R>(parser: Parser<T>, fn: (value: T, span: Span) => R): P
 
       switch (result.isOk) {
         case true: {
-          const span: Span = [pos, result.pos]
-
           return {
             isOk: true,
-            span,
+            span: result.span,
             pos: result.pos,
-            value: fn(result.value, span)
+            value: fn(result.value, result.span)
           }
         }
 

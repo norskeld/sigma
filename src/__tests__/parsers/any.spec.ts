@@ -17,6 +17,13 @@ describe('any', () => {
     should.matchState(actual, expected)
   })
 
+  it('should not split surrogate pairs', () => {
+    const actual = run(many(any()), 'a😀b')
+    const expected = result(true, ['a', '😀', 'b'])
+
+    should.matchState(actual, expected)
+  })
+
   it('should fail at the end of input', () => {
     testFailure('', any())
   })

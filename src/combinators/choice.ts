@@ -29,7 +29,7 @@ export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
             }
 
             case false: {
-              if (!nextResult || nextResult.pos < result.pos) {
+              if (nextResult.pos < result.pos) {
                 nextResult = result
               }
             }

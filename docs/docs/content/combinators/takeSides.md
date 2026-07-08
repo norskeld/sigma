@@ -54,7 +54,7 @@ run(Parser).with('100 ^ 200')
 {
   isOk: false,
   span: [ 4, 5 ],
-  pos: 5,
+  pos: 4,
   expected: '&'
 }
 ```

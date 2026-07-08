@@ -19,13 +19,12 @@ function regexp(rs: RegExp, expected: string): Parser<string>
 ## Implementation notes
 
 ::: warning
-If `g` flag is missing, it will be automatically injected. It's still better to always provide it to avoid small performance penalty and clearly document the intention.
+Matching is performed in sticky mode, so `g` and `y` flags are handled automatically.
 :::
 
-The regular expression must obey two simple rules:
+The regular expression must obey one simple rule:
 
-- It *does* use g flag. Flags like u and i are allowed and can be added if needed.
-- It *doesn't* use `^` and `$` to match at the beginning or at the end of the text.
+- It *doesn't* use `^` and `$` to match at the beginning or at the end of the text. Flags like u and i are allowed and can be added if needed.
 
 ## Usage
 
