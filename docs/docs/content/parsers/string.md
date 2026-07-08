@@ -1,7 +1,7 @@
 ---
 title: 'string'
 kind: 'primitive'
-description: 'string parses an ASCII string. Returns the parsed string.'
+description: 'string parses a string. Returns the parsed string.'
 ---
 
 # string <Primitive />
@@ -14,9 +14,7 @@ function string(match: string): Parser<string>
 
 ## Description
 
-> For parsing Unicode strings, consider using [ustring].
-
-`string` parses an *ASCII* string. Returns the parsed string.
+`string` parses a string. Returns the parsed string.
 
 ## Usage
 
@@ -43,13 +41,9 @@ run(Parser).with('bye')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  span: [ 0, 3 ],
   pos: 0,
   expected: 'hello'
 }
 ```
 :::
-
-<!-- Parsers. -->
-
-[ustring]: ./ustring.md
