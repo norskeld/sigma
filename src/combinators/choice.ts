@@ -13,15 +13,12 @@ export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
     parse(input, pos) {
       // It's "guaranteed" by type system that there will be at least two parsers, so I'm not gonna
       // bother checking for `ps` length and asserting it, because it would hit performance.
-      const [first, ...rest] = ps
-
-      // Run the first parser to infer the type.
-      let nextResult = first.parse(input, pos)
+      let nextResult = ps[0].parse(input, pos)
 
       // Test other alternatives if the first one fails.
       if (!nextResult.isOk) {
-        for (const parser of rest) {
-          const result = parser.parse(input, pos)
+        for (let index = 1; index < ps.length; index++) {
+          const result = ps[index].parse(input, pos)
 
           switch (result.isOk) {
             case true: {

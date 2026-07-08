@@ -2,7 +2,7 @@ import { regexp } from './regexp'
 
 import type { Parser } from '@types'
 
-const WHITESPACE_REQUIRED_RE = /\s+/g
+const WHITESPACE_REQUIRED_RE = /\s+/y
 
 /**
  * Parses whitespace, either a single character or consecutive ones.

@@ -12,15 +12,15 @@ export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToT
 export function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>> {
   return {
     parse(input, pos) {
-      const values: Array<T> = []
+      const values = new Array<T>(ps.length)
       let nextPos = pos
 
-      for (const parser of ps) {
-        const result = parser.parse(input, nextPos)
+      for (let index = 0; index < ps.length; index++) {
+        const result = ps[index].parse(input, nextPos)
 
         switch (result.isOk) {
           case true: {
-            values.push(result.value)
+            values[index] = result.value
             nextPos = result.pos
             break
           }

@@ -26,4 +26,11 @@ describe('choice', () => {
 
     should.matchState(actual, expected)
   })
+
+  it('should keep the full failure of the alternative that progressed furthest', () => {
+    const parser = choice(sequence(string('a'), string('b')), string('c'))
+    const actual = parser.parse('ax', 0)
+
+    should.beStrictEqual(actual, { isOk: false, span: [1, 2], pos: 1, expected: 'b' })
+  })
 })

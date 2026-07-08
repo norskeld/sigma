@@ -2,12 +2,12 @@ import { regexp } from './regexp'
 
 import type { Parser } from '@types'
 
-const HEXADECIMAL_RE = /0[xX][0-9a-fA-F]+/g
-const BINARY_RE = /0[bB][01]+/g
-const OCTAL_RE = /0[oO][0-7]+/g
-const WHOLE_RE = /(0|[1-9][0-9]*)/g
-const INTEGER_RE = /-?(0|[1-9][0-9]*)/g
-const FLOAT_RE = /-?[0-9]+\.[0-9]+/g
+const HEXADECIMAL_RE = /0[xX][0-9a-fA-F]+/y
+const BINARY_RE = /0[bB][01]+/y
+const OCTAL_RE = /0[oO][0-7]+/y
+const WHOLE_RE = /(?:0|[1-9][0-9]*)/y
+const INTEGER_RE = /-?(?:0|[1-9][0-9]*)/y
+const FLOAT_RE = /-?[0-9]+\.[0-9]+/y
 
 /**
  * Parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`.
@@ -15,15 +15,17 @@ const FLOAT_RE = /-?[0-9]+\.[0-9]+/g
  * @returns Parsed hexadecimal number as a decimal one
  */
 export function hex(): Parser<number> {
+  const parser = regexp(HEXADECIMAL_RE, 'hexadecimal number')
+
   return {
     parse(input, pos) {
-      const result = regexp(HEXADECIMAL_RE, 'hexadecimal number').parse(input, pos)
+      const result = parser.parse(input, pos)
 
       switch (result.isOk) {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos],
+            span: result.span,
             pos: result.pos,
             value: parseInt(result.value.slice(2), 16)
           }
@@ -43,15 +45,17 @@ export function hex(): Parser<number> {
  * @returns Parsed binary number as a decimal one
  */
 export function binary(): Parser<number> {
+  const parser = regexp(BINARY_RE, 'binary number')
+
   return {
     parse(input, pos) {
-      const result = regexp(BINARY_RE, 'binary number').parse(input, pos)
+      const result = parser.parse(input, pos)
 
       switch (result.isOk) {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos],
+            span: result.span,
             pos: result.pos,
             value: parseInt(result.value.slice(2), 2)
           }
@@ -71,15 +75,17 @@ export function binary(): Parser<number> {
  * @returns Parsed octal number as a decimal one
  */
 export function octal(): Parser<number> {
+  const parser = regexp(OCTAL_RE, 'octal number')
+
   return {
     parse(input, pos) {
-      const result = regexp(OCTAL_RE, 'octal number').parse(input, pos)
+      const result = parser.parse(input, pos)
 
       switch (result.isOk) {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos],
+            span: result.span,
             pos: result.pos,
             value: parseInt(result.value.slice(2), 8)
           }
@@ -99,15 +105,17 @@ export function octal(): Parser<number> {
  * @returns Parsed whole number
  */
 export function whole(): Parser<number> {
+  const parser = regexp(WHOLE_RE, 'whole number')
+
   return {
     parse(input, pos) {
-      const result = regexp(WHOLE_RE, 'whole number').parse(input, pos)
+      const result = parser.parse(input, pos)
 
       switch (result.isOk) {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos],
+            span: result.span,
             pos: result.pos,
             value: parseInt(result.value, 10)
           }
@@ -127,15 +135,17 @@ export function whole(): Parser<number> {
  * @returns Parsed integer number
  */
 export function integer(): Parser<number> {
+  const parser = regexp(INTEGER_RE, 'integer number')
+
   return {
     parse(input, pos) {
-      const result = regexp(INTEGER_RE, 'integer number').parse(input, pos)
+      const result = parser.parse(input, pos)
 
       switch (result.isOk) {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos],
+            span: result.span,
             pos: result.pos,
             value: parseInt(result.value, 10)
           }
@@ -157,15 +167,17 @@ export function integer(): Parser<number> {
  * @returns Parsed float number
  */
 export function float(): Parser<number> {
+  const parser = regexp(FLOAT_RE, 'float number')
+
   return {
     parse(input, pos) {
-      const result = regexp(FLOAT_RE, 'float number').parse(input, pos)
+      const result = parser.parse(input, pos)
 
       switch (result.isOk) {
         case true: {
           return {
             isOk: true,
-            span: [pos, result.pos],
+            span: result.span,
             pos: result.pos,
             value: parseFloat(result.value)
           }

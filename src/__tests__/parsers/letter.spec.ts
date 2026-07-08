@@ -68,4 +68,11 @@ describe('letters', () => {
 
     should.matchState(actual, expected)
   })
+
+  it('should parse repeatedly at different positions with one instance', () => {
+    const parser = letters()
+
+    should.beStrictEqual(parser.parse('abc', 0), { isOk: true, span: [0, 3], pos: 3, value: 'abc' })
+    should.beStrictEqual(parser.parse('12ab', 2), { isOk: true, span: [2, 4], pos: 4, value: 'ab' })
+  })
 })

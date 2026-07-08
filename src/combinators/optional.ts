@@ -1,6 +1,3 @@
-import { choice } from './choice'
-
-import { nothing } from '@parsers'
 import type { Parser } from '@types'
 
 /**
@@ -11,5 +8,24 @@ import type { Parser } from '@types'
  * @returns Result of `parser` or `null`
  */
 export function optional<T>(parser: Parser<T>): Parser<T | null> {
-  return choice(parser, nothing())
+  return {
+    parse(input, pos) {
+      const result = parser.parse(input, pos)
+
+      switch (result.isOk) {
+        case true: {
+          return result
+        }
+
+        case false: {
+          return {
+            isOk: true,
+            span: [pos, pos],
+            pos,
+            value: null
+          }
+        }
+      }
+    }
+  }
 }

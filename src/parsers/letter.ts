@@ -2,8 +2,8 @@ import { regexp } from './regexp'
 
 import type { Parser } from '@types'
 
-const LETTER_RE = /\p{Letter}/gu
-const LETTERS_RE = /\p{Letter}+/gu
+const LETTER_RE = /\p{Letter}/uy
+const LETTERS_RE = /\p{Letter}+/uy
 
 /**
  * Parses a single alphabetical character. Unicode friendly.

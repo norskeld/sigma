@@ -1,5 +1,5 @@
 import { hex, binary, octal, whole, integer, float } from '@parsers'
-import { describe, testFailure, testSuccess, it } from '@testing'
+import { describe, should, testFailure, testSuccess, it } from '@testing'
 
 describe('hex', () => {
   it('should succeed if given a hexadecimal number', () => {
@@ -16,6 +16,31 @@ describe('hex', () => {
   it('should fail if given a non-hexadecimal number', () => {
     const tCases = ['', 'zero', '0', '-42', '0o42', '0b10', '0x', '0xXB']
     tCases.forEach((tCase) => testFailure(tCase, hex()))
+  })
+
+  it('should succeed with the span of the matched number', () => {
+    const actual = hex().parse('0xFF', 0)
+
+    should.beStrictEqual(actual, { isOk: true, span: [0, 4], pos: 4, value: 255 })
+  })
+
+  it('should fail without consuming input', () => {
+    const actual = hex().parse('zz', 0)
+
+    should.beStrictEqual(actual, {
+      isOk: false,
+      span: [0, 0],
+      pos: 0,
+      expected: 'hexadecimal number'
+    })
+  })
+
+  it('should parse repeatedly at different positions with one instance', () => {
+    const parser = hex()
+
+    should.beStrictEqual(parser.parse('0x1F', 0), { isOk: true, span: [0, 4], pos: 4, value: 31 })
+    should.beStrictEqual(parser.parse('..0x2A', 2), { isOk: true, span: [2, 6], pos: 6, value: 42 })
+    should.beStrictEqual(parser.parse('0x1F', 0), { isOk: true, span: [0, 4], pos: 4, value: 31 })
   })
 })
 
@@ -74,6 +99,18 @@ describe('integer', () => {
     const tCases = ['', 'zero']
     tCases.forEach((tCase) => testFailure(tCase, integer()))
   })
+
+  it('should succeed at a non-zero position', () => {
+    const actual = integer().parse('a-42', 1)
+
+    should.beStrictEqual(actual, { isOk: true, span: [1, 4], pos: 4, value: -42 })
+  })
+
+  it('should fail without consuming input', () => {
+    const actual = integer().parse('abc', 0)
+
+    should.beStrictEqual(actual, { isOk: false, span: [0, 0], pos: 0, expected: 'integer number' })
+  })
 })
 
 describe('float', () => {
@@ -85,5 +122,11 @@ describe('float', () => {
   it('should fail if given a non-float number', () => {
     const tCases = ['', 'zero', '0xFF', '0b10', '0o42']
     tCases.forEach((tCase) => testFailure(tCase, float()))
+  })
+
+  it('should fail without consuming input', () => {
+    const actual = float().parse('4', 0)
+
+    should.beStrictEqual(actual, { isOk: false, span: [0, 0], pos: 0, expected: 'float number' })
   })
 })

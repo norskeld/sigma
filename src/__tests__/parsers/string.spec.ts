@@ -1,3 +1,4 @@
+import { many } from '@combinators'
 import { string } from '@parsers'
 import { run, result, should, describe, it } from '@testing'
 
@@ -63,6 +64,25 @@ describe('string', () => {
 
     const actual = run(string(tCase), '')
     const expected = result(false, tCase)
+
+    should.matchState(actual, expected)
+  })
+
+  it('should clamp the failure span to the end of input', () => {
+    const actual = string('abc').parse('ab', 0)
+
+    should.beStrictEqual(actual, { isOk: false, span: [0, 2], pos: 0, expected: 'abc' })
+  })
+
+  it('should succeed with a zero-width match if given an empty string', () => {
+    const actual = string('').parse('x', 0)
+
+    should.beStrictEqual(actual, { isOk: true, span: [0, 0], pos: 0, value: '' })
+  })
+
+  it('should not loop forever when a zero-width match is repeated', () => {
+    const actual = run(many(string('')), 'x')
+    const expected = result(true, [])
 
     should.matchState(actual, expected)
   })

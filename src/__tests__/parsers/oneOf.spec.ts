@@ -24,4 +24,21 @@ describe('oneOf', () => {
   it('should fail if reached the end of input', () => {
     testFailure('prefix', sequence(string('prefix'), oneOf('XY')))
   })
+
+  it('should fail listing all expected characters including duplicates', () => {
+    const actual = oneOf('aab').parse('q', 0)
+
+    should.beStrictEqual(actual, { isOk: false, span: [0, 0], pos: 0, expected: 'one of: a, a, b' })
+  })
+
+  it('should fail with the exact end of input message', () => {
+    const actual = oneOf('xy').parse('', 0)
+
+    should.beStrictEqual(actual, {
+      isOk: false,
+      span: [0, 0],
+      pos: 0,
+      expected: 'oneOf @ reached the end of input'
+    })
+  })
 })

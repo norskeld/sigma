@@ -1,6 +1,3 @@
-import { many } from './many'
-import { sequence } from './sequence'
-
 import type { Parser } from '@types'
 
 /**
@@ -17,20 +14,27 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
       // Run the parser once to get the first value.
       const resultP = parser.parse(input, pos)
 
-      // If the parser succeeds, run the parser and separator parser many times.
+      // If the parser succeeds, run the separator and parser pairwise many times.
       if (resultP.isOk) {
-        const resultS = many(sequence(sep, parser)).parse(input, resultP.pos)
         const values = [resultP.value]
+        let nextPos = resultP.pos
 
-        // If the parsers succeed, concatenate the values sans the separator.
-        for (const [, value] of resultS.value) {
-          values.push(value)
+        while (nextPos < input.length) {
+          const resultS = sep.parse(input, nextPos)
+          if (!resultS.isOk) break
+
+          // The progress guard covers the whole sep-value pair to discard zero-width matches.
+          const resultV = parser.parse(input, resultS.pos)
+          if (!resultV.isOk || resultV.pos <= nextPos) break
+
+          values.push(resultV.value)
+          nextPos = resultV.pos
         }
 
         return {
           isOk: true,
-          span: [pos, resultS.pos],
-          pos: resultS.pos,
+          span: [pos, nextPos],
+          pos: nextPos,
           value: values
         }
       }
@@ -59,20 +63,33 @@ export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>
       // Run the parser once to get the first value.
       const resultP = parser.parse(input, pos)
 
-      // If the parser succeeds, run the parser and separator parser many times.
+      // If the parser succeeds, run the separator and parser pairwise many times.
       if (resultP.isOk) {
-        const resultS = many(sequence(sep, parser)).parse(input, resultP.pos)
         const values = [resultP.value]
+        let nextPos = resultP.pos
 
-        // If the parsers succeed, concatenate the values sans the separator.
-        for (const [, value] of resultS.value) {
-          values.push(value)
+        while (nextPos < input.length) {
+          const resultS = sep.parse(input, nextPos)
+
+          if (!resultS.isOk) {
+            break
+          }
+
+          const resultV = parser.parse(input, resultS.pos)
+
+          // The progress guard covers the whole sep-value pair to discard zero-width matches.
+          if (!resultV.isOk || resultV.pos <= nextPos) {
+            break
+          }
+
+          values.push(resultV.value)
+          nextPos = resultV.pos
         }
 
         return {
           isOk: true,
-          span: [pos, resultS.pos],
-          pos: resultS.pos,
+          span: [pos, nextPos],
+          pos: nextPos,
           value: values
         }
       }

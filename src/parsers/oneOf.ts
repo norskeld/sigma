@@ -9,6 +9,8 @@ import type { Parser } from '@types'
  */
 export function oneOf(chars: string): Parser<string> {
   const charset = [...chars]
+  const codepoints = new Set(charset.map((char) => char.codePointAt(0) as number))
+  const expected = `one of: ${charset.join(', ')}`
 
   return {
     parse(input, pos) {
@@ -22,10 +24,12 @@ export function oneOf(chars: string): Parser<string> {
       }
 
       // Read a full code point to avoid splitting surrogate pairs.
-      const char = String.fromCodePoint(input.codePointAt(pos) as number)
-      const nextPos = pos + char.length
+      const code = input.codePointAt(pos) as number
 
-      if (charset.includes(char)) {
+      if (codepoints.has(code)) {
+        const char = String.fromCodePoint(code)
+        const nextPos = pos + char.length
+
         return {
           isOk: true,
           span: [pos, nextPos],
@@ -38,7 +42,7 @@ export function oneOf(chars: string): Parser<string> {
         isOk: false,
         span: [pos, pos],
         pos,
-        expected: `one of: ${charset.join(', ')}`
+        expected
       }
     }
   }

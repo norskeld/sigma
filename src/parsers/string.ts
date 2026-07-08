@@ -1,4 +1,4 @@
-import type { Parser, Span } from '@types'
+import type { Parser } from '@types'
 
 /**
  * Parses a string.
@@ -10,28 +10,22 @@ import type { Parser, Span } from '@types'
 export function string(match: string): Parser<string> {
   return {
     parse(input, pos) {
-      const nextPos = Math.min(pos + match.length, input.length)
-      const slice = input.substring(pos, nextPos)
-      const span: Span = [pos, nextPos]
+      if (input.startsWith(match, pos)) {
+        const nextPos = pos + match.length
 
-      switch (slice === match) {
-        case true: {
-          return {
-            isOk: true,
-            span,
-            pos: nextPos,
-            value: match
-          }
+        return {
+          isOk: true,
+          span: [pos, nextPos],
+          pos: nextPos,
+          value: match
         }
+      }
 
-        case false: {
-          return {
-            isOk: false,
-            span,
-            pos,
-            expected: match
-          }
-        }
+      return {
+        isOk: false,
+        span: [pos, Math.min(pos + match.length, input.length)],
+        pos,
+        expected: match
       }
     }
   }

@@ -29,6 +29,18 @@ describe('takeMid', () => {
     should.matchState(actual, expected)
   })
 
+  it('should succeed with the span covering the whole sequence', () => {
+    const actual = takeMid(string('l'), string('m'), string('r')).parse('lmr', 0)
+
+    should.beStrictEqual(actual, { isOk: true, span: [0, 3], pos: 3, value: 'm' })
+  })
+
+  it('should fail at the position of the failed parser', () => {
+    const actual = takeMid(string('l'), string('m'), string('r')).parse('l-r', 0)
+
+    should.beStrictEqual(actual, { isOk: false, span: [1, 2], pos: 1, expected: 'm' })
+  })
+
   it('should fail completely when one of the parsers fail', () => {
     const parser = takeMid(string('left'), string('mid'), string('right'))
     const actual = run(parser, 'left midright')
@@ -63,6 +75,12 @@ describe('takeSides', () => {
     const expected = result(true, ['left', 'right'])
 
     should.matchState(actual, expected)
+  })
+
+  it('should succeed with the span covering the whole sequence', () => {
+    const actual = takeSides(string('l'), string('m'), string('r')).parse('lmr', 0)
+
+    should.beStrictEqual(actual, { isOk: true, span: [0, 3], pos: 3, value: ['l', 'r'] })
   })
 
   it('should fail completely when one of the parsers fail', () => {

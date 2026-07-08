@@ -28,4 +28,26 @@ describe('noneOf', () => {
   it('should fail if reached the end of input', () => {
     testFailure('prefix', sequence(string('prefix'), noneOf('XY')))
   })
+
+  it('should fail listing all rejected characters including duplicates', () => {
+    const actual = noneOf('aab').parse('a', 0)
+
+    should.beStrictEqual(actual, {
+      isOk: false,
+      span: [0, 0],
+      pos: 0,
+      expected: 'none of: a, a, b'
+    })
+  })
+
+  it('should fail with the exact end of input message', () => {
+    const actual = noneOf('xy').parse('', 0)
+
+    should.beStrictEqual(actual, {
+      isOk: false,
+      span: [0, 0],
+      pos: 0,
+      expected: 'noneOf @ reached the end of input'
+    })
+  })
 })
