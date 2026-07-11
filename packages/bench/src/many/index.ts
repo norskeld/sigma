@@ -1,13 +1,25 @@
 import { bench, group, run, summary } from 'mitata'
 
-import { SAMPLE } from './@sample'
-import { parse as parseParjs } from './parjs'
-import { parse as parseSigma } from './sigma'
+import { validate } from '../validate.ts'
+import { COUNT, SAMPLE } from './@sample.ts'
+import { parse as parseChevrotain } from './chevrotain.ts'
+import { parse as parseParjs } from './parjs.ts'
+import { parse as parseParsimmon } from './parsimmon.ts'
+import { parse as parseSigma } from './sigma.ts'
 
-group('many — sigma vs parjs', () => {
+validate(Array(COUNT).fill('x!'), {
+  sigma: () => parseSigma(SAMPLE),
+  parjs: () => parseParjs(SAMPLE),
+  parsimmon: () => parseParsimmon(SAMPLE),
+  chevrotain: () => parseChevrotain(SAMPLE),
+})
+
+group('many', () => {
   summary(() => {
     bench('sigma', () => parseSigma(SAMPLE))
     bench('parjs', () => parseParjs(SAMPLE))
+    bench('parsimmon', () => parseParsimmon(SAMPLE))
+    bench('chevrotain', () => parseChevrotain(SAMPLE))
   })
 })
 

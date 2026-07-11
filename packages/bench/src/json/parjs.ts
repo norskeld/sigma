@@ -12,7 +12,7 @@ import {
   thenq,
 } from 'parjs/combinators'
 
-import type * as Ast from './ast'
+import type * as Ast from './ast.ts'
 
 /* Tokens. */
 
@@ -36,6 +36,7 @@ const Escapes: Record<string, string> = {
   '"': `"`,
   '\\': '\\',
   '/': '/',
+  b: '\b',
   f: '\f',
   n: '\n',
   r: '\r',
@@ -47,7 +48,8 @@ const Escapes: Record<string, string> = {
 function toJsonObject(values: Array<Ast.JsonObjectProp>): Ast.JsonObject {
   return {
     type: 'object',
-    values,
+    // Copy, since parjs attaches a non-standard `separators` property to `manySepBy` results.
+    values: values.slice(),
   }
 }
 
@@ -64,7 +66,8 @@ function toJsonObjectProp(tuple: [Ast.JsonString, Ast.JsonValue]): Ast.JsonObjec
 function toJsonArray(values: Array<Ast.JsonValue>): Ast.JsonArray {
   return {
     type: 'array',
-    values,
+    // Copy, since parjs attaches a non-standard `separators` property to `manySepBy` results.
+    values: values.slice(),
   }
 }
 
@@ -119,7 +122,7 @@ function toJsonNull(): Ast.JsonNull {
 const pJsonValue = later<Ast.JsonValue>()
 const pJsonRoot = later<Ast.JsonRoot>()
 
-const pEscapeChar = anyCharOf(Object.keys(Escapes).join()).pipe(map((char) => Escapes[char]))
+const pEscapeChar = anyCharOf(Object.keys(Escapes).join('')).pipe(map((char) => Escapes[char]))
 
 const pEscapeUnicode = string('u').pipe(
   qthen(
@@ -168,12 +171,9 @@ pJsonRoot.init(pArray.pipe(or(pObject), between(whitespace())))
 export function parse(text: string): Ast.JsonRoot {
   const result = pJsonRoot.parse(text)
 
-  if (result.kind === 'OK') {
-    return result.value
+  if (result.kind !== 'OK') {
+    throw new Error(`parjs failed: ${result.reason}`)
   }
 
-  return {
-    type: 'object',
-    values: [],
-  }
+  return result.value
 }

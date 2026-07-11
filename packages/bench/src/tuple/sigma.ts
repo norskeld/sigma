@@ -12,7 +12,7 @@ import {
   whitespace,
 } from '@nrsk/sigma'
 
-import type * as Ast from './ast'
+import type * as Ast from './ast.ts'
 
 /* Tokens. */
 
@@ -52,7 +52,7 @@ const TupleList = defer<Ast.ListNode>()
 TupleNumber.with(map(Integer, toNumber))
 
 TupleList.with(
-  map(takeMid(OpenParen, sepBy(choice(TupleList, TupleNumber), Comma), CloseParen), toList),
+  map(takeMid(OpenParen, sepBy(choice(TupleNumber, TupleList), Comma), CloseParen), toList),
 )
 
 /* Wrapper for bench runner. */
@@ -60,16 +60,9 @@ TupleList.with(
 export function parse(text: string): Ast.ListNode {
   const result = run(TupleList).with(text)
 
-  switch (result.isOk) {
-    case true: {
-      return result.value
-    }
-
-    case false: {
-      return {
-        type: 'list',
-        value: [],
-      }
-    }
+  if (!result.isOk) {
+    throw new Error(`sigma failed at ${result.pos}: expected ${result.expected}`)
   }
+
+  return result.value
 }

@@ -8,9 +8,9 @@ const Parser = string('x!').pipe(many())
 export function parse(text: string): Array<string> {
   const result = Parser.parse(text)
 
-  if (result.kind === 'OK') {
-    return result.value
+  if (result.kind !== 'OK') {
+    throw new Error(`parjs failed: ${result.reason}`)
   }
 
-  return []
+  return result.value
 }

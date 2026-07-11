@@ -1,7 +1,7 @@
 import { run } from 'mitata'
 
-import './json'
-import './tuple'
-import './many'
+import './json/index.ts'
+import './tuple/index.ts'
+import './many/index.ts'
 
 await run()

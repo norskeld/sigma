@@ -1,7 +1,7 @@
 import { int, string, whitespace } from 'parjs'
 import { between, later, manySepBy, map, or } from 'parjs/combinators'
 
-import type * as Ast from './ast'
+import type * as Ast from './ast.ts'
 
 /* Mapping functions to turn parsed string values into AST nodes. */
 
@@ -15,7 +15,8 @@ function toNumber(value: number): Ast.NumberNode {
 function toList(value: Array<Ast.NumberNode | Ast.ListNode>): Ast.ListNode {
   return {
     type: 'list',
-    value,
+    // Copy, since parjs attaches a non-standard `separators` property to `manySepBy` results.
+    value: value.slice(),
   }
 }
 
@@ -39,12 +40,9 @@ TupleList.init(
 export function parse(text: string): Ast.ListNode {
   const result = TupleList.parse(text)
 
-  if (result.kind === 'OK') {
-    return result.value
+  if (result.kind !== 'OK') {
+    throw new Error(`parjs failed: ${result.reason}`)
   }
 
-  return {
-    type: 'list',
-    value: [],
-  }
+  return result.value
 }

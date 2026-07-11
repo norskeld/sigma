@@ -14,7 +14,8 @@ import {
   whitespace,
 } from '@nrsk/sigma'
 
-import type * as Ast from './ast'
+import type * as Ast from './ast.ts'
+import { decode } from './decode.ts'
 
 /* Tokens. */
 
@@ -62,7 +63,7 @@ function toJsonArray(values: Array<Ast.JsonValue>): Ast.JsonArray {
 function toJsonString(text: string): Ast.JsonString {
   return {
     type: 'string',
-    value: text.slice(1, -1),
+    value: decode(text.slice(1, -1)),
   }
 }
 
@@ -111,7 +112,7 @@ function toJsonNull(): Ast.JsonNull {
 const NumberLiteral = choice(float(), integer())
 
 const Space = optional(whitespace())
-const StringLiteral = regexp(/"([^"]|\\.)*"/g, 'string')
+const StringLiteral = regexp(/"(?:\\.|[^"\\])*"/g, 'string')
 
 // Utility.
 const match = (s: string) => takeMid(Space, string(s), Space)
@@ -164,16 +165,9 @@ JsonValue.with(choice(JsonObject, JsonArray, JsonString, JsonNumber, JsonBoolean
 export function parse(text: string): Ast.JsonRoot {
   const result = run(JsonRoot).with(text)
 
-  switch (result.isOk) {
-    case true: {
-      return result.value
-    }
-
-    case false: {
-      return {
-        type: 'object',
-        values: [],
-      }
-    }
+  if (!result.isOk) {
+    throw new Error(`sigma failed at ${result.pos}: expected ${result.expected}`)
   }
+
+  return result.value
 }
