@@ -13,7 +13,7 @@
   "dependencies": {
     "@nrsk/sigma": "workspace:*",
     "mitata": "^1.0.34",
-    "parjs": "0.12.7"
+    "parjs": "1.3.9"
   },
   "devDependencies": {
     "@nrsk/tsconfig": "workspace:*",
