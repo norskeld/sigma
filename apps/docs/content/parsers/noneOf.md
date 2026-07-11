@@ -1,18 +1,9 @@
 ---
 title: 'noneOf'
-kind: 'primitive'
 description: 'noneOf ensures that none of the characters in the given string matches the current character.'
 ---
 
 # noneOf <Primitive />
-
-## Signature
-
-```ts
-function noneOf(): Parser<string>
-```
-
-## Description
 
 `noneOf` ensures that none of the characters in the given string matches the current character.
 

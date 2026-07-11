@@ -1,18 +1,9 @@
 ---
 title: 'skipUntil'
-kind: 'primitive'
 description: "skipUntil combinator applies source parser, ignores its output, and stops after terminator parser succeeds. Returns a terminator's value. Fails if parser fails."
 ---
 
 # skipUntil <Primitive />
-
-## Signature
-
-```ts
-function skipUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parser<S>
-```
-
-## Description
 
 `skipUntil` combinator applies source `parser`, ignores its output, and stops after `terminator` parser succeeds. Returns a `terminator`'s value. Fails if `parser` fails, or with the `terminator`'s error if `parser` succeeds without consuming input.
 

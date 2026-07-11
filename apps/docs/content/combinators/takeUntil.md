@@ -1,18 +1,9 @@
 ---
 title: 'takeUntil'
-kind: 'primitive'
 description: 'takeUntil combinator applies source parser, collects its output, and stops after terminator parser succeeds. Returns a tuple of values collected by parser and terminator. Fails if parser fails.'
 ---
 
 # takeUntil <Primitive />
-
-## Signature
-
-```ts
-function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parser<[Array<T>, S]>
-```
-
-## Description
 
 `takeUntil` combinator applies source `parser`, collects its output, and stops after `terminator` parser succeeds. Returns a tuple of values collected by `parser` and `terminator`. Fails if `parser` fails, or with the `terminator`'s error if `parser` succeeds without consuming input.
 

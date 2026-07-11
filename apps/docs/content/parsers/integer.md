@@ -1,18 +1,9 @@
 ---
 title: 'integer'
-kind: 'composite'
 description: "integer parses an integer number with an optional minus sign, e.g. '0', '-7', '420'. Returns a decimal number obtained using parseInt with radix of 10."
 ---
 
 # integer <Composite />
-
-## Signature
-
-```ts
-function integer(): Parser<number>
-```
-
-## Description
 
 `integer` parses an integer number with an optional minus sign, e.g. `0`, `-7`, `420`. Returns **a decimal number** obtained using [parseInt] with radix of 10.
 

@@ -1,18 +1,9 @@
 ---
 title: 'rest'
-kind: 'primitive'
 description: 'rest simply returns the unparsed input as a string. Never fails.'
 ---
 
 # rest <Primitive />
-
-## Signature
-
-```ts
-function rest(): Parser<string>
-```
-
-## Description
 
 `rest` simply returns the unparsed input as a string. Never fails.
 

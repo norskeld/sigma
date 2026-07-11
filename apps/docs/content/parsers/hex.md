@@ -1,18 +1,9 @@
 ---
 title: 'hex'
-kind: 'composite'
 description: "hexadecimal parses a hexadecimal number prefixed with '0x' or '0X', e.g. '0xFF', '0XFF', '0xff'. Returns a decimal number obtained using parseInt with radix of 16."
 ---
 
 # hex <Composite />
-
-## Signature
-
-```ts
-function hex(): Parser<number>
-```
-
-## Description
 
 `hex` parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`. Returns **a decimal number** obtained using [parseInt] with radix of 16.
 

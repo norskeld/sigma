@@ -90,7 +90,6 @@ export const Content = {
   getItems(docFolder: string) {
     return readdirSync(docFolder).map((filename) => {
       const { name } = parse(filename)
-
       const { title } = Markdown.getFrontmatter<Frontmatter>(`${docFolder}/${filename}`)
 
       return Sidebar.item(title, name)

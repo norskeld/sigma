@@ -1,18 +1,9 @@
 ---
 title: 'eol'
-kind: 'composite'
 description: 'eol only succeeds at the end of the line with a matched line break character.'
 ---
 
 # eol <Composite />
-
-## Signature
-
-```ts
-function eol(): Parser<string>
-```
-
-## Description
 
 `eol` only succeeds at the end of the line with a matched line break character.
 

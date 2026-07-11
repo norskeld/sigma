@@ -1,18 +1,9 @@
 ---
 title: 'regexp'
-kind: 'primitive'
 description: 'regexp parses a string that matches a provided regular expression. Returns the matched string, or fails with a provided message.'
 ---
 
 # regexp <Primitive />
-
-## Signature
-
-```ts
-function regexp(rs: RegExp, expected: string): Parser<string>
-```
-
-## Description
 
 `regexp` parses a string that matches a provided `re` regular expression. Returns the matched string, or fails with an `expected` message.
 
@@ -22,9 +13,7 @@ function regexp(rs: RegExp, expected: string): Parser<string>
 Matching is performed in sticky mode, so `g` and `y` flags are handled automatically.
 :::
 
-The regular expression must obey one simple rule:
-
-- It *doesn't* use `^` and `$` to match at the beginning or at the end of the text. Flags like u and i are allowed and can be added if needed.
+The regular expression must obey one simple rule: it *doesn't* use `^` and `$` to match at the beginning or at the end of the text. Flags like u and i are allowed and can be added if needed.
 
 ## Usage
 

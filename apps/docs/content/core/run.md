@@ -1,22 +1,9 @@
 ---
 title: 'run'
-kind: 'core'
 description: 'run is used to run parser with provided input.'
 ---
 
 # run
-
-## Signature
-
-```ts
-interface Runnable<T> {
-  with(input: string): Result<T>
-}
-
-function run<T>(parser: Parser<T>): Runnable<T>
-```
-
-## Description
 
 `run` is used to run `parser` with provided input.
 

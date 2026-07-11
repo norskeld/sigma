@@ -1,18 +1,9 @@
 ---
 title: 'oneOf'
-kind: 'primitive'
 description: 'oneOf ensures that one of the characters in the given string matches the current character.'
 ---
 
 # oneOf <Primitive />
-
-## Signature
-
-```ts
-function oneOf(): Parser<string>
-```
-
-## Description
 
 `oneOf` ensures that one of the characters in the given string matches the current character.
 

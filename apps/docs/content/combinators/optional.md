@@ -1,18 +1,9 @@
 ---
 title: 'optional'
-kind: 'composite'
 description: 'optional combinator tries to apply parser. Returns the result of parser or null. Never fails.'
 ---
 
-# optional <Composite />
-
-## Signature
-
-```ts
-function optional<T>(parser: Parser<T>): Parser<T | null>
-```
-
-## Description
+# optional <Primitive />
 
 `optional` combinator tries to apply `parser`. Returns the result of `parser` or `null`. Never fails.
 

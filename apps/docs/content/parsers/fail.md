@@ -1,18 +1,9 @@
 ---
 title: 'fail'
-kind: 'primitive'
 description: 'fail always fails with the given message, without consuming any input.'
 ---
 
 # fail <Primitive />
-
-## Signature
-
-```ts
-function fail(expected: string): FailingParser
-```
-
-## Description
 
 `fail` always fails with the given `expected` message, without consuming any input. It's the counterpart of [nothing], and is mostly useful inside [when] callbacks to reject input based on an already parsed value.
 

@@ -1,22 +1,9 @@
 ---
 title: 'tryRun'
-kind: 'core'
 description: 'tryRun is used to run parser with provided input, throwing an error on failure.'
 ---
 
 # tryRun
-
-## Signature
-
-```ts
-interface Runnable<T> {
-  with(input: string): Success<T>
-}
-
-function tryRun<T>(parser: Parser<T>): Runnable<T>
-```
-
-## Description
 
 `tryRun` is is used to run `parser` with provided input, **throwing `ParserError` on failure**.
 

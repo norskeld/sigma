@@ -1,18 +1,9 @@
 ---
 title: 'letters'
-kind: 'composite'
 description: 'letters parses a sequence of alphabetical characters. Returns matched characters as a string. Unicode friendly.'
 ---
 
 # letters <Composite />
-
-## Signature
-
-```ts
-function letters(): Parser<string>
-```
-
-## Description
 
 `letters` parses a sequence of alphabetical characters. Returns matched characters as a string. Unicode friendly.
 

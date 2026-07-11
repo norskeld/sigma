@@ -1,18 +1,9 @@
 ---
 title: 'string'
-kind: 'primitive'
 description: 'string parses a string. Returns the parsed string.'
 ---
 
 # string <Primitive />
-
-## Signature
-
-```ts
-function string(match: string): Parser<string>
-```
-
-## Description
 
 `string` parses a string. Returns the parsed string.
 

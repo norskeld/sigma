@@ -1,19 +1,9 @@
 ---
 title: 'choice'
-kind: 'primitive'
 description: 'choice combinator tries to apply parsers in order, until one of them succeeds. Returns a value of the succeeding parser.'
 ---
 
 # choice <Primitive />
-
-## Signature
-
-```ts
-function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>
-function choice<T>(...ps: Array<Parser<T>>): Parser<T>
-```
-
-## Description
 
 `choice` combinator tries to apply `ps` parsers in order, until one of them succeeds. Returns a value of the succeeding parser.
 

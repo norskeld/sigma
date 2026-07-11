@@ -1,18 +1,9 @@
 ---
 title: 'whitespace'
-kind: 'composite'
 description: 'whitespace parses whitespace, either a single character or consecutive ones. Returns the matched character(s).'
 ---
 
 # whitespace <Composite />
-
-## Signature
-
-```ts
-function whitespace(): Parser<string>
-```
-
-## Description
 
 `whitespace` parses whitespace, either a single character or consecutive ones. Returns the matched character(s).
 

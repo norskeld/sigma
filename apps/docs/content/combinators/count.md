@@ -1,18 +1,9 @@
 ---
 title: 'count'
-kind: 'primitive'
 description: 'count combinator applies parser exactly n times and collects the values into an array.'
 ---
 
 # count <Primitive />
-
-## Signature
-
-```ts
-function count<T>(parser: Parser<T>, n: number): Parser<Array<T>>
-```
-
-## Description
 
 `count` combinator applies `parser` exactly `n` times and collects the values into an array. Fails with the first failure of `parser`. Resolves to an empty array if `n` is less than one.
 

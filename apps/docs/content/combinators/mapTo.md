@@ -1,18 +1,9 @@
 ---
 title: 'mapTo'
-kind: 'composite'
 description: "mapTo combinator maps the parser's result to a constant value."
 ---
 
 # mapTo <Composite />
-
-## Signature
-
-```ts
-function mapTo<T, R>(parser: Parser<T>, value: R): Parser<R>
-```
-
-## Description
 
 `mapTo` combinator maps the `parser`'s result to a constant `value`.
 

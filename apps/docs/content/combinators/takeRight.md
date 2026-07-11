@@ -1,18 +1,9 @@
 ---
 title: 'takeRight'
-kind: 'composite'
 description: 'takeRight combinator takes exactly two parsers and applies them in order. Returns the result of the rightmost parser.'
 ---
 
 # takeRight <Composite />
-
-## Signature
-
-```ts
-function takeRight<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T2>
-```
-
-## Description
 
 `takeRight` combinator takes exactly **two** parsers and applies them in order. Returns the result of the rightmost `p2` parser.
 

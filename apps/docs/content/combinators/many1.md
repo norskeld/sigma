@@ -1,18 +1,9 @@
 ---
 title: 'many1'
-kind: 'composite'
 description: 'many1 combinator applies parser one or more times. Returns an array of the returned values of parser.'
 ---
 
 # many1 <Primitive />
-
-## Signature
-
-```ts
-function many1<T>(parser: Parser<T>): Parser<Array<T>>
-```
-
-## Description
 
 `many1` combinator applies `parser` *one* or more times. Returns an array of the returned values of `parser`. After the first match, successes that consume no input are not collected, so the combinator always terminates.
 

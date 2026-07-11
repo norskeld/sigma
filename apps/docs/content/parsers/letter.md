@@ -1,18 +1,9 @@
 ---
 title: 'letter'
-kind: 'composite'
 description: 'letter parses a single alphabetical character. Returns the matched character. Unicode friendly.'
 ---
 
 # letter <Composite />
-
-## Signature
-
-```ts
-function letter(): Parser<string>
-```
-
-## Description
 
 `letter` parses a single alphabetical character. Returns the matched character. Unicode friendly.
 

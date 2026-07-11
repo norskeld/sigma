@@ -1,18 +1,9 @@
 ---
 title: 'lookahead'
-kind: 'primitive'
 description: 'lookahead combinator applies parser without consuming any input on success.'
 ---
 
 # lookahead <Primitive />
-
-## Signature
-
-```ts
-function lookahead<T>(parser: Parser<T>): Parser<T>
-```
-
-## Description
 
 `lookahead` combinator applies `parser` without consuming any input on success. On failure the failure is returned as is, with `pos` pointing to the deepest position reached, which yields more precise errors.
 

@@ -1,18 +1,9 @@
 ---
 title: 'eof'
-kind: 'primitive'
 description: 'eof only succeeds at the end of the input.'
 ---
 
 # eof <Primitive />
-
-## Signature
-
-```ts
-function eof(): Parser<null>
-```
-
-## Description
 
 `eof` only succeeds (with `null`) at the end of the input.
 

@@ -1,22 +1,9 @@
 ---
 title: 'defer'
-kind: 'primitive'
 description: 'defer is a special parser that is tailored for creating mutually recursive parsers.'
 ---
 
 # defer <Primitive />
-
-## Signature
-
-```ts
-interface Deferred<T> extends Parser<T> {
-  with(parser: Parser<T>): void
-}
-
-function defer<T>(): Deferred<T>
-```
-
-## Description
 
 `defer` is a special parser that has an additional `with` method, which must be used to define the parser, before it is called. This parser is tailored for creating mutually recursive parsers.
 

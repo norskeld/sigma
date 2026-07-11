@@ -1,18 +1,9 @@
 ---
 title: 'error'
-kind: 'primitive'
 description: 'error combinator allows to replace error message for parser.'
 ---
 
 # error <Primitive />
-
-## Signature
-
-```ts
-function error<T>(parser: Parser<T>, expected: string): Parser<T>
-```
-
-## Description
 
 `error` combinator allows to replace `parser`'s error message with `expected`.
 

@@ -1,18 +1,9 @@
 ---
 title: 'not'
-kind: 'primitive'
 description: 'not combinator applies parser without consuming any input and succeeds only if it fails, i.e. acts as negative lookahead.'
 ---
 
 # not <Primitive />
-
-## Signature
-
-```ts
-function not(parser: Parser<unknown>, expected?: string): Parser<null>
-```
-
-## Description
 
 `not` combinator applies `parser` without consuming any input and succeeds with `null` only if it fails, i.e. acts as the negative counterpart of [lookahead]. If `parser` succeeds, `not` fails with `expected`, which defaults to `unexpected input`.
 

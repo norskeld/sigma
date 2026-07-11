@@ -1,22 +1,9 @@
 ---
 title: 'filter'
-kind: 'primitive'
 description: 'filter combinator applies parser and tests its value with a predicate, failing if the value is rejected.'
 ---
 
 # filter <Primitive />
-
-## Signature
-
-```ts
-function filter<T>(
-  parser: Parser<T>,
-  fn: (value: T) => boolean,
-  expected: string
-): Parser<T>
-```
-
-## Description
 
 `filter` combinator applies `parser` and tests its value with the `fn` predicate. Succeeds with the value if `fn` returns `true`, otherwise fails with `expected`. Failures of `parser` itself are propagated as is.
 

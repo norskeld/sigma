@@ -1,12 +1,9 @@
 ---
 title: 'grammar'
-kind: 'core'
 description: 'This simplifies the creation of a self-contained grammar.'
 ---
 
 # grammar
-
-## Description
 
 `grammar` is used to create a self-contained grammar.
 

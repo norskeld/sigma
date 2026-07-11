@@ -1,18 +1,9 @@
 ---
 title: 'map'
-kind: 'primitive'
 description: "map combinator applies a function to the parser's result and returns the result of that function."
 ---
 
 # map <Primitive />
-
-## Signature
-
-```ts
-function map<T, R>(parser: Parser<T>, fn: (value: T) => R): Parser<R>
-```
-
-## Description
 
 `map` combinator applies `fn` to the `parser`'s result and returns the result of that `fn`.
 

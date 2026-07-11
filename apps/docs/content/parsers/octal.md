@@ -1,18 +1,9 @@
 ---
 title: 'octal'
-kind: 'composite'
 description: "octal parses an octal number prefixed with '0o' or '0O', e.g. '0o42', '0O42'. Returns a decimal number obtained using parseInt with radix of 8."
 ---
 
 # octal <Composite />
-
-## Signature
-
-```ts
-function octal(): Parser<number>
-```
-
-## Description
 
 `octal` parses an octal number prefixed with `0o` or `0O`, e.g. `0o42`, `0O42`. Returns **a decimal number** obtained using [parseInt] with radix of 8.
 
