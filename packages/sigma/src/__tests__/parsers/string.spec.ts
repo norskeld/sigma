@@ -71,13 +71,31 @@ describe('string', () => {
   it('should clamp the failure span to the end of input', () => {
     const actual = string('abc').parse('ab', 0)
 
-    should.beStrictEqual(actual, { isOk: false, span: [0, 2], pos: 0, expected: 'abc' })
+    should.beStrictEqual(actual, { isOk: false, start: 0, end: 2, pos: 0, expected: 'abc' })
+  })
+
+  it('should succeed if given a single character mid-input', () => {
+    const actual = string('b').parse('abc', 1)
+
+    should.beStrictEqual(actual, { isOk: true, start: 1, end: 2, pos: 2, value: 'b' })
+  })
+
+  it('should fail if given a single character and a non-matching input', () => {
+    const actual = string('a').parse('xyz', 0)
+
+    should.beStrictEqual(actual, { isOk: false, start: 0, end: 1, pos: 0, expected: 'a' })
+  })
+
+  it('should clamp the single character failure span at the end of input', () => {
+    const actual = string('a').parse('xyz', 3)
+
+    should.beStrictEqual(actual, { isOk: false, start: 3, end: 3, pos: 3, expected: 'a' })
   })
 
   it('should succeed with a zero-width match if given an empty string', () => {
     const actual = string('').parse('x', 0)
 
-    should.beStrictEqual(actual, { isOk: true, span: [0, 0], pos: 0, value: '' })
+    should.beStrictEqual(actual, { isOk: true, start: 0, end: 0, pos: 0, value: '' })
   })
 
   it('should not loop forever when a zero-width match is repeated', () => {

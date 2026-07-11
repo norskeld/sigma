@@ -24,7 +24,8 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
           case true: {
             return {
               isOk: true,
-              span: [pos, resultT.pos],
+              start: pos,
+              end: resultT.pos,
               pos: resultT.pos,
               value: [values, resultT.value],
             }
@@ -76,7 +77,8 @@ export function skipUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
           case true: {
             return {
               isOk: true,
-              span: [pos, resultT.pos],
+              start: pos,
+              end: resultT.pos,
               pos: resultT.pos,
               value: resultT.value,
             }

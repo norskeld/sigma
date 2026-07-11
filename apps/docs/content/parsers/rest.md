@@ -19,7 +19,8 @@ run(Parser).with('hello world')
 
 {
   isOk: true,
-  span: [ 0, 11 ],
+  start: 0,
+  end: 11,
   pos: 11,
   value: ['hello', ' world']
 }

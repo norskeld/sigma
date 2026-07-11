@@ -8,6 +8,35 @@ import type { Parser } from '@types'
  * @returns Parsed string
  */
 export function string(match: string): Parser<string> {
+  if (match.length === 1) {
+    const code = match.charCodeAt(0)
+
+    return {
+      parse(input, pos) {
+        // Out of range charCodeAt yields NaN, which never compares equal.
+        if (input.charCodeAt(pos) === code) {
+          const nextPos = pos + 1
+
+          return {
+            isOk: true,
+            start: pos,
+            end: nextPos,
+            pos: nextPos,
+            value: match,
+          }
+        }
+
+        return {
+          isOk: false,
+          start: pos,
+          end: Math.min(pos + 1, input.length),
+          pos,
+          expected: match,
+        }
+      },
+    }
+  }
+
   return {
     parse(input, pos) {
       if (input.startsWith(match, pos)) {
@@ -15,7 +44,8 @@ export function string(match: string): Parser<string> {
 
         return {
           isOk: true,
-          span: [pos, nextPos],
+          start: pos,
+          end: nextPos,
           pos: nextPos,
           value: match,
         }
@@ -23,7 +53,8 @@ export function string(match: string): Parser<string> {
 
       return {
         isOk: false,
-        span: [pos, Math.min(pos + match.length, input.length)],
+        start: pos,
+        end: Math.min(pos + match.length, input.length),
         pos,
         expected: match,
       }

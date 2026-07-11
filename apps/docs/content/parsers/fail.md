@@ -22,7 +22,8 @@ run(Parser).with('42')
 
 {
   isOk: true,
-  span: [ 2, 2 ],
+  start: 2,
+  end: 2,
   pos: 2,
   value: 42
 }
@@ -35,7 +36,8 @@ run(Parser).with('43')
 
 {
   isOk: false,
-  span: [ 2, 2 ],
+  start: 2,
+  end: 2,
   pos: 2,
   expected: 'even number'
 }

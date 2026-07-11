@@ -32,14 +32,16 @@ export function regexp(rs: RegExp, expected: string): Parser<string> {
 
         return {
           isOk: true,
-          span: [pos, index],
+          start: pos,
+          end: index,
           pos: index,
           value: match,
         }
       } else {
         return {
           isOk: false,
-          span: [pos, pos],
+          start: pos,
+          end: pos,
           pos,
           expected,
         }

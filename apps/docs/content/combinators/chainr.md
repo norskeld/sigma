@@ -27,7 +27,8 @@ run(Parser).with('2 ^ 3 ^ 2')
 
 {
   isOk: true,
-  span: [ 0, 9 ],
+  start: 0,
+  end: 9,
   pos: 9,
   value: 512
 }

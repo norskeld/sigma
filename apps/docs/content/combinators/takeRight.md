@@ -22,7 +22,8 @@ run(Parser).with('let binding')
 
 {
   isOk: true,
-  span: [ 0, 11 ],
+  start: 0,
+  end: 11,
   pos: 11,
   value: 'binding'
 }
@@ -35,7 +36,8 @@ run(Parser).with('let 42')
 
 {
   isOk: false,
-  span: [ 4, 4 ],
+  start: 4,
+  end: 4,
   pos: 4,
   expected: 'letters'
 }

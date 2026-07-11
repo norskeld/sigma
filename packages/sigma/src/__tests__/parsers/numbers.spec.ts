@@ -21,7 +21,7 @@ describe('hex', () => {
   it('should succeed with the span of the matched number', () => {
     const actual = hex().parse('0xFF', 0)
 
-    should.beStrictEqual(actual, { isOk: true, span: [0, 4], pos: 4, value: 255 })
+    should.beStrictEqual(actual, { isOk: true, start: 0, end: 4, pos: 4, value: 255 })
   })
 
   it('should fail without consuming input', () => {
@@ -29,7 +29,8 @@ describe('hex', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [0, 0],
+      start: 0,
+      end: 0,
       pos: 0,
       expected: 'hexadecimal number',
     })
@@ -38,9 +39,27 @@ describe('hex', () => {
   it('should parse repeatedly at different positions with one instance', () => {
     const parser = hex()
 
-    should.beStrictEqual(parser.parse('0x1F', 0), { isOk: true, span: [0, 4], pos: 4, value: 31 })
-    should.beStrictEqual(parser.parse('..0x2A', 2), { isOk: true, span: [2, 6], pos: 6, value: 42 })
-    should.beStrictEqual(parser.parse('0x1F', 0), { isOk: true, span: [0, 4], pos: 4, value: 31 })
+    should.beStrictEqual(parser.parse('0x1F', 0), {
+      isOk: true,
+      start: 0,
+      end: 4,
+      pos: 4,
+      value: 31,
+    })
+    should.beStrictEqual(parser.parse('..0x2A', 2), {
+      isOk: true,
+      start: 2,
+      end: 6,
+      pos: 6,
+      value: 42,
+    })
+    should.beStrictEqual(parser.parse('0x1F', 0), {
+      isOk: true,
+      start: 0,
+      end: 4,
+      pos: 4,
+      value: 31,
+    })
   })
 })
 
@@ -103,13 +122,19 @@ describe('integer', () => {
   it('should succeed at a non-zero position', () => {
     const actual = integer().parse('a-42', 1)
 
-    should.beStrictEqual(actual, { isOk: true, span: [1, 4], pos: 4, value: -42 })
+    should.beStrictEqual(actual, { isOk: true, start: 1, end: 4, pos: 4, value: -42 })
   })
 
   it('should fail without consuming input', () => {
     const actual = integer().parse('abc', 0)
 
-    should.beStrictEqual(actual, { isOk: false, span: [0, 0], pos: 0, expected: 'integer number' })
+    should.beStrictEqual(actual, {
+      isOk: false,
+      start: 0,
+      end: 0,
+      pos: 0,
+      expected: 'integer number',
+    })
   })
 })
 
@@ -127,6 +152,12 @@ describe('float', () => {
   it('should fail without consuming input', () => {
     const actual = float().parse('4', 0)
 
-    should.beStrictEqual(actual, { isOk: false, span: [0, 0], pos: 0, expected: 'float number' })
+    should.beStrictEqual(actual, {
+      isOk: false,
+      start: 0,
+      end: 0,
+      pos: 0,
+      expected: 'float number',
+    })
   })
 })

@@ -18,7 +18,8 @@ export function lookahead<T>(parser: Parser<T>): Parser<T> {
         case true: {
           return {
             isOk: true,
-            span: result.span,
+            start: result.start,
+            end: result.end,
             pos,
             value: result.value,
           }

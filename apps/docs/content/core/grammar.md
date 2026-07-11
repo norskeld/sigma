@@ -57,7 +57,8 @@ console.log(run(a).with('abba'))
 ```ts
 {
   isOk: true,
-  span: [0, 4],
+  start: 0,
+  end: 4,
   pos: 4,
   value: 'abba'
 }

@@ -22,7 +22,8 @@ run(Parser).with('true')
 
 {
   isOk: true,
-  span: [ 0, 4 ],
+  start: 0,
+  end: 4,
   pos: 4,
   value: 'true'
 }
@@ -37,7 +38,8 @@ run(Parser).with('yank')
 
 {
   isOk: false,
-  span: [ 0, 4 ],
+  start: 0,
+  end: 4,
   pos: 0,
   expected: 'true'
 }
@@ -48,7 +50,8 @@ run(Parser).with('maybe')
 
 {
   isOk: false,
-  span: [ 0, 4 ],
+  start: 0,
+  end: 4,
   pos: 0,
   expected: 'true'
 }

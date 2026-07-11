@@ -16,7 +16,7 @@ describe('tryRun', () => {
     deferred.with(string('deferred'))
 
     const actual = () => tryRun(deferred).with('lazy')
-    const expected = new ParserError({ pos: 8, span: [0, 4], expected: 'deferred' })
+    const expected = new ParserError({ pos: 8, start: 0, end: 4, expected: 'deferred' })
 
     should.throwError(actual, expected)
   })

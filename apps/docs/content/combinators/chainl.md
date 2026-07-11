@@ -52,7 +52,8 @@ You will get the following result:
 ```ts{5}
 {
   isOk: true,
-  span: [ 0, 10 ],
+  start: 0,
+  end: 10,
   pos: 10,
   value: 30
 }
@@ -173,7 +174,8 @@ We will get the following result:
 ```ts
 {
   isOk: true,
-  span: [ 0, 12 ],
+  start: 0,
+  end: 12,
   pos: 12,
   value: 80
 }

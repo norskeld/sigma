@@ -32,13 +32,13 @@ describe('takeMid', () => {
   it('should succeed with the span covering the whole sequence', () => {
     const actual = takeMid(string('l'), string('m'), string('r')).parse('lmr', 0)
 
-    should.beStrictEqual(actual, { isOk: true, span: [0, 3], pos: 3, value: 'm' })
+    should.beStrictEqual(actual, { isOk: true, start: 0, end: 3, pos: 3, value: 'm' })
   })
 
   it('should fail at the position of the failed parser', () => {
     const actual = takeMid(string('l'), string('m'), string('r')).parse('l-r', 0)
 
-    should.beStrictEqual(actual, { isOk: false, span: [1, 2], pos: 1, expected: 'm' })
+    should.beStrictEqual(actual, { isOk: false, start: 1, end: 2, pos: 1, expected: 'm' })
   })
 
   it('should fail completely when one of the parsers fail', () => {
@@ -80,7 +80,7 @@ describe('takeSides', () => {
   it('should succeed with the span covering the whole sequence', () => {
     const actual = takeSides(string('l'), string('m'), string('r')).parse('lmr', 0)
 
-    should.beStrictEqual(actual, { isOk: true, span: [0, 3], pos: 3, value: ['l', 'r'] })
+    should.beStrictEqual(actual, { isOk: true, start: 0, end: 3, pos: 3, value: ['l', 'r'] })
   })
 
   it('should fail completely when one of the parsers fail', () => {

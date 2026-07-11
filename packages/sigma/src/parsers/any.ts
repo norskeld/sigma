@@ -12,7 +12,8 @@ export function any(): Parser<string> {
       if (input.length === pos) {
         return {
           isOk: false,
-          span: [pos, pos],
+          start: pos,
+          end: pos,
           pos,
           expected: 'any @ reached the end of input',
         }
@@ -24,7 +25,8 @@ export function any(): Parser<string> {
 
       return {
         isOk: true,
-        span: [pos, nextPos],
+        start: pos,
+        end: nextPos,
         pos: nextPos,
         value,
       }

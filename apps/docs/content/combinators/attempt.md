@@ -27,7 +27,8 @@ run(Plain).with('football')
 
 {
   isOk: false,
-  span: [ 3, 6 ],
+  start: 3,
+  end: 6,
   pos: 3,
   expected: 'bar'
 }
@@ -38,7 +39,8 @@ run(Attempted).with('football')
 
 {
   isOk: false,
-  span: [ 2, 3 ],
+  start: 2,
+  end: 3,
   pos: 2,
   expected: 'x'
 }

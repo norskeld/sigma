@@ -23,7 +23,8 @@ run(Parser).with('hello world')
 
 {
   isOk: true,
-  span: [ 0, 11 ],
+  start: 0,
+  end: 11,
   pos: 11,
   value: [ 'hello', ' ', 'world' ]
 }
@@ -36,7 +37,8 @@ run(Parser).with('hello friend')
 
 {
   isOk: false,
-  span: [ 6, 11 ],
+  start: 6,
+  end: 11,
   pos: 6,
   expected: 'world'
 }

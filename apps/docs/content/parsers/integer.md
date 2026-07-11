@@ -19,7 +19,8 @@ run(Parser).with('-42')
 
 {
   isOk: true,
-  span: [ 0, 3 ],
+  start: 0,
+  end: 3,
   pos: 3,
   value: -42
 }
@@ -30,7 +31,8 @@ run(Parser).with('134912398891')
 
 {
   isOk: true,
-  span: [ 0, 12 ],
+  start: 0,
+  end: 12,
   pos: 12,
   value: 134912398891
 }
@@ -43,7 +45,8 @@ run(Parser).with('x')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'integer number'
 }

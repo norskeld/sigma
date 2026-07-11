@@ -18,6 +18,14 @@ describe('map', () => {
 
     should.matchState(actual, expected)
   })
+
+  it('should pass the span to a callback that declares it', () => {
+    const parser = map(string('9000'), (value, span) => ({ value, span }))
+    const actual = run(parser, '9000')
+    const expected = result(true, { value: '9000', span: { start: 0, end: 4 } })
+
+    should.matchState(actual, expected)
+  })
 })
 
 describe('mapTo', () => {

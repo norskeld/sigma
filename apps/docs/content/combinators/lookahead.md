@@ -25,7 +25,8 @@ run(Parser).with('hello lettuce')
 
 {
   isOk: true,
-  span: [ 0, 13 ],
+  start: 0,
+  end: 13,
   pos: 13,
   value: [ 'hello', 'let', 'lettuce' ]
 }
@@ -38,7 +39,8 @@ run(Parser).with('hello let')
 
 {
   isOk: false,
-  span: [ 6, 9 ],
+  start: 6,
+  end: 9,
   pos: 6,
   expected: 'lettuce'
 }
@@ -49,7 +51,8 @@ run(Parser).with('hello something')
 
 {
   isOk: false,
-  span: [ 6, 9 ],
+  start: 6,
+  end: 9,
   pos: 6,
   expected: 'let'
 }

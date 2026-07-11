@@ -19,7 +19,8 @@ run(Parser).with('+++')
 
 {
   isOk: true,
-  span: [ 0, 3 ],
+  start: 0,
+  end: 3,
   pos: 3,
   value: [ '+', '+', '+' ]
 }
@@ -32,7 +33,8 @@ run(Parser).with('---')
 
 {
   isOk: true,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   value: []
 }

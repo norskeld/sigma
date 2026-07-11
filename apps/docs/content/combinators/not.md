@@ -21,7 +21,8 @@ run(Parser).with('let x')
 
 {
   isOk: true,
-  span: [ 0, 3 ],
+  start: 0,
+  end: 3,
   pos: 3,
   value: 'let'
 }
@@ -34,7 +35,8 @@ run(Parser).with('letx')
 
 {
   isOk: false,
-  span: [ 3, 4 ],
+  start: 3,
+  end: 4,
   pos: 3,
   expected: 'keyword boundary'
 }

@@ -10,7 +10,8 @@ describe('not', () => {
 
     should.beStrictEqual(actual, {
       isOk: true,
-      span: [0, 3],
+      start: 0,
+      end: 3,
       pos: 3,
       value: 'let',
     })
@@ -21,7 +22,8 @@ describe('not', () => {
 
     should.beStrictEqual(actual, {
       isOk: true,
-      span: [0, 0],
+      start: 0,
+      end: 0,
       pos: 0,
       value: null,
     })
@@ -32,7 +34,8 @@ describe('not', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [3, 4],
+      start: 3,
+      end: 4,
       pos: 3,
       expected: 'keyword boundary',
     })
@@ -43,7 +46,8 @@ describe('not', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [0, 1],
+      start: 0,
+      end: 1,
       pos: 0,
       expected: 'unexpected input',
     })

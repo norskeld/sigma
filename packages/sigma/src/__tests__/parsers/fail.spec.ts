@@ -8,7 +8,8 @@ describe('fail', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [0, 0],
+      start: 0,
+      end: 0,
       pos: 0,
       expected: 'boom',
     })
@@ -19,7 +20,8 @@ describe('fail', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [1, 1],
+      start: 1,
+      end: 1,
       pos: 1,
       expected: 'nope',
     })

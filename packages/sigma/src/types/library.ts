@@ -1,5 +1,8 @@
 /** Represents some range in the source input we are parsing or parsed. */
-export type Span = [start: number, end: number]
+export interface Span {
+  readonly start: number
+  readonly end: number
+}
 
 /** Parsers of this type always succeed, e.g. `many` and `sepBy`. */
 export interface SucceedingParser<T> {
@@ -22,7 +25,8 @@ export type Parser<T> = FailingParser | SucceedingParser<T> | UnsafeParser<T>
 /** Represents failed execution. */
 export type Failure = {
   readonly isOk: false
-  readonly span: Span
+  readonly start: number
+  readonly end: number
   readonly pos: number
   readonly expected: string
 }
@@ -30,7 +34,8 @@ export type Failure = {
 /** Represents successful execution. */
 export type Success<T> = {
   readonly isOk: true
-  readonly span: Span
+  readonly start: number
+  readonly end: number
   readonly pos: number
   readonly value: T
 }

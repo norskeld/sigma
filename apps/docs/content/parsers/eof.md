@@ -24,7 +24,8 @@ run(Parser).with(`<start><body><end>`)
 
 {
   isOk: true,
-  span: [ 0, 18 ],
+  start: 0,
+  end: 18,
   pos: 18,
   value: [ '<start>', '<body>', '<end>', null ]
 }
@@ -37,7 +38,8 @@ run(Parser).with(`<start><body><end>\n`)
 
 {
   isOk: false,
-  span: [ 18, 18 ],
+  start: 18,
+  end: 18,
   pos: 18,
   expected: 'end of input'
 }

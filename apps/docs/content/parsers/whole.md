@@ -19,7 +19,8 @@ run(Parser).with('42')
 
 {
   isOk: true,
-  span: [ 0, 2 ],
+  start: 0,
+  end: 2,
   pos: 2,
   value: 42
 }
@@ -32,7 +33,8 @@ run(Parser).with('x')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'whole number'
 }

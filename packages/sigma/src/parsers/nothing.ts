@@ -10,7 +10,8 @@ export function nothing(): Parser<null> {
     parse(_, pos) {
       return {
         isOk: true,
-        span: [pos, pos],
+        start: pos,
+        end: pos,
         pos,
         value: null,
       }

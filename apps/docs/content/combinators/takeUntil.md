@@ -24,7 +24,8 @@ run(CommentParser).with('/* Hello */')
 
 {
   isOk: true,
-  span: [ 0, 11 ],
+  start: 0,
+  end: 11,
   pos: 11,
   value: [
     '/*',
@@ -41,7 +42,8 @@ run(FailingParser).with('one.')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'decimal digit'
 }

@@ -22,7 +22,8 @@ run(Parser).with('42 spartans')
 
 {
   isOk: true,
-  span: [ 0, 11 ],
+  start: 0,
+  end: 11,
   pos: 11,
   value: 42
 }
@@ -35,7 +36,8 @@ run(Parser).with('42 haskellers')
 
 {
   isOk: false,
-  span: [ 3, 11 ],
+  start: 3,
+  end: 11,
   pos: 3,
   expected: 'spartans'
 }

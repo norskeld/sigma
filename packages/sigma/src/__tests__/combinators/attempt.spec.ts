@@ -9,7 +9,8 @@ describe('attempt', () => {
 
     should.beStrictEqual(actual, {
       isOk: true,
-      span: [0, 11],
+      start: 0,
+      end: 11,
       pos: 11,
       value: ['hello', ' world'],
     })
@@ -21,7 +22,8 @@ describe('attempt', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [5, 11],
+      start: 5,
+      end: 11,
       pos: 0,
       expected: ' world',
     })
@@ -35,7 +37,8 @@ describe('attempt', () => {
 
     should.beStrictEqual(plain, {
       isOk: false,
-      span: [3, 6],
+      start: 3,
+      end: 6,
       pos: 3,
       expected: 'bar',
     })
@@ -44,7 +47,8 @@ describe('attempt', () => {
 
     should.beStrictEqual(attempted, {
       isOk: false,
-      span: [2, 3],
+      start: 2,
+      end: 3,
       pos: 2,
       expected: 'x',
     })

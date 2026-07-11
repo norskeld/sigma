@@ -24,7 +24,8 @@ run(Parser).with('4:abcd')
 
 {
   isOk: true,
-  span: [ 2, 6 ],
+  start: 2,
+  end: 6,
   pos: 6,
   value: 'abcd'
 }
@@ -37,7 +38,8 @@ run(Parser).with('4:ab')
 
 {
   isOk: false,
-  span: [ 4, 4 ],
+  start: 4,
+  end: 4,
   pos: 4,
   expected: 'any @ reached the end of input'
 }

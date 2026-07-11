@@ -10,7 +10,7 @@ function countingSep(): Parser<null> & { calls(): number } {
     calls: () => calls,
     parse(_, pos) {
       calls += 1
-      return { isOk: false, span: [pos, pos], pos, expected: 'separator' }
+      return { isOk: false, start: pos, end: pos, pos, expected: 'separator' }
     },
   }
 }

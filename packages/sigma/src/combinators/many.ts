@@ -28,7 +28,8 @@ export function many<T>(parser: Parser<T>): SucceedingParser<Array<T>> {
 
       return {
         isOk: true,
-        span: [pos, nextPos],
+        start: pos,
+        end: nextPos,
         pos: nextPos,
         value: values,
       }
@@ -70,7 +71,8 @@ export function many1<T>(parser: Parser<T>): Parser<Array<T>> {
 
         return {
           isOk: true,
-          span: [pos, nextPos],
+          start: pos,
+          end: nextPos,
           pos: nextPos,
           value: values,
         }

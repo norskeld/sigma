@@ -26,7 +26,8 @@ run(Parser).with('integer 42')
 
 {
   isOk: true,
-  span: [ 8, 10 ],
+  start: 8,
+  end: 10,
   pos: 10,
   value: 42
 }
@@ -37,7 +38,8 @@ run(Parser).with('string Something')
 
 {
   isOk: true,
-  span: [ 7, 16 ],
+  start: 7,
+  end: 16,
   pos: 16,
   value: 'Something'
 }
@@ -48,7 +50,8 @@ run(Parser).with('bracketed (Something)')
 
 {
   isOk: true,
-  span: [ 10, 21 ],
+  start: 10,
+  end: 21,
   pos: 21,
   value: 'Something'
 }
@@ -59,7 +62,8 @@ run(Parser).with('some input')
 
 {
   isOk: true,
-  span: [ 5, 10 ],
+  start: 5,
+  end: 10,
   pos: 10,
   value: 'input'
 }
@@ -72,7 +76,8 @@ run(Parser).with('0x42')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'letters'
 }

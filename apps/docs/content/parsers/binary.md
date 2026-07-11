@@ -19,7 +19,8 @@ run(Parser).with('0b10')
 
 {
   isOk: true,
-  span: [ 0, 4 ],
+  start: 0,
+  end: 4,
   pos: 4,
   value: 2
 }
@@ -32,7 +33,8 @@ run(Parser).with('b10')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'binary number'
 }

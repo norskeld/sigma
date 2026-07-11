@@ -27,7 +27,8 @@ export function filter<T>(
 
           return {
             isOk: false,
-            span: result.span,
+            start: result.start,
+            end: result.end,
             pos,
             expected,
           }

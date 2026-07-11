@@ -28,7 +28,13 @@ describe('oneOf', () => {
   it('should fail listing all expected characters including duplicates', () => {
     const actual = oneOf('aab').parse('q', 0)
 
-    should.beStrictEqual(actual, { isOk: false, span: [0, 0], pos: 0, expected: 'one of: a, a, b' })
+    should.beStrictEqual(actual, {
+      isOk: false,
+      start: 0,
+      end: 0,
+      pos: 0,
+      expected: 'one of: a, a, b',
+    })
   })
 
   it('should fail with the exact end of input message', () => {
@@ -36,7 +42,8 @@ describe('oneOf', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [0, 0],
+      start: 0,
+      end: 0,
       pos: 0,
       expected: 'oneOf @ reached the end of input',
     })

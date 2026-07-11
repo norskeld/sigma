@@ -22,7 +22,8 @@ run(Parser).with('-2')
 
 {
   isOk: true,
-  span: [ 0, 2 ],
+  start: 0,
+  end: 2,
   pos: 2,
   value: [ '-', 2 ]
 }
@@ -33,7 +34,8 @@ run(Parser).with('2')
 
 {
   isOk: true,
-  span: [ 0, 1 ],
+  start: 0,
+  end: 1,
   pos: 1,
   value: [ null, 2 ]
 }
@@ -46,7 +48,8 @@ run(Parser).with('~2')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'whole number'
 }

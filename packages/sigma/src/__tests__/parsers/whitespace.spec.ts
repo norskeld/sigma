@@ -38,4 +38,34 @@ describe('whitespace', () => {
 
     should.matchState(actual, expected)
   })
+
+  it('should match every character that \\s matches', () => {
+    const chars = '\t\n\v\f\r   ' + '           ' + '    　﻿'
+
+    should.beEqual(/^\s+$/.test(chars), true)
+
+    const actual = run(whitespace(), chars)
+
+    should.beStrictEqual(actual, {
+      isOk: true,
+      start: 0,
+      end: chars.length,
+      pos: chars.length,
+      value: chars,
+    })
+  })
+
+  it('should not match non-whitespace Unicode characters', () => {
+    for (const char of ['​', '᠎', 'あ', 'x']) {
+      should.beEqual(/^\s/.test(char), false)
+      should.matchState(run(whitespace(), char), result(false, 'whitespace'))
+    }
+  })
+
+  it('should stop at the first non-whitespace character', () => {
+    const actual = run(whitespace(), '\t\r\n x')
+    const expected = result(true, '\t\r\n ')
+
+    should.matchState(actual, expected)
+  })
 })

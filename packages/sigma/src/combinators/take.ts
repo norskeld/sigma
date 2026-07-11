@@ -20,7 +20,8 @@ export function takeLeft<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T1> {
 
       return {
         isOk: true,
-        span: [pos, r2.pos],
+        start: pos,
+        end: r2.pos,
         pos: r2.pos,
         value: r1.value,
       }
@@ -52,7 +53,8 @@ export function takeMid<T1, T2, T3>(p1: Parser<T1>, p2: Parser<T2>, p3: Parser<T
 
       return {
         isOk: true,
-        span: [pos, r3.pos],
+        start: pos,
+        end: r3.pos,
         pos: r3.pos,
         value: r2.value,
       }
@@ -80,7 +82,8 @@ export function takeRight<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T2> {
 
       return {
         isOk: true,
-        span: [pos, r2.pos],
+        start: pos,
+        end: r2.pos,
         pos: r2.pos,
         value: r2.value,
       }
@@ -116,7 +119,8 @@ export function takeSides<T1, T2, T3>(
 
       return {
         isOk: true,
-        span: [pos, r3.pos],
+        start: pos,
+        end: r3.pos,
         pos: r3.pos,
         value: [r1.value, r3.value],
       }

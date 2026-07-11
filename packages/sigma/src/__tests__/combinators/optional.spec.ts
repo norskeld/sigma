@@ -22,6 +22,6 @@ describe('optional', () => {
   it('should succeed with null at the current position on failure', () => {
     const actual = optional(string('x')).parse('ab', 1)
 
-    should.beStrictEqual(actual, { isOk: true, span: [1, 1], pos: 1, value: null })
+    should.beStrictEqual(actual, { isOk: true, start: 1, end: 1, pos: 1, value: null })
   })
 })

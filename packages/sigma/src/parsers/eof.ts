@@ -12,7 +12,8 @@ export function eof(): Parser<null> {
         case true: {
           return {
             isOk: true,
-            span: [pos, pos],
+            start: pos,
+            end: pos,
             pos: input.length,
             value: null,
           }
@@ -21,7 +22,8 @@ export function eof(): Parser<null> {
         case false: {
           return {
             isOk: false,
-            span: [pos, pos],
+            start: pos,
+            end: pos,
             pos,
             expected: 'end of input',
           }

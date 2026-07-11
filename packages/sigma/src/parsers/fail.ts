@@ -12,7 +12,8 @@ export function fail(expected: string): FailingParser {
     parse(_, pos) {
       return {
         isOk: false,
-        span: [pos, pos],
+        start: pos,
+        end: pos,
         pos,
         expected,
       }

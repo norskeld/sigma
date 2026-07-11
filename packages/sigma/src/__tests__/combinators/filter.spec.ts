@@ -10,7 +10,8 @@ describe('filter', () => {
 
     should.beStrictEqual(actual, {
       isOk: true,
-      span: [0, 4],
+      start: 0,
+      end: 4,
       pos: 4,
       value: 8080,
     })
@@ -21,7 +22,8 @@ describe('filter', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [0, 5],
+      start: 0,
+      end: 5,
       pos: 0,
       expected: 'port number',
     })

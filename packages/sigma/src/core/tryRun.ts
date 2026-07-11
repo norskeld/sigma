@@ -17,7 +17,7 @@ export class ParserError extends Error {
   constructor(res: ErrorResult) {
     super(res.expected)
 
-    this.span = res.span
+    this.span = { start: res.start, end: res.end }
     this.pos = res.pos
   }
 }

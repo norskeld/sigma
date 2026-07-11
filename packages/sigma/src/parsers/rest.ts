@@ -10,7 +10,8 @@ export function rest(): SucceedingParser<string> {
     parse(input, pos) {
       return {
         isOk: true,
-        span: [pos, input.length],
+        start: pos,
+        end: input.length,
         pos: input.length,
         value: input.substring(pos),
       }

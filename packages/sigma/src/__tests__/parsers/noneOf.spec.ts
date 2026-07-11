@@ -34,7 +34,8 @@ describe('noneOf', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [0, 0],
+      start: 0,
+      end: 0,
       pos: 0,
       expected: 'none of: a, a, b',
     })
@@ -45,7 +46,8 @@ describe('noneOf', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [0, 0],
+      start: 0,
+      end: 0,
       pos: 0,
       expected: 'noneOf @ reached the end of input',
     })

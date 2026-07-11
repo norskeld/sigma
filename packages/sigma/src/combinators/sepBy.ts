@@ -33,7 +33,8 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
         return {
           isOk: true,
-          span: [pos, nextPos],
+          start: pos,
+          end: nextPos,
           pos: nextPos,
           value: values,
         }
@@ -41,7 +42,8 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
 
       return {
         isOk: true,
-        span: [pos, pos],
+        start: pos,
+        end: pos,
         pos,
         value: [],
       }
@@ -88,7 +90,8 @@ export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>
 
         return {
           isOk: true,
-          span: [pos, nextPos],
+          start: pos,
+          end: nextPos,
           pos: nextPos,
           value: values,
         }

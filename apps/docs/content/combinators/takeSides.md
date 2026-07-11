@@ -27,7 +27,8 @@ run(Parser).with('100 & 200')
 
 {
   isOk: true,
-  span: [ 0, 9 ],
+  start: 0,
+  end: 9,
   pos: 9,
   value: [ 100, 200 ]
 }
@@ -40,7 +41,8 @@ run(Parser).with('100 ^ 200')
 
 {
   isOk: false,
-  span: [ 4, 5 ],
+  start: 4,
+  end: 5,
   pos: 4,
   expected: '&'
 }

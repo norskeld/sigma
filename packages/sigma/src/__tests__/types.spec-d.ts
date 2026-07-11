@@ -39,7 +39,8 @@ describe('library', () => {
     expectTypeOf<t.Result<number>>().toMatchTypeOf<
       | {
           readonly isOk: true
-          readonly span: t.Span
+          readonly start: number
+          readonly end: number
           readonly pos: number
           readonly value: number
         }
@@ -52,7 +53,8 @@ describe('library', () => {
 
     expectTypeOf<SuccessWithNumber>().not.toBeAny()
     expectTypeOf<SuccessWithNumber>().toMatchTypeOf<{
-      readonly span: t.Span
+      readonly start: number
+      readonly end: number
       readonly pos: number
       readonly value: number
     }>()

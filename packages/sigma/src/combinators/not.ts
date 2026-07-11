@@ -18,7 +18,8 @@ export function not(parser: Parser<unknown>, expected = 'unexpected input'): Par
         case true: {
           return {
             isOk: false,
-            span: result.span,
+            start: result.start,
+            end: result.end,
             pos,
             expected,
           }
@@ -27,7 +28,8 @@ export function not(parser: Parser<unknown>, expected = 'unexpected input'): Par
         case false: {
           return {
             isOk: true,
-            span: [pos, pos],
+            start: pos,
+            end: pos,
             pos,
             value: null,
           }

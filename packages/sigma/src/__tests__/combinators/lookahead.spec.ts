@@ -14,7 +14,8 @@ describe('lookahead', () => {
 
     should.beStrictEqual(actual, {
       isOk: true,
-      span: [0, 13],
+      start: 0,
+      end: 13,
       pos: 13,
       value: ['hello', 'let', 'lettuce'],
     })
@@ -25,7 +26,8 @@ describe('lookahead', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [6, 9],
+      start: 6,
+      end: 9,
       pos: 6,
       expected: 'lettuce',
     })
@@ -36,7 +38,8 @@ describe('lookahead', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [6, 9],
+      start: 6,
+      end: 9,
       pos: 6,
       expected: 'let',
     })
@@ -47,7 +50,8 @@ describe('lookahead', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [5, 11],
+      start: 5,
+      end: 11,
       pos: 5,
       expected: ' world',
     })

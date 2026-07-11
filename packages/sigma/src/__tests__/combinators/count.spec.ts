@@ -8,7 +8,8 @@ describe('count', () => {
 
     should.beStrictEqual(actual, {
       isOk: true,
-      span: [0, 4],
+      start: 0,
+      end: 4,
       pos: 4,
       value: ['a', 'b', 'c', 'd'],
     })
@@ -19,7 +20,8 @@ describe('count', () => {
 
     should.beStrictEqual(actual, {
       isOk: true,
-      span: [0, 0],
+      start: 0,
+      end: 0,
       pos: 0,
       value: [],
     })
@@ -30,7 +32,8 @@ describe('count', () => {
 
     should.beStrictEqual(actual, {
       isOk: false,
-      span: [4, 5],
+      start: 4,
+      end: 5,
       pos: 4,
       expected: 'ab',
     })

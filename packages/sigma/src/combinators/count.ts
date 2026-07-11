@@ -33,7 +33,8 @@ export function count<T>(parser: Parser<T>, n: number): Parser<Array<T>> {
 
       return {
         isOk: true,
-        span: [pos, nextPos],
+        start: pos,
+        end: nextPos,
         pos: nextPos,
         value: values,
       }

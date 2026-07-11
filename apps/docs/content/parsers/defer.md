@@ -63,25 +63,26 @@ We will get the following result:
 ```ts
 {
   isOk: true,
-  span: [ 0, 15 ],
+  start: 0,
+  end: 15,
   pos: 15,
   value: {
     type: 'list',
-    span: [ 0, 15 ],
+    span: { start: 0, end: 15 },
     value: [
-      { type: 'number', span: [ 1, 2 ], value: 1 },
-      { type: 'number', span: [ 3, 4 ], value: 2 },
+      { type: 'number', span: { start: 1, end: 2 }, value: 1 },
+      { type: 'number', span: { start: 3, end: 4 }, value: 2 },
       {
         type: 'list',
-        span: [ 5, 14 ],
+        span: { start: 5, end: 14 },
         value: [
-          { type: 'number', span: [ 6, 7 ], value: 3 },
+          { type: 'number', span: { start: 6, end: 7 }, value: 3 },
           {
             type: 'list',
-            span: [ 8, 13 ],
+            span: { start: 8, end: 13 },
             value: [
-              { type: 'number', span: [ 9, 10 ], value: 4 },
-              { type: 'number', span: [ 11, 12 ], value: 5 }
+              { type: 'number', span: { start: 9, end: 10 }, value: 4 },
+              { type: 'number', span: { start: 11, end: 12 }, value: 5 }
             ]
           }
         ]

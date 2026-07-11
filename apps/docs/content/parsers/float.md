@@ -21,7 +21,8 @@ run(Parser).with('-42.0')
 
 {
   isOk: true,
-  span: [ 0, 5 ],
+  start: 0,
+  end: 5,
   pos: 5,
   value: -42
 }
@@ -34,7 +35,8 @@ run(Parser).with('42')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'float number'
 }

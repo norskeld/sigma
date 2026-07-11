@@ -1,7 +1,8 @@
 import type { Parser, Span } from '@types'
 
 /**
- * Applies `fn` to the `parser`'s result.
+ * Applies `fn` to the `parser`'s result. If `fn` declares a second parameter, it receives the
+ * result's {@link Span}.
  *
  * @param parser - Parser to apply
  * @param fn - Function to apply to `parser`'s result
@@ -17,9 +18,13 @@ export function map<T, R>(parser: Parser<T>, fn: (value: T, span: Span) => R): P
         case true: {
           return {
             isOk: true,
-            span: result.span,
+            start: result.start,
+            end: result.end,
             pos: result.pos,
-            value: fn(result.value, result.span),
+            value: fn(result.value, {
+              start: pos,
+              end: result.pos,
+            }),
           }
         }
 

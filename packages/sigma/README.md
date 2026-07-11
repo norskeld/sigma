@@ -106,20 +106,21 @@ And in the end we get the following output with the AST, which can then be manip
 ```ts
 {
   isOk: true,
-  span: [ 0, 14 ],
+  start: 0,
+  end: 14,
   pos: 14,
   value: {
     type: 'list',
-    span: [ 0, 14 ],
+    span: { start: 0, end: 14 },
     value: [
-      { type: 'number', span: [ 1, 2 ], value: 1 },
-      { type: 'number', span: [ 4, 5 ], value: 2 },
+      { type: 'number', span: { start: 1, end: 2 }, value: 1 },
+      { type: 'number', span: { start: 4, end: 5 }, value: 2 },
       {
         type: 'list',
-        span: [ 7, 13 ],
+        span: { start: 7, end: 13 },
         value: [
-          { type: 'number', span: [ 8, 9 ], value: 3 },
-          { type: 'number', span: [ 11, 12 ], value: 4 }
+          { type: 'number', span: { start: 8, end: 9 }, value: 3 },
+          { type: 'number', span: { start: 11, end: 12 }, value: 4 }
         ]
       }
     ]

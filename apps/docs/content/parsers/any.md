@@ -20,7 +20,8 @@ run(ManyParser).with('xyz')
 
 {
   isOk: true,
-  span: [ 0, 3 ],
+  start: 0,
+  end: 3,
   pos: 3,
   value: [ 'x', 'y', 'z' ]
 }
@@ -33,7 +34,8 @@ run(SingleParser).with('')
 
 {
   isOk: false,
-  span: [ 0, 0 ],
+  start: 0,
+  end: 0,
   pos: 0,
   expected: 'any @ reached the end of input'
 }

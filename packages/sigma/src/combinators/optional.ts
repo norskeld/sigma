@@ -20,7 +20,8 @@ export function optional<T>(parser: Parser<T>): Parser<T | null> {
         case false: {
           return {
             isOk: true,
-            span: [pos, pos],
+            start: pos,
+            end: pos,
             pos,
             value: null,
           }

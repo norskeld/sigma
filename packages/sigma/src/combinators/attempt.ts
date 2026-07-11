@@ -23,7 +23,8 @@ export function attempt<T>(parser: Parser<T>): Parser<T> {
         case false: {
           return {
             isOk: false,
-            span: result.span,
+            start: result.start,
+            end: result.end,
             pos,
             expected: result.expected,
           }
