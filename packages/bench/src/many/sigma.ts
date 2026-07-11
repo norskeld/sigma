@@ -1,5 +1,4 @@
-import { many } from '@nrsk/sigma/combinators'
-import { run, string } from '@nrsk/sigma/parsers'
+import { many, run, string } from '@nrsk/sigma'
 
 const Parser = many(string('x!'))
 

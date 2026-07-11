@@ -1,15 +1,5 @@
-import { add, suite } from 'benny'
+import { run } from 'mitata'
 
-import { handlers } from '../@helpers'
-import { SAMPLE } from './@sample'
-import { parse as parseParjs } from './parjs'
-import { parse as parseSigma } from './sigma'
+import './suite'
 
-suite(
-  'many :: sigma vs parjs',
-
-  add('sigma', () => parseSigma(SAMPLE)),
-  add('parjs', () => parseParjs(SAMPLE)),
-
-  ...handlers,
-)
+await run()

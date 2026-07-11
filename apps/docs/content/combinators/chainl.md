@@ -182,8 +182,7 @@ We will get the following result:
 
 ::: details Complete example
 ```ts
-import { chainl, choice, sequence, takeMid, takeRight } from '@nrsk/sigma/combinators'
-import { defer, integer, string, run } from '@nrsk/sigma/parsers'
+import { chainl, choice, defer, integer, run, sequence, string, takeMid, takeRight } from '@nrsk/sigma'
 
 function mapBinary(left: number, [op, right]: [string, number]) {
   switch (op) {

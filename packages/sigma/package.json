@@ -49,26 +49,6 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./combinators": {
-      "import": {
-        "types": "./dist/combinators.d.mts",
-        "default": "./dist/combinators.mjs"
-      },
-      "require": {
-        "types": "./dist/combinators.d.cts",
-        "default": "./dist/combinators.cjs"
-      }
-    },
-    "./parsers": {
-      "import": {
-        "types": "./dist/parsers.d.mts",
-        "default": "./dist/parsers.mjs"
-      },
-      "require": {
-        "types": "./dist/parsers.d.cts",
-        "default": "./dist/parsers.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [

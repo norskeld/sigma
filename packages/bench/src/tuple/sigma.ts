@@ -1,5 +1,16 @@
-import { choice, map, optional, sepBy, sequence, takeMid } from '@nrsk/sigma/combinators'
-import { defer, regexp, run, string, whitespace } from '@nrsk/sigma/parsers'
+import {
+  choice,
+  defer,
+  map,
+  optional,
+  regexp,
+  run,
+  sepBy,
+  sequence,
+  string,
+  takeMid,
+  whitespace,
+} from '@nrsk/sigma'
 
 import type * as Ast from './ast'
 

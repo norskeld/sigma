@@ -1,17 +1,5 @@
-import { add, suite } from 'benny'
+import { run } from 'mitata'
 
-import { handlers } from '../@helpers'
-import { SAMPLE } from './@sample'
-import { parse as parseParjs } from './parjs'
-import { parse as parseSigmaDefer } from './sigma'
-import { parse as parseSigmaGrammar } from './sigma-grammar'
+import './suite'
 
-suite(
-  'JSON :: sigma vs parjs',
-
-  add('sigma:defer', () => parseSigmaDefer(SAMPLE)),
-  add('sigma:grammar', () => parseSigmaGrammar(SAMPLE)),
-  add('parjs', () => parseParjs(SAMPLE)),
-
-  ...handlers,
-)
+await run()
