@@ -1,124 +1,104 @@
 # `𝝨` sigma
 
-[![Build/Test](https://img.shields.io/github/actions/workflow/status/norskeld/sigma/checks.yaml?style=flat-square&colorA=22272d&colorB=22272d)](https://github.com/norskeld/sigma/actions 'Build and test workflows')
-[![Coverage](https://img.shields.io/coverallsCoverage/github/norskeld/sigma?style=flat-square&colorA=22272d&colorB=22272d)](https://coveralls.io/github/norskeld/sigma 'Test coverage')
-[![NPM](https://img.shields.io/npm/v/@nrsk/sigma?style=flat-square&colorA=22272d&colorB=22272d)](https://npm.im/@nrsk/sigma 'This package on NPM')
-![Supported Node Versions](https://img.shields.io/node/v/%40nrsk/sigma?style=flat-square&colorA=22272d&colorB=22272d)
-[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/@nrsk/sigma?label=minzipped&style=flat-square&colorA=22272d&colorB=22272d)](https://bundlephobia.com/package/@nrsk/sigma)
-![Tree Shaking](https://img.shields.io/static/v1?label=tree+shaking&message=✔&style=flat-square&colorA=22272d&colorB=22272d)
-
-TypeScript [parser combinator][parser-combinator] library for building fast and convenient parsers.
+TypeScript [parser combinator](https://en.wikipedia.org/wiki/Parser_combinator) library for building fast and convenient parsers.
 
 ## Features
 
-- [x] Capable of parsing [LL grammars][ll-grammar] using [recursive descent][rd] with backtracking.
+- [x] Capable of parsing [LL grammars](https://en.wikipedia.org/wiki/LL_grammar) using [recursive descent](https://en.wikipedia.org/wiki/Recursive_descent_parser) with backtracking.
 - [x] Ergonomic API with excellent TypeScript support.
 - [x] Zero dependencies. Supports tree shaking.
-- [x] [Performant enough][bench] to beat similar parser combinator libraries.
-
-All-in-all, Sigma is easy to use and extend, reasonably fast and convenient, *but* a bit limited regarding what types of grammars it can parse.
+- [x] [Performant enough](../bench/) to beat similar parser combinator libraries.
 
 ## Docs
 
-You can find the documentation [here][docs]. If you want to contribute, feel free to check out [the source code][docs-source].
+You can find the documentation [here](https://sigma.nrsk.dev). Changelog is [here](./CHANGELOG.md).
 
 ## Installation
-
-### Node
 
 Just use your favorite package manager.
 
 ```bash
-npm i @nrsk/sigma
+npm i @nrsk/sigma # or
+pnpm add @nrsk/sigma # or
+yarn add @nrsk/sigma
 ```
 
-### Deno
-
-You can import the library via [Skypack] (note the `?dts` query parameter, this is to pull types):
+For Deno and the browser, you can import the library via something like [Skypack](https://skypack.dev) (note the `?dts` query parameter, this is to pull types):
 
 ```ts
 import { ... } from 'https://cdn.skypack.dev/@nrsk/sigma?dts'
-import { ... } from 'https://cdn.skypack.dev/@nrsk/sigma/parsers?dts'
-import { ... } from 'https://cdn.skypack.dev/@nrsk/sigma/combinators?dts'
 ```
 
 ## Example
 
-Below is an example of parsing nested tuples like `(1, 2, (3, 4))` into an AST.
+Below is a simple example of parsing nested tuples like `(1, 2, (3, 4))` into an AST.
 
 <details>
-<summary>Click to show the tuples example.</summary>
+<summary>Click to show the tuples example</summary>
 
 ```ts
-import { choice, map, optional, sepBy, sequence, takeMid } from '@nrsk/sigma/combinators'
-import { defer, integer, run, string, whitespace } from '@nrsk/sigma/parsers'
-import type { Span } from '@nrsk/sigma'
+import * as s from '@nrsk/sigma'
 
 /* AST. */
 
 interface NumberNode {
   type: 'number'
-  span: Span
+  span: s.Span
   value: number
 }
 
 interface ListNode {
   type: 'list'
-  span: Span
+  span: s.Span
   value: Array<NumberNode | ListNode>
 }
 
 /* Mapping functions to turn parsed string values into AST nodes. */
 
-function toNumber(value: number, span: Span): NumberNode {
+function toNumberNode(value: number, span: s.Span): NumberNode {
   return {
     type: 'number',
     span,
-    value
+    value,
   }
 }
 
-function toList(value: Array<NumberNode | ListNode>, span: Span): ListNode {
+function toListNode(value: Array<NumberNode | ListNode>, span: s.Span): ListNode {
   return {
     type: 'list',
     span,
-    value
+    value,
   }
 }
 
 /* Parsers. */
 
-const OpenParen = string('(')
-const CloseParen = string(')')
-const Space = optional(whitespace())
-const Comma = sequence(Space, string(','), Space)
+const OpenParen = s.string('(')
+const CloseParen = s.string(')')
+const Space = s.optional(s.whitespace())
+const Comma = s.sequence(Space, s.string(','), Space)
 
-const TupleNumber = defer<NumberNode>()
-const TupleList = defer<ListNode>()
+const TupleNumber = s.defer<NumberNode>()
+const TupleList = s.defer<ListNode>()
 
-TupleNumber.with(
-  map(
-    integer(),
-    toNumber
-  )
-)
+TupleNumber.with(s.map(s.integer(), toNumberNode))
 
 TupleList.with(
-  map(
-    takeMid(
+  s.map(
+    s.takeMid(
       OpenParen,
-      sepBy(choice(TupleList, TupleNumber), Comma),
+      s.sepBy(s.choice(TupleList, TupleNumber), Comma),
       CloseParen
     ),
-    toList
-  )
+    toListNode,
+  ),
 )
 ```
 
 Then we simply `run` the root parser, feeding it `with` text:
 
 ```ts
-run(TupleList).with('(1, 2, (3, 4))')
+console.log(s.run(TupleList).with('(1, 2, (3, 4))'))
 ```
 
 And in the end we get the following output with the AST, which can then be manipulated if needed:
@@ -148,35 +128,6 @@ And in the end we get the following output with the AST, which can then be manip
 ```
 </details>
 
-## Development
-
-This package lives in a [pnpm](https://pnpm.io) workspace. Fork, clone, then:
-
-```sh
-pnpm install
-```
-
-Common tasks, run from the repository root:
-
-- `pnpm build` — build the package with [tsdown](https://tsdown.dev)
-- `pnpm test` and `pnpm test:types` — run unit and type tests
-- `pnpm check` — lint and format with [Biome](https://biomejs.dev)
-- `pnpm changeset` — record a changeset describing your change
-
-Pull request titles must follow the [Conventional Commits][cc-spec] format. Versioning and releases are handled with [Changesets](https://github.com/changesets/changesets).
-
 ## License
 
 [MIT](LICENSE).
-
-<!-- Links. -->
-
-[ll-grammar]: https://en.wikipedia.org/wiki/LL_grammar
-[rd]: https://en.wikipedia.org/wiki/Recursive_descent_parser
-[parser-combinator]: https://en.wikipedia.org/wiki/Parser_combinator
-[cfg]: https://en.wikipedia.org/wiki/Context-free_grammar
-[docs]: https://sigma.nrsk.dev
-[docs-source]: ../../apps/docs
-[bench]: ../benchmarks
-[skypack]: https://skypack.dev
-[cc-spec]: https://conventionalcommits.org/en/v1.0.0/#summary

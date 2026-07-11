@@ -10,7 +10,7 @@ From the repository root:
 pnpm bench
 ```
 
-This builds `@nrsk/sigma` and runs all suites. To run a single suite, use `pnpm --filter @nrsk/sigma-benchmarks bench:json` (or `bench:tuple`, `bench:many`).
+This builds `@nrsk/sigma` and runs all suites. To run a single suite, use `pnpm --filter @nrsk/sigma-bench bench:json` (or `bench:tuple`, `bench:many`).
 
 ## Notes
 
