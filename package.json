@@ -1,120 +1,32 @@
 {
-  "name": "@nrsk/sigma",
-  "version": "3.8.0",
-  "description": "TypeScript parser combinator library for building fast and convenient parsers.",
-  "packageManager": "npm@9.7.2",
-  "sideEffects": false,
+  "name": "sigma",
+  "private": true,
   "type": "module",
-  "main": "./index.cjs",
-  "module": "./index.js",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js",
-      "require": "./index.cjs"
-    },
-    "./combinators": {
-      "types": "./combinators.d.ts",
-      "import": "./combinators.js",
-      "require": "./combinators.cjs"
-    },
-    "./parsers": {
-      "types": "./parsers.d.ts",
-      "import": "./parsers.js",
-      "require": "./parsers.cjs"
-    }
-  },
-  "files": [
-    "CHANGELOG.md",
-    "*.d.ts",
-    "*.cjs*",
-    "*.js*"
-  ],
-  "engines": {
-    "node": ">=18 <=20"
-  },
   "scripts": {
-    "build": "tsup",
-    "fmt:lint": "eslint --fix --ext .js,.ts,.tsx .",
-    "fmt:prettier": "prettier --write \"**/*.{js,ts,tsx,json}\"",
-    "install:all": "npm install && npm run install:benchmarks && npm run install:docs",
-    "install:benchmarks": "cd benchmarks && npm install",
-    "install:docs": "cd docs && npm install",
-    "postversion": "tsx ../scripts/release.ts restore",
-    "prebuild": "rimraf dist",
-    "prepare": "is-ci || husky install",
-    "prerelease": "tsx scripts/release.ts prepare",
-    "release": "npx semantic-release",
-    "release:dry": "npx semantic-release --dry-run",
-    "test": "vitest",
-    "test:types": "vitest typecheck",
-    "test:coverage": "vitest --coverage"
+    "bench": "pnpm build && pnpm --filter @nrsk/sigma-bench bench",
+    "build": "pnpm --filter @nrsk/sigma build",
+    "build:watch": "pnpm --filter @nrsk/sigma build:watch",
+    "changeset": "changeset",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "docs:build": "pnpm --filter @nrsk/sigma-docs build",
+    "docs:dev": "pnpm --filter @nrsk/sigma-docs dev",
+    "prepare": "lefthook install",
+    "release": "pnpm build && changeset publish",
+    "test": "pnpm --filter @nrsk/sigma test",
+    "test:coverage": "pnpm --filter @nrsk/sigma test:coverage",
+    "test:types": "pnpm --filter @nrsk/sigma test:types",
+    "typecheck": "pnpm --recursive --if-present typecheck",
+    "version": "changeset version"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/norskeld/sigma.git"
-  },
-  "keywords": [
-    "typescript",
-    "parser-combinators",
-    "parser",
-    "combinators",
-    "parsec",
-    "bnf",
-    "ebnf",
-    "abnf"
-  ],
-  "author": {
-    "name": "Vladislav Mamon",
-    "email": "vlad@nrsk.dev"
-  },
-  "contributors": [
-    "Vladislav Mamon <vlad@nrsk.dev>",
-    "Danil Tarasov <thefedaikin@gmail.com>"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/norskeld/sigma/issues"
-  },
-  "homepage": "https://github.com/norskeld/sigma#readme",
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
-    "@nrsk/config-conventional": "^1.0.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@types/is-ci": "^3.0.0",
-    "@types/node": "^18.16.16",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
-    "@vitest/coverage-istanbul": "^0.31.4",
-    "eslint": "^8.44.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
-    "husky": "^8.0.3",
-    "is-ci": "^3.0.1",
-    "lint-staged": "^13.2.3",
-    "prettier": "^2.8.8",
-    "rimraf": "^5.0.1",
-    "semantic-release": "^21.0.6",
-    "tsup": "^7.1.0",
-    "tsx": "^3.12.7",
-    "typescript": "^5.1.6",
-    "vite-tsconfig-paths": "^4.2.0",
-    "vitest": "^0.31.4"
+    "@biomejs/biome": "2.5.3",
+    "@changesets/changelog-github": "0.7.0",
+    "@changesets/cli": "2.31.0",
+    "@nrsk/tsconfig": "workspace:*",
+    "lefthook": "2.1.10",
+    "publint": "0.3.21",
+    "typescript": "catalog:"
   },
-  "commitlint": {
-    "extends": [
-      "@nrsk/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "*.{js,ts,json}": [
-      "prettier --write"
-    ],
-    "*.{js,ts}": [
-      "eslint --fix"
-    ]
-  }
+  "packageManager": "pnpm@11.10.0"
 }

@@ -1,0 +1,33 @@
+packages:
+  - apps/*
+  - packages/*
+
+allowBuilds:
+  esbuild: true
+  lefthook: true
+
+catalog:
+  '@types/node': ^24.10.4
+  '@vitest/coverage-istanbul': 4.1.10
+  tsdown: 0.22.4
+  typescript: 5.9.3
+  vite: ^8.1.4
+  vitest: 4.1.10
+
+minimumReleaseAgeExclude:
+  - lefthook-darwin-arm64@2.1.10
+  - lefthook-darwin-x64@2.1.10
+  - lefthook-freebsd-arm64@2.1.10
+  - lefthook-freebsd-x64@2.1.10
+  - lefthook-linux-arm64@2.1.10
+  - lefthook-linux-x64@2.1.10
+  - lefthook-openbsd-arm64@2.1.10
+  - lefthook-openbsd-x64@2.1.10
+  - lefthook-windows-arm64@2.1.10
+  - lefthook-windows-x64@2.1.10
+  - lefthook@2.1.10
+  - vite@8.1.4
+
+onlyBuiltDependencies:
+  - esbuild
+  - lefthook

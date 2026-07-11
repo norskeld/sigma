@@ -1,9 +1,0 @@
-node_modules
-coverage
-dist
-
-# Ignore Markdown at the root.
-/*.md
-
-# Ignore Markdown in the docs.
-/docs/**/*.md

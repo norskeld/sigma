@@ -1,0 +1,33 @@
+import type { Parser } from '@types'
+
+/**
+ * Applies `parser` without consuming any input on success. On failure the failure is returned as
+ * is, with `pos` pointing to the deepest position reached, which yields more precise errors.
+ *
+ * @param parser - Parser to apply
+ *
+ * @returns Result of `parser`
+ */
+export function lookahead<T>(parser: Parser<T>): Parser<T> {
+  return {
+    parse(input, pos) {
+      const result = parser.parse(input, pos)
+
+      switch (result.isOk) {
+        // If parser succeeded, keep the position untouched.
+        case true: {
+          return {
+            isOk: true,
+            span: result.span,
+            pos,
+            value: result.value,
+          }
+        }
+
+        case false: {
+          return result
+        }
+      }
+    },
+  }
+}

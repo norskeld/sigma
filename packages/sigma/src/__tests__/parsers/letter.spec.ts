@@ -1,0 +1,78 @@
+import { letter, letters } from '@parsers'
+import { describe, it, result, run, should } from '@testing'
+
+describe('letter', () => {
+  it('should succeed with an ASCII letter', () => {
+    const actual = run(letter(), 'A')
+    const expected = result(true, 'A')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with a Unicode letter', () => {
+    const actual = run(letter(), 'Â')
+    const expected = result(true, 'Â')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with a single letter if given multiple letters', () => {
+    const actual = run(letter(), 'ab')
+    const expected = result(true, 'a')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should fail if given something other than a letter', () => {
+    ;['1', '+', '~', '`', ':', `'`].forEach((tCase) => {
+      const actual = run(letter(), tCase)
+      const expected = result(false, 'letter')
+
+      should.matchState(actual, expected)
+    })
+  })
+})
+
+describe('letters', () => {
+  it('should succeed with an ASCII letter if given input with a single ASCII letter', () => {
+    const actual = run(letters(), 'A')
+    const expected = result(true, 'A')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with a Unicode letter if given input with a single Unicode letter', () => {
+    const actual = run(letters(), 'Â')
+    const expected = result(true, 'Â')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with letters if given input with letters', () => {
+    const actual = run(letters(), 'Âne')
+    const expected = result(true, 'Âne')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with letters if given input with letters and other symbols', () => {
+    const actual = run(letters(), 'Âne+9000')
+    const expected = result(true, 'Âne')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should fail if given something other than letters', () => {
+    const actual = run(letters(), '9000+Âne')
+    const expected = result(false, 'letters')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should parse repeatedly at different positions with one instance', () => {
+    const parser = letters()
+
+    should.beStrictEqual(parser.parse('abc', 0), { isOk: true, span: [0, 3], pos: 3, value: 'abc' })
+    should.beStrictEqual(parser.parse('12ab', 2), { isOk: true, span: [2, 4], pos: 4, value: 'ab' })
+  })
+})

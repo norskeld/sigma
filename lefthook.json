@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/lefthook/schema.json",
+  "pre-commit": {
+    "commands": {
+      "biome": {
+        "run": "pnpm exec biome check --write {staged_files}",
+        "glob": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.json", "*.jsonc"],
+        "stage_fixed": true
+      }
+    }
+  }
+}

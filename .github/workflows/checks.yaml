@@ -1,0 +1,59 @@
+name: checks
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Type tests
+        run: pnpm test:types
+
+      - name: Test & coverage
+        run: pnpm test:coverage
+
+      - name: Lint
+        run: pnpm check
+
+      - name: Validate package exports
+        run: pnpm exec publint ./packages/sigma
+
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: packages/sigma/coverage/lcov.info

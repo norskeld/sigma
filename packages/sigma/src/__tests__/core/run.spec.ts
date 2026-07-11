@@ -1,0 +1,31 @@
+import { defer, run, string } from '@parsers'
+import { describe, it, result, should } from '@testing'
+
+describe('run', () => {
+  it('should succeed if given a succeeding parser', () => {
+    const parser = string('runnable')
+    const actual = run(parser).with('runnable')
+    const expected = result(true, 'runnable')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should fail if given a failing parser', () => {
+    const deferred = defer<string>()
+
+    deferred.with(string('deferred'))
+
+    const actual = run(deferred).with('lazy')
+    const expected = result(false, 'deferred')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should throw if given a parser that throws', () => {
+    const parser = defer<string>()
+
+    should.throwError(() => {
+      run(parser).with('')
+    }, new Error('Deferred parser was not initialized'))
+  })
+})

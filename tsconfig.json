@@ -1,26 +1,7 @@
 {
+  "extends": "@nrsk/tsconfig",
   "compilerOptions": {
-    "outDir": "dist",
-    "strict": true,
-    "target": "es2022",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "declaration": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@combinators": ["./src/combinators"],
-      "@combinators/*": ["./src/combinators/*"],
-      "@core": ["./src/core"],
-      "@core/*": ["./src/core/*"],
-      "@lib": ["./src"],
-      "@lib/*": ["./src/*"],
-      "@parsers": ["./src/parsers"],
-      "@parsers/*": ["./src/parsers/*"],
-      "@testing": ["./src/__tests__/@helpers"],
-      "@types": ["./src/types"]
-    }
-  },
-  "include": ["benchmarks", "scripts", "src"]
+    "composite": false,
+    "noEmit": true
+  }
 }
