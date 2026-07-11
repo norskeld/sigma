@@ -34,20 +34,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm build
+      - name: Lint
+        run: pnpm check
 
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Type tests
-        run: pnpm test:types
+      - name: Build
+        run: pnpm build
 
       - name: Test & coverage
-        run: pnpm test:coverage
-
-      - name: Lint
-        run: pnpm check
+        run: |
+          pnpm test:types
+          pnpm test:coverage
 
       - name: Validate package exports
         run: pnpm exec publint ./packages/sigma

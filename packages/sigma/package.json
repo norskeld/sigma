@@ -33,7 +33,7 @@
     "abnf"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
