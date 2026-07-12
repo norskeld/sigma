@@ -1,5 +1,6 @@
 import type { Parser } from '@nrsk/sigma'
 import {
+  char,
   choice,
   float,
   grammar,
@@ -111,12 +112,12 @@ function toJsonNull(): Ast.JsonNull {
 
 // Non-Terminals.
 const NumberLiteral = choice(float(), integer())
-
 const Space = optional(whitespace())
 const StringLiteral = regexp(/"(?:\\.|[^"\\])*"/g, 'string')
 
 // Utility.
-const match = (s: string) => takeMid(Space, string(s), Space)
+const keyword = (s: string) => takeMid(Space, string(s), Space)
+const symbol = (s: string) => takeMid(Space, char(s), Space)
 
 // Grammar.
 const Json = grammar({
@@ -126,22 +127,22 @@ const Json = grammar({
   Object(): Parser<Ast.JsonObject> {
     return map(
       takeMid(
-        match(Terminals.OpenBrace),
-        sepBy(this.ObjectProp, match(Terminals.Comma)),
-        match(Terminals.CloseBrace),
+        symbol(Terminals.OpenBrace),
+        sepBy(this.ObjectProp, symbol(Terminals.Comma)),
+        symbol(Terminals.CloseBrace),
       ),
       toJsonObject,
     )
   },
   ObjectProp(): Parser<Ast.JsonObjectProp> {
-    return map(sequence(this.String, match(Terminals.Colon), this.Value), toJsonObjectProp)
+    return map(sequence(this.String, symbol(Terminals.Colon), this.Value), toJsonObjectProp)
   },
   Array(): Parser<Ast.JsonArray> {
     return map(
       takeMid(
-        match(Terminals.OpenSquare),
-        sepBy(this.Value, match(Terminals.Comma)),
-        match(Terminals.CloseSquare),
+        symbol(Terminals.OpenSquare),
+        sepBy(this.Value, symbol(Terminals.Comma)),
+        symbol(Terminals.CloseSquare),
       ),
       toJsonArray,
     )
@@ -153,10 +154,10 @@ const Json = grammar({
     return map(NumberLiteral, toJsonNumber)
   },
   Boolean(): Parser<Ast.JsonBoolean> {
-    return map(choice(match(Keywords.True), match(Keywords.False)), toJsonBoolean)
+    return map(choice(keyword(Keywords.True), keyword(Keywords.False)), toJsonBoolean)
   },
   Null(): Parser<Ast.JsonNull> {
-    return map(match(Keywords.Null), toJsonNull)
+    return map(keyword(Keywords.Null), toJsonNull)
   },
   Value(): Parser<Ast.JsonValue> {
     return choice(this.Object, this.Array, this.String, this.Number, this.Boolean, this.Null)

@@ -1,5 +1,6 @@
 import { run as internal$run } from '@parsers'
 import type { Parser, Result } from '@types'
+import { FAIL, ParseContext } from '@types'
 import { expect } from 'vitest'
 
 interface ReducedResult<T> {
@@ -9,6 +10,31 @@ interface ReducedResult<T> {
 
 export function run<T>(parser: Parser<T>, text: string): Result<T> {
   return internal$run(parser).with(text)
+}
+
+export function parseAt<T>(parser: Parser<T>, input: string, pos: number): Result<T> {
+  const ctx = new ParseContext(input)
+  ctx.pos = pos
+
+  const value = parser.parse(ctx)
+
+  if (value === FAIL) {
+    return {
+      isOk: false,
+      start: ctx.errorStart,
+      end: ctx.errorEnd,
+      pos: ctx.errorPos,
+      expected: ctx.expected,
+    }
+  }
+
+  return {
+    isOk: true,
+    start: pos,
+    end: ctx.pos,
+    pos: ctx.pos,
+    value: value as T,
+  }
 }
 
 export function result<T>(isOk: boolean, value: T): ReducedResult<T> {

@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Parses *zero* or more occurrences of `parser`, separated by `sep`. Never fails.
@@ -10,43 +11,37 @@ import type { Parser } from '@types'
  */
 export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>> {
   return {
-    parse(input, pos) {
+    parse(ctx) {
       // Run the parser once to get the first value.
-      const resultP = parser.parse(input, pos)
+      const first = parser.parse(ctx)
+
+      if (first === FAIL) {
+        return []
+      }
 
       // If the parser succeeds, run the separator and parser pairwise many times.
-      if (resultP.isOk) {
-        const values = [resultP.value]
-        let nextPos = resultP.pos
+      const values: Array<T> = [first as T]
+      const length = ctx.input.length
 
-        while (nextPos < input.length) {
-          const resultS = sep.parse(input, nextPos)
-          if (!resultS.isOk) break
+      let last = ctx.pos
 
-          // The progress guard covers the whole sep-value pair to discard zero-width matches.
-          const resultV = parser.parse(input, resultS.pos)
-          if (!resultV.isOk || resultV.pos <= nextPos) break
+      while (last < length) {
+        const resultS = sep.parse(ctx)
+        if (resultS === FAIL) break
 
-          values.push(resultV.value)
-          nextPos = resultV.pos
+        const resultV = parser.parse(ctx)
+
+        // The progress guard covers the whole sep-value pair to discard zero-width matches.
+        if (resultV === FAIL || ctx.pos <= last) {
+          ctx.pos = last
+          break
         }
 
-        return {
-          isOk: true,
-          start: pos,
-          end: nextPos,
-          pos: nextPos,
-          value: values,
-        }
+        values.push(resultV as T)
+        last = ctx.pos
       }
 
-      return {
-        isOk: true,
-        start: pos,
-        end: pos,
-        pos,
-        value: [],
-      }
+      return values
     },
   }
 }
@@ -61,43 +56,34 @@ export function sepBy<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>>
  */
 export function sepBy1<T, S>(parser: Parser<T>, sep: Parser<S>): Parser<Array<T>> {
   return {
-    parse(input, pos) {
+    parse(ctx) {
       // Run the parser once to get the first value.
-      const resultP = parser.parse(input, pos)
+      const first = parser.parse(ctx)
+      if (first === FAIL) return FAIL
 
       // If the parser succeeds, run the separator and parser pairwise many times.
-      if (resultP.isOk) {
-        const values = [resultP.value]
-        let nextPos = resultP.pos
+      const values: Array<T> = [first as T]
+      const length = ctx.input.length
 
-        while (nextPos < input.length) {
-          const resultS = sep.parse(input, nextPos)
+      let last = ctx.pos
 
-          if (!resultS.isOk) {
-            break
-          }
+      while (last < length) {
+        const resultS = sep.parse(ctx)
+        if (resultS === FAIL) break
 
-          const resultV = parser.parse(input, resultS.pos)
+        const resultV = parser.parse(ctx)
 
-          // The progress guard covers the whole sep-value pair to discard zero-width matches.
-          if (!resultV.isOk || resultV.pos <= nextPos) {
-            break
-          }
-
-          values.push(resultV.value)
-          nextPos = resultV.pos
+        // The progress guard covers the whole sep-value pair to discard zero-width matches.
+        if (resultV === FAIL || ctx.pos <= last) {
+          ctx.pos = last
+          break
         }
 
-        return {
-          isOk: true,
-          start: pos,
-          end: nextPos,
-          pos: nextPos,
-          value: values,
-        }
+        values.push(resultV as T)
+        last = ctx.pos
       }
 
-      return resultP
+      return values
     },
   }
 }

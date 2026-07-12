@@ -7,28 +7,12 @@ import type { Parser } from '@types'
  */
 export function eof(): Parser<null> {
   return {
-    parse(input, pos) {
-      switch (pos === input.length) {
-        case true: {
-          return {
-            isOk: true,
-            start: pos,
-            end: pos,
-            pos: input.length,
-            value: null,
-          }
-        }
-
-        case false: {
-          return {
-            isOk: false,
-            start: pos,
-            end: pos,
-            pos,
-            expected: 'end of input',
-          }
-        }
+    parse(ctx) {
+      if (ctx.pos === ctx.input.length) {
+        return null
       }
+
+      return ctx.fail('end of input')
     },
   }
 }

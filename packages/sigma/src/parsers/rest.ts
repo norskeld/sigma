@@ -7,14 +7,10 @@ import type { SucceedingParser } from '@types'
  */
 export function rest(): SucceedingParser<string> {
   return {
-    parse(input, pos) {
-      return {
-        isOk: true,
-        start: pos,
-        end: input.length,
-        pos: input.length,
-        value: input.substring(pos),
-      }
+    parse(ctx) {
+      const value = ctx.input.substring(ctx.pos)
+      ctx.pos = ctx.input.length
+      return value
     },
   }
 }

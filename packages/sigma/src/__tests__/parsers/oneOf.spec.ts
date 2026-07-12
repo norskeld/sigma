@@ -1,6 +1,6 @@
 import { sequence } from '@combinators'
 import { oneOf, string } from '@parsers'
-import { describe, it, result, run, should, testFailure } from '@testing'
+import { describe, it, parseAt, result, run, should, testFailure } from '@testing'
 
 describe('oneOf', () => {
   it('should succeed if input character is among given ones', () => {
@@ -26,8 +26,7 @@ describe('oneOf', () => {
   })
 
   it('should fail listing all expected characters including duplicates', () => {
-    const actual = oneOf('aab').parse('q', 0)
-
+    const actual = parseAt(oneOf('aab'), 'q', 0)
     should.beStrictEqual(actual, {
       isOk: false,
       start: 0,
@@ -38,8 +37,7 @@ describe('oneOf', () => {
   })
 
   it('should fail with the exact end of input message', () => {
-    const actual = oneOf('xy').parse('', 0)
-
+    const actual = parseAt(oneOf('xy'), '', 0)
     should.beStrictEqual(actual, {
       isOk: false,
       start: 0,

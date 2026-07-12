@@ -13,40 +13,21 @@ export function noneOf(chars: string): Parser<string> {
   const expected = `none of: ${charset.join(', ')}`
 
   return {
-    parse(input, pos) {
-      if (input.length === pos) {
-        return {
-          isOk: false,
-          start: pos,
-          end: pos,
-          pos,
-          expected: 'noneOf @ reached the end of input',
-        }
+    parse(ctx) {
+      if (ctx.input.length === ctx.pos) {
+        return ctx.fail('noneOf @ reached the end of input')
       }
 
       // Read a full code point to avoid splitting surrogate pairs.
-      const code = input.codePointAt(pos) as number
+      const code = ctx.input.codePointAt(ctx.pos) as number
 
       if (!codepoints.has(code)) {
         const char = String.fromCodePoint(code)
-        const nextPos = pos + char.length
-
-        return {
-          isOk: true,
-          start: pos,
-          end: nextPos,
-          pos: nextPos,
-          value: char,
-        }
+        ctx.pos += char.length
+        return char
       }
 
-      return {
-        isOk: false,
-        start: pos,
-        end: pos,
-        pos,
-        expected,
-      }
+      return ctx.fail(expected)
     },
   }
 }

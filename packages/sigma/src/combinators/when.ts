@@ -1,4 +1,5 @@
 import type { Parser, ToParser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Context provided to a callback for producing conditional/chained parser.
@@ -24,18 +25,20 @@ export function when<T, R extends Parser<unknown>>(
   parser: (ctx: Context<T>) => R,
 ): ToParser<R> {
   return {
-    parse(input, pos) {
-      const result = context.parse(input, pos)
+    parse(ctx) {
+      const start = ctx.pos
 
-      switch (result.isOk) {
-        case true: {
-          return parser({ value: result.value, pos: result.pos, input }).parse(input, result.pos)
-        }
+      const result = context.parse(ctx)
+      if (result === FAIL) return FAIL
 
-        case false: {
-          return result
-        }
+      const next = parser({ value: result as T, pos: ctx.pos, input: ctx.input }).parse(ctx)
+
+      if (next === FAIL) {
+        ctx.pos = start
+        return FAIL
       }
+
+      return next
     },
   } as ToParser<R>
 }

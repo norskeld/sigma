@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies source `parser`, collects its output, and stops after `terminator` parser succeeds.
@@ -11,45 +12,35 @@ import type { Parser } from '@types'
  */
 export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parser<[Array<T>, S]> {
   return {
-    parse(input, pos) {
+    parse(ctx) {
+      const start = ctx.pos
       const values: Array<T> = []
-      let nextPos = pos
 
       while (true) {
-        const resultT = terminator.parse(input, nextPos)
+        const last = ctx.pos
 
-        switch (resultT.isOk) {
-          // If ok, then we stumbled upon a terminating parser, so push final matches, and then
-          // return accumulated values.
-          case true: {
-            return {
-              isOk: true,
-              start: pos,
-              end: resultT.pos,
-              pos: resultT.pos,
-              value: [values, resultT.value],
-            }
-          }
+        const resultT = terminator.parse(ctx)
 
-          // Otherwise try to run source parser and push results into `values`.
-          // If it fails, then return early and stop parsing.
-          case false: {
-            const resultP = parser.parse(input, nextPos)
-
-            if (resultP.isOk) {
-              // Guard against infinite loops on zero-width successes.
-              if (resultP.pos === nextPos) {
-                return resultT
-              }
-
-              values.push(resultP.value)
-              nextPos = resultP.pos
-              continue
-            }
-
-            return resultP
-          }
+        if (resultT !== FAIL) {
+          return [values, resultT as S]
         }
+
+        const resultP = parser.parse(ctx)
+
+        if (resultP === FAIL) {
+          ctx.pos = start
+          return FAIL
+        }
+
+        // Guard against infinite loops on zero-width successes. The success may have overwritten
+        // the error mirror, so re-fail the terminator to report its error.
+        if (ctx.pos === last) {
+          terminator.parse(ctx)
+          ctx.pos = start
+          return FAIL
+        }
+
+        values.push(resultP as T)
       }
     },
   }
@@ -66,41 +57,31 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
  */
 export function skipUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parser<S> {
   return {
-    parse(input, pos) {
-      let nextPos = pos
+    parse(ctx) {
+      const start = ctx.pos
 
       while (true) {
-        const resultT = terminator.parse(input, nextPos)
+        const last = ctx.pos
 
-        switch (resultT.isOk) {
-          // If ok, then we stumbled upon a terminating parser, so return its value.
-          case true: {
-            return {
-              isOk: true,
-              start: pos,
-              end: resultT.pos,
-              pos: resultT.pos,
-              value: resultT.value,
-            }
-          }
+        const resultT = terminator.parse(ctx)
 
-          // Otherwise try to run source parser *ignoring* its results.
-          // If it fails, then return early and stop parsing.
-          case false: {
-            const resultP = parser.parse(input, nextPos)
+        if (resultT !== FAIL) {
+          return resultT as S
+        }
 
-            if (resultP.isOk) {
-              // Guard against infinite loops on zero-width successes.
-              if (resultP.pos === nextPos) {
-                return resultT
-              }
+        const resultP = parser.parse(ctx)
 
-              nextPos = resultP.pos
-              continue
-            }
+        if (resultP === FAIL) {
+          ctx.pos = start
+          return FAIL
+        }
 
-            return resultP
-          }
+        // Guard against infinite loops on zero-width successes. The success may have overwritten
+        // the error mirror, so re-fail the terminator to report its error.
+        if (ctx.pos === last) {
+          terminator.parse(ctx)
+          ctx.pos = start
+          return FAIL
         }
       }
     },

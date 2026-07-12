@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `parser` exactly `n` times and collects the values. Fails with the first failure of
@@ -11,33 +12,22 @@ import type { Parser } from '@types'
  */
 export function count<T>(parser: Parser<T>, n: number): Parser<Array<T>> {
   return {
-    parse(input, pos) {
+    parse(ctx) {
+      const start = ctx.pos
       const values: Array<T> = []
-      let nextPos = pos
 
       for (let index = 0; index < n; index++) {
-        const result = parser.parse(input, nextPos)
+        const result = parser.parse(ctx)
 
-        switch (result.isOk) {
-          case true: {
-            values.push(result.value)
-            nextPos = result.pos
-            break
-          }
-
-          case false: {
-            return result
-          }
+        if (result === FAIL) {
+          ctx.pos = start
+          return FAIL
         }
+
+        values.push(result as T)
       }
 
-      return {
-        isOk: true,
-        start: pos,
-        end: nextPos,
-        pos: nextPos,
-        value: values,
-      }
+      return values
     },
   }
 }

@@ -1,4 +1,5 @@
 import type { Parser, Span } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `fn` to the `parser`'s result. If `fn` declares a second parameter, it receives the
@@ -10,28 +11,28 @@ import type { Parser, Span } from '@types'
  * @returns Result of `fn`
  */
 export function map<T, R>(parser: Parser<T>, fn: (value: T, span: Span) => R): Parser<R> {
+  // Span-less callbacks skip the span allocation entirely.
+  if (fn.length < 2) {
+    const fn1 = fn as (value: T) => R
+
+    return {
+      parse(ctx) {
+        const result = parser.parse(ctx)
+        if (result === FAIL) return FAIL
+
+        return fn1(result as T)
+      },
+    }
+  }
+
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const start = ctx.pos
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            value: fn(result.value, {
-              start: pos,
-              end: result.pos,
-            }),
-          }
-        }
+      const result = parser.parse(ctx)
+      if (result === FAIL) return FAIL
 
-        case false: {
-          return result
-        }
-      }
+      return fn(result as T, { start, end: ctx.pos })
     },
   }
 }
@@ -45,5 +46,12 @@ export function map<T, R>(parser: Parser<T>, fn: (value: T, span: Span) => R): P
  * @returns `value`
  */
 export function mapTo<T, R>(parser: Parser<T>, value: R): Parser<R> {
-  return map(parser, () => value)
+  return {
+    parse(ctx) {
+      const result = parser.parse(ctx)
+      if (result === FAIL) return FAIL
+
+      return value
+    },
+  }
 }

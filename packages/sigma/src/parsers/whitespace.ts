@@ -8,22 +8,24 @@ import type { Parser } from '@types'
  */
 export function whitespace(): Parser<string> {
   return {
-    parse(input, pos) {
+    parse(ctx) {
+      const input = ctx.input
+      const pos = ctx.pos
       let next = pos
 
       while (next < input.length) {
         const code = input.charCodeAt(next)
 
-        // Fast path for ASCII whitespace
+        // Fast path for ASCII whitespace.
         if (code === 0x20 || (code >= 0x09 && code <= 0x0d)) {
           next++
           continue
         }
 
-        // Fast exit for standard non-whitespace ASCII characters
+        // Fast exit for standard non-whitespace ASCII characters.
         if (code < 0x80) break
 
-        // Non-ASCII Unicode whitespace
+        // Non-ASCII Unicode whitespace.
         if (
           code === 0xa0 ||
           code === 0x1680 ||
@@ -43,28 +45,12 @@ export function whitespace(): Parser<string> {
       }
 
       if (next > pos) {
-        // 2. String Allocation Optimization: Return static string for single spaces
-        const value =
-          next - pos === 1 && input.charCodeAt(pos) === 0x20 ? ' ' : input.slice(pos, next)
-
-        return {
-          isOk: true,
-          start: pos,
-          end: next,
-          pos: next,
-          value,
-        }
+        ctx.pos = next
+        // Return a static string for single spaces to avoid allocation.
+        return next - pos === 1 && input.charCodeAt(pos) === 0x20 ? ' ' : input.slice(pos, next)
       }
 
-      // Note: Allocating a failure object is unavoidable here unless
-      // your @types allow for a static failure token or mutating a shared state.
-      return {
-        isOk: false,
-        start: pos,
-        end: pos,
-        pos,
-        expected: 'whitespace',
-      }
+      return ctx.fail('whitespace')
     },
   }
 }

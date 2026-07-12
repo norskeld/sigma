@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Takes exactly **two** parsers and applies them in order, returning the result of the leftmost
@@ -11,20 +12,20 @@ import type { Parser } from '@types'
  */
 export function takeLeft<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T1> {
   return {
-    parse(input, pos) {
-      const r1 = p1.parse(input, pos)
-      if (!r1.isOk) return r1
+    parse(ctx) {
+      const start = ctx.pos
 
-      const r2 = p2.parse(input, r1.pos)
-      if (!r2.isOk) return r2
+      const r1 = p1.parse(ctx)
+      if (r1 === FAIL) return FAIL
 
-      return {
-        isOk: true,
-        start: pos,
-        end: r2.pos,
-        pos: r2.pos,
-        value: r1.value,
+      const r2 = p2.parse(ctx)
+
+      if (r2 === FAIL) {
+        ctx.pos = start
+        return FAIL
       }
+
+      return r1
     },
   }
 }
@@ -41,23 +42,27 @@ export function takeLeft<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T1> {
  */
 export function takeMid<T1, T2, T3>(p1: Parser<T1>, p2: Parser<T2>, p3: Parser<T3>): Parser<T2> {
   return {
-    parse(input, pos) {
-      const r1 = p1.parse(input, pos)
-      if (!r1.isOk) return r1
+    parse(ctx) {
+      const start = ctx.pos
 
-      const r2 = p2.parse(input, r1.pos)
-      if (!r2.isOk) return r2
+      const r1 = p1.parse(ctx)
+      if (r1 === FAIL) return FAIL
 
-      const r3 = p3.parse(input, r2.pos)
-      if (!r3.isOk) return r3
+      const r2 = p2.parse(ctx)
 
-      return {
-        isOk: true,
-        start: pos,
-        end: r3.pos,
-        pos: r3.pos,
-        value: r2.value,
+      if (r2 === FAIL) {
+        ctx.pos = start
+        return FAIL
       }
+
+      const r3 = p3.parse(ctx)
+
+      if (r3 === FAIL) {
+        ctx.pos = start
+        return FAIL
+      }
+
+      return r2
     },
   }
 }
@@ -73,20 +78,20 @@ export function takeMid<T1, T2, T3>(p1: Parser<T1>, p2: Parser<T2>, p3: Parser<T
  */
 export function takeRight<T1, T2>(p1: Parser<T1>, p2: Parser<T2>): Parser<T2> {
   return {
-    parse(input, pos) {
-      const r1 = p1.parse(input, pos)
-      if (!r1.isOk) return r1
+    parse(ctx) {
+      const start = ctx.pos
 
-      const r2 = p2.parse(input, r1.pos)
-      if (!r2.isOk) return r2
+      const r1 = p1.parse(ctx)
+      if (r1 === FAIL) return FAIL
 
-      return {
-        isOk: true,
-        start: pos,
-        end: r2.pos,
-        pos: r2.pos,
-        value: r2.value,
+      const r2 = p2.parse(ctx)
+
+      if (r2 === FAIL) {
+        ctx.pos = start
+        return FAIL
       }
+
+      return r2
     },
   }
 }
@@ -107,23 +112,27 @@ export function takeSides<T1, T2, T3>(
   p3: Parser<T3>,
 ): Parser<[T1, T3]> {
   return {
-    parse(input, pos) {
-      const r1 = p1.parse(input, pos)
-      if (!r1.isOk) return r1
+    parse(ctx) {
+      const start = ctx.pos
 
-      const r2 = p2.parse(input, r1.pos)
-      if (!r2.isOk) return r2
+      const r1 = p1.parse(ctx)
+      if (r1 === FAIL) return FAIL
 
-      const r3 = p3.parse(input, r2.pos)
-      if (!r3.isOk) return r3
+      const r2 = p2.parse(ctx)
 
-      return {
-        isOk: true,
-        start: pos,
-        end: r3.pos,
-        pos: r3.pos,
-        value: [r1.value, r3.value],
+      if (r2 === FAIL) {
+        ctx.pos = start
+        return FAIL
       }
+
+      const r3 = p3.parse(ctx)
+
+      if (r3 === FAIL) {
+        ctx.pos = start
+        return FAIL
+      }
+
+      return [r1, r3] as [T1, T3]
     },
   }
 }

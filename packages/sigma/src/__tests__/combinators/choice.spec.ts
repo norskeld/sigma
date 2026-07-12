@@ -1,6 +1,6 @@
 import { choice, sequence } from '@combinators'
 import { string } from '@parsers'
-import { describe, it, result, run, should } from '@testing'
+import { describe, it, parseAt, result, run, should } from '@testing'
 
 describe('choice', () => {
   it('should succeed with the value of the first successful parser in sequence', () => {
@@ -29,8 +29,7 @@ describe('choice', () => {
 
   it('should keep the full failure of the alternative that progressed furthest', () => {
     const parser = choice(sequence(string('a'), string('b')), string('c'))
-    const actual = parser.parse('ax', 0)
-
+    const actual = parseAt(parser, 'ax', 0)
     should.beStrictEqual(actual, { isOk: false, start: 1, end: 2, pos: 1, expected: 'b' })
   })
 })

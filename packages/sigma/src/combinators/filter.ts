@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `parser` and tests its value with the `fn` predicate. Succeeds with the value if `fn`
@@ -16,28 +17,21 @@ export function filter<T>(
   expected: string,
 ): Parser<T> {
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const start = ctx.pos
 
-      switch (result.isOk) {
-        case true: {
-          if (fn(result.value)) {
-            return result
-          }
+      const result = parser.parse(ctx)
+      if (result === FAIL) return FAIL
 
-          return {
-            isOk: false,
-            start: result.start,
-            end: result.end,
-            pos,
-            expected,
-          }
-        }
-
-        case false: {
-          return result
-        }
+      if (fn(result as T)) {
+        return result
       }
+
+      // The reported span covers the rejected value, but the position is rewound.
+      const end = ctx.pos
+      ctx.pos = start
+
+      return ctx.fail(expected, end)
     },
   }
 }

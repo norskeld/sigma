@@ -1,4 +1,5 @@
 import type { Parser, ToUnion } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `ps` parsers in order until one of them succeeds.
@@ -10,31 +11,42 @@ import type { Parser, ToUnion } from '@types'
 export function choice<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToUnion<T>>
 export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
   return {
-    parse(input, pos) {
+    parse(ctx) {
       // It's "guaranteed" by type system that there will be at least two parsers, so I'm not gonna
       // bother checking for `ps` length and asserting it, because it would hit performance.
-      let nextResult = ps[0].parse(input, pos)
+      const first = ps[0].parse(ctx)
 
-      // Test other alternatives if the first one fails.
-      if (!nextResult.isOk) {
-        for (let index = 1; index < ps.length; index++) {
-          const result = ps[index].parse(input, pos)
+      if (first !== FAIL) {
+        return first
+      }
 
-          switch (result.isOk) {
-            case true: {
-              return result
-            }
+      // Keep the failure that got the furthest; the first alternative wins ties.
+      let bestPos = ctx.errorPos
+      let bestStart = ctx.errorStart
+      let bestEnd = ctx.errorEnd
+      let bestExpected = ctx.expected
 
-            case false: {
-              if (nextResult.pos < result.pos) {
-                nextResult = result
-              }
-            }
-          }
+      for (let index = 1; index < ps.length; index++) {
+        const result = ps[index].parse(ctx)
+
+        if (result !== FAIL) {
+          return result
+        }
+
+        if (ctx.errorPos > bestPos) {
+          bestPos = ctx.errorPos
+          bestStart = ctx.errorStart
+          bestEnd = ctx.errorEnd
+          bestExpected = ctx.expected
         }
       }
 
-      return nextResult
+      ctx.errorPos = bestPos
+      ctx.errorStart = bestStart
+      ctx.errorEnd = bestEnd
+      ctx.expected = bestExpected
+
+      return FAIL
     },
   }
 }

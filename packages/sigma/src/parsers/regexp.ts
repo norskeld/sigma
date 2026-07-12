@@ -21,31 +21,18 @@ export function regexp(rs: RegExp, expected: string): Parser<string> {
   const re = rs.sticky ? rs : new RegExp(rs.source, rs.flags.replace('g', '') + 'y')
 
   return {
-    parse(input, pos) {
-      re.lastIndex = pos
+    parse(ctx) {
+      re.lastIndex = ctx.pos
 
-      const result = re.exec(input)
+      const result = re.exec(ctx.input)
 
       if (result) {
-        const [match] = result
-        const index = pos + match.length
-
-        return {
-          isOk: true,
-          start: pos,
-          end: index,
-          pos: index,
-          value: match,
-        }
-      } else {
-        return {
-          isOk: false,
-          start: pos,
-          end: pos,
-          pos,
-          expected,
-        }
+        const match = result[0]
+        ctx.pos += match.length
+        return match
       }
+
+      return ctx.fail(expected)
     },
   }
 }

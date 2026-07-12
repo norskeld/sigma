@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `parser` without consuming any input on success. On failure the failure is returned as
@@ -10,25 +11,15 @@ import type { Parser } from '@types'
  */
 export function lookahead<T>(parser: Parser<T>): Parser<T> {
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const start = ctx.pos
+      const result = parser.parse(ctx)
 
-      switch (result.isOk) {
-        // If parser succeeded, keep the position untouched.
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos,
-            value: result.value,
-          }
-        }
-
-        case false: {
-          return result
-        }
+      if (result !== FAIL) {
+        ctx.pos = start
       }
+
+      return result
     },
   }
 }

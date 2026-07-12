@@ -9,14 +9,8 @@ import type { FailingParser } from '@types'
  */
 export function fail(expected: string): FailingParser {
   return {
-    parse(_, pos) {
-      return {
-        isOk: false,
-        start: pos,
-        end: pos,
-        pos,
-        expected,
-      }
+    parse(ctx) {
+      return ctx.fail(expected)
     },
   }
 }

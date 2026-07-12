@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Replaces `parser`'s error message with `expected`.
@@ -10,24 +11,14 @@ import type { Parser } from '@types'
  */
 export function error<T>(parser: Parser<T>, expected: string): Parser<T> {
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = parser.parse(ctx)
 
-      switch (result.isOk) {
-        case true: {
-          return result
-        }
-
-        case false: {
-          return {
-            isOk: false,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            expected,
-          }
-        }
+      if (result === FAIL) {
+        ctx.expected = expected
       }
+
+      return result
     },
   }
 }

@@ -64,9 +64,9 @@ export function defer<T>(): Deferred<T> {
       deferred = parser
     },
 
-    parse(input, pos) {
+    parse(ctx) {
       if (deferred) {
-        return deferred.parse(input, pos)
+        return deferred.parse(ctx)
       }
 
       throw new Error('Deferred parser was not initialized')

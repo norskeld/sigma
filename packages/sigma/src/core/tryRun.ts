@@ -1,4 +1,5 @@
 import type { Failure, Parser, Span, Success } from '@types'
+import { FAIL, ParseContext } from '@types'
 
 /** @internal */
 interface Runnable<T> {
@@ -33,16 +34,24 @@ export class ParserError extends Error {
 export function tryRun<T>(parser: Parser<T>): Runnable<T> {
   return {
     with(input) {
-      const result = parser.parse(input, 0)
+      const ctx = new ParseContext(input)
+      const value = parser.parse(ctx)
 
-      switch (result.isOk) {
-        case true: {
-          return result
-        }
+      if (value === FAIL) {
+        throw new ParserError({
+          start: ctx.errorStart,
+          end: ctx.errorEnd,
+          pos: ctx.errorPos,
+          expected: ctx.expected,
+        })
+      }
 
-        case false: {
-          throw new ParserError(result)
-        }
+      return {
+        isOk: true,
+        start: 0,
+        end: ctx.pos,
+        pos: ctx.pos,
+        value: value as T,
       }
     },
   }

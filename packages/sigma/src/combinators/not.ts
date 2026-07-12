@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `parser` without consuming any input and succeeds with `null` only if it fails, i.e.
@@ -11,30 +12,20 @@ import type { Parser } from '@types'
  */
 export function not(parser: Parser<unknown>, expected = 'unexpected input'): Parser<null> {
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const start = ctx.pos
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: false,
-            start: result.start,
-            end: result.end,
-            pos,
-            expected,
-          }
-        }
+      const result = parser.parse(ctx)
 
-        case false: {
-          return {
-            isOk: true,
-            start: pos,
-            end: pos,
-            pos,
-            value: null,
-          }
-        }
+      if (result === FAIL) {
+        return null
       }
+
+      // The reported span covers the unexpected match, but the position is rewound.
+      const end = ctx.pos
+      ctx.pos = start
+
+      return ctx.fail(expected, end)
     },
   }
 }

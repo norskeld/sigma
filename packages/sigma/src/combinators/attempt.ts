@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `parser` and behaves exactly like it on success. On failure it pretends that no input
@@ -11,25 +12,16 @@ import type { Parser } from '@types'
  */
 export function attempt<T>(parser: Parser<T>): Parser<T> {
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const start = ctx.pos
 
-      switch (result.isOk) {
-        case true: {
-          return result
-        }
+      const result = parser.parse(ctx)
 
-        // If parser failed, reset the position to pretend no input was consumed.
-        case false: {
-          return {
-            isOk: false,
-            start: result.start,
-            end: result.end,
-            pos,
-            expected: result.expected,
-          }
-        }
+      if (result === FAIL) {
+        ctx.errorPos = start
       }
+
+      return result
     },
   }
 }

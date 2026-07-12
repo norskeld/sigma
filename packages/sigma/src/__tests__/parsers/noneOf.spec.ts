@@ -1,6 +1,6 @@
 import { sequence } from '@combinators'
 import { noneOf, string } from '@parsers'
-import { describe, it, result, run, should, testFailure } from '@testing'
+import { describe, it, parseAt, result, run, should, testFailure } from '@testing'
 
 describe('noneOf', () => {
   it('should succeed with input character is not among given ones', () => {
@@ -30,8 +30,7 @@ describe('noneOf', () => {
   })
 
   it('should fail listing all rejected characters including duplicates', () => {
-    const actual = noneOf('aab').parse('a', 0)
-
+    const actual = parseAt(noneOf('aab'), 'a', 0)
     should.beStrictEqual(actual, {
       isOk: false,
       start: 0,
@@ -42,8 +41,7 @@ describe('noneOf', () => {
   })
 
   it('should fail with the exact end of input message', () => {
-    const actual = noneOf('xy').parse('', 0)
-
+    const actual = parseAt(noneOf('xy'), '', 0)
     should.beStrictEqual(actual, {
       isOk: false,
       start: 0,

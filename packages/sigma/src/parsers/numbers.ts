@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 import { regexp } from './regexp'
 
@@ -9,33 +10,25 @@ const WHOLE_RE = /(?:0|[1-9][0-9]*)/y
 const INTEGER_RE = /-?(?:0|[1-9][0-9]*)/y
 const FLOAT_RE = /-?[0-9]+\.[0-9]+/y
 
+const HEXADECIMAL_PARSER = regexp(HEXADECIMAL_RE, 'hexadecimal number')
+const BINARY_PARSER = regexp(BINARY_RE, 'binary number')
+const OCTAL_PARSER = regexp(OCTAL_RE, 'octal number')
+const WHOLE_PARSER = regexp(WHOLE_RE, 'whole number')
+const INTEGER_PARSER = regexp(INTEGER_RE, 'integer number')
+const FLOAT_PARSER = regexp(FLOAT_RE, 'float number')
+
 /**
  * Parses a hexadecimal number prefixed with `0x` or `0X`, e.g. `0xFF`, `0XFF`, `0xff`.
  *
  * @returns Parsed hexadecimal number as a decimal one
  */
 export function hex(): Parser<number> {
-  const parser = regexp(HEXADECIMAL_RE, 'hexadecimal number')
-
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = HEXADECIMAL_PARSER.parse(ctx)
+      if (result === FAIL) return FAIL
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            value: parseInt(result.value.slice(2), 16),
-          }
-        }
-
-        case false: {
-          return result
-        }
-      }
+      return parseInt(result.slice(2), 16)
     },
   }
 }
@@ -46,27 +39,12 @@ export function hex(): Parser<number> {
  * @returns Parsed binary number as a decimal one
  */
 export function binary(): Parser<number> {
-  const parser = regexp(BINARY_RE, 'binary number')
-
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = BINARY_PARSER.parse(ctx)
+      if (result === FAIL) return FAIL
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            value: parseInt(result.value.slice(2), 2),
-          }
-        }
-
-        case false: {
-          return result
-        }
-      }
+      return parseInt(result.slice(2), 2)
     },
   }
 }
@@ -77,27 +55,12 @@ export function binary(): Parser<number> {
  * @returns Parsed octal number as a decimal one
  */
 export function octal(): Parser<number> {
-  const parser = regexp(OCTAL_RE, 'octal number')
-
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = OCTAL_PARSER.parse(ctx)
+      if (result === FAIL) return FAIL
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            value: parseInt(result.value.slice(2), 8),
-          }
-        }
-
-        case false: {
-          return result
-        }
-      }
+      return parseInt(result.slice(2), 8)
     },
   }
 }
@@ -108,27 +71,12 @@ export function octal(): Parser<number> {
  * @returns Parsed whole number
  */
 export function whole(): Parser<number> {
-  const parser = regexp(WHOLE_RE, 'whole number')
-
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = WHOLE_PARSER.parse(ctx)
+      if (result === FAIL) return FAIL
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            value: parseInt(result.value, 10),
-          }
-        }
-
-        case false: {
-          return result
-        }
-      }
+      return parseInt(result, 10)
     },
   }
 }
@@ -139,27 +87,12 @@ export function whole(): Parser<number> {
  * @returns Parsed integer number
  */
 export function integer(): Parser<number> {
-  const parser = regexp(INTEGER_RE, 'integer number')
-
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = INTEGER_PARSER.parse(ctx)
+      if (result === FAIL) return FAIL
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            value: parseInt(result.value, 10),
-          }
-        }
-
-        case false: {
-          return result
-        }
-      }
+      return parseInt(result, 10)
     },
   }
 }
@@ -172,27 +105,12 @@ export function integer(): Parser<number> {
  * @returns Parsed float number
  */
 export function float(): Parser<number> {
-  const parser = regexp(FLOAT_RE, 'float number')
-
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = FLOAT_PARSER.parse(ctx)
+      if (result === FAIL) return FAIL
 
-      switch (result.isOk) {
-        case true: {
-          return {
-            isOk: true,
-            start: result.start,
-            end: result.end,
-            pos: result.pos,
-            value: parseFloat(result.value),
-          }
-        }
-
-        case false: {
-          return result
-        }
-      }
+      return parseFloat(result)
     },
   }
 }

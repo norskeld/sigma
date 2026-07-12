@@ -1,4 +1,5 @@
 import type { Parser, SucceedingParser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `parser` *zero* or more times, collecting its results. Successes that consume no input
@@ -10,29 +11,25 @@ import type { Parser, SucceedingParser } from '@types'
  */
 export function many<T>(parser: Parser<T>): SucceedingParser<Array<T>> {
   return {
-    parse(input, pos) {
+    parse(ctx) {
       const values: Array<T> = []
-      let nextPos = pos
+      const length = ctx.input.length
 
-      while (nextPos < input.length) {
-        const result = parser.parse(input, nextPos)
+      let last = ctx.pos
+
+      while (last < length) {
+        const result = parser.parse(ctx)
+        if (result === FAIL) break
 
         // Zero-width successes are not collected, otherwise the loop would never terminate.
-        if (result.isOk && result.pos > nextPos) {
-          values.push(result.value)
-          nextPos = result.pos
-        } else {
-          break
-        }
+        const pos = ctx.pos
+        if (pos === last) break
+
+        values.push(result as T)
+        last = pos
       }
 
-      return {
-        isOk: true,
-        start: pos,
-        end: nextPos,
-        pos: nextPos,
-        value: values,
-      }
+      return values
     },
   }
 }
@@ -47,38 +44,28 @@ export function many<T>(parser: Parser<T>): SucceedingParser<Array<T>> {
  */
 export function many1<T>(parser: Parser<T>): Parser<Array<T>> {
   return {
-    parse(input, pos) {
-      const resultP = parser.parse(input, pos)
+    parse(ctx) {
+      const first = parser.parse(ctx)
+      if (first === FAIL) return FAIL
 
-      if (resultP.isOk) {
-        const values: Array<T> = []
-        let nextPos = resultP.pos
+      const values: Array<T> = [first as T]
+      const length = ctx.input.length
 
-        values.push(resultP.value)
+      let last = ctx.pos
 
-        while (nextPos < input.length) {
-          const resultR = parser.parse(input, nextPos)
+      while (last < length) {
+        const result = parser.parse(ctx)
+        if (result === FAIL) break
 
-          // Zero-width successes are not collected, otherwise the loop would never terminate.
-          if (resultR.isOk && resultR.pos > nextPos) {
-            values.push(resultR.value)
-            nextPos = resultR.pos
-            continue
-          }
+        // Zero-width successes are not collected, otherwise the loop would never terminate.
+        const pos = ctx.pos
+        if (pos === last) break
 
-          break
-        }
-
-        return {
-          isOk: true,
-          start: pos,
-          end: nextPos,
-          pos: nextPos,
-          value: values,
-        }
+        values.push(result as T)
+        last = pos
       }
 
-      return resultP
+      return values
     },
   }
 }

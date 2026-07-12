@@ -4,23 +4,65 @@ export interface Span {
   readonly end: number
 }
 
+/** Sentinel returned by parsers on failure. Reserved: never return it as a parser value. */
+export const FAIL: unique symbol = Symbol('sigma.FAIL')
+
+/** Type of the {@link FAIL} sentinel. */
+export type Fail = typeof FAIL
+
+/**
+ * Mutable state shared by all parsers during a single run. Holds the cursor and a mirror of the
+ * failure that would be reported if the parse stopped now.
+ *
+ * Invariants: a parser that returns {@link FAIL} must leave `pos` at its entry value and the error
+ * fields describing its failure. On success the error fields are unspecified.
+ */
+export class ParseContext {
+  input: string
+  pos: number
+  errorPos: number
+  errorStart: number
+  errorEnd: number
+  expected: string
+
+  constructor(input: string) {
+    this.input = input
+    this.pos = 0
+    this.errorPos = 0
+    this.errorStart = 0
+    this.errorEnd = 0
+    this.expected = ''
+  }
+
+  /** Records a failure at the current position and returns {@link FAIL}. */
+  fail(expected: string, end: number = this.pos): Fail {
+    this.expected = expected
+    this.errorPos = this.pos
+    this.errorStart = this.pos
+    this.errorEnd = end
+    return FAIL
+  }
+}
+
 /** Parsers of this type always succeed, e.g. `many` and `sepBy`. */
 export interface SucceedingParser<T> {
-  parse(input: string, pos: number): Success<T>
+  parse(ctx: ParseContext): T
 }
 
 /** Parsers of this type always fail. */
 export interface FailingParser {
-  parse(input: string, pos: number): Failure
+  parse(ctx: ParseContext): Fail
 }
 
 /** Parsers of this type may fail. */
 export interface UnsafeParser<T> {
-  parse(input: string, pos: number): Result<T>
+  parse(ctx: ParseContext): T | Fail
 }
 
 /** Parser interface that all parsers and combinators consume and resolve to. */
-export type Parser<T> = FailingParser | SucceedingParser<T> | UnsafeParser<T>
+export interface Parser<T> {
+  parse(ctx: ParseContext): T | Fail
+}
 
 /** Represents failed execution. */
 export type Failure = {

@@ -1,4 +1,5 @@
 import {
+  char,
   choice,
   defer,
   float,
@@ -110,12 +111,12 @@ function toJsonNull(): Ast.JsonNull {
 
 // Non-Terminals.
 const NumberLiteral = choice(float(), integer())
-
 const Space = optional(whitespace())
 const StringLiteral = regexp(/"(?:\\.|[^"\\])*"/g, 'string')
 
 // Utility.
-const match = (s: string) => takeMid(Space, string(s), Space)
+const keyword = (s: string) => takeMid(Space, string(s), Space)
+const symbol = (s: string) => takeMid(Space, char(s), Space)
 
 // Composites.
 const JsonRoot = defer<Ast.JsonRoot>()
@@ -133,31 +134,31 @@ JsonRoot.with(choice(JsonObject, JsonArray))
 JsonObject.with(
   map(
     takeMid(
-      match(Terminals.OpenBrace),
-      sepBy(JsonObjectProp, match(Terminals.Comma)),
-      match(Terminals.CloseBrace),
+      symbol(Terminals.OpenBrace),
+      sepBy(JsonObjectProp, symbol(Terminals.Comma)),
+      symbol(Terminals.CloseBrace),
     ),
     toJsonObject,
   ),
 )
 
-JsonObjectProp.with(map(sequence(JsonString, match(Terminals.Colon), JsonValue), toJsonObjectProp))
+JsonObjectProp.with(map(sequence(JsonString, symbol(Terminals.Colon), JsonValue), toJsonObjectProp))
 
 JsonArray.with(
   map(
     takeMid(
-      match(Terminals.OpenSquare),
-      sepBy(JsonValue, match(Terminals.Comma)),
-      match(Terminals.CloseSquare),
+      symbol(Terminals.OpenSquare),
+      sepBy(JsonValue, symbol(Terminals.Comma)),
+      symbol(Terminals.CloseSquare),
     ),
     toJsonArray,
   ),
 )
 
-JsonNull.with(map(match(Keywords.Null), toJsonNull))
+JsonNull.with(map(keyword(Keywords.Null), toJsonNull))
 JsonString.with(map(StringLiteral, toJsonString))
 JsonNumber.with(map(NumberLiteral, toJsonNumber))
-JsonBoolean.with(map(choice(match(Keywords.True), match(Keywords.False)), toJsonBoolean))
+JsonBoolean.with(map(choice(keyword(Keywords.True), keyword(Keywords.False)), toJsonBoolean))
 JsonValue.with(choice(JsonObject, JsonArray, JsonString, JsonNumber, JsonBoolean, JsonNull))
 
 /* Wrapper for bench runner. */

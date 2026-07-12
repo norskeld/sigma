@@ -1,4 +1,5 @@
 import type { Parser, Result } from '@types'
+import { FAIL, ParseContext } from '@types'
 
 /** @internal */
 interface Runnable<T> {
@@ -15,7 +16,26 @@ interface Runnable<T> {
 export function run<T>(parser: Parser<T>): Runnable<T> {
   return {
     with(input) {
-      return parser.parse(input, 0)
+      const ctx = new ParseContext(input)
+      const value = parser.parse(ctx)
+
+      if (value === FAIL) {
+        return {
+          isOk: false,
+          start: ctx.errorStart,
+          end: ctx.errorEnd,
+          pos: ctx.errorPos,
+          expected: ctx.expected,
+        }
+      }
+
+      return {
+        isOk: true,
+        start: 0,
+        end: ctx.pos,
+        pos: ctx.pos,
+        value,
+      }
     },
   }
 }

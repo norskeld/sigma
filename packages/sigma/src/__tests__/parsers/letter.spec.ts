@@ -1,5 +1,5 @@
 import { letter, letters } from '@parsers'
-import { describe, it, result, run, should } from '@testing'
+import { describe, it, parseAt, result, run, should } from '@testing'
 
 describe('letter', () => {
   it('should succeed with an ASCII letter', () => {
@@ -72,14 +72,14 @@ describe('letters', () => {
   it('should parse repeatedly at different positions with one instance', () => {
     const parser = letters()
 
-    should.beStrictEqual(parser.parse('abc', 0), {
+    should.beStrictEqual(parseAt(parser, 'abc', 0), {
       isOk: true,
       start: 0,
       end: 3,
       pos: 3,
       value: 'abc',
     })
-    should.beStrictEqual(parser.parse('12ab', 2), {
+    should.beStrictEqual(parseAt(parser, '12ab', 2), {
       isOk: true,
       start: 2,
       end: 4,

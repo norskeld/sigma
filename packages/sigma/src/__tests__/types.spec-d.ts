@@ -8,11 +8,7 @@ describe('library', () => {
     expectTypeOf<NumberParser>().not.toBeAny()
     expectTypeOf<NumberParser>()
       .toHaveProperty('parse')
-      .toMatchTypeOf<
-        | ((input: string, pos: number) => t.Success<number>)
-        | ((input: string, pos: number) => t.Result<number>)
-        | ((input: string, pos: number) => t.Failure)
-      >()
+      .toMatchTypeOf<(ctx: t.ParseContext) => number | t.Fail>()
   })
 
   it('`SucceedingParser` should correctly infer right signature', () => {
@@ -20,9 +16,7 @@ describe('library', () => {
 
     expectTypeOf<SucceedingNumberParser>().toBeObject()
     expectTypeOf<SucceedingNumberParser>().not.toBeAny()
-    expectTypeOf<SucceedingNumberParser>()
-      .toHaveProperty('parse')
-      .returns.toMatchTypeOf<t.Success<number>>()
+    expectTypeOf<SucceedingNumberParser>().toHaveProperty('parse').returns.toMatchTypeOf<number>()
   })
 
   it('`UnsafeParser` should correctly infer right signature', () => {
@@ -32,7 +26,7 @@ describe('library', () => {
     expectTypeOf<UnsafeNumberParser>().not.toBeAny()
     expectTypeOf<UnsafeNumberParser>()
       .toHaveProperty('parse')
-      .returns.toMatchTypeOf<t.Result<number>>()
+      .returns.toMatchTypeOf<number | t.Fail>()
   })
 
   it('`Result` should correctly infer right signature', () => {
@@ -74,11 +68,7 @@ describe('internal utilities', () => {
     expectTypeOf<t.UnionToIntersection<number | number>>().not.toBeUnknown()
 
     expectTypeOf<t.UnionToIntersection<ParserNumberAndString>>().toMatchTypeOf<
-      t.FailingParser &
-        t.SucceedingParser<number> &
-        t.UnsafeParser<number> &
-        t.SucceedingParser<string> &
-        t.UnsafeParser<string>
+      t.Parser<number> & t.Parser<string>
     >()
   })
 

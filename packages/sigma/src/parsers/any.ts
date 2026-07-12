@@ -8,28 +8,16 @@ import type { Parser } from '@types'
  */
 export function any(): Parser<string> {
   return {
-    parse(input, pos) {
-      if (input.length === pos) {
-        return {
-          isOk: false,
-          start: pos,
-          end: pos,
-          pos,
-          expected: 'any @ reached the end of input',
-        }
+    parse(ctx) {
+      if (ctx.input.length === ctx.pos) {
+        return ctx.fail('any @ reached the end of input')
       }
 
       // Read a full code point to avoid splitting surrogate pairs.
-      const value = String.fromCodePoint(input.codePointAt(pos) as number)
-      const nextPos = pos + value.length
+      const value = String.fromCodePoint(ctx.input.codePointAt(ctx.pos) as number)
+      ctx.pos += value.length
 
-      return {
-        isOk: true,
-        start: pos,
-        end: nextPos,
-        pos: nextPos,
-        value,
-      }
+      return value
     },
   }
 }

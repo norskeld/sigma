@@ -1,4 +1,5 @@
 import type { Parser } from '@types'
+import { FAIL } from '@types'
 
 /**
  * Applies `parser`, falling back to `null` if it fails. Never fails.
@@ -9,24 +10,10 @@ import type { Parser } from '@types'
  */
 export function optional<T>(parser: Parser<T>): Parser<T | null> {
   return {
-    parse(input, pos) {
-      const result = parser.parse(input, pos)
+    parse(ctx) {
+      const result = parser.parse(ctx)
 
-      switch (result.isOk) {
-        case true: {
-          return result
-        }
-
-        case false: {
-          return {
-            isOk: true,
-            start: pos,
-            end: pos,
-            pos,
-            value: null,
-          }
-        }
-      }
+      return result === FAIL ? null : result
     },
   }
 }

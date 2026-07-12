@@ -8,56 +8,30 @@ import type { Parser } from '@types'
  * @returns Parsed string
  */
 export function string(match: string): Parser<string> {
-  if (match.length === 1) {
-    const code = match.charCodeAt(0)
-
-    return {
-      parse(input, pos) {
-        // Out of range charCodeAt yields NaN, which never compares equal.
-        if (input.charCodeAt(pos) === code) {
-          const nextPos = pos + 1
-
-          return {
-            isOk: true,
-            start: pos,
-            end: nextPos,
-            pos: nextPos,
-            value: match,
-          }
-        }
-
-        return {
-          isOk: false,
-          start: pos,
-          end: Math.min(pos + 1, input.length),
-          pos,
-          expected: match,
-        }
-      },
-    }
-  }
+  const length = match.length
+  const codes = match.split('').map((char) => char.charCodeAt(0))
 
   return {
-    parse(input, pos) {
-      if (input.startsWith(match, pos)) {
-        const nextPos = pos + match.length
+    parse(ctx) {
+      const input = ctx.input
+      const pos = ctx.pos
+      const end = pos + length
 
-        return {
-          isOk: true,
-          start: pos,
-          end: nextPos,
-          pos: nextPos,
-          value: match,
+      // Manual charCodeAt comparison stays on the JIT fast path, unlike String#startsWith.
+      if (end <= input.length) {
+        let index = 0
+
+        while (index < length && input.charCodeAt(pos + index) === codes[index]) {
+          index++
+        }
+
+        if (index === length) {
+          ctx.pos = end
+          return match
         }
       }
 
-      return {
-        isOk: false,
-        start: pos,
-        end: Math.min(pos + match.length, input.length),
-        pos,
-        expected: match,
-      }
+      return ctx.fail(match, Math.min(end, input.length))
     },
   }
 }
