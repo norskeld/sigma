@@ -34,6 +34,10 @@ export type GrammarType = {
  * destructure these, pass them around individually, or compose them with other
  * grammars, parsers or combinators as needed.
  *
+ * Initializers must return self-contained parsers whose `parse` doesn't rely on `this`,
+ * because `parse` is copied onto the grammar object. Class-based or otherwise stateful
+ * parsers would lose their state; use `defer` for those instead.
+ *
  * @example
  *
  * ```typescript
