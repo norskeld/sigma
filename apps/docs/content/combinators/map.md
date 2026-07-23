@@ -5,7 +5,7 @@ description: "map combinator applies a function to the parser's result and retur
 
 # map
 
-`map` combinator applies `fn` to the `parser`'s result and returns the result of that `fn`.
+`map` combinator applies `fn` to the `parser`'s result and returns the result of that `fn`. `fn` also receives the result's span as its second argument.
 
 ## Usage
 
