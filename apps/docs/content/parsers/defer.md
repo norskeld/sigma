@@ -3,7 +3,7 @@ title: 'defer'
 description: 'defer is a special parser that is tailored for creating mutually recursive parsers.'
 ---
 
-# defer <Primitive />
+# defer
 
 `defer` is a special parser that has an additional `with` method, which must be used to define the parser, before it is called. This parser is tailored for creating mutually recursive parsers.
 

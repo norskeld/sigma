@@ -3,7 +3,7 @@ title: 'takeMid'
 description: 'takeMid combinator takes exactly three parsers and applies them in order. Returns the result of the parser in the middle.'
 ---
 
-# takeMid <Composite />
+# takeMid
 
 `takeMid` combinator takes exactly **three** parsers and applies them in order. Returns the result of the `p2` parser in the middle.
 

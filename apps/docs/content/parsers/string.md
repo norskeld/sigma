@@ -3,7 +3,7 @@ title: 'string'
 description: 'string parses a string. Returns the parsed string.'
 ---
 
-# string <Primitive />
+# string
 
 `string` parses a string. Returns the parsed string.
 

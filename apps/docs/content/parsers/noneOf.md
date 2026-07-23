@@ -3,7 +3,7 @@ title: 'noneOf'
 description: 'noneOf ensures that none of the characters in the given string matches the current character.'
 ---
 
-# noneOf <Primitive />
+# noneOf
 
 `noneOf` ensures that none of the characters in the given string matches the current character.
 

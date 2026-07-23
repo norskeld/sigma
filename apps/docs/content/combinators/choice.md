@@ -3,7 +3,7 @@ title: 'choice'
 description: 'choice combinator tries to apply parsers in order, until one of them succeeds. Returns a value of the succeeding parser.'
 ---
 
-# choice <Primitive />
+# choice
 
 `choice` combinator tries to apply `ps` parsers in order, until one of them succeeds. Returns a value of the succeeding parser.
 

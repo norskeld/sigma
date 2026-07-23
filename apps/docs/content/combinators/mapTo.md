@@ -3,7 +3,7 @@ title: 'mapTo'
 description: "mapTo combinator maps the parser's result to a constant value."
 ---
 
-# mapTo <Composite />
+# mapTo
 
 `mapTo` combinator maps the `parser`'s result to a constant `value`.
 

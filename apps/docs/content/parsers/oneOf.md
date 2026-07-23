@@ -3,7 +3,7 @@ title: 'oneOf'
 description: 'oneOf ensures that one of the characters in the given string matches the current character.'
 ---
 
-# oneOf <Primitive />
+# oneOf
 
 `oneOf` ensures that one of the characters in the given string matches the current character.
 

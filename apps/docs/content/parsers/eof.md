@@ -3,7 +3,7 @@ title: 'eof'
 description: 'eof only succeeds at the end of the input.'
 ---
 
-# eof <Primitive />
+# eof
 
 `eof` only succeeds (with `null`) at the end of the input.
 

@@ -3,7 +3,7 @@ title: 'eol'
 description: 'eol only succeeds at the end of the line with a matched line break character.'
 ---
 
-# eol <Composite />
+# eol
 
 `eol` only succeeds at the end of the line with a matched line break character.
 

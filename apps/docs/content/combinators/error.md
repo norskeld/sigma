@@ -3,7 +3,7 @@ title: 'error'
 description: 'error combinator allows to replace error message for parser.'
 ---
 
-# error <Primitive />
+# error
 
 `error` combinator allows to replace `parser`'s error message with `expected`.
 

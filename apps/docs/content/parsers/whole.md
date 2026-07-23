@@ -3,7 +3,7 @@ title: 'whole'
 description: "whole parses a positive whole number without leading zeros, e.g. '0', '7', '420'. Returns a decimal number obtained using parseInt with radix of 10."
 ---
 
-# whole <Composite />
+# whole
 
 `whole` parses a positive whole number without leading zeros, e.g. `0`, `7`, `420`. Returns **a decimal number** obtained using [parseInt] with radix of 10.
 

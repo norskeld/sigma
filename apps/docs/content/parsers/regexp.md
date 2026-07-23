@@ -3,7 +3,7 @@ title: 'regexp'
 description: 'regexp parses a string that matches a provided regular expression. Returns the matched string, or fails with a provided message.'
 ---
 
-# regexp <Primitive />
+# regexp
 
 `regexp` parses a string that matches a provided `re` regular expression. Returns the matched string, or fails with an `expected` message.
 

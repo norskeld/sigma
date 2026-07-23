@@ -3,7 +3,7 @@ title: 'any'
 description: 'any parses any single character from the input and returns it; it fails at the end of input.'
 ---
 
-# any <Primitive />
+# any
 
 `any` parses any single character from the input and returns it. It fails at the end of input.
 

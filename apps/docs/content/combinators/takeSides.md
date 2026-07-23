@@ -3,7 +3,7 @@ title: 'takeSides'
 description: 'takeSides combinator takes exactly three parsers and applies them in order. Returns a tuple of the results of the first and the last parsers.'
 ---
 
-# takeSides <Composite />
+# takeSides
 
 `takeSides` combinator takes exactly **three** parsers and applies them in order. Returns a tuple of the results of `p1` and `p3` parsers.
 

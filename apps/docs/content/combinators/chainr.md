@@ -3,7 +3,7 @@ title: 'chainr'
 description: 'chainr combinator parses zero or more occurrences of parser, separated by op. Returns a value obtained by a recursive right-associative application of a function to the values returned by parser and op.'
 ---
 
-# chainr <Composite />
+# chainr
 
 `chainr` combinator parses _zero_ or more occurrences of `parser`, separated by `op` (in [EBNF] notation: `parser (op parser)*`). Returns a value obtained by a recursive right-associative application of `fn` to the operand values and the values returned by `op`. It is the right-associative counterpart of [chainl], useful for right-associative operators like exponentiation.
 

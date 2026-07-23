@@ -3,7 +3,7 @@ title: 'filter'
 description: 'filter combinator applies parser and tests its value with a predicate, failing if the value is rejected.'
 ---
 
-# filter <Primitive />
+# filter
 
 `filter` combinator applies `parser` and tests its value with the `fn` predicate. Succeeds with the value if `fn` returns `true`, otherwise fails with `expected`. Failures of `parser` itself are propagated as is.
 

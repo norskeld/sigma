@@ -3,7 +3,7 @@ title: 'count'
 description: 'count combinator applies parser exactly n times and collects the values into an array.'
 ---
 
-# count <Primitive />
+# count
 
 `count` combinator applies `parser` exactly `n` times and collects the values into an array. Fails with the first failure of `parser`. Resolves to an empty array if `n` is less than one.
 

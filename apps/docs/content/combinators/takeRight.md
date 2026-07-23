@@ -3,7 +3,7 @@ title: 'takeRight'
 description: 'takeRight combinator takes exactly two parsers and applies them in order. Returns the result of the rightmost parser.'
 ---
 
-# takeRight <Composite />
+# takeRight
 
 `takeRight` combinator takes exactly **two** parsers and applies them in order. Returns the result of the rightmost `p2` parser.
 

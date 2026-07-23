@@ -3,7 +3,7 @@ title: 'attempt'
 description: "attempt combinator applies parser and behaves exactly like it on success. On failure it pretends that no input was consumed."
 ---
 
-# attempt <Primitive />
+# attempt
 
 `attempt` combinator applies `parser` and behaves exactly like it on success. On failure it pretends that no input was consumed: the failure's `pos` is reset to the position `attempt` was applied at, while `span` still covers the attempted region.
 

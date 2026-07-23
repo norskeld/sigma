@@ -3,7 +3,7 @@ title: 'takeLeft'
 description: 'takeLeft combinator takes exactly two parsers and applies them in order. Returns the result of the leftmost parser.'
 ---
 
-# takeLeft <Composite />
+# takeLeft
 
 `takeLeft` combinator takes exactly **two** parsers and applies them in order. Returns the result of the leftmost `p1` parser.
 

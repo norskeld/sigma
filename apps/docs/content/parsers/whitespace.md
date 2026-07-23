@@ -3,7 +3,7 @@ title: 'whitespace'
 description: 'whitespace parses whitespace, either a single character or consecutive ones. Returns the matched character(s).'
 ---
 
-# whitespace <Composite />
+# whitespace
 
 `whitespace` parses whitespace, either a single character or consecutive ones. Returns the matched character(s).
 

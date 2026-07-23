@@ -3,7 +3,7 @@ title: 'letter'
 description: 'letter parses a single alphabetical character. Returns the matched character. Unicode friendly.'
 ---
 
-# letter <Composite />
+# letter
 
 `letter` parses a single alphabetical character. Returns the matched character. Unicode friendly.
 

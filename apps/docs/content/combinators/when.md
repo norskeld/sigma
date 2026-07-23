@@ -3,7 +3,7 @@ title: 'when'
 description: 'when combinator allows to create chained, context-aware parsers, that may depend on the output of the context parser.'
 ---
 
-# when <Primitive />
+# when
 
 `when` combinator allows to create chained, context-aware parsers, that may depend on the output of the `context` parser. Returns a parser produced by the `parser` callback, which is called only if the `context` parser succeeds, i.e. if it fails, then `when` fails as well.
 

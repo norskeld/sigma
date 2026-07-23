@@ -3,7 +3,7 @@ title: 'optional'
 description: 'optional combinator tries to apply parser. Returns the result of parser or null. Never fails.'
 ---
 
-# optional <Primitive />
+# optional
 
 `optional` combinator tries to apply `parser`. Returns the result of `parser` or `null`. Never fails.
 

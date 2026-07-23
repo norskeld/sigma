@@ -3,7 +3,7 @@ title: 'sepBy1'
 description: 'sepBy combinator parses zero or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
 ---
 
-# sepBy1 <Composite />
+# sepBy1
 
 `sepBy1` combinator parses *one* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. Otherwise returns an error produced by `parser`.
 

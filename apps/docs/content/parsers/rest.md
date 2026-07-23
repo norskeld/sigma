@@ -3,7 +3,7 @@ title: 'rest'
 description: 'rest simply returns the unparsed input as a string. Never fails.'
 ---
 
-# rest <Primitive />
+# rest
 
 `rest` simply returns the unparsed input as a string. Never fails.
 

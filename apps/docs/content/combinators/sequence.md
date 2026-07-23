@@ -3,7 +3,7 @@ title: 'sequence'
 description: 'sequence combinator applies parsers in order, until all of them succeed. Returns a tuple of values returned by parsers.'
 ---
 
-# sequence <Primitive />
+# sequence
 
 `sequence` combinator applies `ps` parsers in order, until *all* of them succeed. Returns [a tuple][typescript-tuple] of values returned by `ps` parsers.
 

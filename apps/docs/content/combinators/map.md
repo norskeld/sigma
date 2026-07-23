@@ -3,7 +3,7 @@ title: 'map'
 description: "map combinator applies a function to the parser's result and returns the result of that function."
 ---
 
-# map <Primitive />
+# map
 
 `map` combinator applies `fn` to the `parser`'s result and returns the result of that `fn`.
 

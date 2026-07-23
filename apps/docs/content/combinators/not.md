@@ -3,7 +3,7 @@ title: 'not'
 description: 'not combinator applies parser without consuming any input and succeeds only if it fails, i.e. acts as negative lookahead.'
 ---
 
-# not <Primitive />
+# not
 
 `not` combinator applies `parser` without consuming any input and succeeds with `null` only if it fails, i.e. acts as the negative counterpart of [lookahead]. If `parser` succeeds, `not` fails with `expected`, which defaults to `unexpected input`.
 
