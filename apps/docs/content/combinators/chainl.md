@@ -1,25 +1,27 @@
 ---
 title: 'chainl'
-description: 'chainl combinator parses zero or more occurrences of parser, separated by op. Returns a value obtained by a recursive left-associative application of a function to the values returned by op and parser.'
+description: 'chainl combinator parses one or more occurrences of parser, separated by op. Returns a value obtained by a recursive left-associative application of a function to the operand values and the values returned by op.'
 ---
 
 # chainl
 
-`chainl` combinator parses _zero_ or more occurrences of `parser`, separated by `op` (in [EBNF] notation: `parser (op parser)*`). Returns a value obtained by a recursive left-associative application of `fn` to the values returned by `op` and `parser`. This combinator is particularly useful for eliminating left recursion, which typically occurs in expression grammars.
+`chainl` combinator parses _one_ or more occurrences of `parser`, separated by `op` (in [EBNF] notation: `parser (op parser)*`). Returns a value obtained by a recursive left-associative application of `fn` to the operand values and the values returned by `op`. This combinator is particularly useful for eliminating left recursion, which typically occurs in expression grammars.
+
+Note that the `op` parser matches _only_ the operator, and `fn` receives the operand values on both sides of it.
 
 ## Examples
 
 ### Simple calculator
 
 ::: info Combinators and parsers used in this section
-- Combinators: [chainl], [choice], [sequence]
+- Combinators: [chainl], [choice]
 - Parsers: [integer], [string]
 :::
 
 The code below showcases an implementation of a simple calculator that supports addition and subtraction. [Read on](#eliminating-left-recursion) to see how to make it more useful by adding new operators, grouping, and operator precedence.
 
 ```ts
-function mapBinary(left: number, [op, right]: [string, number]) {
+function mapBinary(left: number, op: string, right: number) {
   switch (op) {
     case '+': return left + right
     case '-': return left - right
@@ -29,12 +31,9 @@ function mapBinary(left: number, [op, right]: [string, number]) {
 
 const Parser = chainl(
   integer(),
-  sequence(
-    choice(
-      string('+'),
-      string('-')
-    ),
-    integer()
+  choice(
+    string('+'),
+    string('-')
   ),
   mapBinary
 )
@@ -62,16 +61,16 @@ You will get the following result:
 
 So what happens here? Let's unpack, step-by-step.
 
-- **Consume** `10 ['+', 10]`, eagerly **evaluate** by applying `mapBinary`, **yield** `20`.
-- **Consume** `20 ['-', 5]`, eagerly **evaluate** by applying `mapBinary`, **yield** `15`.
-- **Consume** `15 ['+', 15]`, eagerly **evaluate** by applying `mapBinary`, and finally **yield** `30`.
+- **Consume** `10 '+' 10`, eagerly **evaluate** by applying `mapBinary`, **yield** `20`.
+- **Consume** `'-' 5`, eagerly **evaluate** by applying `mapBinary` to the accumulated `20`, **yield** `15`.
+- **Consume** `'+' 15`, eagerly **evaluate** by applying `mapBinary` to the accumulated `15`, and finally **yield** `30`.
 
 As you can see, it directly maps to the [EBNF] notation given above: `parser (op parser)*`.
 
 ### Eliminating left recursion
 
 ::: info Combinators and parsers used in this section
-- Combinators: [chainl], [choice], [map], [sequence], [takeMid], [takeRight]
+- Combinators: [chainl], [choice], [takeMid], [takeRight]
 - Parsers: [defer], [integer], [string]
 :::
 
@@ -134,7 +133,7 @@ That was easy, wasn't it? If you look closely, you will see that the parser defi
 Factor.with(
   chainl(
     Term,
-    sequence(choice(string('*'), string('/')), Term),
+    choice(string('*'), string('/')),
     mapBinary
   )
 )
@@ -142,7 +141,7 @@ Factor.with(
 Expression.with(
   chainl(
     Factor,
-    sequence(choice(string('+'), string('-')), Factor),
+    choice(string('+'), string('-')),
     mapBinary
   )
 )
@@ -151,7 +150,7 @@ Expression.with(
 As you can see, we have added the multiplication and division operators, so we need to change the `mapBinary` function from the previous example a little bit.
 
 ```ts{5-6}
-function mapBinary(left: number, [op, right]: [string, number]) {
+function mapBinary(left: number, op: string, right: number) {
   switch (op) {
     case '+': return left + right
     case '-': return left - right
@@ -184,9 +183,9 @@ We will get the following result:
 
 ::: details Complete example
 ```ts
-import { chainl, choice, defer, integer, run, sequence, string, takeMid, takeRight } from '@nrsk/sigma'
+import { chainl, choice, defer, integer, run, string, takeMid, takeRight } from '@nrsk/sigma'
 
-function mapBinary(left: number, [op, right]: [string, number]) {
+function mapBinary(left: number, op: string, right: number) {
   switch (op) {
     case '+': return left + right
     case '-': return left - right
@@ -211,7 +210,7 @@ Term.with(
 Factor.with(
   chainl(
     Term,
-    sequence(choice(string('*'), string('/')), Term),
+    choice(string('*'), string('/')),
     mapBinary
   )
 )
@@ -219,7 +218,7 @@ Factor.with(
 Expression.with(
   chainl(
     Factor,
-    sequence(choice(string('+'), string('-')), Factor),
+    choice(string('+'), string('-')),
     mapBinary
   )
 )
@@ -238,8 +237,6 @@ console.log(
 
 [chainl]: ./chainl
 [choice]: ./choice
-[map]: ./map
-[sequence]: ./sequence
 [takemid]: ./takeMid
 [takeright]: ./takeRight
 

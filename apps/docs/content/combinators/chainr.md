@@ -1,13 +1,13 @@
 ---
 title: 'chainr'
-description: 'chainr combinator parses zero or more occurrences of parser, separated by op. Returns a value obtained by a recursive right-associative application of a function to the values returned by parser and op.'
+description: 'chainr combinator parses one or more occurrences of parser, separated by op. Returns a value obtained by a recursive right-associative application of a function to the values returned by parser and op.'
 ---
 
 # chainr
 
-`chainr` combinator parses _zero_ or more occurrences of `parser`, separated by `op` (in [EBNF] notation: `parser (op parser)*`). Returns a value obtained by a recursive right-associative application of `fn` to the operand values and the values returned by `op`. It is the right-associative counterpart of [chainl], useful for right-associative operators like exponentiation.
+`chainr` combinator parses _one_ or more occurrences of `parser`, separated by `op` (in [EBNF] notation: `parser (op parser)*`). Returns a value obtained by a recursive right-associative application of `fn` to the operand values and the values returned by `op`. It is the right-associative counterpart of [chainl], useful for right-associative operators like exponentiation.
 
-Note that unlike [chainl], the `op` parser matches _only_ the operator, and `fn` receives the operand values on both sides of it.
+Note that the `op` parser matches _only_ the operator, and `fn` receives the operand values on both sides of it.
 
 ## Usage
 
