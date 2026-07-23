@@ -18,6 +18,11 @@ describe('takeLeft', () => {
 
     should.matchState(actual, expected)
   })
+
+  it('should fail when the first parser fails', () => {
+    const parser = takeLeft(string('left'), string('mid'))
+    should.matchState(run(parser, 'xleftmid'), result(false, 'left'))
+  })
 })
 
 describe('takeMid', () => {
@@ -46,6 +51,16 @@ describe('takeMid', () => {
 
     should.matchState(actual, expected)
   })
+
+  it('should fail and roll back when the third parser fails', () => {
+    const parser = takeMid(string('l'), string('m'), string('r'))
+    should.matchState(run(parser, 'lmx'), result(false, 'r'))
+  })
+
+  it('should fail when the first parser fails', () => {
+    const parser = takeMid(string('l'), string('m'), string('r'))
+    should.matchState(run(parser, 'xmr'), result(false, 'l'))
+  })
 })
 
 describe('takeRight', () => {
@@ -63,6 +78,11 @@ describe('takeRight', () => {
     const expected = result(false, 'right')
 
     should.matchState(actual, expected)
+  })
+
+  it('should fail when the first parser fails', () => {
+    const parser = takeRight(string('mid'), string('right'))
+    should.matchState(run(parser, 'xmidright'), result(false, 'mid'))
   })
 })
 
@@ -86,5 +106,15 @@ describe('takeSides', () => {
     const expected = result(false, 'mid')
 
     should.matchState(actual, expected)
+  })
+
+  it('should fail and roll back when the third parser fails', () => {
+    const parser = takeSides(string('l'), string('m'), string('r'))
+    should.matchState(run(parser, 'lmx'), result(false, 'r'))
+  })
+
+  it('should fail when the first parser fails', () => {
+    const parser = takeSides(string('l'), string('m'), string('r'))
+    should.matchState(run(parser, 'xmr'), result(false, 'l'))
   })
 })
