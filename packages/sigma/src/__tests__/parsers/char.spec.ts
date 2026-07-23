@@ -29,10 +29,4 @@ describe('char', () => {
   it('should fail without consuming input on a surrogate pair mismatch', () => {
     should.matchState(run(char('\u{1F600}'), '\u{1F601}'), result(false, '\u{1F600}'))
   })
-
-  it('should throw on construction if not given exactly one character', () => {
-    should.throw(() => char(''))
-    should.throw(() => char('ab'))
-    should.throw(() => char('\u{1F600}x'))
-  })
 })

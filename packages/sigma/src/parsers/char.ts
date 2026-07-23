@@ -1,12 +1,5 @@
 import type { Parser } from '@types'
 
-/** @internal */
-export type CharConstraint<T extends string> = T extends `${infer _}${infer Rest}`
-  ? Rest extends ''
-    ? T
-    : 'expected at most one character'
-  : 'expected at least one character'
-
 /**
  * Parses a single character (a full code point).
  *
@@ -14,7 +7,7 @@ export type CharConstraint<T extends string> = T extends `${infer _}${infer Rest
  *
  * @returns Parsed character
  */
-export function char<const T extends string>(match: CharConstraint<T>): Parser<string> {
+export function char(match: string): Parser<string> {
   const code = match.charCodeAt(0)
 
   if (match.length === 1) {
