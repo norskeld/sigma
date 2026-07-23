@@ -1,4 +1,5 @@
-import { char } from '@parsers'
+import { sequence } from '@combinators'
+import { char, rest } from '@parsers'
 import { describe, it, parseAt, result, run, should } from '@testing'
 
 describe('char', () => {
@@ -13,5 +14,25 @@ describe('char', () => {
 
   it('should fail on empty input', () => {
     should.matchState(run(char('a'), ''), result(false, 'a'))
+  })
+
+  it('should succeed and consume a full surrogate pair on a match', () => {
+    const actual = parseAt(char('\u{1F600}'), '\u{1F600}!', 0)
+    should.beStrictEqual(actual, { isOk: true, start: 0, end: 2, pos: 2, value: '\u{1F600}' })
+  })
+
+  it('should leave the position after the surrogate pair for the next parser', () => {
+    const actual = run(sequence(char('\u{1F600}'), rest()), '\u{1F600}!')
+    should.matchState(actual, result(true, ['\u{1F600}', '!']))
+  })
+
+  it('should fail without consuming input on a surrogate pair mismatch', () => {
+    should.matchState(run(char('\u{1F600}'), '\u{1F601}'), result(false, '\u{1F600}'))
+  })
+
+  it('should throw on construction if not given exactly one character', () => {
+    should.throw(() => char(''))
+    should.throw(() => char('ab'))
+    should.throw(() => char('\u{1F600}x'))
   })
 })
