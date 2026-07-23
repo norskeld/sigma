@@ -1,5 +1,10 @@
 import type { Parser } from '@types'
 
+/** @internal */
+export type StringConstraint<T extends string> = T extends `${infer _}${infer _}`
+  ? T
+  : 'expected at least one character'
+
 /**
  * Parses a string.
  *
@@ -7,7 +12,7 @@ import type { Parser } from '@types'
  *
  * @returns Parsed string
  */
-export function string(match: string): Parser<string> {
+export function string<const T extends string>(match: StringConstraint<T>): Parser<string> {
   const length = match.length
   const codes = match.split('').map((char) => char.charCodeAt(0))
 
