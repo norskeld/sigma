@@ -1,5 +1,4 @@
 import {
-  char,
   choice,
   defer,
   float,
@@ -116,7 +115,7 @@ const StringLiteral = regexp(/"(?:\\.|[^"\\])*"/g, 'string')
 
 // Utility.
 const keyword = (s: string) => takeMid(Space, string(s), Space)
-const symbol = (s: string) => takeMid(Space, char(s), Space)
+const symbol = (s: string) => takeMid(Space, string(s), Space)
 
 // Composites.
 const JsonRoot = defer<Ast.JsonRoot>()

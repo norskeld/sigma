@@ -1,6 +1,5 @@
 import type { Parser } from '@nrsk/sigma'
 import {
-  char,
   choice,
   float,
   grammar,
@@ -117,7 +116,7 @@ const StringLiteral = regexp(/"(?:\\.|[^"\\])*"/g, 'string')
 
 // Utility.
 const keyword = (s: string) => takeMid(Space, string(s), Space)
-const symbol = (s: string) => takeMid(Space, char(s), Space)
+const symbol = (s: string) => takeMid(Space, string(s), Space)
 
 // Grammar.
 const Json = grammar({

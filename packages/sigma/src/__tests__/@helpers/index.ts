@@ -123,7 +123,6 @@ export const expectedCombinators = [
 export const expectedParsers = [
   'any',
   'binary',
-  'char',
   'defer',
   'eof',
   'eol',

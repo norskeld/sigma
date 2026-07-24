@@ -12,15 +12,14 @@ export function string(match: string): Parser<string> {
 
   return {
     parse(ctx) {
-      const input = ctx.input
       const pos = ctx.pos
 
-      if (input.startsWith(match, pos)) {
+      if (ctx.input.startsWith(match, pos)) {
         ctx.pos = pos + length
         return match
       }
 
-      return ctx.fail(match, Math.min(pos + length, input.length))
+      return ctx.fail(match, Math.min(pos + length, ctx.input.length))
     },
   }
 }
