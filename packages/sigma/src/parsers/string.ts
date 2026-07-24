@@ -9,29 +9,18 @@ import type { Parser } from '@types'
  */
 export function string(match: string): Parser<string> {
   const length = match.length
-  const codes = match.split('').map((char) => char.charCodeAt(0))
 
   return {
     parse(ctx) {
       const input = ctx.input
       const pos = ctx.pos
-      const end = pos + length
 
-      // Manual charCodeAt comparison stays on the JIT fast path, unlike String#startsWith.
-      if (end <= input.length) {
-        let index = 0
-
-        while (index < length && input.charCodeAt(pos + index) === codes[index]) {
-          index++
-        }
-
-        if (index === length) {
-          ctx.pos = end
-          return match
-        }
+      if (input.startsWith(match, pos)) {
+        ctx.pos = pos + length
+        return match
       }
 
-      return ctx.fail(match, Math.min(end, input.length))
+      return ctx.fail(match, Math.min(pos + length, input.length))
     },
   }
 }
