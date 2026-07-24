@@ -71,34 +71,35 @@ function toListNode(value: Array<NumberNode | ListNode>, span: s.Span): ListNode
   }
 }
 
-/* Parsers. */
+/* Grammar. */
 
 const OpenParen = s.string('(')
 const CloseParen = s.string(')')
 const Space = s.optional(s.whitespace())
 const Comma = s.sequence(Space, s.string(','), Space)
 
-const TupleNumber = s.defer<NumberNode>()
-const TupleList = s.defer<ListNode>()
+const Tuple = s.grammar({
+  Number(): s.Parser<NumberNode> {
+    return s.map(s.integer(), toNumberNode)
+  },
 
-TupleNumber.with(s.map(s.integer(), toNumberNode))
-
-TupleList.with(
-  s.map(
-    s.takeMid(
-      OpenParen,
-      s.sepBy(s.choice(TupleList, TupleNumber), Comma),
-      CloseParen
-    ),
-    toListNode,
-  ),
-)
+  List(): s.Parser<ListNode> {
+    return s.map(
+      s.takeMid(
+        OpenParen,
+        s.sepBy(s.choice(this.List, this.Number), Comma),
+        CloseParen
+      ),
+      toListNode,
+    )
+  },
+})
 ```
 
-Then we simply `run` the root parser, feeding it `with` text:
+The `grammar` function lets us define mutually recursive parsers within a single call, referencing sibling rules through `this`. Then we simply `run` the root parser, feeding it `with` text:
 
 ```ts
-console.log(s.run(TupleList).with('(1, 2, (3, 4))'))
+console.log(s.run(Tuple.List).with('(1, 2, (3, 4))'))
 ```
 
 And in the end we get the following output with the AST, which can then be manipulated if needed:
