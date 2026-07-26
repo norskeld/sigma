@@ -1,9 +1,9 @@
-import { not, takeLeft } from '@combinators'
+import { first, not } from '@combinators'
 import { letter, string } from '@parsers'
 import { describe, it, run, should } from '@testing'
 
 describe('not', () => {
-  const parser = takeLeft(string('let'), not(letter(), 'keyword boundary'))
+  const parser = first(string('let'), not(letter(), 'keyword boundary'))
 
   it('should succeed with null without consuming input if parser fails', () => {
     const actual = run(parser, 'let x')

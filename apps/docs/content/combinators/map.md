@@ -15,7 +15,7 @@ function add([left, right]: [number, number]): number {
 }
 
 const Parser = map(
-  takeSides(whole(), string('+'), whole()),
+  outer(whole(), string('+'), whole()),
   add
 )
 ```

@@ -3,6 +3,7 @@ import {
   choice,
   float,
   grammar,
+  inner,
   integer,
   map,
   optional,
@@ -11,7 +12,6 @@ import {
   sepBy,
   sequence,
   string,
-  takeMid,
   whitespace,
 } from '@nrsk/sigma'
 
@@ -115,8 +115,8 @@ const Space = optional(whitespace())
 const StringLiteral = regexp(/"(?:\\.|[^"\\])*"/g, 'string')
 
 // Utility.
-const keyword = (s: string) => takeMid(Space, string(s), Space)
-const symbol = (s: string) => takeMid(Space, string(s), Space)
+const keyword = (s: string) => inner(Space, string(s), Space)
+const symbol = (s: string) => inner(Space, string(s), Space)
 
 // Grammar.
 const Json = grammar({
@@ -125,7 +125,7 @@ const Json = grammar({
   },
   Object(): Parser<Ast.JsonObject> {
     return map(
-      takeMid(
+      inner(
         symbol(Terminals.OpenBrace),
         sepBy(this.ObjectProp, symbol(Terminals.Comma)),
         symbol(Terminals.CloseBrace),
@@ -138,7 +138,7 @@ const Json = grammar({
   },
   Array(): Parser<Ast.JsonArray> {
     return map(
-      takeMid(
+      inner(
         symbol(Terminals.OpenSquare),
         sepBy(this.Value, symbol(Terminals.Comma)),
         symbol(Terminals.CloseSquare),

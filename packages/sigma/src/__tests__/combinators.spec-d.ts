@@ -11,6 +11,8 @@ type StringOrNumberParser = Parser<string | number>
 type StringParsers = Parser<string[]>
 type NumberParsers = Parser<number[]>
 
+declare const p: StringParser
+
 describe('chain', () => {
   const { chainl, chainr } = c
 
@@ -183,39 +185,64 @@ describe('sequence', () => {
   })
 })
 
-describe('take', () => {
-  const { takeLeft, takeMid, takeRight, takeSides } = c
+describe('selector', () => {
+  const { first, inner, last, outer } = c
 
-  it('takeLeft should have correct inferred signature', () => {
-    expectTypeOf<typeof takeLeft>().returns.toMatchTypeOf<UnknownParser>()
+  it('first should have correct inferred signature', () => {
+    expectTypeOf<typeof first>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf<typeof takeLeft<string, number>>().returns.toMatchTypeOf<StringParser>()
-    expectTypeOf<typeof takeLeft<number, string>>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof first<[StringParser, NumberParser]>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof first<[NumberParser, StringParser]>>().returns.toMatchTypeOf<NumberParser>()
+
+    expectTypeOf<
+      typeof first<[StringParser, NumberParser, NumberParser]>
+    >().returns.toMatchTypeOf<StringParser>()
   })
 
-  it('takeRight should have correct inferred signature', () => {
-    expectTypeOf<typeof takeRight>().returns.toMatchTypeOf<UnknownParser>()
+  it('last should have correct inferred signature', () => {
+    expectTypeOf<typeof last>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf<typeof takeRight<string, number>>().returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf<typeof takeRight<number, string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof last<[StringParser, NumberParser]>>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof last<[NumberParser, StringParser]>>().returns.toMatchTypeOf<StringParser>()
+
+    expectTypeOf<
+      typeof last<[NumberParser, NumberParser, StringParser]>
+    >().returns.toMatchTypeOf<StringParser>()
   })
 
-  it('takeMid should have correct inferred signature', () => {
-    expectTypeOf<typeof takeMid>().returns.toMatchTypeOf<UnknownParser>()
+  it('inner should have correct inferred signature', () => {
+    expectTypeOf<typeof inner<string, number, string>>().returns.toMatchTypeOf<NumberParser>()
+    expectTypeOf<typeof inner<number, string, number>>().returns.toMatchTypeOf<StringParser>()
 
-    expectTypeOf<typeof takeMid<string, number, string>>().returns.toMatchTypeOf<NumberParser>()
-    expectTypeOf<typeof takeMid<number, string, number>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<
+      typeof inner<[StringParser, NumberParser, StringParser, StringParser]>
+    >().returns.toMatchTypeOf<Parser<[number, string]>>()
   })
 
-  it('takeSides should have correct inferred signature', () => {
-    expectTypeOf<typeof takeSides>().returns.toMatchTypeOf<UnknownParser>()
+  it('outer should have correct inferred signature', () => {
+    expectTypeOf<typeof outer>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf<typeof takeSides<string, number, string>>().returns.toMatchTypeOf<
+    expectTypeOf<typeof outer<[StringParser, NumberParser, StringParser]>>().returns.toMatchTypeOf<
       Parser<[string, string]>
     >()
-    expectTypeOf<typeof takeSides<number, string, number>>().returns.toMatchTypeOf<
-      Parser<[number, number]>
-    >()
+
+    expectTypeOf<
+      typeof outer<[NumberParser, StringParser, StringParser, NumberParser]>
+    >().returns.toMatchTypeOf<Parser<[number, number]>>()
+  })
+
+  it('should reject calls below the minimum arity', () => {
+    // @ts-expect-error `first` requires at least two parsers.
+    first(p)
+
+    // @ts-expect-error `last` requires at least two parsers.
+    last(p)
+
+    // @ts-expect-error `inner` requires at least three parsers.
+    inner(p, p)
+
+    // @ts-expect-error `outer` requires at least three parsers.
+    outer(p, p)
   })
 })
 

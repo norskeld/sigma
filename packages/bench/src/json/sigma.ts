@@ -2,6 +2,7 @@ import {
   choice,
   defer,
   float,
+  inner,
   integer,
   map,
   optional,
@@ -10,7 +11,6 @@ import {
   sepBy,
   sequence,
   string,
-  takeMid,
   whitespace,
 } from '@nrsk/sigma'
 
@@ -114,8 +114,8 @@ const Space = optional(whitespace())
 const StringLiteral = regexp(/"(?:\\.|[^"\\])*"/g, 'string')
 
 // Utility.
-const keyword = (s: string) => takeMid(Space, string(s), Space)
-const symbol = (s: string) => takeMid(Space, string(s), Space)
+const keyword = (s: string) => inner(Space, string(s), Space)
+const symbol = (s: string) => inner(Space, string(s), Space)
 
 // Composites.
 const JsonRoot = defer<Ast.JsonRoot>()
@@ -132,7 +132,7 @@ JsonRoot.with(choice(JsonObject, JsonArray))
 
 JsonObject.with(
   map(
-    takeMid(
+    inner(
       symbol(Terminals.OpenBrace),
       sepBy(JsonObjectProp, symbol(Terminals.Comma)),
       symbol(Terminals.CloseBrace),
@@ -145,7 +145,7 @@ JsonObjectProp.with(map(sequence(JsonString, symbol(Terminals.Colon), JsonValue)
 
 JsonArray.with(
   map(
-    takeMid(
+    inner(
       symbol(Terminals.OpenSquare),
       sepBy(JsonValue, symbol(Terminals.Comma)),
       symbol(Terminals.CloseSquare),

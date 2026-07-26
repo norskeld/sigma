@@ -13,4 +13,8 @@ describe('index exports', () => {
   it('should re-export parsers', () => {
     should.expose(exposed, ...expectedParsers)
   })
+
+  it('should not re-export sequence internals', () => {
+    should.notExpose(exposed, 'sequence2', 'sequence3', 'sequence4', 'sequence5', 'sequenceN')
+  })
 })

@@ -116,6 +116,29 @@ describe('utilities', () => {
     expectTypeOf<t.ToTupleOrArray<NumberParsersArray>>().not.toMatchTypeOf<string[]>()
   })
 
+  it('`ToFirst` should correctly infer right signature', () => {
+    expectTypeOf<t.ToFirst<ParsersTuple>>().toMatchTypeOf<string>()
+    expectTypeOf<t.ToFirst<NumberParsersArray>>().toMatchTypeOf<number>()
+
+    expectTypeOf<t.ToFirst<ParsersTuple>>().not.toMatchTypeOf<boolean>()
+  })
+
+  it('`ToLast` should correctly infer right signature', () => {
+    expectTypeOf<t.ToLast<ParsersTuple>>().toMatchTypeOf<boolean>()
+    expectTypeOf<t.ToLast<NumberParsersArray>>().toMatchTypeOf<number>()
+
+    expectTypeOf<t.ToLast<ParsersTuple>>().not.toMatchTypeOf<string>()
+  })
+
+  it('`ToInner` should correctly infer right signature', () => {
+    expectTypeOf<t.ToInner<ParsersTuple>>().toMatchTypeOf<[number]>()
+    expectTypeOf<t.ToInner<NumberParsersArray>>().toMatchTypeOf<number[]>()
+
+    expectTypeOf<t.ToInner<[...ParsersTuple, t.Parser<string>]>>().toMatchTypeOf<
+      [number, boolean]
+    >()
+  })
+
   it('`ToUnion` should correctly infer right signature', () => {
     expectTypeOf<t.ToUnion<ParsersTuple>>().toMatchTypeOf<string | number | boolean>()
 

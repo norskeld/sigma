@@ -60,6 +60,64 @@ export type ToTupleOrArray<T> =
     : []
 
 /**
+ * Given a tuple or an array of `Parser<T>`s, extracts the inner `T` of the first one.
+ *
+ * @example
+ *
+ * ```ts
+ * type U = [Parser<string>, Parser<number>, Parser<boolean>]
+ * type R = ToFirst<U> // type R = string
+ *
+ * type A = Array<Parser<number>>
+ * type T = ToFirst<A> // type T = number
+ * ```
+ */
+export type ToFirst<T> = T extends [Parser<infer Head>, ...Array<unknown>]
+  ? Head
+  : T extends Array<Parser<infer Inner>>
+    ? Inner
+    : never
+
+/**
+ * Given a tuple or an array of `Parser<T>`s, extracts the inner `T` of the last one.
+ *
+ * @example
+ *
+ * ```ts
+ * type U = [Parser<string>, Parser<number>, Parser<boolean>]
+ * type R = ToLast<U> // type R = boolean
+ *
+ * type A = Array<Parser<number>>
+ * type T = ToLast<A> // type T = number
+ * ```
+ */
+export type ToLast<T> = T extends [...Array<unknown>, Parser<infer Tail>]
+  ? Tail
+  : T extends Array<Parser<infer Inner>>
+    ? Inner
+    : never
+
+/**
+ * Given a tuple or an array of `Parser<T>`s, extracts the inner `T`s of all but the first and the
+ * last ones into a tuple or an array.
+ *
+ * @example
+ *
+ * ```ts
+ * type U = [Parser<string>, Parser<number>, Parser<boolean>, Parser<string>]
+ * type R = ToInner<U> // type R = [number, boolean]
+ *
+ * type A = Array<Parser<number>>
+ * type T = ToInner<A> // type T = number[]
+ * ```
+ */
+export type ToInner<T> = T extends [Parser<unknown>, ...infer Mid, Parser<unknown>]
+  ? ToTuple<Mid>
+  : T extends Array<Parser<infer Inner>>
+    ? Array<Inner>
+    : never
+
+/**
  * Given a tuple of `Parser<T>`s, recursively extracts inner `T`s into a union.
  *
  * @example

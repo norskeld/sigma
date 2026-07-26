@@ -46,6 +46,10 @@ export const should = {
     exposes.forEach((expose) => expect(exposed[expose]).toBeTruthy())
   },
 
+  notExpose(exposed: Record<string, unknown>, ...exposes: Array<string>): void {
+    exposes.forEach((expose) => expect(exposed).not.toHaveProperty(expose))
+  },
+
   matchState<T, R>(received: Result<T>, expected: ReducedResult<R>): void {
     expect(received.isOk).toBe(expected.isOk)
 
@@ -102,6 +106,9 @@ export const expectedCombinators = [
   'count',
   'error',
   'filter',
+  'first',
+  'inner',
+  'last',
   'lookahead',
   'many',
   'many1',
@@ -109,13 +116,10 @@ export const expectedCombinators = [
   'mapTo',
   'not',
   'optional',
+  'outer',
   'sepBy',
   'sepBy1',
   'sequence',
-  'takeLeft',
-  'takeMid',
-  'takeRight',
-  'takeSides',
   'when',
 ] as const
 

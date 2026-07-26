@@ -2,6 +2,8 @@ import type { Parser } from '@nrsk/sigma'
 import {
   choice,
   defer,
+  first,
+  last,
   map,
   optional,
   regexp,
@@ -9,8 +11,6 @@ import {
   sepBy1,
   sequence,
   string,
-  takeLeft,
-  takeRight,
   whitespace,
   whole,
 } from '@nrsk/sigma'
@@ -99,8 +99,8 @@ const Space = optional(whitespace())
 const IdentifierName = regexp(/[a-zA-Z]\w*/g, 'identifier')
 
 // Utility. Tokens consume trailing whitespace; keywords require whitespace right after.
-const token = <T>(parser: Parser<T>) => takeLeft(parser, Space)
-const keyword = (word: string) => takeLeft(string(word), whitespace())
+const token = <T>(parser: Parser<T>) => first(parser, Space)
+const keyword = (word: string) => first(string(word), whitespace())
 
 // Composites.
 const SelectStatement = defer<Ast.SelectStatement>()
@@ -118,13 +118,13 @@ SelectStatement.with(
 
 SelectClause.with(
   map(
-    takeRight(keyword(Keywords.Select), sepBy1(Identifier, token(string(Terminals.Comma)))),
+    last(keyword(Keywords.Select), sepBy1(Identifier, token(string(Terminals.Comma)))),
     toSelectClause,
   ),
 )
 
-FromClause.with(map(takeRight(keyword(Keywords.From), Identifier), toFromClause))
-WhereClause.with(map(takeRight(keyword(Keywords.Where), Expression), toWhereClause))
+FromClause.with(map(last(keyword(Keywords.From), Identifier), toFromClause))
+WhereClause.with(map(last(keyword(Keywords.Where), Expression), toWhereClause))
 
 Expression.with(
   map(

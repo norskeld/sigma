@@ -10,7 +10,7 @@ description: 'defer is a special parser that is tailored for creating mutually r
 ## Example
 
 ::: info Combinators and parsers used in this section
-- Combinators: [choice], [sepBy], [map], [takeMid]
+- Combinators: [choice], [sepBy], [map], [inner]
 - Parsers: [defer], [integer], [string]
 :::
 
@@ -41,7 +41,7 @@ TupleNumber.with(
 
 TupleList.with(
   map(
-    takeMid(
+    inner(
       string('('),
       sepBy(choice(TupleList, TupleNumber), string(',')),
       string(')')
@@ -98,7 +98,7 @@ We will get the following result:
 [choice]: ../combinators/choice
 [map]: ../combinators/map
 [sepBy]: ../combinators/sepBy
-[takeMid]: ../combinators/takeMid
+[inner]: ../combinators/inner
 
 <!-- Parsers. -->
 

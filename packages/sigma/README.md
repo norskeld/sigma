@@ -85,7 +85,7 @@ const Tuple = s.grammar({
 
   List(): s.Parser<ListNode> {
     return s.map(
-      s.takeMid(
+      s.inner(
         OpenParen,
         s.sepBy(s.choice(this.List, this.Number), Comma),
         CloseParen

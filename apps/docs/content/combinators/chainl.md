@@ -70,7 +70,7 @@ As you can see, it directly maps to the [EBNF] notation given above: `parser (op
 ### Eliminating left recursion
 
 ::: info Combinators and parsers used in this section
-- Combinators: [chainl], [choice], [takeMid], [takeRight]
+- Combinators: [chainl], [choice], [inner], [last]
 - Parsers: [defer], [integer], [string]
 :::
 
@@ -121,8 +121,8 @@ Now we are ready to define parsers for the production rules. Let's start with th
 Term.with(
   choice(
     integer(),
-    takeRight(choice(string('+'), string('-')), Term),
-    takeMid(string('('), Expression, string(')'))
+    last(choice(string('+'), string('-')), Term),
+    inner(string('('), Expression, string(')'))
   )
 )
 ```
@@ -183,7 +183,7 @@ We will get the following result:
 
 ::: details Complete example
 ```ts
-import { chainl, choice, defer, integer, run, string, takeMid, takeRight } from '@nrsk/sigma'
+import { chainl, choice, defer, integer, run, string, inner, last } from '@nrsk/sigma'
 
 function mapBinary(left: number, op: string, right: number) {
   switch (op) {
@@ -202,8 +202,8 @@ const Expression = defer<number>()
 Term.with(
   choice(
     integer(),
-    takeRight(choice(string('+'), string('-')), Term),
-    takeMid(string('('), Expression, string(')'))
+    last(choice(string('+'), string('-')), Term),
+    inner(string('('), Expression, string(')'))
   )
 )
 
@@ -237,8 +237,8 @@ console.log(
 
 [chainl]: ./chainl
 [choice]: ./choice
-[takemid]: ./takeMid
-[takeright]: ./takeRight
+[inner]: ./inner
+[last]: ./last
 
 <!-- Parsers. -->
 

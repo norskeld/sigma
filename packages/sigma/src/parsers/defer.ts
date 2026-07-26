@@ -42,7 +42,7 @@ type Deferred<T> = Parser<T> & {
  *
  * TupleList.with(
  *   map(
- *     takeMid(
+ *     inner(
  *       string('('),
  *       sepBy(choice(TupleList, TupleNumber), string(',')),
  *       string(')')

@@ -1,10 +1,10 @@
-import { lookahead, sequence, takeLeft } from '@combinators'
+import { first, lookahead, sequence } from '@combinators'
 import { string, whitespace } from '@parsers'
 import { describe, it, run, should } from '@testing'
 
 describe('lookahead', () => {
   const parser = sequence(
-    takeLeft(string('hello'), whitespace()),
+    first(string('hello'), whitespace()),
     lookahead(string('let')),
     string('lettuce'),
   )

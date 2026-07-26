@@ -10,11 +10,11 @@ description: 'when combinator allows to create chained, context-aware parsers, t
 ## Usage
 
 ```ts
-const Parser = when(takeLeft(letters(), whitespace()), ({ value }) => {
+const Parser = when(first(letters(), whitespace()), ({ value }) => {
   switch (value) {
     case 'integer': return integer()
     case 'string': return letters()
-    case 'bracketed': return takeMid(string('('), letters(), string(')'))
+    case 'bracketed': return inner(string('('), letters(), string(')'))
     default: return rest()
   }
 })

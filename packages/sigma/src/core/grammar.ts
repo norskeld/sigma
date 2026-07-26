@@ -57,7 +57,7 @@ export type GrammarType = {
  *   },
  *   tupleList(): Parser<ListNode> {
  *     return map(
- *       takeMid(
+ *       inner(
  *         string('('),
  *         sepBy(choice(this.tupleList, this.tupleNumber), string(',')),
  *         string(')')

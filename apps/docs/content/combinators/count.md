@@ -13,7 +13,7 @@ Combined with [when], `count` makes it easy to parse length-prefixed data, e.g. 
 
 ```ts
 const Parser = when(
-  takeLeft(integer(), string(':')),
+  first(integer(), string(':')),
   ({ value }) => map(count(any(), value), (chars) => chars.join(''))
 )
 ```

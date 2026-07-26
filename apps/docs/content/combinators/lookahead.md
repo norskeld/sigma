@@ -13,7 +13,7 @@ The example is rather contrived, but it clearly illustrates how the combinator w
 
 ```ts
 const Parser = sequence(
-  takeLeft(string('hello'), whitespace()),
+  first(string('hello'), whitespace()),
   lookahead(string('let')),
   string('lettuce')
 )

@@ -167,7 +167,7 @@ function sequence5<T>(
 }
 
 /** @internal */
-function sequenceN<T>(ps: Array<Parser<T>>): Parser<Array<T>> {
+export function sequenceN<T>(ps: Array<Parser<T>>): Parser<Array<T>> {
   const len = ps.length
 
   return {

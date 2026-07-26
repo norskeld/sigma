@@ -1,6 +1,7 @@
 import {
   choice,
   defer,
+  inner,
   map,
   optional,
   regexp,
@@ -8,7 +9,6 @@ import {
   sepBy,
   sequence,
   string,
-  takeMid,
   whitespace,
 } from '@nrsk/sigma'
 
@@ -52,7 +52,7 @@ const TupleList = defer<Ast.ListNode>()
 TupleNumber.with(map(Integer, toNumber))
 
 TupleList.with(
-  map(takeMid(OpenParen, sepBy(choice(TupleNumber, TupleList), Comma), CloseParen), toList),
+  map(inner(OpenParen, sepBy(choice(TupleNumber, TupleList), Comma), CloseParen), toList),
 )
 
 /* Wrapper for bench runner. */

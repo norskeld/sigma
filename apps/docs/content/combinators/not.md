@@ -12,7 +12,7 @@ description: 'not combinator applies parser without consuming any input and succ
 The example below parses the `let` keyword, rejecting identifiers that merely start with it, like `letx`.
 
 ```ts
-const Parser = takeLeft(string('let'), not(letter(), 'keyword boundary'))
+const Parser = first(string('let'), not(letter(), 'keyword boundary'))
 ```
 
 ::: tip Success
