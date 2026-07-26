@@ -1,4 +1,4 @@
-import { when } from '@combinators'
+import { choice, when } from '@combinators'
 import { string } from '@parsers'
 import { describe, it, result, run, should } from '@testing'
 
@@ -24,5 +24,50 @@ describe('when', () => {
     const expected = result(false, 'y')
 
     should.matchState(actual, expected)
+  })
+
+  it('should pass the context parser value and position to the callback', () => {
+    let actual: unknown = null
+
+    run(
+      when(string('ab'), (ctx) => {
+        actual = { ...ctx }
+
+        return string('c')
+      }),
+      'abc',
+    )
+
+    should.beStrictEqual(actual, { value: 'ab', pos: 2, input: 'abc' })
+  })
+
+  it('should not consume input when the chained parser fails', () => {
+    const parser = choice(
+      when(string('ab'), () => string('z')),
+      string('abc'),
+    )
+
+    const actual = run(parser, 'abc')
+
+    should.beStrictEqual(actual, {
+      isOk: true,
+      start: 0,
+      end: 3,
+      pos: 3,
+      value: 'abc',
+    })
+  })
+
+  it('should report the failure of the chained parser at its own position', () => {
+    const parser = when(string('ab'), () => string('z'))
+    const actual = run(parser, 'abc')
+
+    should.beStrictEqual(actual, {
+      isOk: false,
+      start: 2,
+      end: 3,
+      pos: 2,
+      expected: 'z',
+    })
   })
 })

@@ -96,7 +96,6 @@ export function testSuccess<T, P extends Parser<unknown>>(input: string, value: 
 export const expectedCore = ['run', 'tryRun'] as const
 
 export const expectedCombinators = [
-  'attempt',
   'chainl',
   'chainr',
   'choice',

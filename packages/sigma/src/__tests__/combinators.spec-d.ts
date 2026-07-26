@@ -11,15 +11,6 @@ type StringOrNumberParser = Parser<string | number>
 type StringParsers = Parser<string[]>
 type NumberParsers = Parser<number[]>
 
-describe('attempt', () => {
-  const { attempt } = c
-
-  it('attempt should have correct inferred signature', () => {
-    expectTypeOf<typeof attempt>().returns.toMatchTypeOf<UnknownParser>()
-    expectTypeOf<typeof attempt<string>>().returns.toMatchTypeOf<StringParser>()
-  })
-})
-
 describe('chain', () => {
   const { chainl, chainr } = c
 
