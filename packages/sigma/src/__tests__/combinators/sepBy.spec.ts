@@ -8,9 +8,10 @@ function countingSep(): Parser<null> & { calls(): number } {
 
   return {
     calls: () => calls,
-    parse(_, pos) {
+    parse(ctx) {
       calls += 1
-      return { isOk: false, start: pos, end: pos, pos, expected: 'separator' }
+
+      return ctx.fail('separator')
     },
   }
 }
@@ -71,6 +72,15 @@ describe('sepBy', () => {
 
     should.matchState(actual, expected)
     should.beEqual(sep.calls(), 0)
+  })
+
+  it('should invoke the separator once when input is left over', () => {
+    const sep = countingSep()
+    const actual = run(sepBy(string('ab'), sep), 'abab')
+    const expected = result(true, ['ab'])
+
+    should.matchState(actual, expected)
+    should.beEqual(sep.calls(), 1)
   })
 })
 

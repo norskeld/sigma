@@ -26,7 +26,10 @@ export function hex(): Parser<number> {
   return {
     parse(ctx) {
       const result = HEXADECIMAL_PARSER.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return parseInt(result.slice(2), 16)
     },
@@ -42,7 +45,10 @@ export function binary(): Parser<number> {
   return {
     parse(ctx) {
       const result = BINARY_PARSER.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return parseInt(result.slice(2), 2)
     },
@@ -58,7 +64,10 @@ export function octal(): Parser<number> {
   return {
     parse(ctx) {
       const result = OCTAL_PARSER.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return parseInt(result.slice(2), 8)
     },
@@ -74,7 +83,10 @@ export function whole(): Parser<number> {
   return {
     parse(ctx) {
       const result = WHOLE_PARSER.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return parseInt(result, 10)
     },
@@ -90,7 +102,10 @@ export function integer(): Parser<number> {
   return {
     parse(ctx) {
       const result = INTEGER_PARSER.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return parseInt(result, 10)
     },
@@ -108,7 +123,10 @@ export function float(): Parser<number> {
   return {
     parse(ctx) {
       const result = FLOAT_PARSER.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return parseFloat(result)
     },

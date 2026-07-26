@@ -8,7 +8,7 @@ describe('filter', () => {
   it('should succeed with the value if the predicate passes', () => {
     const actual = run(parser, '8080')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: true,
       start: 0,
       end: 4,
@@ -20,7 +20,7 @@ describe('filter', () => {
   it('should fail with expected if the predicate rejects the value', () => {
     const actual = run(parser, '70000')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 5,

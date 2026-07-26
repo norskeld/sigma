@@ -20,12 +20,12 @@ describe('hex', () => {
 
   it('should succeed with the span of the matched number', () => {
     const actual = parseAt(hex(), '0xFF', 0)
-    should.beStrictEqual(actual, { isOk: true, start: 0, end: 4, pos: 4, value: 255 })
+    should.matchResult(actual, { isOk: true, start: 0, end: 4, pos: 4, value: 255 })
   })
 
   it('should fail without consuming input', () => {
     const actual = parseAt(hex(), 'zz', 0)
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 0,
@@ -37,21 +37,21 @@ describe('hex', () => {
   it('should parse repeatedly at different positions with one instance', () => {
     const parser = hex()
 
-    should.beStrictEqual(parseAt(parser, '0x1F', 0), {
+    should.matchResult(parseAt(parser, '0x1F', 0), {
       isOk: true,
       start: 0,
       end: 4,
       pos: 4,
       value: 31,
     })
-    should.beStrictEqual(parseAt(parser, '..0x2A', 2), {
+    should.matchResult(parseAt(parser, '..0x2A', 2), {
       isOk: true,
       start: 2,
       end: 6,
       pos: 6,
       value: 42,
     })
-    should.beStrictEqual(parseAt(parser, '0x1F', 0), {
+    should.matchResult(parseAt(parser, '0x1F', 0), {
       isOk: true,
       start: 0,
       end: 4,
@@ -119,12 +119,12 @@ describe('integer', () => {
 
   it('should succeed at a non-zero position', () => {
     const actual = parseAt(integer(), 'a-42', 1)
-    should.beStrictEqual(actual, { isOk: true, start: 1, end: 4, pos: 4, value: -42 })
+    should.matchResult(actual, { isOk: true, start: 1, end: 4, pos: 4, value: -42 })
   })
 
   it('should fail without consuming input', () => {
     const actual = parseAt(integer(), 'abc', 0)
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 0,
@@ -147,7 +147,7 @@ describe('float', () => {
 
   it('should fail without consuming input', () => {
     const actual = parseAt(float(), '4', 0)
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 0,

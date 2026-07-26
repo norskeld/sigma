@@ -19,9 +19,12 @@ export function filter<T>(
   return {
     parse(ctx) {
       const start = ctx.pos
-
+      const mark = ctx.mark()
       const result = parser.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       if (fn(result as T)) {
         return result
@@ -30,6 +33,7 @@ export function filter<T>(
       // The reported span covers the rejected value, but the position is rewound.
       const end = ctx.pos
       ctx.pos = start
+      ctx.reset(mark)
 
       return ctx.fail(expected, end)
     },

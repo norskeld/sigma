@@ -5,7 +5,7 @@ description: 'many combinator applies parser zero or more times. Returns an arra
 
 # many
 
-`many` combinator applies `parser` *zero* or more times. Returns an array of the returned values of `parser`. This combinator never fails and returns an empty list if nothing matched. Successes that consume no input are not collected, so the combinator always terminates.
+`many` combinator applies `parser` *zero* or more times. Returns an array of the returned values of `parser`. This combinator never fails on its own and returns an empty list if nothing matched, but a [committed][commit] failure from `parser` propagates instead of ending the loop. Successes that consume no input are not collected, so the combinator always terminates.
 
 ## Usage
 
@@ -40,3 +40,7 @@ run(Parser).with('---')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit

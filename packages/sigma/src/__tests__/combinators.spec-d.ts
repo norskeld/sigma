@@ -100,8 +100,8 @@ describe('many', () => {
   it('many should have correct inferred signature', () => {
     expectTypeOf<typeof many>().returns.toMatchTypeOf<UnknownParser>()
 
-    expectTypeOf<typeof many<string>>().returns.toMatchTypeOf<SucceedingParser<string[]>>()
-    expectTypeOf<typeof many<number>>().returns.toMatchTypeOf<SucceedingParser<number[]>>()
+    expectTypeOf<typeof many<string>>().returns.toMatchTypeOf<StringParsers>()
+    expectTypeOf<typeof many<number>>().returns.toMatchTypeOf<NumberParsers>()
   })
 
   it('many1 should have correct inferred signature', () => {
@@ -276,5 +276,48 @@ describe('when', () => {
 
     expectTypeOf<typeof when<number, StringParser>>().returns.toMatchTypeOf<StringParser>()
     expectTypeOf<typeof when<number, NumberParser>>().returns.toMatchTypeOf<NumberParser>()
+  })
+})
+
+describe('commit', () => {
+  const { backtrack, commit } = c
+
+  it('commit should have correct inferred signature', () => {
+    expectTypeOf<typeof commit>().returns.toMatchTypeOf<UnknownParser>()
+
+    expectTypeOf<typeof commit<string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof commit<number>>().returns.toMatchTypeOf<NumberParser>()
+  })
+
+  it('backtrack should have correct inferred signature', () => {
+    expectTypeOf<typeof backtrack>().returns.toMatchTypeOf<UnknownParser>()
+
+    expectTypeOf<typeof backtrack<string>>().returns.toMatchTypeOf<StringParser>()
+    expectTypeOf<typeof backtrack<number>>().returns.toMatchTypeOf<NumberParser>()
+  })
+})
+
+describe('recover', () => {
+  const { recover } = c
+
+  it('recover should widen to the fallback type', () => {
+    expectTypeOf<typeof recover<string, number>>().returns.toMatchTypeOf<StringOrNumberParser>()
+  })
+
+  it('recover should resolve to null without a fallback', () => {
+    expectTypeOf<typeof recover<string>>().returns.toMatchTypeOf<Parser<string | null>>()
+  })
+})
+
+describe('sync', () => {
+  const { syncNested, syncPast, syncTo } = c
+
+  it('syncTo and syncPast should never fail', () => {
+    expectTypeOf<typeof syncTo>().returns.toMatchTypeOf<SucceedingParser<null>>()
+    expectTypeOf<typeof syncPast>().returns.toMatchTypeOf<SucceedingParser<null>>()
+  })
+
+  it('syncNested should be fallible', () => {
+    expectTypeOf<typeof syncNested>().returns.toMatchTypeOf<Parser<null>>()
   })
 })

@@ -1,4 +1,4 @@
-import { first, lookahead, sequence } from '@combinators'
+import { commit, first, lookahead, recover, sequence, syncPast } from '@combinators'
 import { string, whitespace } from '@parsers'
 import { describe, it, run, should } from '@testing'
 
@@ -12,7 +12,7 @@ describe('lookahead', () => {
   it('should successfully lookahead and return pos untouched', () => {
     const actual = run(parser, 'hello lettuce')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: true,
       start: 0,
       end: 13,
@@ -24,7 +24,7 @@ describe('lookahead', () => {
   it('should correctly fail if placed before a failing parser (OOB check)', () => {
     const actual = run(parser, 'hello let')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 6,
       end: 9,
@@ -36,7 +36,7 @@ describe('lookahead', () => {
   it('should correctly fail if given a failing parser (non-consuming check)', () => {
     const actual = run(parser, 'hello const')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 6,
       end: 9,
@@ -48,12 +48,20 @@ describe('lookahead', () => {
   it('should return failure as is with the deepest pos', () => {
     const actual = run(lookahead(sequence(string('hello'), string(' world'))), 'hello there')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 5,
       end: 11,
       pos: 5,
       expected: ' world',
     })
+  })
+
+  it('should not report a recovery made inside it twice', () => {
+    // The region is parsed for real right after, so only the second pass may record anything.
+    const region = recover(commit(string('a'), 'x'), syncPast(string(';')), () => 'bad')
+    const actual = run(sequence(lookahead(region), region), 'z;')
+
+    should.matchErrors(actual, ['a'])
   })
 })

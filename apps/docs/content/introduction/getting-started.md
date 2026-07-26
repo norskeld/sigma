@@ -1,6 +1,7 @@
 ---
 title: 'Getting started'
 description: 'Learn how to install and get started with Sigma.'
+order: 1
 ---
 
 # Getting started

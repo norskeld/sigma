@@ -21,7 +21,7 @@ describe('first', () => {
 
   it('should succeed with the span covering the whole sequence', () => {
     const actual = parseAt(first(string('l'), string('m'), string('r')), 'lmr', 0)
-    should.beStrictEqual(actual, { isOk: true, start: 0, end: 3, pos: 3, value: 'l' })
+    should.matchResult(actual, { isOk: true, start: 0, end: 3, pos: 3, value: 'l' })
   })
 
   it('should fail completely when one of the parsers fail', () => {
@@ -62,12 +62,12 @@ describe('inner', () => {
 
   it('should succeed with the span covering the whole sequence', () => {
     const actual = parseAt(inner(string('l'), string('m'), string('r')), 'lmr', 0)
-    should.beStrictEqual(actual, { isOk: true, start: 0, end: 3, pos: 3, value: 'm' })
+    should.matchResult(actual, { isOk: true, start: 0, end: 3, pos: 3, value: 'm' })
   })
 
   it('should fail at the position of the failed parser', () => {
     const actual = parseAt(inner(string('l'), string('m'), string('r')), 'l-r', 0)
-    should.beStrictEqual(actual, { isOk: false, start: 1, end: 2, pos: 1, expected: 'm' })
+    should.matchResult(actual, { isOk: false, start: 1, end: 2, pos: 1, expected: 'm' })
   })
 
   it('should fail completely when one of the parsers fail', () => {
@@ -113,7 +113,7 @@ describe('last', () => {
 
   it('should succeed with the span covering the whole sequence', () => {
     const actual = parseAt(last(string('l'), string('m'), string('r')), 'lmr', 0)
-    should.beStrictEqual(actual, { isOk: true, start: 0, end: 3, pos: 3, value: 'r' })
+    should.matchResult(actual, { isOk: true, start: 0, end: 3, pos: 3, value: 'r' })
   })
 
   it('should fail completely when one of the parsers fail', () => {
@@ -154,7 +154,7 @@ describe('outer', () => {
 
   it('should succeed with the span covering the whole sequence', () => {
     const actual = parseAt(outer(string('l'), string('m'), string('r')), 'lmr', 0)
-    should.beStrictEqual(actual, { isOk: true, start: 0, end: 3, pos: 3, value: ['l', 'r'] })
+    should.matchResult(actual, { isOk: true, start: 0, end: 3, pos: 3, value: ['l', 'r'] })
   })
 
   it('should fail completely when one of the parsers fail', () => {

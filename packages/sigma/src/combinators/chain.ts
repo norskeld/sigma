@@ -5,14 +5,12 @@ import { FAIL } from '@types'
 type TernaryFn<T, R> = (left: T, op: R, right: T) => T
 
 /**
- * Parses *one* or more occurrences of `parser`, separated by `op` (in [EBNF] notation:
+ * Parses *one* or more occurrences of `parser`, separated by `op` (in EBNF notation:
  * `parser (op parser)*`). Returns a value obtained by a recursive left-associative application of
  * `fn` to the values returned by `parser` and `op`. Left-associative counterpart of `chainr`.
  *
  * This combinator is particularly useful for eliminating left recursion, which typically occurs in
  * expression grammars.
- *
- * [EBNF]: https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
  *
  * @param parser - Parser to apply
  * @param op - Separating parser
@@ -27,8 +25,12 @@ export function chainl<T, L extends T, R>(
 ): Parser<T> {
   return {
     parse(ctx) {
+      const start = ctx.pos
       const first = parser.parse(ctx)
-      if (first === FAIL) return FAIL
+
+      if (first === FAIL) {
+        return FAIL
+      }
 
       let result: T = first as L
       const length = ctx.input.length
@@ -36,14 +38,40 @@ export function chainl<T, L extends T, R>(
       let last = ctx.pos
 
       while (last < length) {
+        // Marked per iteration, so recoveries from successful pairs are kept.
+        const mark = ctx.mark()
         const opResult = op.parse(ctx)
-        if (opResult === FAIL) break
+
+        if (opResult === FAIL) {
+          if (ctx.fatal) {
+            ctx.pos = start
+            return FAIL
+          }
+
+          ctx.reset(mark)
+
+          break
+        }
 
         const value = parser.parse(ctx)
 
-        // The progress guard covers the whole op-value pair to discard zero-width matches.
-        if (value === FAIL || ctx.pos <= last) {
+        if (value === FAIL) {
+          if (ctx.fatal) {
+            ctx.pos = start
+            return FAIL
+          }
+
           ctx.pos = last
+          ctx.reset(mark)
+
+          break
+        }
+
+        // The progress guard covers the whole op-value pair to discard zero-width matches.
+        if (ctx.pos <= last) {
+          ctx.pos = last
+          ctx.reset(mark)
+
           break
         }
 
@@ -57,12 +85,10 @@ export function chainl<T, L extends T, R>(
 }
 
 /**
- * Parses *one* or more occurrences of `parser`, separated by `op` (in [EBNF] notation:
+ * Parses *one* or more occurrences of `parser`, separated by `op` (in EBNF notation:
  * `parser (op parser)*`). Returns a value obtained by a recursive right-associative application of
  * `fn` to the values returned by `parser` and `op`. Right-associative counterpart of `chainl`,
  * useful for operators like exponentiation.
- *
- * [EBNF]: https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
  *
  * @param parser - Parser to apply
  * @param op - Separating parser
@@ -77,8 +103,12 @@ export function chainr<T, L extends T, R>(
 ): Parser<T> {
   return {
     parse(ctx) {
+      const start = ctx.pos
       const first = parser.parse(ctx)
-      if (first === FAIL) return FAIL
+
+      if (first === FAIL) {
+        return FAIL
+      }
 
       const values: Array<L> = [first as L]
       const ops: Array<R> = []
@@ -87,14 +117,40 @@ export function chainr<T, L extends T, R>(
       let last = ctx.pos
 
       while (last < length) {
+        // Marked per iteration, so recoveries from successful pairs are kept.
+        const mark = ctx.mark()
         const opResult = op.parse(ctx)
-        if (opResult === FAIL) break
+
+        if (opResult === FAIL) {
+          if (ctx.fatal) {
+            ctx.pos = start
+            return FAIL
+          }
+
+          ctx.reset(mark)
+
+          break
+        }
 
         const value = parser.parse(ctx)
 
-        // The progress guard covers the whole op-value pair to discard zero-width matches.
-        if (value === FAIL || ctx.pos <= last) {
+        if (value === FAIL) {
+          if (ctx.fatal) {
+            ctx.pos = start
+            return FAIL
+          }
+
           ctx.pos = last
+          ctx.reset(mark)
+
+          break
+        }
+
+        // The progress guard covers the whole op-value pair to discard zero-width matches.
+        if (ctx.pos <= last) {
+          ctx.pos = last
+          ctx.reset(mark)
+
           break
         }
 

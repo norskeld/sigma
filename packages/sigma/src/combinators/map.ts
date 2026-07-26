@@ -13,9 +13,11 @@ export function map<T, R>(parser: Parser<T>, fn: (value: T, span: Span) => R): P
   return {
     parse(ctx) {
       const start = ctx.pos
-
       const result = parser.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return fn(result as T, { start, end: ctx.pos })
     },
@@ -34,7 +36,10 @@ export function mapTo<T, R>(parser: Parser<T>, value: R): Parser<R> {
   return {
     parse(ctx) {
       const result = parser.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       return value
     },

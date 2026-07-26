@@ -1,12 +1,17 @@
 import { run as internal$run } from '@parsers'
-import type { Parser, Result } from '@types'
-import { FAIL, ParseContext } from '@types'
+import type { Failure, Parser, Result, Success } from '@types'
+import { EMPTY_ERRORS, FAIL, ParseContext } from '@types'
 import { expect } from 'vitest'
 
 interface ReducedResult<T> {
   isOk: boolean
   value: T
 }
+
+/** A whole {@link Result}, with the recovery fields defaulting to "nothing was recovered". */
+type ExpectedResult<T> =
+  | (Omit<Success<T>, 'errors'> & Partial<Pick<Success<T>, 'errors'>>)
+  | (Omit<Failure, 'errors' | 'label'> & Partial<Pick<Failure, 'errors' | 'label'>>)
 
 export function run<T>(parser: Parser<T>, text: string): Result<T> {
   return internal$run(parser).with(text)
@@ -17,14 +22,17 @@ export function parseAt<T>(parser: Parser<T>, input: string, pos: number): Resul
   ctx.pos = pos
 
   const value = parser.parse(ctx)
+  const errors = ctx.errors.length === 0 ? EMPTY_ERRORS : ctx.errors
 
-  if (value === FAIL) {
+  if (value === FAIL || ctx.fatal) {
     return {
       isOk: false,
       start: ctx.errorStart,
       end: ctx.errorEnd,
       pos: ctx.errorPos,
       expected: ctx.expected,
+      label: ctx.label,
+      errors,
     }
   }
 
@@ -34,6 +42,7 @@ export function parseAt<T>(parser: Parser<T>, input: string, pos: number): Resul
     end: ctx.pos,
     pos: ctx.pos,
     value: value as T,
+    errors,
   }
 }
 
@@ -64,6 +73,22 @@ export const should = {
         break
       }
     }
+  },
+
+  matchResult<T>(received: Result<T>, expected: ExpectedResult<T>): void {
+    const defaults = expected.isOk
+      ? { errors: EMPTY_ERRORS }
+      : { label: null, errors: EMPTY_ERRORS }
+
+    expect(received).toStrictEqual({ ...defaults, ...expected })
+  },
+
+  matchErrors<T>(received: Result<T>, expected: Array<string>): void {
+    expect(received.errors.map((error) => error.expected)).toStrictEqual(expected)
+  },
+
+  matchLabels<T>(received: Result<T>, expected: Array<string | null>): void {
+    expect(received.errors.map((error) => error.label)).toStrictEqual(expected)
   },
 
   beEqual<T = unknown>(a: T, b: T, message?: string) {
@@ -100,9 +125,11 @@ export function testSuccess<T, P extends Parser<unknown>>(input: string, value: 
 export const expectedCore = ['run', 'tryRun'] as const
 
 export const expectedCombinators = [
+  'backtrack',
   'chainl',
   'chainr',
   'choice',
+  'commit',
   'count',
   'error',
   'filter',
@@ -117,9 +144,15 @@ export const expectedCombinators = [
   'not',
   'optional',
   'outer',
+  'recover',
   'sepBy',
   'sepBy1',
   'sequence',
+  'skipUntil',
+  'syncNested',
+  'syncPast',
+  'syncTo',
+  'takeUntil',
   'when',
 ] as const
 

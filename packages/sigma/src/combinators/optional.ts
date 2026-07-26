@@ -2,7 +2,8 @@ import type { Parser } from '@types'
 import { FAIL } from '@types'
 
 /**
- * Applies `parser`, falling back to `null` if it fails. Never fails.
+ * Applies `parser`, falling back to `null` if it fails. Never fails on its own, but a committed
+ * failure from `parser` propagates.
  *
  * @param parser - Parser to apply
  *
@@ -11,9 +12,20 @@ import { FAIL } from '@types'
 export function optional<T>(parser: Parser<T>): Parser<T | null> {
   return {
     parse(ctx) {
+      const mark = ctx.mark()
       const result = parser.parse(ctx)
 
-      return result === FAIL ? null : result
+      if (result !== FAIL) {
+        return result
+      }
+
+      if (ctx.fatal) {
+        return FAIL
+      }
+
+      ctx.reset(mark)
+
+      return null
     },
   }
 }

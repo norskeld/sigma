@@ -1,6 +1,6 @@
 ---
 title: 'sepBy1'
-description: 'sepBy combinator parses zero or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
+description: 'sepBy1 combinator parses one or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
 ---
 
 # sepBy1

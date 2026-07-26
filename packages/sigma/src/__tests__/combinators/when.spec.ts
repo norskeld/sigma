@@ -49,7 +49,7 @@ describe('when', () => {
 
     const actual = run(parser, 'abc')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: true,
       start: 0,
       end: 3,
@@ -62,7 +62,7 @@ describe('when', () => {
     const parser = when(string('ab'), () => string('z'))
     const actual = run(parser, 'abc')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 2,
       end: 3,

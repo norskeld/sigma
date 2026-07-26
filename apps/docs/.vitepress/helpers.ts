@@ -46,17 +46,19 @@ export const Social = {
   },
 }
 
-export type Frontmatter = { title: string }
+export type Frontmatter = { title: string; order?: number }
 
 function getSorting(f: string) {
   // prettier-ignore
   switch (f) {
     case 'introduction':
       return 0
-    case 'core':
+    case 'guides':
       return 1
-    default:
+    case 'core':
       return 2
+    default:
+      return 3
   }
 }
 
@@ -88,11 +90,14 @@ export const Content = {
   },
 
   getItems(docFolder: string) {
-    return readdirSync(docFolder).map((filename) => {
-      const { name } = parse(filename)
-      const { title } = Markdown.getFrontmatter<Frontmatter>(`${docFolder}/${filename}`)
+    return readdirSync(docFolder)
+      .map((filename) => {
+        const { name } = parse(filename)
+        const { title, order } = Markdown.getFrontmatter<Frontmatter>(`${docFolder}/${filename}`)
 
-      return Sidebar.item(title, name)
-    })
+        return { item: Sidebar.item(title, name), order: order ?? Number.POSITIVE_INFINITY }
+      })
+      .sort((a, b) => a.order - b.order)
+      .map(({ item }) => item)
   },
 }

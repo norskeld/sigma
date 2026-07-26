@@ -5,7 +5,7 @@ description: 'sepBy combinator parses zero or more occurrences of parser, separa
 
 # sepBy
 
-`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. This combinator never fails and returns an empty list if nothing matched.
+`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. This combinator never fails on its own and returns an empty list if nothing matched, but a [committed][commit] failure from `parser` or `sep` propagates instead of ending the loop.
 
 ## Usage
 
@@ -50,3 +50,7 @@ run(Parser).with('one+two')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit

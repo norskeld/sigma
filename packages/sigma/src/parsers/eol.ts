@@ -3,8 +3,7 @@ import type { Parser } from '@types'
 
 import { string } from './string'
 
-const EOL_UNIX = '\n'
-const EOL_NON_UNIX = '\r\n'
+const EOL_PARSER = error(choice(string('\n'), string('\r\n')), 'end of line')
 
 /**
  * Only succeeds at the end of the line, either `\n` or `\r\n`.
@@ -12,5 +11,5 @@ const EOL_NON_UNIX = '\r\n'
  * @returns Matched line break character
  */
 export function eol(): Parser<string> {
-  return error(choice(string(EOL_UNIX), string(EOL_NON_UNIX)), 'end of line')
+  return EOL_PARSER
 }

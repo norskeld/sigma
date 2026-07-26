@@ -23,7 +23,9 @@ export function whitespace(): Parser<string> {
         }
 
         // Fast exit for standard non-whitespace ASCII characters.
-        if (code < 0x80) break
+        if (code < 0x80) {
+          break
+        }
 
         // Non-ASCII Unicode whitespace.
         if (

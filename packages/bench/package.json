@@ -9,7 +9,8 @@
     "bench:many": "node --expose-gc src/many/index.ts",
     "bench:json": "node --expose-gc src/json/index.ts",
     "bench:tuple": "node --expose-gc src/tuple/index.ts",
-    "bench:select": "node --expose-gc src/select/index.ts"
+    "bench:select": "node --expose-gc src/select/index.ts",
+    "bench:recovery": "node --expose-gc src/recovery/index.ts"
   },
   "dependencies": {
     "@nrsk/sigma": "workspace:*",

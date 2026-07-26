@@ -2,7 +2,7 @@ import type { Parser } from '@types'
 import { FAIL } from '@types'
 
 /**
- * Replaces `parser`'s error message with `expected`.
+ * Replaces `parser`'s error message with `expected`. Committed failures keep their own message.
  *
  * @param parser - Parser of which error message should be replaced
  * @param expected - New error message
@@ -14,7 +14,7 @@ export function error<T>(parser: Parser<T>, expected: string): Parser<T> {
     parse(ctx) {
       const result = parser.parse(ctx)
 
-      if (result === FAIL) {
+      if (result === FAIL && !ctx.fatal) {
         ctx.expected = expected
       }
 

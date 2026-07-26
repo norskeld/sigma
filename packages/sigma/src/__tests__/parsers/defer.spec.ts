@@ -1,3 +1,4 @@
+import { choice, commit, inner } from '@combinators'
 import { defer, string } from '@parsers'
 import { describe, it, result, run, should } from '@testing'
 
@@ -30,5 +31,23 @@ describe('defer', () => {
     should.throwError(() => {
       run(parser, '')
     }, new Error('Deferred parser was not initialized'))
+  })
+
+  it('should propagate a committed failure from a recursive parser', () => {
+    const nested = defer<string>()
+
+    // `(((x` never closes, so the commit fires at the innermost level.
+    nested.with(choice(inner(string('('), nested, commit(string(')'), 'close')), string('x')))
+
+    const actual = run(nested, '(((x')
+
+    should.matchResult(actual, {
+      isOk: false,
+      start: 4,
+      end: 4,
+      pos: 4,
+      expected: ')',
+      label: 'close',
+    })
   })
 })

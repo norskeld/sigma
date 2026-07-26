@@ -5,7 +5,7 @@ description: 'optional combinator tries to apply parser. Returns the result of p
 
 # optional
 
-`optional` combinator tries to apply `parser`. Returns the result of `parser` or `null`. Never fails.
+`optional` combinator tries to apply `parser`. Returns the result of `parser` or `null`. Never fails on its own, but a [committed][commit] failure from `parser` propagates instead of resolving to `null`.
 
 ## Usage
 
@@ -55,3 +55,7 @@ run(Parser).with('~2')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit

@@ -31,7 +31,7 @@ describe('noneOf', () => {
 
   it('should fail listing all rejected characters including duplicates', () => {
     const actual = parseAt(noneOf('aab'), 'a', 0)
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 0,
@@ -42,7 +42,7 @@ describe('noneOf', () => {
 
   it('should fail with the exact end of input message', () => {
     const actual = parseAt(noneOf('xy'), '', 0)
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 0,

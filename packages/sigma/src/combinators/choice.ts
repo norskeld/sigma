@@ -14,11 +14,20 @@ export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
     parse(ctx) {
       // It's "guaranteed" by type system that there will be at least two parsers, so I'm not gonna
       // bother checking for `ps` length and asserting it, because it would hit performance.
+      const mark = ctx.mark()
       const first = ps[0].parse(ctx)
 
       if (first !== FAIL) {
         return first
       }
+
+      // Bail before the error mirror is overwritten, so a commit keeps its own precise error.
+      if (ctx.fatal) {
+        return FAIL
+      }
+
+      // Anything this alternative recovered is discarded along with the alternative itself.
+      ctx.reset(mark)
 
       // Keep the failure that got the furthest; the first alternative wins ties.
       let bestPos = ctx.errorPos
@@ -32,6 +41,12 @@ export function choice<T>(...ps: Array<Parser<T>>): Parser<T> {
         if (result !== FAIL) {
           return result
         }
+
+        if (ctx.fatal) {
+          return FAIL
+        }
+
+        ctx.reset(mark)
 
         if (ctx.errorPos > bestPos) {
           bestPos = ctx.errorPos

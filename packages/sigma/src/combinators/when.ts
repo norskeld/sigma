@@ -27,9 +27,11 @@ export function when<T, R extends Parser<unknown>>(
   return {
     parse(ctx) {
       const start = ctx.pos
-
       const result = context.parse(ctx)
-      if (result === FAIL) return FAIL
+
+      if (result === FAIL) {
+        return FAIL
+      }
 
       const next = parser({ value: result as T, pos: ctx.pos, input: ctx.input }).parse(ctx)
 

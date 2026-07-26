@@ -119,11 +119,13 @@ function getThemeConfig(): DefaultTheme.Config {
 function getNav() {
   const items = getSidebar().flatMap((item) => item.items ?? [])
 
+  const [guides] = items.filter((item) => item.link?.startsWith('/guides') ?? false)
   const [core] = items.filter((item) => item.link?.startsWith('/core') ?? false)
   const [combinators] = items.filter((item) => item.link?.startsWith('/combinators') ?? false)
   const [parsers] = items.filter((item) => item.link?.startsWith('/parsers') ?? false)
 
   return [
+    Nav.item('Guides', guides.link!),
     Nav.item('Core', core.link!),
     Nav.item('Combinators', combinators.link!),
     Nav.item('Parsers', parsers.link!),

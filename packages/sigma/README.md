@@ -5,6 +5,7 @@ TypeScript [parser combinator](https://en.wikipedia.org/wiki/Parser_combinator) 
 ## Features
 
 - [x] Capable of parsing [LL grammars](https://en.wikipedia.org/wiki/LL_grammar) using [recursive descent](https://en.wikipedia.org/wiki/Recursive_descent_parser) with backtracking.
+- [x] Error recovery: report many syntax errors from one run and still get a usable tree.
 - [x] Ergonomic API with excellent TypeScript support.
 - [x] Zero dependencies. Supports tree shaking.
 - [x] [Performant enough](../bench/) to beat similar parser combinator libraries.

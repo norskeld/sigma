@@ -51,7 +51,23 @@ describe('library', () => {
       readonly end: number
       readonly pos: number
       readonly value: number
+      readonly errors: ReadonlyArray<t.Failure>
     }>()
+  })
+
+  it('`Failure` should carry the recovery fields', () => {
+    expectTypeOf<t.Failure>().not.toBeAny()
+    expectTypeOf<t.Failure>().toHaveProperty('label').toMatchTypeOf<string | null>()
+    expectTypeOf<t.Failure>().toHaveProperty('errors').toMatchTypeOf<ReadonlyArray<t.Failure>>()
+  })
+
+  it('`ParseContext` should expose the commitment state', () => {
+    expectTypeOf<t.ParseContext>().toHaveProperty('fatal').toMatchTypeOf<boolean>()
+    expectTypeOf<t.ParseContext>().toHaveProperty('label').toMatchTypeOf<string | null>()
+    expectTypeOf<t.ParseContext>().toHaveProperty('errors').toMatchTypeOf<Array<t.Failure>>()
+    expectTypeOf<t.ParseContext>().toHaveProperty('commit').toBeFunction()
+    expectTypeOf<t.ParseContext>().toHaveProperty('uncommit').toBeFunction()
+    expectTypeOf<t.ParseContext>().toHaveProperty('snapshot').returns.toMatchTypeOf<t.Failure>()
   })
 })
 

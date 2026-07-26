@@ -23,7 +23,7 @@ describe('sequence', () => {
     const parser = sequence(string('a'), string('b'))
     const actual = run(parser, 'ab')
 
-    should.beStrictEqual(actual, { isOk: true, start: 0, end: 2, pos: 2, value: ['a', 'b'] })
+    should.matchResult(actual, { isOk: true, start: 0, end: 2, pos: 2, value: ['a', 'b'] })
   })
 
   it('should succeed with four parsers', () => {
@@ -47,7 +47,7 @@ describe('sequence', () => {
     const parser = sequence(...ps)
     const actual = run(parser, 'abcdefg')
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: true,
       start: 0,
       end: 7,

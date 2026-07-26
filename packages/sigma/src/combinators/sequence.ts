@@ -34,9 +34,11 @@ function sequence2<T>(p1: Parser<T>, p2: Parser<T>): Parser<Array<T>> {
   return {
     parse(ctx) {
       const start = ctx.pos
-
       const r1 = p1.parse(ctx)
-      if (r1 === FAIL) return FAIL
+
+      if (r1 === FAIL) {
+        return FAIL
+      }
 
       const r2 = p2.parse(ctx)
 
@@ -55,9 +57,11 @@ function sequence3<T>(p1: Parser<T>, p2: Parser<T>, p3: Parser<T>): Parser<Array
   return {
     parse(ctx) {
       const start = ctx.pos
-
       const r1 = p1.parse(ctx)
-      if (r1 === FAIL) return FAIL
+
+      if (r1 === FAIL) {
+        return FAIL
+      }
 
       const r2 = p2.parse(ctx)
 
@@ -88,9 +92,11 @@ function sequence4<T>(
   return {
     parse(ctx) {
       const start = ctx.pos
-
       const r1 = p1.parse(ctx)
-      if (r1 === FAIL) return FAIL
+
+      if (r1 === FAIL) {
+        return FAIL
+      }
 
       const r2 = p2.parse(ctx)
 
@@ -129,9 +135,11 @@ function sequence5<T>(
   return {
     parse(ctx) {
       const start = ctx.pos
-
       const r1 = p1.parse(ctx)
-      if (r1 === FAIL) return FAIL
+
+      if (r1 === FAIL) {
+        return FAIL
+      }
 
       const r2 = p2.parse(ctx)
 
@@ -176,7 +184,10 @@ export function sequenceN<T>(ps: Array<Parser<T>>): Parser<Array<T>> {
 
       // Fast-fail the first parser BEFORE allocating the 'values' array.
       const r0 = ps[0].parse(ctx)
-      if (r0 === FAIL) return FAIL
+
+      if (r0 === FAIL) {
+        return FAIL
+      }
 
       const values = new Array<T>(len)
       values[0] = r0 as T

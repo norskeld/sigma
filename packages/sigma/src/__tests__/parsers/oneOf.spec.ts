@@ -27,7 +27,7 @@ describe('oneOf', () => {
 
   it('should fail listing all expected characters including duplicates', () => {
     const actual = parseAt(oneOf('aab'), 'q', 0)
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 0,
@@ -38,7 +38,7 @@ describe('oneOf', () => {
 
   it('should fail with the exact end of input message', () => {
     const actual = parseAt(oneOf('xy'), '', 0)
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: false,
       start: 0,
       end: 0,

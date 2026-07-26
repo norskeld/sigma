@@ -7,6 +7,8 @@ description: 'error combinator allows to replace error message for parser.'
 
 `error` combinator allows to replace `parser`'s error message with `expected`.
 
+A [committed][commit] failure keeps its own message, so a top-level `error` can't flatten the precise messages a grammar commits to. To label one, commit on the outside: `commit(error(parser, expected), label)`.
+
 ## Usage
 
 ```ts
@@ -45,3 +47,7 @@ run(Parser).with('maybe')
   expected: "expecting either 'true' or 'false'"
 }
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit

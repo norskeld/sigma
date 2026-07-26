@@ -46,7 +46,7 @@ describe('whitespace', () => {
 
     const actual = run(whitespace(), chars)
 
-    should.beStrictEqual(actual, {
+    should.matchResult(actual, {
       isOk: true,
       start: 0,
       end: chars.length,

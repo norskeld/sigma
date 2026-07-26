@@ -3,7 +3,8 @@ import { FAIL } from '@types'
 
 /**
  * Applies source `parser`, collects its output, and stops after `terminator` parser succeeds.
- * Fails with the `terminator`'s error if `parser` succeeds without consuming input.
+ * Fails with the `terminator`'s error if `parser` succeeds without consuming input. A committed
+ * failure from either propagates.
  *
  * @param parser - Parser to apply
  * @param terminator - Terminating parser to stop after
@@ -18,12 +19,20 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
 
       while (true) {
         const last = ctx.pos
-
+        const mark = ctx.mark()
         const resultT = terminator.parse(ctx)
+
+        if (ctx.fatal) {
+          ctx.pos = start
+          return FAIL
+        }
 
         if (resultT !== FAIL) {
           return [values, resultT as S]
         }
+
+        // The terminator's failed probe is speculative, so its recoveries are discarded.
+        ctx.reset(mark)
 
         const resultP = parser.parse(ctx)
 
@@ -36,7 +45,15 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
         // the error mirror, so re-fail the terminator to report its error.
         if (ctx.pos === last) {
           terminator.parse(ctx)
+
+          // The terminator already failed uncommitted here, so the re-run is speculative.
+          if (ctx.fatal) {
+            ctx.uncommit()
+          }
+
+          ctx.reset(mark)
           ctx.pos = start
+
           return FAIL
         }
 
@@ -48,7 +65,8 @@ export function takeUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
 
 /**
  * Applies source `parser`, ignores its output, and stops after `terminator` parser succeeds.
- * Fails with the `terminator`'s error if `parser` succeeds without consuming input.
+ * Fails with the `terminator`'s error if `parser` succeeds without consuming input. A committed
+ * failure from either propagates.
  *
  * @param parser - Parser to apply
  * @param terminator - Terminating parser to stop after
@@ -62,12 +80,20 @@ export function skipUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
 
       while (true) {
         const last = ctx.pos
-
+        const mark = ctx.mark()
         const resultT = terminator.parse(ctx)
+
+        if (ctx.fatal) {
+          ctx.pos = start
+          return FAIL
+        }
 
         if (resultT !== FAIL) {
           return resultT as S
         }
+
+        // The terminator's failed probe is speculative, so its recoveries are discarded.
+        ctx.reset(mark)
 
         const resultP = parser.parse(ctx)
 
@@ -80,7 +106,15 @@ export function skipUntil<T, S>(parser: Parser<T>, terminator: Parser<S>): Parse
         // the error mirror, so re-fail the terminator to report its error.
         if (ctx.pos === last) {
           terminator.parse(ctx)
+
+          // The terminator already failed uncommitted here, so the re-run is speculative.
+          if (ctx.fatal) {
+            ctx.uncommit()
+          }
+
+          ctx.reset(mark)
           ctx.pos = start
+
           return FAIL
         }
       }
