@@ -1,8 +1,8 @@
 import type { Parser } from '@types'
 
 /**
- * Parses a string that matches a provided `re` regular expression. Returns the matched string, or
- * fails with an `expected` message.
+ * Parses a string that matches a provided regular expression. Returns the matched string, or fails
+ * with an `expected` message.
  *
  * The regular expression must obey one simple rule: *doesn't* use `^` and `$` to match at the
  * beginning or at the end of the text.

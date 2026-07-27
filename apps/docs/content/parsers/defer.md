@@ -7,6 +7,8 @@ description: 'defer is a special parser that is tailored for creating mutually r
 
 `defer` is a special parser that has an additional `with` method, which must be used to define the parser, before it is called. This parser is tailored for creating mutually recursive parsers.
 
+Running one that was never given a parser throws `Deferred parser was not initialized` instead of failing: a missing grammar rule is a bug in the grammar, not bad input.
+
 ## Example
 
 ::: info Combinators and parsers used in this section

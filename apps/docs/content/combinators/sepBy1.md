@@ -5,7 +5,9 @@ description: 'sepBy1 combinator parses one or more occurrences of parser, separa
 
 # sepBy1
 
-`sepBy1` combinator parses *one* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. Otherwise returns an error produced by `parser`.
+`sepBy1` combinator parses *one* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. Otherwise returns an error produced by `parser`. A [committed][commit] failure from `parser` or `sep` propagates instead of ending the loop, and the cursor rewinds to where the combinator started.
+
+A `sep` that isn't followed by a value is rewound too, so a trailing separator is left unconsumed.
 
 ## Usage
 
@@ -52,3 +54,7 @@ run(Parser).with('one+two')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit

@@ -46,6 +46,7 @@ run(Parser).with('maybe')
   pos: 0,
   expected: "expecting either 'true' or 'false'"
 }
+```
 :::
 
 <!-- Links. -->

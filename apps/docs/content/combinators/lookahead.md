@@ -5,7 +5,7 @@ description: 'lookahead combinator applies parser without consuming any input on
 
 # lookahead
 
-`lookahead` combinator applies `parser` without consuming any input on success. On failure the failure is returned as is, with `pos` pointing to the deepest position reached, which yields more precise errors.
+`lookahead` combinator applies `parser` without consuming any input on success. On failure the failure is returned as is, with `pos` pointing to the deepest position reached, which yields more precise errors. On success everything `parser` [recovered][recover] is discarded, along with the input it consumed.
 
 ## Usage
 
@@ -58,3 +58,7 @@ run(Parser).with('hello something')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[recover]: ./recover

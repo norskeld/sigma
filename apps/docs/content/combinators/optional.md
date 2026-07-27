@@ -1,6 +1,6 @@
 ---
 title: 'optional'
-description: 'optional combinator tries to apply parser. Returns the result of parser or null. Never fails.'
+description: 'optional combinator tries to apply parser. Returns the result of parser or null. Never fails on its own, but a committed failure propagates.'
 ---
 
 # optional

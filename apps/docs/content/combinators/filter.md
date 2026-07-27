@@ -44,7 +44,3 @@ run(Port).with('70000')
 }
 ```
 :::
-
-<!-- Links. -->
-
-[integer]: ../parsers/integer

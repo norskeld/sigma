@@ -7,6 +7,8 @@ description: 'not combinator applies parser without consuming any input and succ
 
 `not` combinator applies `parser` without consuming any input and succeeds with `null` only if it fails, i.e. acts as the negative counterpart of [lookahead]. If `parser` succeeds, `not` fails with `expected`, which defaults to `unexpected input`.
 
+A [committed][commit] failure propagates instead of counting as a non-match, so wrap `parser` in [backtrack] to keep it speculative.
+
 ## Usage
 
 The example below parses the `let` keyword, rejecting identifiers that merely start with it, like `letx`.
@@ -46,3 +48,5 @@ run(Parser).with('letx')
 <!-- Links. -->
 
 [lookahead]: ./lookahead
+[commit]: ./commit
+[backtrack]: ./backtrack

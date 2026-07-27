@@ -5,7 +5,7 @@ description: 'oneOf ensures that one of the characters in the given string match
 
 # oneOf
 
-`oneOf` ensures that one of the characters in the given string matches the current character.
+`oneOf` ensures that one of the characters in the given string matches the current character. Characters are compared as whole code points, so surrogate pairs are matched intact. At the end of input it fails with `oneOf @ reached the end of input` instead of the usual `one of: ...` message.
 
 ## Usage
 

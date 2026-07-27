@@ -5,7 +5,9 @@ description: 'sepBy combinator parses zero or more occurrences of parser, separa
 
 # sepBy
 
-`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. This combinator never fails on its own and returns an empty list if nothing matched, but a [committed][commit] failure from `parser` or `sep` propagates instead of ending the loop.
+`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. This combinator never fails on its own and returns an empty list if nothing matched, but a [committed][commit] failure from `parser` or `sep` propagates instead of ending the loop, and the cursor rewinds to where the combinator started.
+
+A `sep` that isn't followed by a value is rewound too, so a trailing separator is left unconsumed. A `sep` and value pair that consumes no input ends the loop, so the combinator always terminates.
 
 ## Usage
 

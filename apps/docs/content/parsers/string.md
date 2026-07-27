@@ -5,7 +5,7 @@ description: 'string parses a string. Returns the parsed string.'
 
 # string
 
-`string` parses a string. Returns the parsed string.
+`string` parses a string. Returns the parsed string. An empty string matches anywhere and consumes nothing. On failure the reported span covers what the match would have covered, clamped to the end of input.
 
 ## Usage
 

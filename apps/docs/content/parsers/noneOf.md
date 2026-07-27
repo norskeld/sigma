@@ -5,7 +5,7 @@ description: 'noneOf ensures that none of the characters in the given string mat
 
 # noneOf
 
-`noneOf` ensures that none of the characters in the given string matches the current character.
+`noneOf` ensures that none of the characters in the given string matches the current character. Characters are compared as whole code points, so surrogate pairs are matched intact. At the end of input it fails with `noneOf @ reached the end of input` instead of the usual `none of: ...` message.
 
 ## Usage
 

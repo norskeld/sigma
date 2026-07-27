@@ -22,7 +22,7 @@ run(Parser).with('42')
 
 {
   isOk: true,
-  start: 2,
+  start: 0,
   end: 2,
   pos: 2,
   value: 42

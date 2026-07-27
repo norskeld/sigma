@@ -253,5 +253,3 @@ expression = expression '+' term
 [first parser]: ./first-parser
 [grammar]: ../core/grammar
 [inner]: ../combinators/inner
-[recover]: ../combinators/recover
-[run]: ../core/run

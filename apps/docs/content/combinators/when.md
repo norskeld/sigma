@@ -5,7 +5,7 @@ description: 'when combinator allows to create chained, context-aware parsers, t
 
 # when
 
-`when` combinator allows to create chained, context-aware parsers, that may depend on the output of the `context` parser. Returns a parser produced by the `parser` callback, which is called only if the `context` parser succeeds, i.e. if it fails, then `when` fails as well.
+`when` combinator allows to create chained, context-aware parsers, that may depend on the output of the `context` parser. Returns a parser produced by the `parser` callback, which is called only if the `context` parser succeeds, i.e. if it fails, then `when` fails as well. A failure of the produced parser rewinds the cursor to before `context`, so the whole chain is retried or reported as one unit.
 
 ## Usage
 
@@ -26,7 +26,7 @@ run(Parser).with('integer 42')
 
 {
   isOk: true,
-  start: 8,
+  start: 0,
   end: 10,
   pos: 10,
   value: 42
@@ -38,7 +38,7 @@ run(Parser).with('string Something')
 
 {
   isOk: true,
-  start: 7,
+  start: 0,
   end: 16,
   pos: 16,
   value: 'Something'
@@ -50,7 +50,7 @@ run(Parser).with('bracketed (Something)')
 
 {
   isOk: true,
-  start: 10,
+  start: 0,
   end: 21,
   pos: 21,
   value: 'Something'
@@ -62,7 +62,7 @@ run(Parser).with('some input')
 
 {
   isOk: true,
-  start: 5,
+  start: 0,
   end: 10,
   pos: 10,
   value: 'input'

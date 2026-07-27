@@ -9,12 +9,10 @@ description: 'run is used to run parser with provided input.'
 
 ## Usage
 
-```ts
-run(string('hello world')).with('hello world')
-```
-
 ::: tip Success
 ```ts
+run(string('hello world')).with('hello world')
+
 {
   isOk: true,
   start: 0,
@@ -28,10 +26,12 @@ run(string('hello world')).with('hello world')
 
 ::: danger Failure
 ```ts
+run(string('hello world')).with('bye')
+
 {
   isOk: false,
   start: 0,
-  end: 0,
+  end: 3,
   pos: 0,
   expected: 'hello world',
   label: null,
@@ -47,10 +47,17 @@ Every result carries `errors`, the failures the run recovered from via [recover]
 `run` tolerates recovered failures; [tryRun] throws on them.
 
 ```ts
+const Statement = map(
+  first(last(string('let '), commit(letters(), 'stmt')), string(';')),
+  (name) => ({ kind: 'let', name })
+)
+
 const Program = many(
   recover(Statement, syncPast(string(';')), (_failure, span) => ({ kind: 'error', span }))
 )
+```
 
+```ts
 run(Program).with('let a;let ;let c;')
 
 {
@@ -58,7 +65,11 @@ run(Program).with('let a;let ;let c;')
   start: 0,
   end: 17,
   pos: 17,
-  value: [ /* let, error, let */ ],
+  value: [
+    { kind: 'let', name: 'a' },
+    { kind: 'error', span: { start: 6, end: 11 } },
+    { kind: 'let', name: 'c' }
+  ],
   errors: [
     { isOk: false, start: 10, end: 10, pos: 10, expected: 'letters', label: 'stmt', errors: [] }
   ]

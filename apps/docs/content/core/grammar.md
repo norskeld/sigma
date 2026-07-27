@@ -18,6 +18,10 @@ The properties of the resulting object are just regular parsers - you can freely
 destructure these, pass them around individually, or compose them with other
 grammars, parsers or combinators as needed.
 
+Initializers must return self-contained parsers whose `parse` doesn't rely on `this`, because only
+`parse` is copied onto the grammar object. A class-based or otherwise stateful parser loses its
+state that way, so use [defer] for those.
+
 ::: warning
 Typing `this` relies on TypeScript's `ThisType`, which is only honoured when `noImplicitThis` is
 enabled, as it is under `strict`. Without it every `this.rule` degrades to `Parser<unknown>` and a

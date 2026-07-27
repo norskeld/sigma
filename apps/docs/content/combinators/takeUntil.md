@@ -5,7 +5,7 @@ description: 'takeUntil combinator applies source parser, collects its output, a
 
 # takeUntil
 
-`takeUntil` combinator applies source `parser`, collects its output, and stops after `terminator` parser succeeds. Returns a tuple of values collected by `parser` and `terminator`. Fails if `parser` fails, or with the `terminator`'s error if `parser` succeeds without consuming input.
+`takeUntil` combinator applies source `parser`, collects its output, and stops after `terminator` parser succeeds. Returns a tuple of values collected by `parser` and `terminator`. Fails if `parser` fails, or with the `terminator`'s error if `parser` succeeds without consuming input. A [committed][commit] failure from either of them propagates, and the cursor rewinds to where the combinator started.
 
 ## Usage
 
@@ -49,3 +49,7 @@ run(FailingParser).with('one.')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit

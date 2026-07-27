@@ -1,6 +1,7 @@
-import { commit, recover, sequence, syncNested, syncPast, syncTo } from '@combinators'
+import { commit, many, recover, sequence, syncNested, syncPast, syncTo } from '@combinators'
 import { nothing, string } from '@parsers'
 import { describe, it, run, should } from '@testing'
+import { EMPTY_ERRORS } from '@types'
 
 describe('syncTo', () => {
   it('should stop before the sync point', () => {
@@ -149,6 +150,39 @@ describe('syncPast', () => {
     )
 
     should.matchErrors(run(syncPast(sync), 'abc'), [])
+  })
+
+  it('should ignore zero-width sync matches', () => {
+    should.matchResult(run(syncPast(nothing()), 'abc'), {
+      isOk: true,
+      start: 0,
+      end: 3,
+      pos: 3,
+      value: null,
+    })
+  })
+
+  it('should progress a recovery nested in a repetition', () => {
+    const parser = many(recover(commit(string('a'), 'a'), syncPast(nothing()), () => null))
+
+    should.matchResult(run(parser, 'bbb'), {
+      isOk: true,
+      start: 0,
+      end: 3,
+      pos: 3,
+      value: [null],
+      errors: [
+        {
+          isOk: false,
+          start: 0,
+          end: 1,
+          pos: 0,
+          expected: 'a',
+          label: 'a',
+          errors: EMPTY_ERRORS,
+        },
+      ],
+    })
   })
 })
 

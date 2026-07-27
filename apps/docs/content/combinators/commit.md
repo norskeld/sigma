@@ -5,7 +5,7 @@ description: 'commit combinator applies parser and behaves exactly like it on su
 
 # commit
 
-`commit` combinator applies `parser` and behaves exactly like it on success. On failure the failure becomes *committed*: enclosing combinators stop backtracking over it. [choice] doesn't try later alternatives, repetition combinators like [many] and [sepBy] stop looping, and [optional] no longer swallows it. Only [recover] and [backtrack] clear it again.
+`commit` combinator applies `parser` and behaves exactly like it on success. On failure the failure becomes *committed*: enclosing combinators stop backtracking over it. [choice] doesn't try later alternatives, repetition combinators like [many] and [sepBy] propagate it instead of ending the loop with what they collected, and [optional] no longer swallows it. Only [recover] and [backtrack] clear it again. [syncTo], [syncPast], [syncNested], [skipUntil] and [takeUntil] scan speculatively, so they drop any commitment raised inside their own scan.
 
 The optional `label` ends up on the failure and is what [recover] matches with its `label` option. It defaults to `null`.
 
@@ -105,3 +105,8 @@ run(Parser).with('hello there')
 [recover]: ./recover
 [sepBy]: ./sepBy
 [backtrack]: ./backtrack
+[syncTo]: ./syncTo
+[syncPast]: ./syncPast
+[syncNested]: ./syncNested
+[skipUntil]: ./skipUntil
+[takeUntil]: ./takeUntil

@@ -5,7 +5,7 @@ description: 'many1 combinator applies parser one or more times. Returns an arra
 
 # many1
 
-`many1` combinator applies `parser` *one* or more times. Returns an array of the returned values of `parser`. After the first match, successes that consume no input are not collected, so the combinator always terminates.
+`many1` combinator applies `parser` *one* or more times. Returns an array of the returned values of `parser`. After the first match, a success that consumes no input ends the loop and isn't collected, so the combinator always terminates. A [committed][commit] failure from `parser` propagates instead of ending the loop, and the cursor rewinds to where the combinator started.
 
 ## Usage
 
@@ -40,3 +40,7 @@ run(Parser).with('---')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit

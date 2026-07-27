@@ -127,12 +127,14 @@ function getNav() {
   const [core] = items.filter((item) => item.link?.startsWith('/core') ?? false)
   const [combinators] = items.filter((item) => item.link?.startsWith('/combinators') ?? false)
   const [parsers] = items.filter((item) => item.link?.startsWith('/parsers') ?? false)
+  const [types] = items.filter((item) => item.link?.startsWith('/types') ?? false)
 
   return [
     Nav.item('Guides', guides.link!),
     Nav.item('Core', core.link!),
     Nav.item('Combinators', combinators.link!),
     Nav.item('Parsers', parsers.link!),
+    Nav.item('Types', types.link!),
     Nav.items(pkg.version, [
       Nav.item('Changelog', GH_URL + '/blob/master/packages/sigma/CHANGELOG.md'),
     ]),

@@ -5,7 +5,7 @@ description: 'choice combinator tries to apply parsers in order, until one of th
 
 # choice
 
-`choice` combinator tries to apply `ps` parsers in order, until one of them succeeds. Returns a value of the succeeding parser.
+`choice` combinator tries to apply `ps` parsers in order, until one of them succeeds. Returns a value of the succeeding parser. A [committed][commit] failure stops it right there and is reported as is, not as the failure that got the furthest. Anything a discarded alternative [recovered][recover] is dropped along with that alternative.
 
 ## Usage
 
@@ -57,3 +57,8 @@ run(Parser).with('maybe')
 }
 ```
 :::
+
+<!-- Links. -->
+
+[commit]: ./commit
+[recover]: ./recover

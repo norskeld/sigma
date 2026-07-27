@@ -5,7 +5,7 @@ description: 'any parses any single character from the input and returns it; it 
 
 # any
 
-`any` parses any single character from the input and returns it. It fails at the end of input.
+`any` parses any single character from the input and returns it. A character here is a whole code point, so a surrogate pair comes back intact. It fails at the end of input with `any @ reached the end of input`.
 
 ## Usage
 

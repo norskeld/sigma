@@ -49,8 +49,9 @@ export function syncTo(sync: Parser<unknown>): SucceedingParser<null> {
 
 /**
  * Consumes input until `sync` matches, consuming the match too, or stops at the end of input if it
- * never matches. A match at the starting position counts. Advances unless the cursor is already at
- * the end of the input, so recovery inside a repetition always progresses. Never fails.
+ * never matches. A match at the starting position counts, but a zero-width match is ignored.
+ * Advances unless the cursor is already at the end of the input, so recovery inside a repetition
+ * always progresses. Never fails.
  *
  * @param sync - Parser marking the resynchronisation point
  *
@@ -67,7 +68,8 @@ export function syncPast(sync: Parser<unknown>): SucceedingParser<null> {
         const at = ctx.pos
         const result = sync.parse(ctx)
 
-        if (result !== FAIL) {
+        // Zero-width matches are ignored, otherwise the scan would stall on them.
+        if (result !== FAIL && ctx.pos > at) {
           ctx.reset(mark)
 
           return null

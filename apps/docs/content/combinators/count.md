@@ -24,7 +24,7 @@ run(Parser).with('4:abcd')
 
 {
   isOk: true,
-  start: 2,
+  start: 0,
   end: 6,
   pos: 6,
   value: 'abcd'
@@ -49,7 +49,3 @@ run(Parser).with('4:ab')
 <!-- Combinators. -->
 
 [when]: ./when
-
-<!-- Parsers. -->
-
-[integer]: ../parsers/integer

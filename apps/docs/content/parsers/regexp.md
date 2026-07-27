@@ -5,7 +5,7 @@ description: 'regexp parses a string that matches a provided regular expression.
 
 # regexp
 
-`regexp` parses a string that matches a provided `re` regular expression. Returns the matched string, or fails with an `expected` message.
+`regexp` parses a string that matches a provided regular expression. Returns the matched string, or fails with an `expected` message.
 
 ## Implementation notes
 

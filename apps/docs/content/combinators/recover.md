@@ -9,6 +9,8 @@ description: "recover combinator applies parser and, if it fails while committed
 
 `fallback` receives the failure and the `span` of the consumed region, so it can build an error node for the tree being parsed. Omit it and the combinator resolves to `null`.
 
+The whole region is replaced, so failures recovered *inside* it are dropped and only the region's own failure is recorded.
+
 Only committed failures are handled. Ordinary ones pass through untouched, so a `recover` inside [many] stops the loop cleanly at the end of input instead of manufacturing a trailing error node for the leftovers. [commit] marks the point past which a failure is a real syntax error rather than a rejected alternative.
 
 `strategy` runs from the position the failure was reported at, not from the start of the region, so the prefix `parser` already accepted is never rescanned. That matters whenever the resynchronisation point can also occur inside a valid construct: scanning for `;` from the start of `set a = "x;y" ?;` would stop inside the string literal and turn one error into a cascade. The `span` handed to `fallback` still covers the whole region.
@@ -130,7 +132,7 @@ The trailing `xyz` doesn't match `let `, so the failure is never committed, `man
 
 ## Restricting by label
 
-With `options.label` only failures committed with that exact label are handled; everything else stays committed for an outer `recover` to deal with. Here the failure carries `other`, so it's declined:
+With `options.label` only failures committed with that exact label are handled; everything else stays committed for an outer `recover` to deal with. The options object is exported as `RecoverOptions`. Here the failure carries `other`, so it's declined:
 
 ```ts
 const Parser = recover(
