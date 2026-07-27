@@ -7,7 +7,9 @@ description: 'chainr combinator parses one or more occurrences of parser, separa
 
 `chainr` combinator parses _one_ or more occurrences of `parser`, separated by `op` (in [EBNF] notation: `parser (op parser)*`). Returns a value obtained by a recursive right-associative application of `fn` to the operand values and the values returned by `op`. It is the right-associative counterpart of [chainl], useful for right-associative operators like exponentiation.
 
-Note that the `op` parser matches _only_ the operator, and `fn` receives the operand values on both sides of it.
+Note that the `op` parser matches _only_ the operator, and `fn` receives the operand values on both sides of it. Where [chainl] folds each pair as it reads it, `chainr` collects the whole run first and folds it afterwards, since the rightmost pair has to be reduced before the ones to its left.
+
+The [expressions] guide covers precedence, associativity and building a tree rather than a value.
 
 ## Usage
 
@@ -44,3 +46,7 @@ The input is parsed right-associatively, i.e. as `2 ^ (3 ^ 2) = 2 ^ 9 = 512`, an
 <!-- Combinators. -->
 
 [chainl]: ./chainl
+
+<!-- Guides. -->
+
+[expressions]: ../guides/expressions

@@ -110,6 +110,10 @@ function getThemeConfig(): DefaultTheme.Config {
     sidebar: getSidebar(),
     socialLinks: getSocialLinks(),
 
+    outline: {
+      level: 'deep',
+    },
+
     search: {
       provider: 'local',
     },
