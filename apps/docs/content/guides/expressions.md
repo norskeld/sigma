@@ -145,7 +145,7 @@ Compare that against the grammar at the top. `Product` is `factor`, `Expression`
 
 `chainl` folds left, so `10 - 3 - 2` is `(10 - 3) - 2`. Exponentiation goes the other way: `2 ^ 3 ^ 2` should be `2 ^ (3 ^ 2)`, which is 512, not `(2 ^ 3) ^ 2`, which is 64. [chainr] is the same combinator folding the other direction.
 
-The two differ in more than direction. `chainl` calls `fn` once per iteration as it goes. `chainr` can't, because the rightmost pair has to be reduced first, so it collects the whole run and folds it afterwards. For a pure function you'd never notice, but it matters if `fn` does anything observable.
+The two differ not only in the direction. `chainl` calls `fn` once per iteration as it goes. `chainr` can't, because the rightmost pair has to be reduced first, so it collects the whole run and folds it afterwards. For a pure function you'd never notice, but it matters if `fn` does anything observable.
 
 ## Building a tree instead of a number
 
@@ -325,7 +325,7 @@ run(Lang.Sum).with('1 + 2 +')
 }
 ```
 
-It succeeded. The trailing `+` matched, the operand after it didn't, so the chain backtracked over the operator, kept `1 + 2`, and stopped at position 6 with the `+` left unconsumed for whatever comes next. That's the right behaviour in general, since an operator character may well belong to an enclosing rule, but it does mean a chain on its own won't tell you about a dangling operator. Anchor the parser with [eof] and the leftovers become a real failure:
+It succeeded! The trailing `+` matched, the operand after it didn't, so the chain backtracked over the operator, kept `1 + 2`, and stopped at position 6 with the `+` left unconsumed for whatever comes next. That's the right behaviour in general, since an operator character may well belong to an enclosing rule, but it does mean a chain on its own won't tell you about a dangling operator. Anchor the parser with [eof] and the leftovers become a real failure:
 
 ```ts
 run(inner(ws, Lang.Sum, eof())).with('1 + 2 +')
