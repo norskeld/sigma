@@ -172,7 +172,7 @@ There's also nothing to recover from. As far as the grammar is concerned, no sta
 
 ```ts
 const Lang = grammar({
-  ...
+  // ...
 
   Binding(): Parser<Node> {
     return map(
@@ -303,7 +303,9 @@ run(Lang.Program).with(`
 let width = 320
 let height = 240;
 `)
+```
 
+```ts
 {
   isOk: true,
   start: 0,
@@ -697,7 +699,9 @@ let width = 320;
 let = 240;
 print(width, 2);
 `)
+```
 
+```ts
 {
   isOk: true,
   start: 0,
