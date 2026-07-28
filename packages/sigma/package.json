@@ -1,0 +1,79 @@
+{
+  "name": "@nrsk/sigma",
+  "version": "3.8.0",
+  "description": "TypeScript parser combinator library for building fast and convenient parsers.",
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": {
+    "name": "Vladislav Mamon",
+    "email": "vlad@nrsk.dev"
+  },
+  "contributors": [
+    "Vladislav Mamon <vlad@nrsk.dev>",
+    "Danil Tarasov <thefedaikin@gmail.com>"
+  ],
+  "homepage": "https://github.com/norskeld/sigma#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norskeld/sigma.git",
+    "directory": "packages/sigma"
+  },
+  "bugs": {
+    "url": "https://github.com/norskeld/sigma/issues"
+  },
+  "keywords": [
+    "typescript",
+    "parser-combinators",
+    "parser",
+    "combinators",
+    "parsec",
+    "bnf",
+    "ebnf",
+    "abnf"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsdown",
+    "build:watch": "tsdown --watch",
+    "test": "vitest run",
+    "test:types": "vitest run --typecheck.only",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit -p tsconfig.lib.json"
+  },
+  "devDependencies": {
+    "@nrsk/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,50 @@
+---
+title: 'eol'
+description: 'eol only succeeds at the end of the line with a matched line break character.'
+---
+
+# eol
+
+`eol` only succeeds at the end of the line with a matched line break character.
+
+## Usage
+
+```ts
+const Parser = sequence(
+  sequence(string('<start>'), eol()),
+  sequence(string('<body>'), eol()),
+  sequence(string('<end>'), eol())
+)
+```
+
+::: tip Success
+```ts
+run(Parser).with(`<start>\n<body>\n<end>\n`)
+
+{
+  isOk: true,
+  start: 0,
+  end: 21,
+  pos: 21,
+  value: [
+    [ '<start>', '\n' ],
+    [ '<body>', '\n' ],
+    [ '<end>', '\n' ]
+  ]
+}
+```
+:::
+
+::: danger Failure
+```ts
+run(Parser).with(`<start>\n<body><end>\n`)
+
+{
+  isOk: false,
+  start: 14,
+  end: 15,
+  pos: 14,
+  expected: 'end of line'
+}
+```
+:::

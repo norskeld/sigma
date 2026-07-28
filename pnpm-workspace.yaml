@@ -1,0 +1,21 @@
+packages:
+  - apps/*
+  - packages/*
+
+minimumReleaseAge: 2880 # 2 days
+
+catalog:
+  '@types/node': ^24.10.4
+  '@vitest/coverage-istanbul': 4.1.10
+  tsdown: 0.22.14
+  typescript: 5.9.3
+  vite: ^8.1.4
+  vitest: 4.1.10
+
+allowBuilds:
+  esbuild: true
+  lefthook: true
+
+onlyBuiltDependencies:
+  - esbuild
+  - lefthook

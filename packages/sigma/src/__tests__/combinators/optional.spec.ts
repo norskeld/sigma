@@ -1,0 +1,26 @@
+import { optional, sequence } from '@combinators'
+import { string } from '@parsers'
+import { describe, it, parseAt, result, run, should } from '@testing'
+
+describe('optional', () => {
+  it('should succeed with the where optional non-matched value replaced with null', () => {
+    const parser = sequence(string('Hello'), optional(string('...')))
+    const actual = run(parser, 'Hello')
+    const expected = result(true, ['Hello', null])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with null anyway', () => {
+    const parser = optional(string('left'))
+    const actual = run(parser, 'between')
+    const expected = result(true, null)
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed with null at the current position on failure', () => {
+    const actual = parseAt(optional(string('x')), 'ab', 1)
+    should.matchResult(actual, { isOk: true, start: 1, end: 1, pos: 1, value: null })
+  })
+})

@@ -1,0 +1,30 @@
+import { many } from '@combinators'
+import { any } from '@parsers'
+import { describe, it, result, run, should, testFailure } from '@testing'
+
+describe('any', () => {
+  it('should succeed with a single character from the input stream', () => {
+    const actual = run(any(), 'xyz')
+    const expected = result(true, 'x')
+
+    should.matchState(actual, expected)
+  })
+
+  it('should succeed only until it hits the end of input', () => {
+    const actual = run(many(any()), 'xyz')
+    const expected = result(true, ['x', 'y', 'z'])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should not split surrogate pairs', () => {
+    const actual = run(many(any()), 'a😀b')
+    const expected = result(true, ['a', '😀', 'b'])
+
+    should.matchState(actual, expected)
+  })
+
+  it('should fail at the end of input', () => {
+    testFailure('', any())
+  })
+})

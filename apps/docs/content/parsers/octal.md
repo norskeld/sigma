@@ -1,0 +1,46 @@
+---
+title: 'octal'
+description: "octal parses an octal number prefixed with '0o' or '0O', e.g. '0o42', '0O42'. Returns a decimal number obtained using parseInt with radix of 8."
+---
+
+# octal
+
+`octal` parses an octal number prefixed with `0o` or `0O`, e.g. `0o42`, `0O42`. Returns **a decimal number** obtained using [parseInt] with radix of 8.
+
+## Usage
+
+```ts
+const Parser = octal()
+```
+
+::: tip Success
+```ts
+run(Parser).with('0o42')
+
+{
+  isOk: true,
+  start: 0,
+  end: 4,
+  pos: 4,
+  value: 34
+}
+```
+:::
+
+::: danger Failure
+```ts
+run(Parser).with('o42')
+
+{
+  isOk: false,
+  start: 0,
+  end: 0,
+  pos: 0,
+  expected: 'octal number'
+}
+```
+:::
+
+<!-- Links. -->
+
+[parseInt]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt

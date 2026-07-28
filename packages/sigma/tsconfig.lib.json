@@ -1,0 +1,26 @@
+{
+  "extends": "@nrsk/tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["ES2022"],
+    "noEmit": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "target": "ES2022",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo",
+    "paths": {
+      "@combinators": ["./src/combinators"],
+      "@combinators/*": ["./src/combinators/*"],
+      "@core": ["./src/core"],
+      "@core/*": ["./src/core/*"],
+      "@lib": ["./src"],
+      "@lib/*": ["./src/*"],
+      "@parsers": ["./src/parsers"],
+      "@parsers/*": ["./src/parsers/*"],
+      "@testing": ["./src/__tests__/@helpers"],
+      "@types": ["./src/types"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/__tests__", "src/**/*.spec.ts", "src/**/*.spec-d.ts"]
+}
