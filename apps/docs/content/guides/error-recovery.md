@@ -160,15 +160,15 @@ print(width, 2);
 }
 ```
 
-One error, and it's the wrong one. Position 18 is the start of `let = 240;`, and the complaint is that the file didn't end there.
+Now there's one error, but it's the wrong one. Position 18 is the start of `let = 240;`, and the complaint is that the file didn't end there.
 
-That's the PEG evaluation model in action. [choice] tries `Binding`, which consumes `let` and fails on the missing name. A failed alternative is just an alternative that didn't apply, so `choice` rewinds and tries `Print`, then `Block`, and none of them match. [many] reads that as "no more statements" and stops, and [eof] then fails on the leftovers, overwriting what little was left of the original complaint. The real problem, a missing name after `let`, is discarded.
+[choice] tries `Binding`, which consumes `let` and fails on the missing name. A failed alternative is just an alternative that didn't apply, so `choice` rewinds and tries `Print`, then `Block`, and none of them match. [many] reads that as "no more statements" and stops, and [eof] then fails on the leftovers, overwriting what little was left of the original complaint. The real problem, a missing name after `let`, is discarded.
 
 There's also nothing to recover from. As far as the grammar is concerned, no statement started here at all.
 
 ## Committing to a parse
 
-[commit] says that once the parser is past a certain point, backtracking is not the answer. Here that point is each rule's opening token: after `let` the construct can only be a binding.
+[commit] prevents backtracking once the parser is past a certain point. Here that point is each rule's opening token, e.g. after `let` the construct can only be a binding.
 
 ```ts
 const Lang = grammar({
@@ -206,7 +206,7 @@ const Lang = grammar({
 })
 ```
 
-A committed failure stops being backtracked over, so `choice` gives up instead of trying `Print`, and the failure travels out with the label attached:
+A committed failure stops being backtracked over, so `choice` gives up instead of trying `Print`, and the failure is propagated with the label attached:
 
 ```ts
 run(Lang.Program).with(`
@@ -234,7 +234,7 @@ The run still stops at the first error, but commitment produced a failure worth 
 
 ## Recovering
 
-[recover] takes a parser, a resynchronisation strategy, and a fallback. On a committed failure it records the failure, runs the strategy to skip the malformed region, and resolves to the fallback value in its place.
+[recover] takes a parser, a resynchronisation strategy, an optional fallback, and options. On a committed failure it records the failure, runs the strategy to skip the malformed region, and resolves to the fallback value in its place.
 
 For a statement list the natural boundary is the terminator, so the strategy is [syncPast] over `;`. Only `Body` changes:
 
@@ -292,7 +292,7 @@ print(width, 2);
 
 The result stays `isOk: true` and the failure moves to `errors`. The error node's span covers the whole statement, from where `Statement` started to where the strategy stopped, not just the point the parser choked on.
 
-`recover` deliberately ignores uncommitted failures, which is what keeps the loop terminating. At the end of the input `Statement` fails before reaching any `commit`, that failure passes straight through, and `many` stops instead of manufacturing a trailing error node for whatever is left.
+`recover` deliberately ignores uncommitted failures, which is what keeps the loop terminating. At the end of the input `Statement` fails before reaching any `commit`, that failure passes straight through, and `many` stops instead of producing a trailing error node for whatever is left.
 
 ## Choosing a resynchronisation point
 
