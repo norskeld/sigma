@@ -17,21 +17,21 @@ Slightly simplified [EBNF], with the problem on the highlighted lines:
 ```haskell{8,12}
 term
   = number
-  = ('+' | '-') term
-  = '(' expression ')'
+  | ('+' | '-') term
+  | '(' expression ')'
 
 factor
   = term
-  = factor ('*' | '/') term
+  | factor ('*' | '/') term
 
 expression
   = factor
-  = expression ('+' | '-') factor
+  | expression ('+' | '-') factor
 ```
 
 `factor` and `expression` both mention themselves as the first thing on the right-hand side. That's left recursion, and it's how you say "an expression is an expression plus something". It's a perfectly good description of the language and a fatal one for this kind of parser.
 
-`term` also refers to itself, on the third line, but only after consuming a `(` first. Recursion that happens after something has been consumed is fine and needs nothing special. Only recursion at the same position fails to terminate.
+`term` also refers to itself, in its second alternative, but only after a `+` or `-` has been consumed, and it reaches `expression` in the third only after a `(`. Recursion that happens after something has been consumed is fine and needs nothing special. Only recursion at the same position fails to terminate.
 
 ## Why left recursion loops
 
@@ -83,7 +83,6 @@ function evalBinary(left: number, op: string, right: number): number {
 Fold `+` and `-` over integers and you have a calculator:
 
 ```ts
-const Additive = token(choice(string('+'), string('-')))
 const Parser = chainl(token(integer()), Additive, evalBinary)
 ```
 
@@ -163,7 +162,7 @@ type Expr =
 So spans have to come from the operands. Every node carries one, and a binary node derives its own from the two it joins:
 
 ```ts
-function binary(left: Expr, op: string, right: Expr): Expr {
+function binaryNode(left: Expr, op: string, right: Expr): Expr {
   return {
     kind: 'binary',
     op,
@@ -184,14 +183,16 @@ map(token(integer()), (value, span): Expr => ({ kind: 'number', value, span }))
 
 A prefix operator is a rule that either consumes the operator and recurses, or falls through to the level below. It goes in the layer stack like any other precedence level, here between `Power` and `Product`, so `-2 ^ 2` parses as `-(2 ^ 2)`.
 
+The grammar below has grown past the sketch at the top of the page: it adds a `^` level and gives unary minus a level of its own rather than folding it into `term`. Nothing about removing the left recursion changes.
+
 ```ts
 const Lang = grammar({
   Sum(): Parser<Expr> {
-    return chainl(this.Product, Additive, binary)
+    return chainl(this.Product, Additive, binaryNode)
   },
 
   Product(): Parser<Expr> {
-    return chainl(this.Unary, Multiplicative, binary)
+    return chainl(this.Unary, Multiplicative, binaryNode)
   },
 
   Unary(): Parser<Expr> {
@@ -205,7 +206,7 @@ const Lang = grammar({
   },
 
   Power(): Parser<Expr> {
-    return chainr(this.Primary, Caret, binary)
+    return chainr(this.Primary, Caret, binaryNode)
   },
 
   Primary(): Parser<Expr> {
@@ -379,7 +380,7 @@ run(CommittedOp).with('1 + 2 @')
 }
 ```
 
-The whole chain fails, including the `1 + 2` it had already folded. The failure keeps its label and is reported at the position the commit fired, while the cursor is rewound all the way to where the chain began. An enclosing [choice] or [recover] therefore resumes from the start of the expression rather than the middle of one. The same holds for a commit inside an operand.
+The whole chain fails, including the `1 + 2` it had already folded. The failure keeps its label and is reported at the position the commit fired, while the cursor is rewound all the way to where the chain began. An enclosing [choice] never reaches its next alternative, because a committed failure ends it outright. An enclosing [recover] does handle it, and because of that rewind the region it replaces starts at the first character of the expression rather than in the middle of one, even though the resynchronisation itself scans from the position the commit fired. The same holds for a commit inside an operand.
 
 Commit an operator only where the language really does rule out every other reading. It's a good fit for a trailing binary operator in a statement-oriented language, and a bad one for a character that also means something to an enclosing rule.
 

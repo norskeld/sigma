@@ -212,7 +212,6 @@ const Document = inner(ws, Value, eof())
 
 `grammar` also catches more mistakes. With `defer` the declaration and the definition of every rule are separate, and nothing checks that you wrote the second half, so a rule you forgot to define surfaces at runtime. With `grammar` a rule is one thing, and a name that doesn't exist is a type error.
 
-
 ### Gotchas
 
 Nonetheless, `grammar` also has its own gotchas.

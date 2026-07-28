@@ -27,10 +27,10 @@ program   = body
 body      = statement*
 statement = binding | print | block
 binding   = "let" name "=" value ";"
-print     = "print" "(" value ( "," value )* ")" ";"
+print     = "print" "(" [ value ( "," value )* ] ")" ";"
 block     = "{" body "}"
 name      = letters
-value     = letters | digits
+value     = digits | letters
 
 letters   = ? letters ?
 digits    = ? digits ?
@@ -68,7 +68,7 @@ const Num = token(integer())
 const Value = choice(Num, Name)
 ```
 
-Since blocks contain statements, the rules are mutually recursive.
+Since blocks contain statements, the rules are mutually recursive, which is what [grammar] is for.
 
 ```ts
 const Lang = grammar({
@@ -390,6 +390,8 @@ Blocks nest, and a scan for the next `}` would stop at the wrong one. Take a str
 
 `Body` stops at `oops`, the `'block'` commit fires because `}` isn't there, and the malformed region runs to the end of the outer block. Skipping to the first `}` would land in the middle of it. [syncNested] tracks depth instead, so the inner `{ ... }` raises and lowers it again and the scan stops after the brace that actually balances.
 
+It's also the one strategy here that can fail. If the region never closes, `syncNested` gives up and `recover` re-raises the original failure, still committed, for a recovery point further out to deal with.
+
 The block gets its own recovery point, with `options.label` restricting it to failures committed as `'block'`:
 
 ```ts
@@ -416,7 +418,7 @@ const Lang = grammar({
 })
 ```
 
-Recovery points now nest. A `'block'` failure is handled here, while a `'let'` failure raised inside a block is declined and left committed for the `recover` in the block's own `Body`.
+Recovery points now nest, and the innermost one wins. A broken statement inside the block is taken by the `recover` in the block's own `Body`, which sits inside this one, so it never gets here. What does get here is the `'block'` failure itself, and `options.label` is what keeps this point to that kind: a failure carrying a different label, having escaped `Body`, is declined and left committed for a recovery point further out.
 
 ```ts
 run(Lang.Program).with(`
@@ -490,7 +492,7 @@ run(Lang.Program).with(`
 
 ## Inserting a missing token
 
-A strategy that consumes nothing turns `recover` into token insertion: [nothing] reports the missing token and the parse carries on where it left off, with no region skipped at all.
+A strategy that consumes nothing turns `recover` into token insertion: [nothing] skips no region at all, so `recover` records the missing token and the parse carries straight on from where it stopped.
 
 ```ts
 const InsertedSemi = recover(commit(Semi, 'semi'), nothing(), () => null) // [!code ++]
@@ -736,6 +738,7 @@ Sigma doesn't deduplicate or suppress diagnostics, so every recovery you allow e
 
 <!-- Links. -->
 
+[backtrack]: ../combinators/backtrack
 [choice]: ../combinators/choice
 [commit]: ../combinators/commit
 [eof]: ../parsers/eof
@@ -751,4 +754,3 @@ Sigma doesn't deduplicate or suppress diagnostics, so every recovery you allow e
 [syncPast]: ../combinators/syncPast
 [syncTo]: ../combinators/syncTo
 [tryRun]: ../core/tryRun
-[backtrack]: ../combinators/backtrack

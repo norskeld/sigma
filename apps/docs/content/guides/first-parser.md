@@ -81,7 +81,7 @@ run(Parser).with('help')
 
 `expected` is a short description of what would have matched, the kind of thing you'd put after "expected" in a message to a user. `label` stays `null` until something [commits][commit] to a parse, which the error recovery guide covers.
 
-The three offsets do different jobs on a failure, and the difference matters once you start rendering diagnostics. `start` and `end` cover the region the parser attempted to match, clamped to the input, so here they span all four characters of `help`. `pos` is where the failure gets reported, rewound to the position the parser started from. A parser that fails leaves the cursor exactly where it found it, which is what makes backtracking work.
+The three offsets do different jobs on a failure, and the difference matters once you start rendering diagnostics. `start` and `end` cover the region the parser attempted to match, clamped to the input, so here they span all four characters of `help`. `pos` is where the failure gets reported, meaning wherever the parser that gave up was standing, which in a larger grammar is usually somewhere in the middle of the input rather than at the beginning. The cursor is a separate thing from all three: a parser that fails leaves it exactly where it found it, which is what makes backtracking work.
 
 ## Putting parsers in a row
 
@@ -281,8 +281,16 @@ const List = map(inner(Open, sepBy(Word, Comma), Close), (value) => ({
   value,
 }))
 
-const Value = choice(List, Flag, Num, Text)
+const Value = choice(Flag, Num, Text) // [!code --]
+const Value = choice(List, Flag, Num, Text) // [!code ++]
+
+const Setting = map( // [!code ++]
+  outer(Word, Equals, Value), // [!code ++]
+  ([name, value], span) => ({ name, value, span }), // [!code ++]
+) // [!code ++]
 ```
+
+Parsers are values, so `Setting` holds the `Value` it was built from and has to be rebuilt to see the new one. The same applies to every redefinition further down the page.
 
 ```ts
 run(Setting).with('tags = [core, docs, bench]')
@@ -431,6 +439,11 @@ Every alternative in `Value` failed at position 10, and when alternatives tie li
 ```ts
 const Value = choice(List, Flag, Num, Text) // [!code --]
 const Value = error(choice(List, Flag, Num, Text), 'value') // [!code ++]
+
+const Setting = map( // [!code ++]
+  outer(Word, Equals, Value), // [!code ++]
+  ([name, value], span) => ({ name, value, span }), // [!code ++]
+) // [!code ++]
 ```
 
 ```ts
