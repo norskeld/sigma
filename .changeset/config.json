@@ -2,7 +2,13 @@
   "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
   "access": "public",
   "baseBranch": "master",
-  "changelog": ["@changesets/changelog-github", { "repo": "norskeld/sigma" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "norskeld/sigma",
+      "template": "\n\n- {summary} {ref} ({authors})"
+    }
+  ],
   "commit": false,
   "fixed": [],
   "linked": [],
