@@ -48,12 +48,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Create Release Pull Request or Publish
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
-          version: pnpm run version
-          publish: pnpm run release
-          title: "chore: version packages"
-          commit: "chore: version packages"
+          version-script: pnpm run version
+          publish-script: pnpm run release
+          pr-title: "chore: version packages"
+          commit-message: "chore: version packages"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PNPM_CONFIG_PROVENANCE: true
