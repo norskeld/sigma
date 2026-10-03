@@ -19,6 +19,19 @@ describe('sequence', () => {
     should.matchState(actual, expected)
   })
 
+  it('should succeed with an empty tuple when given no parsers', () => {
+    const actual = run(sequence(), '')
+
+    should.matchResult(actual, { isOk: true, start: 0, end: 0, pos: 0, value: [] })
+  })
+
+  it('should compose when given no parsers', () => {
+    const parser = sequence(sequence(), string('a'))
+    const actual = run(parser, 'a')
+
+    should.matchResult(actual, { isOk: true, start: 0, end: 1, pos: 1, value: [[], 'a'] })
+  })
+
   it('should succeed with two parsers', () => {
     const parser = sequence(string('a'), string('b'))
     const actual = run(parser, 'ab')

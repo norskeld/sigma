@@ -12,6 +12,9 @@ export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToT
 export function sequence<T extends Array<Parser<unknown>>>(...ps: T): Parser<ToTupleOrArray<T>>
 export function sequence<T>(...ps: Array<Parser<T>>): Parser<Array<T>> {
   switch (ps.length) {
+    case 0:
+      return { parse: () => [] }
+
     case 2:
       return sequence2(ps[0], ps[1])
 
