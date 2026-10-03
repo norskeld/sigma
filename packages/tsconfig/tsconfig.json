@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "isolatedDeclarations": true,
+    "esModuleInterop": true,
+    "lib": ["ES2024", "ES2024.String", "DOM"],
+    "module": "esnext",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "outDir": "${configDir}/dist",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2024"
+  },
+  "exclude": ["${configDir}/dist"]
+}

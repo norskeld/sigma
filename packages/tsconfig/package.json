@@ -1,0 +1,13 @@
+{
+  "name": "@nrsk/tsconfig",
+  "version": "0.0.0",
+  "description": "Shared TypeScript configuration for the sigma monorepo.",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./tsconfig.json"
+  },
+  "files": [
+    "tsconfig.json"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@nrsk/sigma-bench",
+  "version": "1.0.0",
+  "description": "Benchmarks for @nrsk/sigma",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench": "node --expose-gc src/index.ts",
+    "bench:many": "node --expose-gc src/many/index.ts",
+    "bench:json": "node --expose-gc src/json/index.ts",
+    "bench:tuple": "node --expose-gc src/tuple/index.ts",
+    "bench:select": "node --expose-gc src/select/index.ts",
+    "bench:recovery": "node --expose-gc src/recovery/index.ts"
+  },
+  "dependencies": {
+    "@nrsk/sigma": "workspace:*",
+    "chevrotain": "12.0.0",
+    "mitata": "^1.0.34",
+    "parjs": "1.3.9",
+    "parsimmon": "1.18.1"
+  },
+  "devDependencies": {
+    "@nrsk/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/parsimmon": "1.10.9"
+  }
+}

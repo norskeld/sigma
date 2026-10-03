@@ -1,0 +1,10 @@
+{
+  "extends": "@nrsk/tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "isolatedDeclarations": false,
+    "noEmit": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo"
+  },
+  "include": ["vitest.config.ts", "tsdown.config.ts"]
+}

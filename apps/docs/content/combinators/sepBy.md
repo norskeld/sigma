@@ -1,0 +1,58 @@
+---
+title: 'sepBy'
+description: 'sepBy combinator parses zero or more occurrences of parser, separated by sep. Returns a list of values (without separator) returned by parser.'
+---
+
+# sepBy
+
+`sepBy` combinator parses *zero* or more occurrences of `parser`, separated by `sep`. Returns a list of values (without separator) returned by `parser`. This combinator never fails on its own and returns an empty list if nothing matched, but a [committed][commit] failure from `parser` or `sep` propagates instead of ending the loop, and the cursor rewinds to where the combinator started.
+
+A `sep` that isn't followed by a value is rewound too, so a trailing separator is left unconsumed. A `sep` and value pair that consumes no input ends the loop, so the combinator always terminates.
+
+## Usage
+
+```ts
+const Parser = sepBy(whole(), string('+'))
+```
+
+::: tip Success
+```ts
+run(Parser).with('1+2+3+4')
+
+{
+  isOk: true,
+  start: 0,
+  end: 7,
+  pos: 7,
+  value: [ 1, 2, 3, 4 ]
+}
+```
+---
+```ts
+run(Parser).with('1-two')
+
+{
+  isOk: true,
+  start: 0,
+  end: 1,
+  pos: 1,
+  value: [ 1 ]
+}
+```
+---
+```ts
+run(Parser).with('one+two')
+
+{
+  isOk: true,
+  start: 0,
+  end: 0,
+  pos: 0,
+  value: []
+}
+```
+:::
+
+<!-- Links. -->
+
+[commit]: ./commit
