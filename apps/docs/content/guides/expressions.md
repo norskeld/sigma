@@ -6,9 +6,9 @@ order: 3
 
 # Expressions and precedence
 
-Arithmetic is the first thing you can't parse by writing the grammar down and translating it rule by rule. The obvious grammar for it is left recursive, and a recursive descent parser handed a left recursive rule loops until the stack runs out.
+Arithmetic is the first thing you can't parse by writing the grammar down and translating it rule by rule. The obvious grammar for it is left recursive, and a recursive descent parser given a left recursive rule loops until the stack runs out.
 
-Sigma's answer is [chainl] and [chainr], which parse a flat run of operands and operators and fold it into whatever shape you want. This page starts from the grammar that doesn't work, gets to a calculator, and then turns the calculator into something that produces a tree with source positions on it.
+Sigma provides [chainl] and [chainr], which parse a flat run of operands and operators and fold it into whatever shape you want. This page starts from the grammar that doesn't work and ends with a parser that produces a tree with source positions on it.
 
 ## The grammar
 
@@ -29,19 +29,19 @@ expression
   | expression ('+' | '-') factor
 ```
 
-`factor` and `expression` both mention themselves as the first thing on the right-hand side. That's left recursion, and it's how you say "an expression is an expression plus something". It's a perfectly good description of the language and a fatal one for this kind of parser.
+`factor` and `expression` both mention themselves as the first thing on the right-hand side. That's left recursion. The grammar describes the language correctly, but this kind of parser cannot run it.
 
 `term` also refers to itself, in its second alternative, but only after a `+` or `-` has been consumed, and it reaches `expression` in the third only after a `(`. Recursion that happens after something has been consumed is fine and needs nothing special. Only recursion at the same position fails to terminate.
 
 ## Why left recursion loops
 
-To parse `expression`, the parser tries the first alternative that could match, which is `expression`. To parse that, it tries `expression`. Nothing has been consumed, no state has changed, and the third call is identical to the first. Parser combinators are recursive descent, so this is a plain infinite recursion.
+To parse `expression`, the parser tries the first alternative that could match, which is `expression`. To parse that, it tries `expression`. Nothing has been consumed and the third call is identical to the first, so the recursion never ends.
 
-You can't fix it by reordering the alternatives, and no amount of backtracking helps, because the parser never gets far enough to backtrack from. The grammar has to change. Either rewrite it into an equivalent one without left recursion, or use a combinator built for the job.
+You can't fix it by reordering the alternatives, and no amount of backtracking helps, because the parser never gets far enough to backtrack from. Either rewrite grammar into an equivalent one without left recursion, or use a combinator built for the job.
 
 ## The tokens
 
-Everything below shares these, with whitespace handled by the convention from the [first parser] guide: every token consumes what trails it.
+Everything below shares these tokens, with whitespace handled by the convention from the [first parser] guide: every token consumes whatever trails it.
 
 ```ts
 const ws = optional(whitespace())
@@ -101,7 +101,7 @@ run(Parser).with('10 + 10 - 5 + 15')
 }
 ```
 
-Step by step, `chainl` consumes `10 + 10` and applies `evalBinary` to yield `20`, consumes `- 5` and applies it to the accumulated `20` to yield `15`, then consumes `+ 15` and yields `30`. The fold is eager: each pair is reduced as soon as it's read.
+Step by step, `chainl` consumes `10 + 10` and applies `evalBinary` to get `20`. It then consumes `- 5` and applies it to the accumulated `20` to get `15`, and consumes `+ 15` to get `30`. The fold is eager, so each pair is reduced as soon as it's read.
 
 ## Precedence as layers
 
@@ -144,11 +144,11 @@ Compare that against the grammar at the top. `Product` is `factor`, `Expression`
 
 `chainl` folds left, so `10 - 3 - 2` is `(10 - 3) - 2`. Exponentiation goes the other way: `2 ^ 3 ^ 2` should be `2 ^ (3 ^ 2)`, which is 512, not `(2 ^ 3) ^ 2`, which is 64. [chainr] is the same combinator folding the other direction.
 
-The two differ not only in the direction. `chainl` calls `fn` once per iteration as it goes. `chainr` can't, because the rightmost pair has to be reduced first, so it collects the whole run and folds it afterwards. For a pure function you'd never notice, but it matters if `fn` does anything observable.
+The two also differ in when `fn` runs. `chainl` calls `fn` once per iteration as it goes. `chainr` can't, because the rightmost pair has to be reduced first, so it collects the whole run and folds it afterwards. For a pure function you'd never notice, but it matters if `fn` does anything observable.
 
 ## Building a tree instead of a number
 
-Evaluating during the parse is fine for a calculator and no use for anything else. To get a tree, have `fn` build a node rather than a value.
+Evaluating during the parse is fine for a calculator. Most other uses need a tree of operations, which you get by having `fn` build a node instead of a value.
 
 ```ts
 type Expr =
@@ -157,9 +157,7 @@ type Expr =
   | { kind: 'binary'; op: string; left: Expr; right: Expr; span: Span }
 ```
 
-[map]'s callback receives a `Span` as its second argument. `chainl` and `chainr` give you nothing of the sort: their `fn` is `(left, op, right) => T` and that's all. A chain has no single region to hand over, because it folds a run of things and each fold covers a different slice of it.
-
-So spans have to come from the operands. Every node carries one, and a binary node derives its own from the two it joins:
+`chainl` and `chainr` don't provide spans, so they have to come from the operands. Every node carries one, and a binary node can derive its own from the two it joins:
 
 ```ts
 function binaryNode(left: Expr, op: string, right: Expr): Expr {
@@ -182,8 +180,6 @@ map(token(integer()), (value, span): Expr => ({ kind: 'number', value, span }))
 ## Unary operators
 
 A prefix operator is a rule that either consumes the operator and recurses, or falls through to the level below. It goes in the layer stack like any other precedence level, here between `Power` and `Product`, so `-2 ^ 2` parses as `-(2 ^ 2)`.
-
-The grammar below has grown past the sketch at the top of the page: it adds a `^` level and gives unary minus a level of its own rather than folding it into `term`. Nothing about removing the left recursion changes.
 
 ```ts
 const Lang = grammar({
@@ -218,7 +214,7 @@ const Lang = grammar({
 })
 ```
 
-`Unary` is the one rule that gets its span from `map` rather than composing it, because the `-` isn't part of any operand.
+`Unary` is the rule that gets its span from `map` rather than composing it, because the `-` isn't part of any operand.
 
 ```ts
 run(Lang.Sum).with('1 + 2 * 3')
@@ -247,9 +243,9 @@ run(Lang.Sum).with('1 + 2 * 3')
 }
 ```
 
-The `*` node spans `2 * 3` and the `+` node spans all of it, both assembled from leaf spans without counting a single offset by hand.
+The `*` node spans `2 * 3` and the `+` node spans all of it, both assembled from leaf spans. Note that the leaf for `1` spans two characters. The leaf is `token(integer())`, and `map` wraps the whole token, so the trailing space is part of the span. Apply `map` to `integer()` before wrapping it in `token` if the leaf span should stop at the digits.
 
-Right associativity shows up in the shape rather than the numbers:
+Right associativity shows up in the shape of the tree:
 
 ```ts
 run(Lang.Sum).with('2 ^ 3 ^ 2')
@@ -299,7 +295,7 @@ run(Lang.Sum).with('42')
 }
 ```
 
-No binary node, because there was nothing to combine. This is why the signature is `chainl<T, L extends T, R>`: the operand type has to be assignable to the result type, since a one-operand chain returns an operand as its result. If your `fn` produces a type the operands can't inhabit, that constraint is what will complain.
+There is no binary node, because there was nothing to combine. This is why the signature is `chainl<T, L extends T, R>`. A one-operand chain returns the operand as its result, so the operand type has to be assignable to the result type. If `fn` produces a type the operands can't inhabit, that constraint reports the error.
 
 ## When the chain stops
 
@@ -326,7 +322,7 @@ run(Lang.Sum).with('1 + 2 +')
 }
 ```
 
-It succeeded! The trailing `+` matched, the operand after it didn't, so the chain backtracked over the operator, kept `1 + 2`, and stopped at position 6 with the `+` left unconsumed for whatever comes next. That's the right behaviour in general, since an operator character may well belong to an enclosing rule, but it does mean a chain on its own won't tell you about a dangling operator. Anchor the parser with [eof] and the leftovers become a real failure:
+The parse succeeded. The trailing `+` matched, the operand after it didn't, so the chain backtracked over the operator, kept `1 + 2`, and stopped at position 6 with the `+` left unconsumed for whatever comes next. This is the correct default, since an operator character may belong to an enclosing rule, but it means a chain on its own won't tell you about a dangling operator. Anchor the parser with [eof] and the leftovers become a real failure:
 
 ```ts
 run(inner(ws, Lang.Sum, eof())).with('1 + 2 +')
@@ -346,7 +342,7 @@ run(inner(ws, Lang.Sum, eof())).with('1 + 2 +')
 
 ## Committed failures in a chain
 
-[commit] changes what a half-finished pair means. Commit the operator and it stops being a reason to backtrack and becomes a syntax error.
+[commit] changes what a half-finished pair means. Commit the operator and it becomes a syntax error.
 
 ```ts
 const CommittedOp = chainl(token(integer()), commit(Additive, 'operator'), evalBinary)
@@ -359,10 +355,17 @@ run(CommittedOp).with('1 + 2 +')
 ```
 
 ```ts
-{ isOk: true, start: 0, end: 6, pos: 6, value: 3, errors: [] }
+{
+  isOk: true,
+  start: 0,
+  end: 6,
+  pos: 6,
+  value: 3,
+  errors: []
+}
 ```
 
-But feed it something the operator itself rejects and the commit fires:
+But feed it something the operator itself rejects and the commit triggers:
 
 ```ts
 run(CommittedOp).with('1 + 2 @')
@@ -382,11 +385,11 @@ run(CommittedOp).with('1 + 2 @')
 
 The whole chain fails, including the `1 + 2` it had already folded. The failure keeps its label and is reported at the position the commit fired, while the cursor is rewound all the way to where the chain began. An enclosing [choice] never reaches its next alternative, because a committed failure ends it outright. An enclosing [recover] does handle it, and because of that rewind the region it replaces starts at the first character of the expression rather than in the middle of one, even though the resynchronisation itself scans from the position the commit fired. The same holds for a commit inside an operand.
 
-Commit an operator only where the language really does rule out every other reading. It's a good fit for a trailing binary operator in a statement-oriented language, and a bad one for a character that also means something to an enclosing rule.
+Commit an operator only where the language rules out every other reading. It's a good fit for a trailing binary operator in a statement-oriented language, and a bad one for a character that also means something to an enclosing rule.
 
 ## What to read next
 
-The [error recovery] guide picks up where the last section left off: turning a committed failure into a diagnostic and carrying on, so a file with three bad expressions reports three errors instead of one. The [chainl] and [chainr] reference pages carry the signatures and the smaller examples.
+The [error recovery] guide picks up where the last section left off: turning a committed failure into a diagnostic and carrying on, so a file with three broken expressions reports three errors instead of one. See the [chainl] and [chainr] reference pages to see signatures and smaller examples.
 
 <!-- Links. -->
 

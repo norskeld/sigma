@@ -6,7 +6,7 @@ order: 1
 
 # First parser
 
-Sigma gives you a set of very small parsers and the functions to combine them. There is no separate grammar file and no code generation step. A parser is an ordinary value, and you build a bigger one by passing smaller ones to a function.
+Sigma gives you a set of small parsers and the functions to combine them. There is no separate grammar file and no code generation step. A parser is an ordinary value, and you build a bigger one by passing smaller ones to a function.
 
 This page builds one up from a single literal to a parser for a small settings format, and explains what comes back at each step.
 
@@ -40,7 +40,7 @@ run(Parser).with('hello')
 }
 ```
 
-`isOk` tells you which shape you're holding, and it narrows the type: inside an `if (result.isOk)` branch TypeScript knows `value` exists. `start` and `end` are offsets into the input describing the region the parser consumed. `pos` is where the cursor ended up. `errors` collects failures the parser recovered from, which the [error recovery] guide covers.
+`isOk` tells you which shape you're holding, and it narrows the type. Inside an `if (result.isOk)` branch TypeScript knows `value` exists. `start` and `end` are offsets into the input describing the region the parser consumed. `pos` is where the cursor ended up. `errors` collects failures the parser recovered from, which the [error recovery] guide covers.
 
 Nothing requires a parser to reach the end of the input. Given more to work with, it still stops after what it matched.
 
@@ -79,9 +79,9 @@ run(Parser).with('help')
 }
 ```
 
-`expected` is a short description of what would have matched, the kind of thing you'd put after "expected" in a message to a user. `label` stays `null` until something [commits][commit] to a parse, which the error recovery guide covers.
+`expected` is a short description of what would have matched, written so it reads well after the word "expected" in a message to a user. `label` stays `null` until something [commits][commit] to a parse, which the error recovery guide covers.
 
-The three offsets do different jobs on a failure, and the difference matters once you start rendering diagnostics. `start` and `end` cover the region the parser attempted to match, clamped to the input, so here they span all four characters of `help`. `pos` is where the failure gets reported, meaning wherever the parser that gave up was standing, which in a larger grammar is usually somewhere in the middle of the input rather than at the beginning. The cursor is a separate thing from all three: a parser that fails leaves it exactly where it found it, which is what makes backtracking work.
+The three offsets do different jobs on a failure, and the difference matters once you start rendering diagnostics. `start` and `end` are the region the failed parser highlights. The parser that failed decides how wide that region is. `string` highlights as many characters as its literal is long, clamped to the input, so here the region spans all four characters of `help`. Most other parsers highlight a single point. `pos` is where the failure gets reported, which is wherever the parser that gave up was standing. In a larger grammar that is usually somewhere in the middle of the input. The cursor is separate from all three. A parser that fails leaves the cursor where it found it, and that is what lets the next alternative try the same input.
 
 ## Putting parsers in a row
 
@@ -134,7 +134,7 @@ run(Setting).with('retries=3')
 
 ## Shaping the result
 
-Tuples get unreadable quickly. [map] applies a function to whatever a parser produced, and it hands that function a `Span` as a second argument, so a node can record where it came from.
+Tuples can get unreadable quickly. [map] applies a function to whatever a parser produced, and it hands that function a `Span` as a second argument, so a node can record where it came from.
 
 ```ts
 const Setting = map(
@@ -158,8 +158,6 @@ run(Setting).with('retries=3')
 }
 ```
 
-`map` is where a span enters the tree. Attaching one as you build each node costs nothing, and it's what lets an error message point at a line.
-
 ## Choosing between alternatives
 
 A setting's value isn't always a number. [choice] takes several parsers and returns the result of the first one that matches, with the result type being the union of theirs.
@@ -176,7 +174,7 @@ const Text = map(letters(), (value) => ({ kind: 'text' as const, value }))
 const Value = choice(Flag, Num, Text)
 ```
 
-`choice` is ordered. It doesn't look for the longest match or the best one, it takes the earliest alternative that succeeds and never reconsiders. Put `Text` first and `true` stops being a flag, because [letters] matches the whole word.
+`choice` is ordered. It takes the first alternative that succeeds and never reconsiders, even if a later one would have matched more input. Put `Text` first and `true` stops being a flag, because [letters] matches the whole word.
 
 ```ts
 run(choice(Text, Flag, Num)).with('true')
@@ -208,7 +206,7 @@ run(choice(Flag, Num, Text)).with('true')
 }
 ```
 
-Neither run failed, which is what makes this kind of bug hard to track down. When two alternatives can match the same input, put the specific one first.
+Neither run failed, so nothing points at the mistake. When two alternatives can match the same input, put the specific one first.
 
 `Setting` can now take any of the three.
 
@@ -222,7 +220,7 @@ const Setting = map(
 
 ## Whitespace
 
-So far the grammar only accepts `retries=3` with no spaces. Sigma has no separate lexer, so whitespace is yours to handle. The usual approach is to pick a convention and apply it in one place: every token consumes the whitespace that follows it.
+So far the grammar only accepts `retries=3` with no spaces. Sigma has no separate lexer, so you have to handle whitespace yourself. The usual approach is to pick a convention and apply it in one place, e.g. every token consumes the whitespace that follows it.
 
 ```ts
 const ws = optional(whitespace())
@@ -269,7 +267,7 @@ run(Setting).with('retries = 3')
 }
 ```
 
-`Close` is deliberately not a token. Whatever consumes the whitespace at the end of a setting also pulls it inside that setting's span, and a span that runs into the next line highlights badly. Leaving the last parser of a construct bare keeps the span tight and lets the enclosing rule deal with the gap.
+`Close` is not a token, so a setting's span ends at its last character instead of swallowing the newline after it. The whitespace between settings is handled further down, by wrapping the whole setting in `token`.
 
 ## Lists
 
@@ -366,7 +364,7 @@ The `token` around `Setting` is what consumes the newlines between them. Each se
 
 ## The whole input
 
-`many` stops at the first thing it can't parse, and that's the behaviour that lets a broken file look fine.
+`many` stops at the first thing it can't parse, so a broken file can look fine.
 
 ```ts
 run(inner(ws, many(token(Setting)), ws)).with('\nname = sigma\n???\n')
@@ -389,7 +387,7 @@ run(inner(ws, many(token(Setting)), ws)).with('\nname = sigma\n???\n')
 }
 ```
 
-`isOk: true`, one setting, and the `???` silently dropped. [eof] fixes this: it matches only at the end of the input, so putting it last forces the parser to account for every character.
+The run above produced one setting and dropped the `???` without a word. [eof] fixes this. It matches only at the end of the input, so putting it last forces the parser to account for every character.
 
 ```ts
 const Settings = inner(ws, many(token(Setting)), ws) // [!code --]
@@ -412,11 +410,11 @@ run(Settings).with('\nname = sigma\n???\n')
 }
 ```
 
-Now it's a failure, though not a good one. Position 14 is the start of `???`, and "expected end of input" describes the parser's predicament rather than the user's mistake. That's a fair summary of what the grammar knows. Turning it into a real diagnostic, and getting the rest of the file parsed anyway, is what the [error recovery] guide is about.
+Now it's a failure, but a poor one. Position 14 is the start of `???`, and "expected end of input" tells the user nothing about what they got wrong. The [error recovery] guide shows how to turn it into a real diagnostic and get the rest of the file parsed anyway.
 
 ## Naming what you expected
 
-Ask for a setting with nothing after the `=`:
+Parse a setting with nothing after the `=`:
 
 ```ts
 run(Setting).with('retries = ')
@@ -462,11 +460,11 @@ run(Setting).with('retries = ')
 }
 ```
 
-Do this for anything a user will see. `error` deliberately leaves committed failures alone, so it relabels ordinary expectations without papering over real syntax errors.
+Do this for anything a user will see. `error` leaves committed failures alone, so it relabels ordinary expectations without concealing real syntax errors.
 
 ## When you'd rather throw
 
-[run] always returns a result and never throws, which suits code that wants to inspect the failure. When a failure is not something the caller can do anything about, [tryRun] returns the `Success` directly and throws a `ParserError` otherwise.
+[run] returns a result for a failed parse instead of throwing, which suits code that wants to inspect the failure. When a failure is not something the caller can do anything about, [tryRun] returns the `Success` directly and throws a `ParserError` otherwise.
 
 ```ts
 tryRun(Setting).with('retries = ')

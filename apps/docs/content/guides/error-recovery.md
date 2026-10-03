@@ -1,12 +1,12 @@
 ---
 title: 'Error recovery'
-description: 'How Sigma reports several syntax errors from one run and still produces a usable tree.'
+description: 'How Sigma reports several syntax errors while still producing a usable tree.'
 order: 4
 ---
 
 # Error recovery
 
-By default a run stops at the first failure. That's fine for a validator, but an editor or a compiler front-end needs every error in the file and a tree it can still work with. Sigma builds that out of two pieces: [commit] marks the point past which a failure is a real syntax error, and [recover] resynchronises when one happens.
+By default parsing stops at the first failure. That's fine for a validator, but an editor or a compiler front-end needs every error in the file and a tree it can still work with. Sigma builds that out of two pieces. [commit] marks the point past which a failure is a real syntax error, and [recover] resynchronises when one happens.
 
 This page grows one small grammar until it does both.
 
@@ -20,7 +20,7 @@ print(width, 2);
 { let scale = 2; }
 ```
 
-Written out, the grammar is roughly this:
+The grammar is roughly this:
 
 ```text
 program   = body
@@ -36,7 +36,7 @@ letters   = ? letters ?
 digits    = ? digits ?
 ```
 
-The AST comes first, as a union of object shapes. The `error` node is in the union from the start, since that's what a recovered region resolves to later.
+The AST is a discriminated union of object shapes. The `error` node is what a recovered region resolves to later.
 
 ```ts
 type Node =
@@ -46,7 +46,7 @@ type Node =
   | { kind: 'error'; span: Span }
 ```
 
-Then the lexemes. `token` attaches trailing whitespace to whatever it wraps, so the rules below never mention it again.
+Next are the lexemes. `token` attaches trailing whitespace to whatever it wraps, so the rules below don't have to mention it everywhere.
 
 ```ts
 const ws = optional(whitespace())
@@ -113,7 +113,7 @@ const Lang = grammar({
 })
 ```
 
-On valid input it does what you'd expect.
+On valid input it returns both statements.
 
 ```ts
 run(Lang.Program).with(`
@@ -160,9 +160,9 @@ print(width, 2);
 }
 ```
 
-Now there's one error, but it's the wrong one. Position 18 is the start of `let = 240;`, and the complaint is that the file didn't end there.
+There is one error, and it is the wrong one. Position 18 is the start of `let = 240;`, and the complaint is that the file didn't end there.
 
-[choice] tries `Binding`, which consumes `let` and fails on the missing name. A failed alternative is just an alternative that didn't apply, so `choice` rewinds and tries `Print`, then `Block`, and none of them match. [many] reads that as "no more statements" and stops, and [eof] then fails on the leftovers, overwriting what little was left of the original complaint. The real problem, a missing name after `let`, is discarded.
+[choice] tries `Binding`, which consumes `let` and fails on the missing name. `choice` then rewinds and tries `Print`, then `Block`, and none of them match. `choice` keeps the failure that got the furthest, the missing name at position 22. [many] reads the failure as "no more statements", discards it, and stops. [eof] then fails on the leftovers and reports its own complaint. The real problem, a missing name after `let`, is gone.
 
 There's also nothing to recover from. As far as the grammar is concerned, no statement started here at all.
 
@@ -206,7 +206,7 @@ const Lang = grammar({
 })
 ```
 
-A committed failure stops being backtracked over, so `choice` gives up instead of trying `Print`, and the failure is propagated with the label attached:
+A committed failure stops being backtracked over. `choice` gives up instead of trying `Print`, and the failure is propagated with the label attached:
 
 ```ts
 run(Lang.Program).with(`
@@ -228,15 +228,15 @@ print(width, 2);
 }
 ```
 
-Position 22 is the `=`, and the message names what was actually missing. See [commit] for what commitment does to each combinator.
+Position 22 is the `=`, and the message names what is missing. See [commit] for what commitment does to each combinator.
 
-The run still stops at the first error, but commitment produced a failure worth recovering from.
+The parsing still stops at the first error, but commitment produced a recoverable failure.
 
 ## Recovering
 
-[recover] takes a parser, a resynchronisation strategy, an optional fallback, and options. On a committed failure it records the failure, runs the strategy to skip the malformed region, and resolves to the fallback value in its place.
+[recover] takes a parser, a resynchronisation strategy, an optional fallback, and options. On a committed failure it runs the strategy from the position the failure was reported at. If the strategy finds a resynchronisation point, `recover` records the failure and resolves to the fallback value in place of the malformed region.
 
-For a statement list the natural boundary is the terminator, so the strategy is [syncPast] over `;`. Only `Body` changes:
+A statement list has a boundary at each terminator, so the strategy is [syncPast] over `;`. Only `Body` changes:
 
 ```ts
 function errorNode(_: Failure, span: Span): Node { // [!code ++]
@@ -290,13 +290,13 @@ print(width, 2);
 }
 ```
 
-The result stays `isOk: true` and the failure moves to `errors`. The error node's span covers the whole statement, from where `Statement` started to where the strategy stopped, not just the point the parser choked on.
+The result stays `isOk: true` and the failure moves to `errors`. The error node's span covers the whole statement, from where `Statement` started to where the strategy stopped.
 
-`recover` deliberately ignores uncommitted failures, which is what keeps the loop terminating. At the end of the input `Statement` fails before reaching any `commit`, that failure passes straight through, and `many` stops instead of producing a trailing error node for whatever is left.
+`recover` ignores uncommitted failures, which is what lets `many` stop cleanly. At the end of the input `Statement` fails before reaching any `commit`, that failure passes straight through, and `many` stops instead of producing a trailing error node for whatever is left.
 
 ## Choosing a resynchronisation point
 
-The strategy is an ordinary parser, and which one you pick decides how much input a single error costs you. Here a terminator goes missing instead of a name:
+The strategy is an ordinary parser, and which one you pick decides how much input a single error will strip. Here a terminator goes missing instead of a name:
 
 ```ts
 run(Lang.Program).with(`
@@ -382,15 +382,15 @@ Neither strategy can fail. `syncPast` always advances unless it's already at the
 
 ## Recovering out of a block
 
-Blocks nest, and a scan for the next `}` would stop at the wrong one. Take a stray token sitting before an inner block:
+Blocks nest, and a scan for the next `}` would stop at the wrong one. Take an extra token placed before an inner block:
 
 ```
 { let x = 1; oops { let y = 2; } }
 ```
 
-`Body` stops at `oops`, the `'block'` commit fires because `}` isn't there, and the malformed region runs to the end of the outer block. Skipping to the first `}` would land in the middle of it. [syncNested] tracks depth instead, so the inner `{ ... }` raises and lowers it again and the scan stops after the brace that actually balances.
+`Body` stops at `oops`, the `'block'` commit triggers because `}` isn't there, and the malformed region runs to the end of the outer block. Skipping to the first `}` would end up in the middle of it. [syncNested] tracks depth instead, so the inner `{ ... }` raises and lowers it again and the scan stops after the brace that balances the outer one.
 
-It's also the one strategy here that can fail. If the region never closes, `syncNested` gives up and `recover` re-raises the original failure, still committed, for a recovery point further out to deal with.
+It is the only one of the three strategies that can fail. If the region never closes, `syncNested` gives up and `recover` re-raises the original failure, still committed, for a recovery point further out to deal with.
 
 The block gets its own recovery point, with `options.label` restricting it to failures committed as `'block'`:
 
@@ -418,7 +418,7 @@ const Lang = grammar({
 })
 ```
 
-Recovery points now nest, and the innermost one wins. A broken statement inside the block is taken by the `recover` in the block's own `Body`, which sits inside this one, so it never gets here. What does get here is the `'block'` failure itself, and `options.label` is what keeps this point to that kind: a failure carrying a different label, having escaped `Body`, is declined and left committed for a recovery point further out.
+There are now two recovery points, one inside the other, and the innermost one that accepts a failure handles it. A broken statement inside the block is handled by the `recover` in `Body` and never reaches this one. The `label` option makes this `recover` decline anything not committed as `'block'`, so such a failure stays committed and goes to the next recovery point outward.
 
 ```ts
 run(Lang.Program).with(`
@@ -554,7 +554,7 @@ Use it in a fixed position such as a [sequence], never inside a repetition, wher
 
 ## Accounting for the whole file
 
-`many` stops at the first uncommitted failure, which is what makes recovery terminate, but it also means input matching no rule at all is left unparsed, and [eof] fails on it:
+`many` stops at the first uncommitted failure, which is what ends the loop at the end of input, but it also means input matching no rule at all is left unparsed, and [eof] fails on it:
 
 ```ts
 run(Lang.Program).with(`
@@ -575,7 +575,7 @@ xyz
 }
 ```
 
-Give the loop a last alternative that always fails, and commit to it. "Nothing matched here" turns into a real syntax error, which the recovery point then handles like any other:
+Give the loop a last alternative that always fails, and commit to it. "Nothing matched here" turns into a real syntax error, and the recovery point handles it like any other:
 
 ```ts
 const Unknown = commit(fail('statement'), 'unknown') // [!code ++]
@@ -627,13 +627,13 @@ let b = 2;
 }
 ```
 
-Note that the catch-all goes in `Program` rather than `Body`. `Body` has to be able to stop at a block's `}`, and a rule committing to anything it doesn't recognise would consume that brace instead, so a well-formed `{ let x = 1; }` would come back as one error node.
+Note that the catch-all goes in `Program`, not in `Body`. `Body` has to stop at a block's `}`, but `Unknown` would commit on that brace, and `syncPast(Semi)` would then scan past it looking for a `;`. A well-formed `{ let x = 1; }` would come back as one error node.
 
 ## Falling back to another parse
 
 `recover` answers a committed failure with an error node. Sometimes the right answer is a different parse instead.
 
-Commitment is a property of the rule, so every use of `Statement` inherits it, including uses that only want to try it speculatively. Say a lenient mode should keep unrecognised lines as raw text:
+Commitment is a property of the rule, so every use of `Statement` inherits it, including uses that only want to try it speculatively. Say a lenient mode should keep unrecognised lines as raw text. This section starts again from the grammar as it was before the catch-all was added:
 
 ```ts
 type Node =
@@ -660,7 +660,7 @@ const Lang = grammar({
 })
 ```
 
-That doesn't work, though. The committed failure ends the [choice] before `Raw` is ever reached:
+This does not work. The committed failure ends the [choice] before `Raw` is reached:
 
 ```ts
 run(Lang.Program).with(`
@@ -718,23 +718,23 @@ print(width, 2);
 }
 ```
 
-Note the empty `errors`. `backtrack` forgets the failure, it doesn't report it, and it neither consumes the region nor stands in for it. Reach for it when a committed rule has to be speculative somewhere, and for `recover` when the malformed region has to end up in the diagnostics.
+Note the empty `errors`. `backtrack` forgets the failure. Nothing is reported, nothing is consumed, and nothing stands in for the region. Use it when a committed rule has to be speculative somewhere, and use `recover` when the malformed region has to end up in the diagnostics.
 
 ## Reading the result
 
-Every result carries `errors`, and a successful result with a non-empty `errors` is a partial parse: the value is usable, and each entry describes a syntax error. [run] tolerates recovered failures; [tryRun] throws on them.
+Every result carries `errors`, and a successful result with a non-empty `errors` is a partial parse. The value is usable, and each entry describes a syntax error. [run] tolerates recovered failures and [tryRun] throws on them.
 
-Recoveries made inside a region that is then rejected go with it. Whatever a [choice] alternative, an [optional] or a speculative [lookahead] recovered along the way is dropped, so `errors` only ever describes input that made it into the result. A run that fails outright is the exception: `errors` still holds what was recovered before the parser gave up, including regions the failure rewound past.
+Recoveries made inside a region that is then rejected go with it. Whatever a rejected [choice] alternative or a failed [optional] recovered along the way is dropped, so `errors` only describes input that made it into the result. [lookahead] drops its recoveries on success, because the same region is about to be parsed for real and would otherwise be reported twice. A run that fails outright is the exception. Its `errors` still holds what was recovered before the parser gave up, including regions the failure rewound past.
 
 ## Placing commits
 
-There is no single right answer, but two rules of thumb work well for most grammars.
+Two guidelines work for most grammars.
 
-1. Commit after a token that makes the construct unambiguous. A keyword, an opening bracket or an operator usually means the parser is no longer choosing between alternatives.
+1. Commit after a token that makes the construct unambiguous. Once a keyword or an opening bracket has been consumed, the parser is no longer choosing between alternatives.
 
-2. Put recovery points where the language has a natural boundary. Statement lists resynchronise on the terminator, argument lists on the closing bracket, block structures on balanced delimiters. Recovering at a level with no such boundary tends to produce noise.
+2. Put recovery points where the language has a boundary. Statement lists resynchronise on the terminator and block structures on balanced delimiters. Recovering at a level with no such boundary tends to produce noise.
 
-Sigma doesn't deduplicate or suppress diagnostics, so every recovery you allow ends up in `errors`. A recovery point per statement gives one error per broken statement, one per token gives far more. If the output looks like a cascade, the fix is usually a coarser recovery point rather than a filter after the fact.
+Sigma doesn't deduplicate or suppress diagnostics, so every recovery you allow ends up in `errors`. A recovery point per statement gives one error per broken statement, one per token gives far more. When one mistake produces many errors, the fix is usually a coarser recovery point.
 
 <!-- Links. -->
 
