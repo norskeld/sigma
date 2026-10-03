@@ -15,6 +15,8 @@ Matching is performed in sticky mode, so `g` and `y` flags are handled automatic
 
 The regular expression must obey one simple rule: it *doesn't* use `^` and `$` to match at the beginning or at the end of the text. Flags like u and i are allowed and can be added if needed.
 
+The match must begin at the current position. A Unicode regular expression positioned inside a surrogate pair fails instead of consuming the whole pair.
+
 ## Usage
 
 ```ts

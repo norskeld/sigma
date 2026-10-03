@@ -1,4 +1,5 @@
-import { regexp } from '@parsers'
+import { sequence } from '@combinators'
+import { letter, regexp } from '@parsers'
 import { describe, it, result, run, should } from '@testing'
 
 describe('regexp', () => {
@@ -98,6 +99,27 @@ describe('regexp', () => {
 
     should.matchState(actualDigitFailure, expectedDigitFailure)
     should.matchState(actualEitherFailure, expectedEitherFailure)
+  })
+
+  it('should fail if a Unicode match would start before the current position', () => {
+    const parser = sequence(regexp(/./, 'code unit'), regexp(/./u, 'code point'))
+    const actual = run(parser, '😀')
+
+    should.matchResult(actual, {
+      isOk: false,
+      start: 1,
+      end: 1,
+      pos: 1,
+      expected: 'code point',
+    })
+  })
+
+  it('should fail if a Unicode letter would start before the current position', () => {
+    const parser = sequence(regexp(/./, 'code unit'), letter())
+    const actual = run(parser, '𝐀')
+    const expected = result(false, 'letter')
+
+    should.matchState(actual, expected)
   })
 
   it(`should fail if given zero input and regexp with 'one or more' quantifier`, () => {

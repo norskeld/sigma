@@ -1,8 +1,8 @@
 import type { Parser } from '@types'
 
 /**
- * Parses a string that matches a provided regular expression. Returns the matched string, or fails
- * with an `expected` message.
+ * Parses a string that matches a provided regular expression. The match must begin at the current
+ * position. Returns the matched string, or fails with an `expected` message.
  *
  * The regular expression must obey one simple rule: *doesn't* use `^` and `$` to match at the
  * beginning or at the end of the text.
@@ -26,7 +26,9 @@ export function regexp(rs: RegExp, expected: string): Parser<string> {
 
       const result = re.exec(ctx.input)
 
-      if (result) {
+      // Full-Unicode sticky matching snaps `lastIndex` to the start of a surrogate pair, so the
+      // match can begin before the cursor.
+      if (result !== null && result.index === ctx.pos) {
         const match = result[0]
         ctx.pos += match.length
         return match
